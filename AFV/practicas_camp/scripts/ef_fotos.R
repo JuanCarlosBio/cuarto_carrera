@@ -15,7 +15,8 @@ inter_gas <- read_csv(url1) %>%
 url2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/inter_gas_2.csv"
 inter_gas2 <- read_csv(url2) %>% 
   rename_all(tolower) %>% 
-  mutate(hora=as.character(hora))
+  mutate(hora=as.character(ï..hora)) %>% 
+  select(-ï..hora)
 
 
 # Evolución PAR a lo largo de la mañana

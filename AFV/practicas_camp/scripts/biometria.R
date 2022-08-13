@@ -4,13 +4,13 @@
 ######################## Prácticas de Campo Ecofisiología Biometría del Pinar ######################
 ####################################################################################################
 
-library(tidyverse)
+library(tidyverse) 
 library(readxl)
 library(ggthemes)
 
 ### La primera etapa es usar read_excel y la fuente donde has guardado los datos para importar los datos a R
 ### Yo lo he utilizado directamente desde mi cuenda de GitHub, hay que hacer una serie de modificaciones
-url <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/biometria.csv"
+url <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/biometria.csv"
 biometria <- read_csv(url)
 
 # Vamos a crear los intervalos de DBH que nos permitirá hacer el gráfico

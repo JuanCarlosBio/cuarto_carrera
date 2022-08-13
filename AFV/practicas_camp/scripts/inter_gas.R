@@ -142,7 +142,7 @@ t.test(temperatura~vaselina, data = sombra_12_30)                    # p > 0.05
 #                             Pino y el rosalillo                              #
 #------------------------------------------------------------------------------#
 
-url2 <- "https://github.com/Juankkar/cuarto_carrera/edit/main/AFV/practicas_camp/bases_datos/fvfm2.csv"
+url2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/fvfm2.csv"
 fvfm2 <- read_csv(url2) %>% 
   mutate(hora=as.character(hora))
 

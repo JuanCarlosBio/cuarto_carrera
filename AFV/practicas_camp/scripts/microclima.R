@@ -9,7 +9,7 @@ library(ggthemes)
 library(DescTools)
 library(lubridate)
 
-url <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/microclima.csv"
+url <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/microclima.csv"
 microclima <- read_csv(url) %>% 
   mutate(hora=as.character(hora))
 

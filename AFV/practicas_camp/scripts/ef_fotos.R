@@ -8,7 +8,7 @@ library(readxl)
 #------------------------------------------------------------------------------#
 #                                Intercambio Gaseoso                           #
 #------------------------------------------------------------------------------#
-url1 <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/inter_gas.csv"
+url1 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/inter_gas.csv"
 inter_gas <- read_csv(url1) %>% 
   mutate(hora=as.character(hora))
 

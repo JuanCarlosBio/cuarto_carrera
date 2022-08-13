@@ -11,6 +11,8 @@ library(xlsx)
         # Práctica 3 explantes y siembra de segmentos nodales #
         #######################################################
 
+url_brotes <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_lab/biotec_veg/bases_datos/data_brotes.csv"
+data_brotes <- read_csv(url_brotes)
 
 ##### DATA DE BROTES MANUAL ##### 
 # data_brotes <- data.frame(

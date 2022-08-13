@@ -12,7 +12,7 @@ url1 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/prac
 inter_gas <- read_csv(url1) %>% 
   mutate(hora=as.character(hora))
 
-url2 <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/inter_gas_2.csv"
+url2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/inter_gas_2.csv"
 inter_gas2 <- read_csv(url2) %>% 
   rename_all(tolower) %>% 
   mutate(hora=as.character(hora))

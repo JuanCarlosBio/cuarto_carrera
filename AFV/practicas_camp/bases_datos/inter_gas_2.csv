@@ -1,0 +1,61 @@
+ï..Hora,Sol,Experimento,sol_sombra
+10:30,2.95,A,Sol
+11:00,4.58,A,Sol
+11:30,3.63,A,Sol
+12:00,1.76,A,Sol
+12:30,3.94,A,Sol
+13:00,2.22,A,Sol
+10:30,0.25,E,Sol
+11:00,1.35,E,Sol
+11:30,1.42,E,Sol
+12:00,0.63,E,Sol
+12:30,0.96,E,Sol
+13:00,0.97,E,Sol
+10:30,22.4,T CÂº,Sol
+11:00,25.6,T CÂº,Sol
+11:30,26.5,T CÂº,Sol
+12:00,25.97,T CÂº,Sol
+12:30,21.47,T CÂº,Sol
+13:00,29.56,T CÂº,Sol
+10:30,0.03,Gs,Sol
+11:00,0.07,Gs,Sol
+11:30,0.05,Gs,Sol
+12:00,0.02,Gs,Sol
+12:30,0.05,Gs,Sol
+13:00,0.04,Gs,Sol
+10:30,1900,PAR,Sol
+11:00,1800,PAR,Sol
+11:30,1900,PAR,Sol
+12:00,1800,PAR,Sol
+12:30,1200,PAR,Sol
+13:00,1700,PAR,Sol
+10:30,0.32,A,Sombra
+11:00,-0.02,A,Sombra
+11:30,-0.32,A,Sombra
+12:00,0.27,A,Sombra
+12:30,0.34,A,Sombra
+13:00,-0.79,A,Sombra
+10:30,0.65,E,Sombra
+11:00,1.24,E,Sombra
+11:30,0.3,E,Sombra
+12:00,0.33,E,Sombra
+12:30,0.54,E,Sombra
+13:00,0.33,E,Sombra
+10:30,17.6,T CÂº,Sombra
+11:00,21.45,T CÂº,Sombra
+11:30,21.53,T CÂº,Sombra
+12:00,21.1,T CÂº,Sombra
+12:30,13.97,T CÂº,Sombra
+13:00,23.55,T CÂº,Sombra
+10:30,0.01,Gs,Sombra
+11:00,0.07,Gs,Sombra
+11:30,0.03,Gs,Sombra
+12:00,0.03,Gs,Sombra
+12:30,0.06,Gs,Sombra
+13:00,0.01,Gs,Sombra
+10:30,70,PAR,Sombra
+11:00,60,PAR,Sombra
+11:30,70,PAR,Sombra
+12:00,68,PAR,Sombra
+12:30,52,PAR,Sombra
+13:00,70,PAR,Sombra

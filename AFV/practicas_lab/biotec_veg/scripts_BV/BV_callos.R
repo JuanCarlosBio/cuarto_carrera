@@ -15,6 +15,8 @@ library(xlsx)
 #                         Contaminaciones de zanahoria                         #
 #------------------------------------------------------------------------------#
 
+url_callos <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_lab/biotec_veg/bases_datos/data_zanahoria.csv"
+data_zanahoria <- read_csv(url_callos)
 
 #### DATA DE CALLOS DE ZANAHORIA MANUAL ##### --> si no te va el link de arriba puedes usar esto
 # data_zanahoria <- data.frame(

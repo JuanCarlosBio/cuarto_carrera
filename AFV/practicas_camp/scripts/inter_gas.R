@@ -10,7 +10,7 @@ library(DescTools)
 #                       Estudio de la Tª con/sin vaselina                      #
 #------------------------------------------------------------------------------#
 
-url1 <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/fvfm.csv"
+url1 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/fvfm.csv"
 fvfm <- read_csv(url1) %>% 
   mutate(hora=as.character(hora))
  

@@ -18,6 +18,9 @@ library(xlsx)
 #   what a failure
 
 
+url_conjunto <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_lab/biotec_veg/bases_datos/data_conjunto_biotecv.csv"
+data_conjunto <- read_csv(url_conjunto)
+
 #### Data Manual de los datos en su conjunto ##### 
 # cont_callos=-c(0,6,rep(21,4),rep(22,5))
 # callos=c(rep(0,4),rep(2,7))

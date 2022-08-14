@@ -23,4 +23,4 @@ La verdad es que una práctica muy interactiva, a mí me gustó mucho
 * El directorio tiene dos scripts: tenebrios.R con los resultados del nuestro grupo, es decir el Grupo 4 de Oscuridad. Por otro lado el script de tene_todos_limpio.R es el que utilicé para estudiar los resultados de todos.
 * Por otro lado hay 3 bases de datos:
 * Nuestros resultados: están por un lado tenebrios.csv --> tal cuál como te piden hacer la base de datos (la media de la masa corporal cada semana), las tasas de crecimiento semanal y diaria. Mientras, df_tenebrios.csv, los datos de cada uno de los tenebrios pesados cada semana.
-* Resultados de todos: tene_todos_crudos.R --> la base de datos de todos los alumnos de FAA. He de decir que no la forma que toman los datos, que da muy bonito, es muy R, SPSS, Python... friendly, con lo cual tuve que hacer un preprocesamiento guapo.
+* Resultados de todos: tene_todos_crudos.R --> la base de datos de todos los alumnos de FAA. He de decir que la forma que toman los datos, queda muy bonito, pero no es muy R, SPSS, Python... friendly, con lo cual tuve que hacer un preprocesamiento guapo. 

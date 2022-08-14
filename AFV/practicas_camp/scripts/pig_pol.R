@@ -11,7 +11,7 @@ library(rgl)
 library(tidytext)
 library(xlsx)
 
-url1 <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/pig_polifenoles_pino.csv"
+url1 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/pig_polifenoles_pino.csv"
 pig_pol_pino <- read_csv(url1)
 
 ##### NBI Pino #####
@@ -243,7 +243,7 @@ plot3d(x=df_cp_pino_colores$PC1, y=df_cp_pino_colores$PC2, z=df_cp_pino_colores$
 #                     Estudio de la hoja del Rosalillo                         #
 #------------------------------------------------------------------------------#
 
-url2 <- "https://raw.githubusercontent.com/Juankkar/afv_practicas_campo_ecofiosiologia/main/bases_datos/pig_polifenoles_rosalillo.csv"
+url2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/pig_polifenoles_rosalillo.csv"
 pig_pol_rosalillo <- read_csv(url2) 
  
 #### NBI Rosalillo

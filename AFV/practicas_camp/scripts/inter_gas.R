@@ -6,6 +6,9 @@ library(readxl)
 library(ggthemes)
 library(DescTools)
 
+# Este link provee un script donde tengo una funciones interesantes hechas por mí
+source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
+
 #------------------------------------------------------------------------------#
 #                       Estudio de la Tª con/sin vaselina                      #
 #------------------------------------------------------------------------------#
@@ -52,6 +55,8 @@ temp_sombra %>%
   geom_bar(stat = "identity", position = position_dodge(), col = "black") +
   geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .3,
                 position = position_dodge(.9)) +
+  geom_text(data=tibble(x=6, y=12),
+            aes(x=x,y=y, label="*"), size=10, inherit.aes=FALSE) +
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,40),
                      breaks = seq(0,40,5)) +
@@ -59,7 +64,7 @@ temp_sombra %>%
        subtitle = "Informe A.F.V.,García-Estupiñán, J.C., Biología ULL",
        x = "Hora",
        y = "T leaf (ºC)",
-       fill = "Con/sin vaselina") +
+       fill = "Con/sin vaselina") + 
   theme_tufte() +
   theme(axis.line = element_line(),
         title = element_text(size = 13, face = "bold"),
@@ -77,65 +82,34 @@ temp_sombra %>%
 temp_sol2 <- temp_sol[,c("hora","temperatura","vaselina")]
 
 sol_10_00 <- temp_sol2 %>% filter(hora %in% "10:00:00")
-tapply(sol_10_00$temperatura,sol_10_00$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sol_10_00)             # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sol_10_00)                 # p < 0.05*
-
+tw.groups(sol_10_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p < 0.05*
 sol_10_30 <- temp_sol2 %>% filter(hora %in% "10:30:00")
-tapply(sol_10_30$temperatura,sol_10_30$vaselina, shapiro.test) # No se cumple normalidad
-wilcox.test(temperatura~vaselina, data = sol_10_30)            # p > 0.05
-
+tw.groups(sol_10_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina") # p > 0.05
 sol_11_00 <- temp_sol2 %>% filter(hora %in% "11:00:00")           
-tapply(sol_11_00$temperatura,sol_11_00$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sol_11_00)             # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sol_11_00)                 # p < 0.05*
-
+tw.groups(sol_11_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina") # p < 0.05*
 sol_11_30 <- temp_sol2 %>% filter(hora %in% "11:30:00")
-tapply(sol_11_30$temperatura,sol_11_30$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sol_11_30)             # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sol_11_30)                 # p > 0.05 
-
+tw.groups(sol_11_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
 sol_12_00 <- temp_sol2 %>% filter(hora %in% "12:00:00")
-tapply(sol_12_00$temperatura,sol_12_00$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sol_12_00)             # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sol_12_00)                 # p < 0.05*
-
+tw.groups(sol_12_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p < 0.05*
 sol_12_30 <- temp_sol2 %>% filter(hora %in% "12:30:00")
-tapply(sol_12_30$temperatura,sol_12_30$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sol_12_30)             # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sol_12_30)                 # p > 0.05 
+tw.groups(sol_12_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
+
 
 
 temp_sombra2 <- temp_sombra[,c("hora","temperatura","vaselina")]
 
 sombra_10_00 <- temp_sombra2 %>% filter(hora %in% "10:00:00")
-tapply(sombra_10_00$temperatura,sombra_10_00$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sombra_10_00)                # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sombra_10_00)                    # p > 0.05 
-
+tw.groups(sombra_10_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
 sombra_10_30 <- temp_sombra2 %>% filter(hora %in% "10:30:00")
-tapply(sombra_10_30$temperatura,sombra_10_30$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sombra_10_30)                # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sombra_10_30)                    # p > 0.05
-
+tw.groups(sombra_10_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
 sombra_11_00 <- temp_sombra2 %>% filter(hora %in% "11:00:00")           
-tapply(sombra_11_00$temperatura,sombra_11_00$vaselina, shapiro.test) # no se cumple normalidad
-wilcox.test(temperatura~vaselina, data = sombra_11_00)               # p > 0.05 
-
+tw.groups(sombra_11_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
 sombra_11_30 <- temp_sombra2 %>% filter(hora %in% "11:30:00")
-tapply(sombra_11_30$temperatura,sombra_11_30$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sombra_11_30)                # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sombra_11_30)                    # p > 0.05 
-
+tw.groups(sombra_11_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
 sombra_12_00 <- temp_sombra2 %>% filter(hora %in% "12:00:00")
-tapply(sombra_12_00$temperatura,sombra_12_00$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sombra_12_00)             # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sombra_12_00)                 # p > 0.05 
-
+tw.groups(sombra_12_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
 sombra_12_30 <- temp_sombra2 %>% filter(hora %in% "12:30:00")
-tapply(sombra_12_30$temperatura,sombra_12_30$vaselina, shapiro.test) # se cumple normalidad
-LeveneTest(temperatura~vaselina, data = sombra_12_30)                # se cumple homocedasticidad
-t.test(temperatura~vaselina, data = sombra_12_30)                    # p > 0.05
+tw.groups(sombra_12_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p < 0.05 
 
 #------------------------------------------------------------------------------#
 #                         Eficiencia fotoquímica del                           #
@@ -181,9 +155,11 @@ tapply(pino$fvfm, pino$exposicion, shapiro.test)    # se cumple normalidad
 LeveneTest(fvfm~exposicion, data = pino)            # se cumple homocedasticidad
 t.test(fvfm~exposicion, data = pino)                # p > 0.05
 
+
 rosalillo <- fvfm2 %>% filter(especie %in% "Rosalillo")
 tapply(rosalillo$fvfm, rosalillo$exposicion, shapiro.test)    # se cumple normalidad
 LeveneTest(fvfm~exposicion, data = rosalillo)                 # se cumple homocedasticidad
 t.test(fvfm~exposicion, data = rosalillo)                     # p > 0.05
+
 
 

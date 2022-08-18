@@ -9,6 +9,9 @@ library(ggthemes)
 library(DescTools)
 library(lubridate)
 
+# Este link provee un script donde tengo una funciones interesantes hechas por mí
+source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
+
 url <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/microclima.csv"
 microclima <- read_csv(url) %>% 
   mutate(hora=as.character(hora))
@@ -51,44 +54,34 @@ microclima %>%
 #----------------------------------------------------#
 
 microc_10_00 <- microclima %>% filter(hora %in% "10:00:00")
-tapply(microc_10_00$par,microc_10_00$estrato , shapiro.test)  # No se cumple la normalidad
-kruskal.test(par~estrato, data = microc_10_00)                # p < 0.01 ***
+tr.groups(microc_10_00, par, "par", estrato, "Apical", "Basal", "Media")
 pairwise.wilcox.test(x=microc_10_00$par,
                      g=microc_10_00$estrato, 
                      p.adjust.method = "bonf")                # p < 0.05* Para todos los grupos
 
-
 microc_10_30 <- microclima %>% filter(hora %in% "10:30:00")
-tapply(microc_10_30$par,microc_10_30$estrato , shapiro.test)  # No se cumple la normalidad
-kruskal.test(par~estrato, data = microc_10_30)                # p < 0.01 ***
+tr.groups(microc_10_30, par, "par", estrato, "Apical", "Basal", "Media")
 pairwise.wilcox.test(x=microc_10_30$par,
                      g=microc_10_30$estrato, 
                      p.adjust.method = "bonf")                # p > 0.05 apical-media y basal-media
 
 microc_11_00 <- microclima %>% filter(hora %in% "11:00:00")
-tapply(microc_11_00$par,microc_11_00$estrato , shapiro.test)  # No se cumple la normalidad
-kruskal.test(par~estrato, data = microc_11_00)                # p < 0.01 ***
+tr.groups(microc_11_00, par, "par", estrato, "Apical", "Basal", "Media")
 pairwise.wilcox.test(x=microc_11_00$par,
                      g=microc_11_00$estrato, 
                      p.adjust.method = "bonf")                # p > 0.05 apical-media 
 
 microc_11_30 <- microclima %>% filter(hora %in% "11:30:00")
-tapply(microc_11_30$par,microc_11_30$estrato , shapiro.test)  # No se cumple la normalidad
-kruskal.test(par~estrato, data = microc_11_30)                # p < 0.05 *
+tr.groups(microc_11_30, par, "par", estrato, "Apical", "Basal", "Media")
 pairwise.wilcox.test(x=microc_11_30$par,
                      g=microc_11_30$estrato, 
                      p.adjust.method = "bonf")                # p > 0.05 apical-media; media-basal 
 
-
 microc_12_00 <- microclima %>% filter(hora %in% "12:00:00")
-tapply(microc_12_00$par,microc_12_00$estrato , shapiro.test)  # No se cumple la normalidad
-kruskal.test(par~estrato, data = microc_12_00)                # p > 0.05 
-
-
+tr.groups(microc_12_00, par, "par", estrato, "Apical", "Basal", "Media") # p > 0.05
 microc_12_30 <- microclima %>% filter(hora %in% "12:30:00")
-tapply(microc_12_30$par,microc_12_30$estrato , shapiro.test)  # No se cumple la normalidad
-kruskal.test(par~estrato, data = microc_12_30)                # p > 0.05 
-   
+tr.groups(microc_12_30, par, "par", estrato, "Apical", "Basal", "Media") # p > 0.05
+
 
 ######################
 # Estudio de Tleaf   #
@@ -153,6 +146,17 @@ microc_12_30 <- microclima %>% filter(hora %in% "12:30:00")
 tapply(microc_12_30$tleaf,microc_12_30$estrato , shapiro.test)                # No se cumple la normalidad
 kruskal.test(tleaf~estrato, data = microc_12_30)                              # p > 0.05
 
+#------------------------------------------------------------------------------3
+
+tr.groups(microc_10_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+tr.groups(microc_10_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media")
+pairwise.wilcox.test(x=microc_10_30$tleaf,
+                     g=microc_10_30$estrato, 
+                     p.adjust.method = "bonf")                # p > 0.05 apical-media y basal-media
+tr.groups(microc_11_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+tr.groups(microc_11_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+tr.groups(microc_12_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+tr.groups(microc_12_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
 
 
 

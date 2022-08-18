@@ -2,14 +2,16 @@
 ############################ Tenebrios Todos los grupos ########################
 ################################################################################
 
-library(readxl)                                                     
-library(tidyverse)
-library(DescTools)
-library(rstatix)
-library(nortest)
-library(tidytext)
+# Esta función me abre corre un script que tengo en GitHub con funciones de inferencia estadística
+source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
 
-url <- "https://raw.githubusercontent.com/Juankkar/tenebrios_faa/main/bases_datos/tene_todos_crudos.csv"
+library(readxl)      
+library(readr)
+library(tidytext)
+library(ggtext)
+library(glue)
+
+url <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/tenebrios/scripts_tenebrios/tene_todos_crudos.csv"
 tene_todos_crudos <- read.csv(url,sep = ";") # madre de dios la limpieza lloro ); sea todo por la ciencia
 ten_tod2 <- tene_todos_crudos[1:42,]
 
@@ -51,12 +53,8 @@ df_tenebrios <- bind_rows(uno,dos, tre, cua, cin, sei) %>%
                                grepl("O",grupo)~"Oscuridad",
                                grepl("T",grupo)~"Temperatura")) 
 
-#fila <- seq(0,216,12) 
-df_tenebrios[
-  # fila, # Por qué no? );
-  c(24,48,60,72,84,96,108,120,132,144,192,204,216)
-             ,c(4,5)] <- NA # Por alguna extraña razón algunas personas decidieron poner el promedio de d y dx al final
-df_tenebrios[12,3] <- 0.1319 # Y este valor es el único desaparecido, pero nada que no pueda solucionarse con fuerza bruta
+df_tenebrios[seq(0,216,12) , c(4,5)] <- NA # Por alguna extraña razón algunas personas decidieron poner el promedio de d y dx al final
+
 
 df_tenebrios %>% 
   group_by(semana,experimento) %>% 
@@ -72,8 +70,8 @@ df_tenebrios %>%
        x="Semana",
        y="Masa Corporal (g)",
        col="Variación") +
-  geom_text(data = tibble(x=4, y =0.09),
-            aes(x=x,y=y, label="*"), size = 8, inherit.aes = F) +
+  # geom_text(data = tibble(x=4, y =0.09),
+  #           aes(x=x,y=y, label="*"), size = 8, inherit.aes = F) +
   scale_x_continuous(limits = c(0,12),
                      breaks = seq(1,12,1)) +
   scale_y_continuous(limits = c(0,.18),
@@ -92,56 +90,39 @@ df_tenebrios %>%
     legend.text = element_text(size = 12)
   )
 
-# Existen diferencias significativas en el aumento de la masa corpora según las semanas 
-# La ide sería ser capaz de hacerlo sin moirir en el intento :(
+# Existen diferencias significativas en el aumento de la masa corporal según las semanas en cada grupo?
+# Utilizamos la función que he hecho en el link de la línea "6", seguramente haya alguna manera más 
+# automática de hacer esto, pero bueno, esto servirá
 
-modelo_inferencia <- function(df,sem) {
-  oscuridad = subset(df, experimento == "Oscuridad" & semana == sem & masa_corp != "NA")
-  control = subset(df, experimento == "Control" & semana == sem & masa_corp != "NA")
-  temperatura = subset(df, experimento == "Temperatura" & semana == sem & masa_corp != "NA")
-  normalidad_osc=shapiro.test(as.numeric(oscuridad$masa_corp))
-  normalidad_con=shapiro.test(as.numeric(control$masa_corp))
-  normalidad_tem=shapiro.test(as.numeric(temperatura$masa_corp))
-  vector=c(normalidad_con$p.value,normalidad_osc$p.value,normalidad_tem$p.value)
-  df=data.frame(
-    masa_corp=c(control$masa_corp,oscuridad$masa_corp,temperatura$masa_corp),
-    experimento=c(control$experimento,oscuridad$experimento,temperatura$experimento)
-  )
-  levene = LeveneTest(as.numeric(masa_corp)~experimento, data = df, center = "mean")
-  p_valor_levene = data.frame(p_valor=levene$`Pr(>F)`)[1,]
-  condicion= all(vector > 0.05)
-  if(p_valor_levene > 0.05 & condicion == TRUE) {
-    print("Anova de una vía")
-    print(summary(aov(masa_corp~experimento, data = df)))
-  } else if(p_valor_levene < 0.05 & condicion == TRUE){
-    print("Anova de Welch")
-    print(welch_anova_test(masa_corp~experimento, data = df))
-  } else{
-    print("Kruskal-Wallis")
-    print(kruskal.test(masa_corp~experimento, data = df))
-  }
-  return(condicion)
-} # No es perfecta pero me sirve para practicar,
-  # la mejoraré en el futuro
+semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
+tr.groups(semana_1,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad") 
 
-modelo_inferencia(df_tenebrios, 1) # p > 0.05
-modelo_inferencia(df_tenebrios, 2) # p > 0.05
-modelo_inferencia(df_tenebrios, 3) # p > 0.05
-modelo_inferencia(df_tenebrios, 4) # p < 0.05*
+semana_2 <- subset(df_tenebrios, as.character(semana) == "2")
+tr.groups(semana_2,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
-semana4 <- df_tenebrios %>% filter(semana %in% 4) %>% mutate(masa_corp=masa_corp)
-TukeyHSD(aov(masa_corp~experimento, data = semana4)) # p < 0.05* temperatura alta-control solamente
+semana_3 <- subset(df_tenebrios, as.character(semana) == "3")
+tr.groups(semana_3,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
-modelo_inferencia(df_tenebrios, 5) # p > 0.05 
-modelo_inferencia(df_tenebrios, 6) # p > 0.05
-modelo_inferencia(df_tenebrios, 7) # p > 0.05
-modelo_inferencia(df_tenebrios, 8) # p > 0.05
-modelo_inferencia(df_tenebrios, 9)
+semana_4 <- subset(df_tenebrios, as.character(semana) == "4")
+tr.groups(semana_4,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
-modelo_inferencia(tenebrios_todos, 10) # A partir de aqui es complicado sacar la normalidad ya 
-# que disminuyen los valores de las muestras significativamenete
+semana_5 <- subset(df_tenebrios, as.character(semana) == "5")
+tr.groups(semana_5,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_6 <- subset(df_tenebrios, as.character(semana) == "6")
+tr.groups(semana_6,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_7 <- subset(df_tenebrios, as.character(semana) == "7")
+tr.groups(semana_7,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_8<- subset(df_tenebrios, as.character(semana) == "8")
+tr.groups(semana_8,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_9 <- subset(df_tenebrios, as.character(semana) == "9")
+tr.groups(semana_9,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 
+#### Estduio de la tasa de crecimiento semanal
 df_tenebrios %>% 
   group_by(semana,experimento) %>% 
   summarise(media=mean(d, na.rm=T),
@@ -156,8 +137,8 @@ df_tenebrios %>%
        x="Semana",
        y="Tasa de crecimiento (g)",
        col="Variación") +
-   scale_x_continuous(limits = c(0,12),
-                      breaks = seq(1,12,1)) +
+  scale_x_continuous(limits = c(0,12),
+                     breaks = seq(1,12,1)) +
   theme(
     panel.background = element_blank(),
     axis.line = element_line(),
@@ -173,18 +154,87 @@ df_tenebrios %>%
   )
 
 
-# ¿existen diferencias significativas? hay que sustituir en la función masa_corp por tasa_crec_s, no he logrado que la 
-# función sea del todo reproducible, el test de shapiro me da problesmas pero tiene buena pinta para ir 
-# mejorandola.
+# ¿existen diferencias significativas con el paso de las semanas? 
+semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
+tr.groups(semana_1,d, "d", experimento, "Control", "Temperatura", "Oscuridad") 
 
-modelo_inferencia(df_tenebrios, 1) # p > 0.05
-modelo_inferencia(df_tenebrios, 2) # p > 0.05
-modelo_inferencia(df_tenebrios, 3) # p > 0.05
-modelo_inferencia(df_tenebrios, 4) # p > 0.05
-modelo_inferencia(df_tenebrios, 5) # p > 0.05 
-modelo_inferencia(df_tenebrios, 6) # p > 0.05
-modelo_inferencia(df_tenebrios, 7) # p > 0.05
-modelo_inferencia(df_tenebrios, 8) # p > 0.05
-modelo_inferencia(df_tenebrios, 9) # A partir de aqui es complicado sacar la normalidad ya 
-# que disminuyen los valores de las muestras significativamenete.
- 
+semana_2 <- subset(df_tenebrios, as.character(semana) == "2")
+tr.groups(semana_2,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_3 <- subset(df_tenebrios, as.character(semana) == "3")
+tr.groups(semana_3,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_4 <- subset(df_tenebrios, as.character(semana) == "4")
+tr.groups(semana_4,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_5 <- subset(df_tenebrios, as.character(semana) == "5")
+tr.groups(semana_5,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_6 <- subset(df_tenebrios, as.character(semana) == "6")
+tr.groups(semana_6,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_7 <- subset(df_tenebrios, as.character(semana) == "7")
+tr.groups(semana_7,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+semana_8<- subset(df_tenebrios, as.character(semana) == "8")
+tr.groups(semana_8,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+
+# Obviamente las Últimas semanas no se pueden ver si ha diferencias significativas
+# ya que muchos de los tnebrios han entrado en estado de pupa, lo que impide hacer
+# el test de shapiro test ya que normalmente solo queda uno o dos grupo por terminar
+# Esto nos planteó a mi grupo y a mí que podríamos ver si existen diferencias 
+# significativas en el tiempo que tardan cada gurpo en terminar el experimento.
+# Viendo que no hay diferencias significativas en las tasas de crecimeinto con el
+# paso de las semanas así como con la masa corporal. En tema comercial, igual nos renta
+# Utilizar el tratameinto que más rápido haga crecer a los tenebrios. Aunque esto también
+# podría funcionar al contrario ahora que me fijo en las gráficas, si los quieres
+# con más masa corporal, igual te interesan que tarden más para que aumenten en este parámetro.
+# Aunque por otra parte es cierto que conforme más aumentan las semanas, menor tasa de 
+# crecimeinto tienen en las últimas.
+
+# Al parecer el grupo de temperatura parece entrar más rápido en estado de pupa, ya 
+# que en las gráficas vemos que este tratameito pierde en las últimas semanas más rápido
+# las barras de error, lo que significa eso, las larvas entran en pupa más rápido.
+# Pero... ¿son estas diferencias significativas?
+
+
+df_temporal <- tibble(
+  semanas = c(12,11,10,10,10,10,
+              9,9,12,9,9,10,
+              12,9,11,11,11,10),
+  experimento = c(rep("Control",6),
+                  rep("Temperatura",6),
+                  rep("Oscuridad",6))
+)
+
+# No existen diferencias significativas entre los grupos, p > 0.05
+test_temporal <- tr.groups(df_temporal, semanas, "semanas", experimento, "Control", "Temperatura","Oscuridad")
+estadistico_temporal <- test_temporal$statistic
+p.valor <- round(test_temporal$p.value,2)
+
+df_temporal %>% 
+  mutate(experimento=factor(experimento,
+                            levels = c("Control","Temperatura","Oscuridad"))) %>% 
+  ggplot(aes(experimento, semanas, fill=experimento)) +
+  geom_jitter(pch=21, position = position_jitter(.25), show.legend = F) +
+  geom_boxplot(alpha=.35, width=.5, show.legend = F) +
+  scale_y_continuous(limits = c(5,15),
+                     breaks = seq(4,16,2)) +
+  scale_fill_manual(breaks = c("Control", "Temperatura", "Oscuridad"),
+                    values = c("blue","red","black")) +
+  labs(
+    title = "Tiempo de experimentación de los grupos",
+    subtitle = glue("*X\u00B2 Kruskal-Wallis* = {estadistico_temporal}, *p* = {p.valor}"),
+    y="Semanas de experimentación",
+    x=NULL
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(face="bold", size = 16, hjust = .5),
+    plot.subtitle = element_markdown(size = 13, hjust = .5),
+    axis.title.y = element_markdown(size = 12, face = "bold"),
+    axis.text.x = element_markdown(size = 12, face = "bold", color="black")
+  )
+
+
+

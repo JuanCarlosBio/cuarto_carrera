@@ -22,8 +22,9 @@ library(xlsx)
 
 # write_csv(matrix_artemias, "matrix_artemias.csv")
 
-matrix_artemias <- read_excel("bases_datos/matrix_artemias.xlsx", 
-                              sheet = "Matriz") %>% 
+url_artemias <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/matrix_artemias.csv"
+
+matrix_artemias <- read_csv(url_artemias) %>% 
   mutate(tratamiento = Tratamiento,
          tratamiento = case_when(tratamiento == 1 ~ "Levadura",
                                  tratamiento == 2 ~ "Lectina marina",

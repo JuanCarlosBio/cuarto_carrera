@@ -9,8 +9,12 @@ library(rstatix)
 library(glue)
 library(ggtext)
 
-matrix_artemias <- read_excel("bases_datos/matrix_artemias.xlsx", 
-                              sheet = "Matriz")
+# Necesitas información del script de este script. 
+source("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/inferencia_estadistica.R")
+
+url_artemias <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/matrix_artemias.csv"
+
+matrix_artemias <- read_csv(url_artemias)
 
 tidy_artemias <- matrix_artemias %>% 
   mutate(tratamiento = Tratamiento,
@@ -63,7 +67,7 @@ artemias_anova %>%
     axis.ticks.x = element_blank(),
     plot.title = element_text(size = 14, face = "bold", hjust = .5),
     plot.subtitle = element_text(size = 12, face = "italic", hjust = .5,
-                              margin = margin(b=30)),
+                                 margin = margin(b=30)),
     axis.title = element_text(face = "bold"),
     legend.position = "bottom",
     legend.background = element_rect(color = "white"),
@@ -126,9 +130,6 @@ artemias_kw <- tidy_artemias %>%
                             labels = c("Levadura", "Lectina\nmarina", 
                                        "Aceite\nEchium/Bacalao", "Enriquecedor\ncomercial")))
 
-kw_16_0 <- artemias_kw %>% filter(acido_graso == "C 16:0")
-kw_16_3n3 <- artemias_kw %>% filter(acido_graso == "C 18:3n-3")
-
 
 artemias_kw %>% 
   ggplot(aes(acido_graso, valores, fill=tratamiento)) +
@@ -161,4 +162,3 @@ artemias_kw %>%
     axis.text.x = element_text(face = "bold", 
                                color = "black", size = 11),
   )
-

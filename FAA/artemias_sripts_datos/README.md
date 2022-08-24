@@ -16,7 +16,7 @@ Hay varias razones, estas cuatro, son las que más me han gustado.
 
 3) Las dos opciones anteriores promueven la creación de comunidades grandes y robustas, como ocurre con las de R y Python, donde debido a que es gratis y tienes la libertad que quieras, algunos científicos crean extenciones de software por cuenta agena (***librerías***) que mejoran al sofware de base.
 
-4) Tus resultados son reproducibles y replicables. POR LA CIENCIA. Hacer clics en una serie de pasos que tienes en la mente es mucho más fácil que aprender un lenguaje de programación. Sin embargo, el recorrido que has hecho para obtener tus resultados queda imposibilitado al rastreo por otros científicos, podrías apuntarlos en un documento de word, texto... pero a la hora de la verdad esto te va a quitar más tiempo y pasarás a realizar tu estudio y apañado. Mientras que un script de R o Python están cada uno de los pasos para llegar a tu reultado, 100% de transparencia. **Copartir es vivir**.
+4) Tus resultados son reproducibles y replicables. POR LA CIENCIA. Hacer clics en una serie de pasos que tienes en la mente es mucho más fácil que aprender un lenguaje de programación. Sin embargo, el recorrido que has hecho para obtener tus resultados queda imposibilitado al rastreo por otros científicos, podrías apuntarlos en un documento de word, texto... pero a la hora de la verdad esto te va a quitar más tiempo y pasarás a realizar tu estudio y apañado. Mientras que un script de R o Python están cada uno de los pasos para llegar a tu reultado, 100% de transparencia. **Compartir es vivir**.
 
 ---
 

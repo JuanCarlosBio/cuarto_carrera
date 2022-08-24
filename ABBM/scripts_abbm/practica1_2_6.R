@@ -8,7 +8,7 @@ source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_prop
 # write_csv(practica2, "practica2.csv")
 url_practica2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/practica2.csv"
 practica2 <- read_csv(url_practica2) %>% 
-  select(alumno, ul_10, ul_20 = yl_20,blanco, tiempo, grupos)
+  select(alumno, ul_10, ul_20 = ul_20,blanco, tiempo, grupos)
 
 
 ### Práctica de Siberio 1.
@@ -61,8 +61,8 @@ tres_hora <- experimento %>% filter(tiempo == "3 Horas" & tipo_exp != "blanco")
 cinco_hora <- experimento %>% filter(tiempo == "5 Horas" & tipo_exp != "blanco")
 
 tapply(una_hora$absorbancia, una_hora$tipo_exp, shapiro.test)  # El blanco da problemas, por ser todo 0, 
-                                                               # obviamente existen diferencias así que 
-                                                               # compararemos únicamente los otros
+# obviamente existen diferencias así que 
+# compararemos únicamente los otros
 
 # En 1 hora T-test: p < 0.05* entre 10 ul y 20 ul
 tw.groups(una_hora, absorbancia, "absorbancia", tipo_exp, "ul_10", "ul_20")           
@@ -77,8 +77,8 @@ tw.groups(cinco_hora, absorbancia, "absorbancia", tipo_exp, "ul_10", "ul_20")
 
 diez_ul <- experimento %>% filter(tipo_exp == c("ul_10"))
 veinte_ul <- experimento %>% filter(tipo_exp == c("ul_20"))
-                                    
-                                    
+
+
 # Con 10 ul, ANOVA de una vía: p > 0.05 No existen diferncias en los experimentos entre horas en 10 ul de disolución
 th.groups(diez_ul, absorbancia, "absorbancia", tiempo, "1 Horas", "3 Horas", "5 Horas")           
 
@@ -96,7 +96,7 @@ th.groups(veinte_ul, absorbancia, "absorbancia", tiempo, "1 Horas", "3 Horas", "
 
 # write_csv(bradford, "bradford.csv")
 url_bradford <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/bradford.csv"
-bradford <- read_excel(url_bradford)
+bradford <- read_csv(url_bradford)
 
 ####################
 ###### 1 Horas #####
@@ -112,7 +112,7 @@ onpg_1h <- bradford %>%
   filter(hora == "1 Hora") %>% 
   select(hora, starts_with("onpg")) %>% 
   pivot_longer(-hora, names_to = "sustrato", values_to = "concentracion") 
-  
+
 una_bradford <- cbind(brad_1h, onpg_1h)
 
 # Alumnos de 5 horas
@@ -452,9 +452,9 @@ todos_grupos %>%
   group_by(alumno) %>% 
   cor_test(concentracion, absorbancia) %>%
   arrange(desc(cor))
-  summarise(maximo_correlacion=max(cor),
-            minimo_pvalor=min(p)
-            ) 
+summarise(maximo_correlacion=max(cor),
+          minimo_pvalor=min(p)
+) 
 
 # Y yo? soy el 1: 0.92, not bad tampoco, no entro en el top 5 por un puesto shit xd.
 
@@ -561,5 +561,4 @@ tiempo <- 25 # min
 
 act_esp(Abs = absorbancia, vT = volumen_total_ml, 
         E = E, conc_prot = conc_prot, ve = v_extracto_ml, t = tiempo)
-
 

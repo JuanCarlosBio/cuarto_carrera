@@ -6,10 +6,8 @@ library(xlsx)
 # Mi fórmula maestra 
 source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
 # write_csv(practica2, "practica2.csv")
-practica2 <- read_excel("practicas_abbm.xlsx", 
-                             sheet = "Siberio1", col_types = c("text", 
-                                                               "numeric", "numeric", "numeric", 
-                                                               "text", "text")) %>% 
+url_practica2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/practica2.csv"
+practica2 <- read_csv(url_practica2) %>% 
   select(alumno, ul_10, ul_20 = yl_20,blanco, tiempo, grupos)
 
 
@@ -97,8 +95,8 @@ th.groups(veinte_ul, absorbancia, "absorbancia", tiempo, "1 Horas", "3 Horas", "
 # de reacción, vamos a ver si podemos improvisar algo...
 
 # write_csv(bradford, "bradford.csv")
-bradford <- read_excel("practicas_abbm.xlsx", 
-                       sheet = "Bradford")
+url_bradford <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/bradford.csv"
+bradford <- read_excel(url_bradford)
 
 ####################
 ###### 1 Horas #####

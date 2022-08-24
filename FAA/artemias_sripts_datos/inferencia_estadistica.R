@@ -1,3 +1,5 @@
+url_artemias <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/matrix_artemias.csv"
+
 ################################################################################
 ########### PRÁCTICAS DE INFORMÁTICA DE FISIOLOGÍA ANIMAL APLICADA  ############
 ################################################################################
@@ -7,8 +9,9 @@ library(ggthemes)
 library(readxl)
 library(rstatix)
 
-matrix_artemias <- read_excel("bases_datos/matrix_artemias.xlsx", 
-                              sheet = "Matriz")
+url_artemias <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/matrix_artemias.csv"
+
+matrix_artemias <- read_csv(url_artemias)
 
 tidy_artemias <- matrix_artemias %>% 
   mutate(tratamiento = Tratamiento,
@@ -70,7 +73,7 @@ levene
 acidos_anova <- tidy_artemias %>% 
   filter(!(acido_graso %in% c("C 16:0","C 16:1n-7","C 18:0","C 18:1n-9", 
                               "C 18:3n-3","C 18:3n-6","C 20:5n-3","C 22:6n-3"))) #%>% 
-  # group_by(acido_graso) %>% count()
+# group_by(acido_graso) %>% count()
 
 resultados_anova1 <- acidos_anova %>% 
   group_by(acido_graso) %>% 
@@ -116,7 +119,7 @@ tidy_artemias %>%
          valores_log = log10(valores),
          valores_log_mas_1 = log10(valores + 1), # Valores negativos
          valores_inversa = 1/valores
-         ) %>% view()
+  ) %>% view()
 
 #### Yo por otro lado voy a hacer los test según la distribución y homocedasticidad de los 
 #### datos reales.
@@ -178,13 +181,14 @@ kw_artemias %>%
 # acido_graso  comparacion1   comparacion2   significacion
 # C 16:0      Echium/Bacalao Lectina marina       **           
 # C 18:3n-3   Echium/Bacalao Lectina marina       **      
-  
+
 kw_artemias %>% 
   dunn_test(valores ~ tratamiento, p.adjust.method = "bonf") %>% 
   select(acido_graso, 
          comparacion1=group1, comparacion2=group2, 
          significacion=p.adj.signif) %>% 
   filter(significacion == c("*", "**", "***"))
+
 
 
 

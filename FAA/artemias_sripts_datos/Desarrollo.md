@@ -526,7 +526,7 @@ Igualmente te advierto que este gráfico es una flipada en verdad porque en la p
 
 ---
 
-[link grafico3d](file:///C:/Users/jcge9/Desktop/cuarto_carrera/FA.A/PracticasFA.A/graficas/plot3d.html)
+[link grafico3d]("file:///C:/Users/jcge9/Desktop/cuarto_carrera/FA.A/PracticasFA.A/graficas/plot3d.html")
 
 Figura 5:
 

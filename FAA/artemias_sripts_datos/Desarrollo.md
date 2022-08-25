@@ -526,6 +526,8 @@ Igualmente te advierto que este gráfico es una flipada en verdad porque en la p
 
 ---
 
+[link grafico3d](https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/graficas/plot3d.html)
+
 Figura 5:
 
 ---

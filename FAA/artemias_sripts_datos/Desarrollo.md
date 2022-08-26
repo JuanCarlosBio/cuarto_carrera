@@ -472,13 +472,13 @@ data_frame %>%
 ---
 
 <p align="center">
-[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot03.png")
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot03.png">
 </p>
 
 Figura 1.
 
 <p align="center">
-[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot04.png")
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot04.png">
 </p>
 
 Figura 2. 
@@ -501,7 +501,7 @@ data_frame %>%
 ---
 
 <p align="center">
-[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot06.png")
+     <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot06.png">
 </p>
 
 Figura 3
@@ -526,7 +526,7 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 ---
 
 <p align="center">
-[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png")
+<img src=("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png">
 </p>
 
 ***Figura 4.*** Análisis de componentes principales para distintos tratamientos de diverso contenido de ácidos grasos.

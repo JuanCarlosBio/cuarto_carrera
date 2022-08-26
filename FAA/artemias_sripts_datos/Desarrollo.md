@@ -542,7 +542,7 @@ Igualmente te advierto que este gráfico es una flipada en verdad porque en la p
 
 ---
 
-![link html](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/plot3d.html)
+![link html](file:///C:/Users/jcge9/Desktop/cuarto_carrera/FA.A/PracticasFA.A/graficas/plot3d.html)
 
 Figura 5:
 

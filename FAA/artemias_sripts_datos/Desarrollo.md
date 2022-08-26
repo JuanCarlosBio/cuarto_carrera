@@ -526,7 +526,7 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 ---
 
 <p align="center">
-<img src=("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png">
 </p>
 
 ***Figura 4.*** Análisis de componentes principales para distintos tratamientos de diverso contenido de ácidos grasos.
@@ -542,7 +542,6 @@ Igualmente te advierto que este gráfico es una flipada en verdad porque en la p
 
 ---
 
-![link html](file:///C:/Users/jcge9/Desktop/cuarto_carrera/FA.A/PracticasFA.A/graficas/plot3d.html)
 
 Figura 5:
 

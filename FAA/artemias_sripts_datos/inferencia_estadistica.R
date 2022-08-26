@@ -1,5 +1,3 @@
-url_artemias <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/matrix_artemias.csv"
-
 ################################################################################
 ########### PRÁCTICAS DE INFORMÁTICA DE FISIOLOGÍA ANIMAL APLICADA  ############
 ################################################################################
@@ -93,8 +91,8 @@ acidos_anova %>%
   tukey_hsd(valores ~ tratamiento) %>% 
   select(acido_graso, 
          comparacion1=group1, comparacion2=group2, 
-         significacion = p.adj.signif) %>% 
-  filter(significacion == "ns")
+         significacion = p.adj.signif) #%>% 
+  # filter(significacion == "ns")
 
 
 #### Comparar más de dos grupos indepentdientes en caso de que las variables sean ####
@@ -125,10 +123,11 @@ tidy_artemias %>%
 #### datos reales.
 
 # vector con los valores significativos de Levene
-vect_welch <- levene$acido_graso
+vect_no_norm <- normalidad$acido_graso
+vect_no_homoc <- levene$acido_graso
 
 anova_welch <- tidy_artemias %>% 
-  filter(acido_graso %in% vect_welch) %>% 
+  filter(acido_graso %in% vect_no_homoc & !(acido_graso %in% vect_no_norm)) %>% 
   mutate(tratamiento = as.factor(tratamiento)) %>% 
   group_by(acido_graso)
 
@@ -188,7 +187,6 @@ kw_artemias %>%
          comparacion1=group1, comparacion2=group2, 
          significacion=p.adj.signif) %>% 
   filter(significacion == c("*", "**", "***"))
-
 
 
 

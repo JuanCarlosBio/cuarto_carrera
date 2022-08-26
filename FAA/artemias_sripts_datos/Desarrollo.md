@@ -471,7 +471,15 @@ data_frame %>%
 
 ---
 
+<p align="center">
+[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot03.png")
+</p>
+
 Figura 1.
+
+<p align="center">
+[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot04.png")
+</p>
 
 Figura 2. 
 
@@ -491,6 +499,10 @@ data_frame %>%
 ### Y esta ha sido el que yo he hecho.
 
 ---
+
+<p align="center">
+[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot06.png")
+</p>
 
 Figura 3
 
@@ -513,7 +525,11 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 
 ---
 
-Figura 4
+<p align="center">
+[link image]("https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png")
+</p>
+
+***Figura 4.*** Análisis de componentes principales para distintos tratamientos de diverso contenido de ácidos grasos.
 
 --- 
 
@@ -526,7 +542,9 @@ Igualmente te advierto que este gráfico es una flipada en verdad porque en la p
 
 ---
 
-[link grafico3d]("file:///C:/Users/jcge9/Desktop/cuarto_carrera/FA.A/PracticasFA.A/graficas/plot3d.html")
+<p align="center">
+
+</p>
 
 Figura 5:
 

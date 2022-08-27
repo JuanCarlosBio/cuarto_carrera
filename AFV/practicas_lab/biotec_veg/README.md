@@ -2,7 +2,7 @@
 
 Por un lado, te vas a encontrar:
 
-* ### ***Resultados de las prácticas de cultivo in vitro de mi grupo.***
+* ### ***Resultados de las prácticas de cultivo in vitro de mi grupo de prácticas.***
 
 * ### ***Resultados obtenidos en las prácticas de laboratorio de Ecofisiología de distintos parámetros fisiológicos.*** 
 

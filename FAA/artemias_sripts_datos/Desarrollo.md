@@ -535,14 +535,6 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 
 ### **Nota sobre el PCA:** recuerda que para sacar una interpretación biológica (los grupos están separados entre sí formando grupos...) de este gráfico, tienes que estudiar las componentes por separado, es decir, PC1 y PC2 son independientes. Otra cosa que deberías hacer y está en el script del pca, es realizar infenrencia estadística (ANOVA, kruskal...) para cada componente, para ver si los grupos presentan diferencias significativas.
 
-Por último, me gustaría probar ya que estamos gráficos 3D de otra librería de plotly. Podemos añadir en ese sentido una tercera componente y de esa manera podemos rotar las componentes a nuestro antojo, lo cuál puede ayudar en la interpretación de los resultados. No voy a explicar cómo hacerlo, porque para cuando estoy haciendo esta memoria lo acobo de descubrir. Tengo suficiente bagaje para aprender a hacerlo en el momento, pero aún así ha varias cosas que asimilar. Igualmente de dejo el Link de la página de Plotly donde aprendí a hacerlo: [Gráfico PCA plotly](https://plotly.com/r/pca-visualization/)
+Por último, probé gráficos 3D de otra librería de ```plotly```. Podemos añadir en ese sentido una tercera componente (**PC3**) y de esa manera podemos rotar las componentes a nuestro antojo, lo cuál puede ayudar en la interpretación de los resultados. No voy a explicar cómo hacerlo, porque para cuando estoy haciendo esta memoria lo acabo de descubrir. Tengo suficiente bagaje para aprender a hacerlo en el momento, pero aún así ha varias cosas que asimilar. Igualmente de dejo el Link de la página de Plotly donde aprendí a hacerlo: [Gráfico PCA plotly](https://plotly.com/r/pca-visualization/)
 
-Igualmente te advierto que este gráfico es una flipada en verdad porque en la práctica ¿adivina que? Las memorias que hagas son en 2D, con lo cual de nada te sirve una imagen 3D no interactiva en 2D xd. A lomejor en un futuro se pueden hacer TFGs/TFMs/artículos en Markdown, quién sabe.
-
-
----
-
-
-Figura 5:
-
----
+Igualmente te advierto que este gráfico es una flipada en verdad porque en la práctica ¿adivina que? Las memorias que hagas son en 2D, con lo cual de nada te sirve una imagen 3D no interactiva en 2D xd. A lomejor en un futuro se pueden hacer TFGs/TFMs/artículos en Markdown, quién sabe. Es más te preguntarás por que no lo he subido aquí si GitHub permite subir este tipo de gráficos... bueno ... literal el archivo en HTML es tan grande que no se puede ver aquí. Lástima. 

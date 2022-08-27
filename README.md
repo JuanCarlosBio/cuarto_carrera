@@ -9,4 +9,4 @@
 
 Algunas de las asignaturas no incentivaban a utilizar R, o no fui capaz de buscar alguna aplicación en ese momento.
 
-### **Obviamente quiero dejar constancia que las baes de datos que uso aquí, no las he optenido por cuenta ajena, sino en mi estancia en la Universidad de de La Laguna, en cada una de estas asignaturas.**
+### **Obviamente quiero dejar constancia que las baes de datos que uso aquí, no las he obtenido por cuenta ajena, sino en mi estancia en la Universidad de de La Laguna, en cada una de estas asignaturas.**

@@ -6,608 +6,691 @@ library(tidyverse)
 library(DescTools)
 library(readxl)
 library(ggthemes)
-library(lawstat)
-library(survival) ####
-library(coin)     #### Permite usar el test de Wilcoxon cuando hay datos repetidos, p valor exacto
-library(googledrive)
+library(survival) 
+library(rstatix)
+library(cowplot)
+library(glue)
 
 # Importar de un excel con el data frame
 
-conducta <- read_csv("C:/Users/jcge9/Desktop/FAA/conducta/conducta_ratones.csv")
-
-conducta %>% str()
-
-conducta <- read_excel("conducta.xlsx", col_types = c("numeric", 
-                                                      "numeric", "numeric", "numeric", "numeric", 
-                                                      "numeric", "numeric", "numeric", "numeric", 
-                                                      "numeric", "numeric", "numeric", "numeric", 
-                                                      "numeric", "numeric", "numeric", "numeric", 
-                                                      "text", "text"));view(conducta)
+url_conducta <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/conducta/conducta_ratones.csv"
+conducta <- read_csv(url_conducta)
 
 #------------------------------------------------------------------------------#
 #                               OPEN FIELD                                     #
 #------------------------------------------------------------------------------#
 
-of <- conducta %>% select(starts_with("o_"), "v_j")
-of %>% summarise(n = n())
+open_field <- conducta %>% select(starts_with("o_"), "v_j") %>% 
+  pivot_longer(-v_j, names_to = "observacion", values_to = "numero_obs") %>% 
+  mutate(observacion = case_when(observacion == "o_ambext" ~ "Ambulación externa",
+                                 observacion == "o_ambmed" ~ "Ambulación media",
+                                 observacion == "o_ambint" ~ "Ambulación interna",
+                                 observacion == "o_grooming" ~ "Acicalarse",
+                                 observacion == "o_heces" ~ "Heces",
+                                 observacion == "o_up" ~ "Up"))
 
 view(of)
 
-###########################
-# Normalidad de los datos #
-###########################
+# No normales:
+# v_j     observacion variable   statistic       p
+# Jovenes Acicalarse  numero_obs     0.714 0.00875
+# Viejos  Acicalarse  numero_obs     0.640 0.00135
+normalidad_of <- open_field %>% 
+  group_by(v_j, observacion) %>% 
+  shapiro_test(numero_obs) %>% 
+  filter(p < 0.05)
 
-tapply(of$o_heces, of$v_j, shapiro.test)            # p > 0.05
-tapply(of$o_ambext, of$v_j, shapiro.test)           # p > 0.05
-tapply(of$o_ambmed, of$v_j, shapiro.test)           # p > 0.05      
-tapply(of$o_ambint, of$v_j, shapiro.test)           # p > 0.05
-tapply(of$o_grooming, of$v_j, shapiro.test)         # p < 0.05
-tapply(of$o_up, of$v_j, shapiro.test)               # p > 0.05
+no_normales_of <- normalidad_of$observacion
 
-
-
-####################
-# Prueba de Levene #
-####################
-
-    
-levene.test(of$o_heces,of$v_j, location = "mean")         # p > 0.05
-levene.test(of$o_ambext,of$v_j, location = "mean")        # p > 0.05
-levene.test(of$o_ambmed,of$v_j, location = "mean")        # p < 0.05
-levene.test(of$o_ambint,of$v_j, location = "mean")        # p > 0.05
-levene.test(of$o_grooming,of$v_j)                         # p > 0.05
-levene.test(of$o_up,of$v_j, location = "mean")            # p > 0.05
-
-colnames(of)
-of
-viejos <- of %>% 
-  filter(v_j %in% "Viejos") 
-var(viejos$o_ambext)
-viejos <- of %>% 
-  filter(v_j %in% "Jovenes") 
+# Todas las variables presenta homocedasticidad
+levene_of <- open_field %>% 
+  group_by(observacion) %>% 
+  mutate(v_j=as.factor(v_j)) %>% 
+  levene_test(numero_obs ~ v_j)
 
 
-##############################################
-# Test parametrico; todos excepto "grooming" #
-##############################################
-
-# t-student y Welch para dos grupos (ambulaciones Intermedias)
-
-t.test(o_heces~v_j, data = of, paired = F, var.eq = T)  # p > 0.05
-t.test(o_ambext~v_j, data = of, paired = F, var.eq = T) # p > 0.05
-t.test(o_ambmed~v_j, data = of, paired = F, var.eq = F) # p > 0.05
-t.test(o_ambint~v_j, data = of, paired = F, var.eq = T) # p > 0.05
-t.test(o_up~v_j, data = of, paired = F, var.eq = T)     # p > 0.05
-
+# T.test:
+# Ningún grupo presenta diferencias significativas
+open_field %>% 
+  filter(observacion != "Acicalarse") %>% 
+  group_by(observacion) %>% 
+  t_test(numero_obs ~ v_j, var.equal = T)
+ 
 # Wilcoxon
-
-library(survival)
-library(coin)
-wilcox.test(o_grooming~as.factor(v_j), data = of, paired = F) # p > 0.05
-wilcox_test(o_grooming~as.factor(v_j), data = of)
+# Los ratones viejos y jóvenes tampoco presentan 
+# fiferencias significativas en Acicalarse
+open_field %>% 
+  filter(observacion == "Acicalarse") %>% 
+  group_by(observacion) %>% 
+  wilcox_test(numero_obs ~ v_j)
 
 # gráficos de las ambulaciones
 
-comp_of_amb <- data.frame(ambulaciones = c(78,73,170,75,79,71,60,68,87,77,54,92,
-                                           22,22,12,57,25,13,17,11,11,39,20,11,
-                                           2,2,3,6,3,1,2,2,2,4,3,0),
-                          tipo = c(rep("amb/ext", 12), rep("amb/Int", 12), rep("amb/int", 12)),
-                          v_j = c("Viejos","Viejos","Jovenes","Jovenes",
-                                  rep("Viejos", 4), rep("Jovenes", 4))); view(comp_of_amb)
-
-# Gráfico de ambulaciones
-amb_ext <- filter(comp_of_amb, tipo %in% "amb/ext")
-levene.test(amb_ext$ambulaciones, amb_ext$v_j, location = "mean")
-
-comp_of_amb %>% 
-  group_by(v_j, tipo) %>% 
-  mutate(media1 = mean(ambulaciones),
-            sd1 = sd(ambulaciones)) %>% 
-  ggplot(aes(v_j, media1, fill = tipo)) +
-  #geom_jitter(pch = 21, position = position_jitterdodge(.1)) +
-  #stat_summary(fun = mean, geom = "crossbar", position = position_dodge(.65),
-   #            width = .6) +
-  geom_bar(stat = "identity", position = position_dodge(0.5), width = .5, col = "black") +
-  geom_errorbar(aes(ymin=media1+sd1, ymax=media1-sd1), width = .3, position = position_dodge(.5)) +
+of1 <- open_field %>%
+  filter(observacion %in% c("Ambulación interna", "Ambulación media", "Ambulación externa")) %>% 
+  mutate(ambulacion = factor(observacion,
+                             levels = c("Ambulación interna", "Ambulación media", 
+                                        "Ambulación externa"),
+                             labels = c("Ambulación\ninterna", "Ambulación\nmedia", 
+                                        "Ambulación\nexterna"))) %>%
+  select(-observacion) %>% 
+  group_by(v_j, ambulacion) %>% 
+  summarise(media=mean(numero_obs), sd=sd(numero_obs), .groups = "drop") %>% 
+  ggplot(aes(v_j, media, fill=reorder(ambulacion, media))) +
+  geom_bar(stat = "identity", color="black",
+           width = .5, position = position_dodge(.7)) +
+  geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
+                width=.3, position = position_dodge(.7)) +
   scale_y_continuous(expand = expansion(0),
-                     limits = c(0,220),
-                     breaks = seq(0,220, 40)) +
-  labs(title = "Open field, comparación de ambulaciones",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Ambulaciones",
-       x = "Grupo de ratones",
+                     limits = c(0,160),
+                     breaks = seq(0,160, 30)) +
+  scale_fill_manual(values = c("white", "black", "orange")) +
+  labs(title = "Ambulación Open field",
+       subtitle = "Datos Normales y homocedásticos: T.test: p > 0.05 todos",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Ambulación",
+       x = NULL,
        fill = "Ambulación") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        legend.background = element_rect(color = "black"),
-        legend.position = c(.9,.7),
-        legend.text = element_text(size = 13),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  geom_line(data = tibble(x = c(.9,2.1), y = c(155,155)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 165),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5) +
-  scale_fill_manual(values = c("red", "yellow", "blue"))
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+        )
 
-# Comparación heces
-
-of %>% 
-  group_by(v_j) %>% 
-  summarise(media2 = mean(o_heces), sd2 = sd(o_heces)) %>% 
-  ggplot(aes(v_j, media2, fill = v_j)) +
-  geom_errorbar(aes(ymin = media2+sd2, ymax = media2-sd2), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
+of2 <- open_field %>%
+  filter(observacion %in% c("Heces", "Up")) %>% 
+  group_by(v_j, observacion) %>% 
+  summarise(media=mean(numero_obs), sd=sd(numero_obs), .groups = "drop") %>% 
+  ggplot(aes(v_j, media, fill=reorder(observacion, media))) +
+  geom_bar(stat = "identity", color="black",
+           width = .5, position = position_dodge(.7)) +
+  geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
+                width=.3, position = position_dodge(.7)) +
   scale_y_continuous(expand = expansion(0),
-                     limits = c(0,3),
-                     breaks = seq(0,3, .5)) +
-  labs(title = "Open Field, nº de defecaciones",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de defecaciones",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(2.2,2.2)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 2.4),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
+                     limits = c(0,NA)) +
+  scale_fill_manual(values = c("brown", "skyblue")) +
+  labs(title = "Comportamientos específicos Open field",
+       subtitle = "Datos Normales y homocedásticos: T.test: p > 0.05 todos",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Frecuencia",
+       x = NULL,
+       fill = "Comportamiento") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 11, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  )
+  
+of3 <- open_field %>%
+  filter(observacion %in% c("Acicalarse")) %>% 
+  ggplot(aes(v_j, numero_obs, fill=reorder(observacion, numero_obs))) +
+  geom_boxplot(width=.5, alpha=.5) +
+  geom_jitter(pch=21, position = position_jitterdodge(seed = )) +
+  scale_y_continuous(limits = c(-1,NA)) +
+  scale_fill_manual(values = c("yellow", "skyblue")) +
+  labs(title = "Comportamientos específicos Open field",
+       subtitle = "Datos NO Normales y homocedásticos: T.test: p > 0.05 todos",
+       caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Frecuencia",
+       x = NULL,
+       fill = "Comportamiento") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 11, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  )
 
-# Nº de ups
+plot_grid(of1,of2,of3,
+                   labels = c("A","B","C"))
 
-of %>% 
-  group_by(v_j) %>% 
-  summarise(media3 = mean(o_up), sd3 = sd(o_up)) %>% 
-  ggplot(aes(v_j, media3, fill = v_j)) +
-  geom_errorbar(aes(ymin = media3+sd3, ymax = media3-sd3), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
-  scale_y_continuous(expand = expansion(0),
-                     limits = c(0,80),
-                     breaks = seq(0,80, 20)) +
-  labs(title = "Open Field, nº de Saltos",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº Saltos",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(55,55)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 60),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
-# Nº Grooming
-
-of %>% 
-  group_by(v_j) %>% 
-  ggplot(aes(v_j, o_grooming, fill = v_j)) +
-  geom_jitter(pch = 21, position = position_jitterdodge(.5, seed = 20101997),
-              show.legend = F) +
-  geom_boxplot(width = .5, alpha = .7, show.legend = F) +
-  labs(title = "Open Field, nº de Grooming",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de grooming",
-       x = "Grupo de ratones") +
-  scale_y_continuous(limits = c(0,12),
-                     breaks = seq(0,12,2)) +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(8.5,8.5)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 9),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
 
 #------------------------------------------------------------------------------#
 #                                  Holes maze                                  #
 #------------------------------------------------------------------------------#
+holes_maze <- conducta %>% select(starts_with("h_"), "v_j") %>% 
+  pivot_longer(-v_j, names_to = "observacion", values_to = "numero_obs") %>% 
+  mutate(observacion = case_when(observacion == "h_amb" ~ "Ambulación",
+                                 observacion == "h_cabeza" ~ "Mete cabeza",
+                                 observacion == "h_t_oler" ~ "Tiempo olisqueo",
+                                 observacion == "h_grooming" ~ "Acicalarse",
+                                 observacion == "h_up" ~ "Up"))
 
-hb <- conducta %>% select(starts_with("h_"), "v_j")
+# Todos son normales:
+normalidad_hm <- holes_maze %>% 
+  filter(observacion != "Acicalarse") %>%    # Todos son cero, no existen diff pero... tiene que ser error xd
+  group_by(v_j, observacion) %>% 
+  shapiro_test(numero_obs) #%>% 
+  # filter(p < 0.05)
 
-######################
-# Estudio Normalidad #
-######################
+# Todas las variables presenta homocedasticidad
+levene_of <- holes_maze %>% 
+  filter(observacion != "Acicalarse") %>%    
+  group_by(observacion) %>% 
+  mutate(v_j=as.factor(v_j)) %>% 
+  levene_test(numero_obs ~ v_j)
 
-view(hb)
 
-tapply(hb$h_cabeza, hb$v_j, shapiro.test)        # p > 0.05
-tapply(hb$h_amb, hb$v_j, shapiro.test)           # p > 0.05
-tapply(hb$h_t_oler, hb$v_j, shapiro.test)        # p > 0.05
-tapply(hb$h_grooming, hb$v_j, shapiro.test)      # No se puede comparar todos lo x son =
-tapply(hb$h_up, hb$v_j, shapiro.test)            # p > 0.05
+# T.test:
+# observacion   group1        p
+# Mete cabeza  Jovenes     0.00297
+holes_maze %>% 
+  filter(observacion != "Acicalarse") %>% 
+  group_by(observacion) %>% 
+  t_test(numero_obs ~ v_j, var.equal = T) %>% 
+  filter(p < .05) %>% select(observacion, group1, group1, p  )
 
-####################
-# Prueba de Levene #
-####################
 
-levene.test(hb$h_cabeza, hb$v_j, location = "mean")    # p > 0.05
-levene.test(hb$h_amb, hb$v_j, location = "mean")       # p > 0.05
-levene.test(hb$h_t_oler, hb$v_j, location = "mean")    # p > 0.05
-levene.test(hb$h_grooming, hb$v_j, location = "mean")  # p < 0.05
-levene.test(hb$h_up, hb$v_j, location = "mean")        # p > 0.05
+# gráfico Hole Maze
 
-################
-# Test-Student #
-################
+etiqueta_sighm <- tibble(x=c(1,2),
+                       y=c(42,60),
+                       color=c(F,T),
+                       etiqueta=c("***","***"))
 
-t.test(h_cabeza~v_j, data = hb, var.equal = T, paired = F)    # p < 0.05
-t.test(h_amb~v_j, data = hb, var.equal = T, paired = F)       # p > 0.05
-t.test(h_t_oler~v_j, data = hb, var.equal = T, paired = F)    # p > 0.05
-t.test(h_grooming~v_j, data = hb, var.equal = F, paired = F)  # p > 0.05
-t.test(h_up~v_j, data = hb, var.equal = T, paired = F)        # p > 0.05
-
-############
-# Gráficos #
-############
-
-hb %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(h_cabeza), sd = sd(h_cabeza)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
+holes_maze %>%
+  filter(observacion != "Acicalarse") %>% 
+  mutate(ambulacion = factor(observacion,
+                             levels = c("Ambulación", "Mete cabeza", 
+                                        "Tiempo olisqueo", "Up"),
+                             labels = c("Ambulación", "Mete\ncabeza", 
+                                        "Tiempo\nolisqueo", "Up"))) %>%
+  group_by(v_j, observacion) %>% 
+  summarise(media=mean(numero_obs), sd=sd(numero_obs), .groups = "drop") %>%
+  mutate(mucho=observacion=="Tiempo olisqueo") %>% 
+  ggplot(aes(v_j, media, fill=reorder(observacion, media))) +
+  geom_bar(stat = "identity", color="black",
+           width = .5, position = position_dodge(.7)) +
+  geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
+                width=.3, position = position_dodge(.7)) +
+  geom_hline(yintercept = 0, size=1) +
+  geom_text(data = etiqueta_sighm,
+            aes(x=x, y=y, label=etiqueta),
+            inherit.aes = FALSE, size=5) +
+  facet_wrap(~mucho, ncol = 1, scales = "free") +
   scale_y_continuous(expand = expansion(0),
-                     limits = c(0,80),
-                     breaks = seq(0,80, 20)) +
-  labs(title = "H.B., nº de veces que mete la cabeza",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de veces que mete la cabeza",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(60,60)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 62),
-            aes(x = x, y = y),inherit.aes = F, label = "**", size = 10)
+                     limits = c(0,NA)) +
+  scale_fill_manual(breaks = c("Ambulación", "Mete cabeza", 
+                               "Tiempo olisqueo", "Up"),
+                    labels = c("Ambulación", "Mete\ncabeza", 
+                               "Tiempo\nolisqueo", "Up"),
+                    values = c("white", "darkgray", "black","orange", "red")) +
+  labs(title = "Observaciones Holemaze Open field",
+       subtitle = "Datos Normales y homocedásticos: T.test: Meter la cabeza***",
+       caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Observación",
+       x = NULL,
+       fill = "Observación") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 10, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 16),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1),
+        strip.background = element_blank(),
+        strip.text = element_blank()
+  )
 
-hb %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(h_amb), sd = sd(h_amb)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
-  scale_y_continuous(expand = expansion(0),
-                     limits = c(0,120),
-                     breaks = seq(0,120, 20)) +
-  labs(title = "H.B., Nº de ambulaciones",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de Ambulaciones",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(80,80)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 85),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
-
-hb %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(h_t_oler), sd = sd(h_t_oler)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
-  scale_y_continuous(expand = expansion(0),
-                     limits = c(0,70),
-                     breaks = seq(0,70, 15)) +
-  labs(title = "H.B., Tiempo de olisqueo",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Tiempo (s)",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(55,55)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 60),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
-
-hb %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(h_grooming), sd = sd(h_grooming)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
-  #scale_y_continuous(expand = expansion(0),
-   #                  limits = c(0,70),
-    #                 breaks = seq(0,70, 15)) +
-  labs(title = "H.B., Grooming",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Veces de Grooming",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) #+
-  #geom_line(data = tibble(x = c(1,2), y = c(55,55)),
-   #         aes(x = x, y = y),inherit.aes = F) +
-  #geom_text(data = tibble(x = 1.5, y = 60),
-   #         aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
-
-hb %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(h_up), sd = sd(h_up)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
-  scale_y_continuous(expand = expansion(0),
-                    limits = c(0,45),
-                   breaks = seq(0,45, 10)) +
-  labs(title = "H.B., Nº de saltos",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de Saltos",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(35,35)),
-         aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 38),
-         aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
 
 #------------------------------------------------------------------------------#
 #                                 P.Maze                                       #
 #------------------------------------------------------------------------------#
 
-pm <- conducta %>% select(starts_with("p_"), "v_j")
+p.maze <- conducta %>% select(starts_with("p_"), "v_j") %>% 
+  pivot_longer(-v_j, names_to = "observacion", values_to = "numero_obs") %>%
+  mutate(observacion = case_when(observacion == "p_t_cto" ~ "Tiempo centro",
+                                 observacion == "p_t_ba" ~ "Tiempo abierto",
+                                 observacion == "p_t_bc" ~ "Tiempo cerrado",
+                                 observacion == "p_cto" ~ "Nº.centro",
+                                 observacion == "p_ba" ~ "Nº.abierto",
+                                 observacion == "p_bc" ~ "Nº.cerrado",
+                                 observacion == "p_grooming" ~ "Acicalarse", 
+                                 observacion == "p_up" ~ "Up",
+                                 )) %>% 
+  filter(numero_obs < 500) # Hay uno serie de otliers en el tiempo que pasan en cada brazo 
 
-##############
-# Normalidad #
-##############
+# No normales:
+normalidad_pm <- p.maze %>% 
+  filter(observacion != "Acicalarse") %>%    # Los viejos no se acicalan BUG del juego
+  group_by(v_j, observacion) %>% 
+  shapiro_test(numero_obs) %>% 
+  filter(p < 0.05)
 
-tapply(pm$p_t_cto, pm$v_j, shapiro.test)     # p < 0.05
-tapply(pm$p_t_ba, pm$v_j, shapiro.test)      # p < 0.05
-tapply(pm$p_t_bc, pm$v_j, shapiro.test)      # p < 0.05
-tapply(pm$p_cto, pm$v_j, shapiro.test)       # p > 0.05
-tapply(pm$p_grooming, pm$v_j, shapiro.test)  #
-tapply(pm$p_up, pm$v_j, shapiro.test)        # p > 0.05
+no_normales_pm <- unique(normalidad_pm$observacion)
 
-####################
-# Homocedasticidad #
-####################
+# Todas las variables presenta homocedasticidad
+levene_pm <- p.maze %>% 
+  group_by(observacion) %>% 
+  mutate(v_j=as.factor(v_j)) %>% 
+  levene_test(numero_obs ~ v_j) %>% 
+  filter(p < 0.05)
 
-levene.test(pm$p_t_cto, pm$v_j)                        # p > 0.05
-levene.test(pm$p_t_ba, pm$v_j)                         # p > 0.05
-levene.test(pm$p_t_bc, pm$v_j)                         # p > 0.05
-levene.test(pm$p_cto, pm$v_j, location = "mean")       # p < 0.05
-levene.test(pm$p_up, pm$v_j, location = "mean")        # p > 0.05
+no_homoc_pm <- unique(levene_pm$observacion)
 
+# T.test: No ha diferencias
+# observacion   p
+# Acicalarse   0.0779
+# Nº.cerrado   0.137 
+# Up           0.917 
 
+p.maze %>% 
+  filter(!(observacion %in% no_normales_pm) & 
+           !(observacion %in% no_homoc_pm)) %>% 
+  group_by(observacion) %>% 
+  t_test(numero_obs ~ v_j, var.equal = T)
 
-#####################
-# Test Paramétricos #
-# T-Student; Welch  #
-#####################
-
-t.test(p_cto~v_j, data = pm, var.equal = F, paired = F) # p < 0.05 *
-t.test(p_up~v_j, data = pm, var.equal = T, paired = F)  # p > 0.05
-
-
-
-########################
-# Test No paramétricos #
-#     Wilcoxon         #
-########################
-
-
-wilcox_test(p_t_cto~as.factor(v_j), data = pm)    # p > 0.05
-wilcox_test(p_t_ba~as.factor(v_j), data = pm)     # p > 0.05
-wilcox_test(p_t_bc~as.factor(v_j), data = pm)     # p > 0.05
-
-
-
-############################
-# Gráficos No paramétricos #
-############################
-
-# Data frame para los análisis
-
-comb_pm_t <- data.frame(tb = c(163,95,18,39,11,8.38,4.70,0,15.15,95,46,80,
-                               0,32,0,134,0,0,0,3,0,8.1,3,0,
-                               17,53,162,7,170,172,175.3,177,164,77,131,100),
-                        tipo = c(rep("t.Centro", 12),rep("t.Brazo abierto", 12),
-                                 rep("t.Brazo cerrado", 12)),
-                        v_j = rep(c("Viejos","Viejos","Jovenes","Jovenes",
-                                    rep("Viejos",4), rep("Jovenes",4)), 3));view(comb_pm_t)
+# T.Welch:
+# observacion      p
+#  Nº.centro   0.0294 **
+p.maze %>% 
+  filter(observacion == no_homoc_pm) %>% 
+  group_by(observacion) %>% 
+  t_test(numero_obs ~ v_j, var.equal = F) %>% select(observacion, p)
 
 
-comb_pm_t%>% 
-  group_by(v_j, tipo) %>% 
-  ggplot(aes(v_j, tb, fill = tipo)) +
-  geom_boxplot(alpha = .7, width = .4, position = position_dodge(.75)) +
-  geom_jitter(pch = 21, position = position_jitterdodge(.2)) +
-  scale_y_continuous(limits = c(0,320),
-                     breaks = seq(0,320, 40)) +
-  labs(title = "P.Maze, Tiempo de permanencia brazo/centro",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Tiempo (s)",
-       x = "Grupo de ratones",
-       fill = "Zona") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        legend.background = element_rect(color = "black"),
-        legend.position = c(.9,.9),
-        legend.text = element_text(size = 13),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  geom_line(data = tibble(x = c(.75,2.25), y = c(200,200)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 215),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5) +
-  scale_fill_manual(values = c("red", "yellow", "blue"))
+# Wilcoxon
+# Los ratones viejos y jóvenes tampoco presentan 
+# fiferencias significativas en Acicalarse
+p.maze %>% 
+  filter(observacion %in% no_normales_pm) %>% 
+  group_by(observacion) %>% 
+  wilcox_test(numero_obs ~ v_j)
 
+# gráficos de los tiempos
 
-#########################
-# Gráficos paramétricos #
-#########################
+p1 <- p.maze %>%
+  filter(observacion %in% c("Tiempo centro", "Tiempo cerrado")) %>% 
+  mutate(observacion = factor(observacion,
+                             levels = c("Tiempo centro", 
+                                        "Tiempo cerrado"),
+                             labels = c("Centro", 
+                                        "Cerrado"))) %>%
+  group_by(observacion, v_j) %>%
+  summarise(media=mean(numero_obs), sd=sd(numero_obs)) %>%
+  ggplot(aes(v_j, media, fill=observacion)) +
+  geom_bar(stat = "identity", color="black",
+           width = .5, position = position_dodge(.7)) +
+  geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
+                width=.3, position = position_dodge(.7)) +
+  # geom_boxplot(data=data_abierto,aes(v_j, numero_obs), inherit.aes = FALSE,
+  #              fill="orange", alpha=.25, width=.25, position = position_nudge(x=.5,y=0)) +
+  scale_y_continuous(expand = expansion(0),
+                     limits = c(0,200),
+                     breaks = seq(0,200, 40)) +
+  scale_fill_manual(values = c("white", "black", "orange")) +
+  labs(title = "Tiempo de estancia (centro y cerrado) P.maze",
+       subtitle = "Datos Normales y Homocedásticos: T.test: p > 0.05 todos",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Tiempo (seg)",
+       x = NULL,
+       fill = "Lugar de\nestancia") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  );p1
 
-pm %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(p_cto), sd = sd(p_cto)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
+p2 <- p.maze %>%
+  filter(observacion %in% c("Tiempo abierto")) %>% 
+  mutate(observacion = factor(observacion,
+                              levels = c("Tiempo abierto"),
+                              labels = c("Aabierto"))) %>%
+  ggplot(aes(v_j, numero_obs, fill=observacion)) +
+  geom_boxplot(width=.35, alpha=.25) +
+  geom_jitter(pch=21,position = position_jitterdodge(.5), size=1) +
+  scale_y_continuous(limits = c(0,200),
+                     breaks = seq(0,200, 40)) +
+  scale_fill_manual(values ="orange") +
+  labs(title = "Tiempo de estancia (abierto) P.maze",
+       subtitle = "Datos NO Normales: Wicoxon: p > 0.05",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Tiempo (seg)",
+       x = NULL,
+       fill = "Lugar de\nestancia") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  );p2
+
+pmix1 <- plot_grid(p1,p2,nrow = 1,
+          labels = c("A","B"))
+
+### Gráficos de estancias:
+
+p3 <- p.maze %>%
+  filter(observacion %in% c("Nº.centro", "Nº.cerrado")) %>% 
+  mutate(observacion = factor(observacion,
+                              levels = c("Nº.centro", 
+                                         "Nº.cerrado"),
+                              labels = c("Centro","Brazo\ncerrado"))) %>%
+  group_by(observacion, v_j) %>%
+  summarise(media=mean(numero_obs), sd=sd(numero_obs)) %>%
+  ggplot(aes(v_j, media, fill=observacion)) +
+  geom_bar(stat = "identity", color="black",
+           width = .5, position = position_dodge(.7)) +
+  geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
+                width=.3, position = position_dodge(.7)) +
+  geom_text(data = tibble(x=c(.825,1.825),y=c(12,6)),
+            aes(x=x,y=y, label="*"), inherit.aes = FALSE, size=7) +
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,20),
-                     breaks = seq(0,20, 5)) +
-  labs(title = "P.Maze, Nº veces en el centro",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Frecuencia absoluta",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(15,15)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 16),
-            aes(x = x, y = y),inherit.aes = F, label = "*", size = 10)
+                     breaks = seq(0,20, 3)) +
+  scale_fill_manual(values = c("tomato", "skyblue")) +
+  labs(title = "Estancia (centro y cerrado) P.maze",
+       subtitle = "Datos Normales, Homocedásticos (centro) y\nno Homocedásticos (cerrado)",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Número de estancias",
+       x = NULL,
+       fill = "Lugar de\nestancia") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  );p3
 
-pm %>% 
-  group_by(v_j) %>% 
-  summarise(media = mean(p_up), sd = sd(p_up)) %>% 
-  ggplot(aes(v_j, media, fill = v_j)) +
-  geom_errorbar(aes(ymin = media+sd, ymax = media-sd), width = .1) +
-  geom_bar(stat = "identity", show.legend = F, width = .3, col = "black") +
+p4 <- p.maze %>%
+  filter(observacion %in% c("Nº.abierto")) %>% 
+  mutate(observacion = factor(observacion,
+                              levels = c("Nº.abierto"),
+                              labels = c("Brazo\nabierto"))) %>%
+  ggplot(aes(v_j, numero_obs, fill=observacion)) +
+  geom_boxplot(width=.35, alpha=.25) +
+  geom_jitter(pch=21,position = position_jitterdodge(.5), size=1) +
+  scale_y_continuous(limits = c(0,20),
+                     breaks = seq(0,20, 3)) +
+  scale_fill_manual(values ="yellowgreen") +
+  labs(title = "Estancia (abierto) P.maze",
+       subtitle = "Datos NO Normales: Wicoxon: p > 0.05",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Número de estancias",
+       x = NULL,
+       fill = "Lugar de\nestancia") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 10, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  );p4
+
+pmix2 <- plot_grid(p3,p4,nrow = 1,
+          labels = c("C","D"))
+
+plot_grid(pmix1,pmix2, nrow = 2)
+
+
+###### Observaciones específicos del p.maiz
+
+p.maze %>%
+  filter(observacion %in% c("Acicalarse", "Up")) %>% 
+  mutate(observacion = factor(observacion,
+                              levels = c("Acicalarse", 
+                                         "Up"))) %>%
+  group_by(observacion, v_j) %>%
+  summarise(media=mean(numero_obs), sd=sd(numero_obs)) %>%
+  ggplot(aes(v_j, media, fill=observacion)) +
+  geom_bar(stat = "identity", color="black",
+           width = .5, position = position_dodge(.7)) +
+  geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
+                width=.3, position = position_dodge(.7)) +
   scale_y_continuous(expand = expansion(0),
-                     limits = c(0,45),
-                     breaks = seq(0,45, 10)) +
-  labs(title = "P.Maze., Nº de saltos",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de Saltos",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(35,35)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 37),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
+                     limits = c(0,30),
+                     breaks = seq(0,30, 3)) +
+  scale_fill_manual(values = c("tomato", "skyblue")) +
+  labs(title = "Observaciones específicas P.maze",
+       subtitle = "Datos Normales y Homocedásticos; p > 0.05 Ups. Obviamente hay diferencias en cuanto a\nlos acicalamientos, pero al haber 0 de los viejos, no se pudierno hacer de forma correcata los test.",
+       #caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
+       y = "Frecuencia",
+       x = NULL,
+       fill = "comportamiento\nespecífico") +
+  theme_classic() +
+  theme(axis.line = element_line(size = 1),
+        legend.position = "bottom",
+        legend.text = element_text(size = 9, hjust = .5),
+        plot.title = element_text(face = "bold", size = 13, hjust = .5),
+        plot.subtitle = element_text(face = "italic", size = 8.5, hjust = .5),
+        plot.caption = element_text(face = "italic", size = 11),
+        axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 13, color="black"),
+        axis.ticks.x = element_blank() ,
+        axis.ticks.y = element_line(size=1)
+  )
+
+#---------------------------------------------------------------#
+# Análisis de componentes principales para cada prueba          #
+#---------------------------------------------------------------#
+
+# matrices:
+matrix_of <- conducta %>% select(starts_with("o_"), "v_j")
+matrix_hm <- conducta %>% select(starts_with("h_"), "v_j")
+matrix_pm <- conducta %>% select(starts_with("p_"), "v_j")
+
+##### PCA Open Field
+matrix_numof <- matrix_of[,-7]
+
+pca_of <- prcomp(matrix_numof, scale=TRUE, center=TRUE)
+
+resumen_of <- summary(pca_of) 
+cor(pca_of$x[,c(1,2)], matrix_numof)
+
+# Componentes principales Open Field
+pc_of <- as_tibble(pca_of$x[,c(1,2)]) %>% 
+  mutate(v_j=matrix_of$v_j)
+# Varianza explicada por PC1 y PC2
+
+pc1_of <- round(resumen_of$importance[2,1]*100,2)
+pc2_of <- round(resumen_of$importance[2,2]*100,2)
+
+pc_1 <- pc_of %>% 
+  ggplot(aes(PC1, PC2, fill=v_j, color = v_j)) +
+  geom_point(pch=21, color="black") +
+  stat_ellipse(geom = "polygon", alpha = .25) +
+  geom_vline(xintercept = 0, color="black", linetype="dashed") +
+  geom_hline(yintercept = 0, color="black", linetype="dashed") +
+  scale_fill_manual(name="Edad:",
+                    values = c("red", "blue")) + 
+  scale_color_manual(name="Edad:",
+                     values = c("red", "blue")) +
+  labs(
+    title = "PCA para Las Variables de Open Field",
+    x=glue("PC1 ({pc1_of}% varianza explicada)"),
+    y=glue("PC2 ({pc2_of}% varianza explicada)")
+  ) +
+  theme_classic() +
+  theme(
+    axis.line = element_line(size=1),
+    axis.ticks = element_line(size=1),
+    plot.title = element_text(size = 14, face = "bold", hjust = .5,
+                              margin = margin(b=30)),
+    axis.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.background = element_rect(color = "white")
+  )
+
+##### PCA Hole maez
+matrix_numhm <- matrix_hm[,-6]
+
+pca_hm <- prcomp(matrix_numhm, scale=TRUE, center=TRUE)
+
+resumen_hm <- summary(pca_hm) 
+cor(pca_hm$x[,c(1,2)], matrix_numhm)
+
+# Componentes principales Open Field
+pc_hm <- as_tibble(pca_hm$x[,c(1,2)]) %>% 
+  mutate(v_j=matrix_hm$v_j)
+# Varianza explicada por PC1 y PC2
+
+pc1_hm <- round(resumen_hm$importance[2,1]*100,2)
+pc2_hm <- round(resumen_hm$importance[2,2]*100,2)
+
+pc_2 <- pc_hm %>% 
+  ggplot(aes(PC1, PC2, fill=v_j, color = v_j)) +
+  geom_point(pch=21, color="black") +
+  stat_ellipse(geom = "polygon", alpha = .25) +
+  geom_vline(xintercept = 0, color="black", linetype="dashed") +
+  geom_hline(yintercept = 0, color="black", linetype="dashed") +
+  scale_fill_manual(name="Edad:",
+                    values = c("red", "blue")) + 
+  scale_color_manual(name="Edad:",
+                     values = c("red", "blue")) +
+  labs(
+    title = "PCA para Las Variables de Hole Maze",
+    x=glue("PC1 ({pc1_hm}% varianza explicada)"),
+    y=glue("PC2 ({pc2_hm}% varianza explicada)")
+  ) +
+  theme_classic() +
+  theme(
+    axis.line = element_line(size=1),
+    axis.ticks = element_line(size=1),
+    plot.title = element_text(size = 14, face = "bold", hjust = .5,
+                              margin = margin(b=30)),
+    axis.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.background = element_rect(color = "white")
+  )
+
+# Componentes principales Open Field
+pc_of <- as_tibble(pca_of$x[,c(1,2)]) %>% 
+  mutate(v_j=matrix_of$v_j)
+# Varianza explicada por PC1 y PC2
+
+pc1_of <- round(resumen_of$importance[2,1]*100,2)
+pc2_of <- round(resumen_of$importance[2,2]*100,2)
+
+pc_of %>% 
+  ggplot(aes(PC1, PC2, fill=v_j, color = v_j)) +
+  geom_point(pch=21, color="black") +
+  stat_ellipse(geom = "polygon", alpha = .25) +
+  geom_vline(xintercept = 0, color="black", linetype="dashed") +
+  geom_hline(yintercept = 0, color="black", linetype="dashed") +
+  scale_fill_manual(name="Edad:",
+                    values = c("red", "blue")) + 
+  scale_color_manual(name="Edad:",
+                     values = c("red", "blue")) +
+  labs(
+    title = "PCA para Las Variables de Open Field",
+    x=glue("PC1 ({pc1_of}% varianza explicada)"),
+    y=glue("PC2 ({pc2_of}% varianza explicada)")
+  ) +
+  theme_classic() +
+  theme(
+    axis.line = element_line(size=1),
+    axis.ticks = element_line(size=1),
+    plot.title = element_text(size = 14, face = "bold", hjust = .5,
+                              margin = margin(b=30)),
+    axis.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.background = element_rect(color = "white")
+  )
+
+##### PCA Hole maez
+matrix_numpm <- matrix_pm[,-9]
+
+pca_pm <- prcomp(matrix_numpm, scale=TRUE, center=TRUE)
+
+resumen_pm <- summary(pca_pm) 
+cor(pca_pm$x[,c(1,2)], matrix_numpm)
+
+# Componentes principales P.maze
+pc_pm <- as_tibble(pca_pm$x[,c(1,2,3)]) %>% 
+  mutate(v_j=matrix_pm$v_j)
+# Varianza explicada por PC1 y PC2
+
+pc1_pm <- round(resumen_pm$importance[2,1]*100,2)
+pc2_pm <- round(resumen_pm$importance[2,2]*100,2)
+pc3_pm <- round(resumen_pm$importance[2,3]*100,2)
 
 
-####################################
-# P.Maze comparación brazos/centro #
-####################################
-
-pm_brazos <- data.frame(paso = c(2,3,3,5,5,4,0,2,9,9,12,4,
-                                 0,2,7,0,0,0,1,0,0,2,1,0,
-                                 1,4,3,2,6,5,4,5,10,8,11,7),
-                        brazo = c(rep("Centro", 12), rep("B.abierto", 12),
-                                  rep("B.cerrado",12)),
-                        v_j = rep(c("Viejos","Viejos","Jovenes","Jovenes",
-                                    rep("Viejos",4), rep("Jovenes",4)), 3));view(pm_brazos)
-
-pm_cto <- filter(pm_brazos, brazo %in% "Centro")
-pm_ba <- filter(pm_brazos, brazo %in% "B.abierto")
-pm_bc <- filter(pm_brazos, brazo %in% "B.cerrado")
-
-# Normalidad
-
-tapply(pm_cto$paso, pm_cto$v_j, shapiro.test)   # p > 0.05
-tapply(pm_ba$paso, pm_ba$v_j, shapiro.test)     # p < 0.05
-tapply(pm_bc$paso, pm_bc$v_j, shapiro.test)     # p > 0.05
-
-# Homocedasticidad
-
-levene.test(pm_cto$paso, pm_cto$v_j, location = "mean") # p < 0.05
-levene.test(pm_ba$paso, pm_ba$v_j, location = "median") # p > 0.05
-levene.test(pm_bc$paso, pm_bc$v_j, location = "mean")   # p > 0.05
-
-# Análisis paramétricos
-
-t.test(paso~v_j, data = pm_cto, paired = F, var.eq = F)  # p < 0.05
-t.test(paso~v_j, data = pm_bc, paired = F, var.eq = T)   # p > 0.05
-
-# Análisis no paramétrico
-
-wilcox_test(paso~as.factor(v_j), data = pm_ba)           # p > 0.05
+pc_3 <- pc_pm %>% 
+  ggplot(aes(PC1, PC2, fill=v_j, color = v_j)) +
+  geom_point(pch=21, color="black") +
+  stat_ellipse(geom = "polygon", alpha = .25) +
+  geom_vline(xintercept = 0, color="black", linetype="dashed") +
+  geom_hline(yintercept = 0, color="black", linetype="dashed") +
+  scale_fill_manual(name="Edad:",
+                    values = c("red", "blue")) + 
+  scale_color_manual(name="Edad:",
+                     values = c("red", "blue")) +
+  labs(
+    title = "PCA para Las Variables de P.maze",
+    x=glue("PC1 ({pc1_pm}% varianza explicada)"),
+    y=glue("PC2 ({pc2_pm}% varianza explicada)")
+  ) +
+  theme_classic() +
+  theme(
+    axis.line = element_line(size=1),
+    axis.ticks = element_line(size=1),
+    plot.title = element_text(size = 14, face = "bold", hjust = .5,
+                              margin = margin(b=30)),
+    axis.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.background = element_rect(color = "white")
+  )
 
 
-# gráficos
-pm_cto %>% filter(v_j %in% "Jovenes")%>%  summarise(media = mean(paso))
-pm_bc %>% filter(v_j %in% "Jovenes") %>% summarise(media = mean(paso))
+library(plotly)
 
-pm_brazos %>% 
-  filter(brazo %in% c("Centro", "B.cerrado")) %>% 
-  group_by(v_j, brazo) %>% 
-  mutate(media1 = mean(paso),
-         sd1 = sd(paso)) %>% 
-  ggplot(aes(v_j, media1, fill = brazo)) +
-  geom_errorbar(aes(ymin=media1+sd1, ymax=media1-sd1), width = .2, position = position_dodge(.6)) +
-  geom_bar(stat = "identity", position = position_dodge(.6), width = .5, col = "black") +
-  scale_y_continuous(expand = expansion(0),
-                     limits = c(0,20),
-                     breaks = seq(0,20, 5)) +
-  labs(title = "P.Maze, veces que pasan por B.cerrado/Centro",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de trámites",
-       x = "Grupo de ratones",
-       fill = "Zona") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        legend.background = element_rect(color = "black"),
-        legend.position = c(.9,.7),
-        legend.text = element_text(size = 13),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  geom_text(data = tibble(x = .85, y = 11.5),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5) +
-    geom_text(data = tibble(x = 1.15, y = 11.2),
-              aes(x = x, y = y),inherit.aes = F, label = "*", size = 10) +
-    geom_text(data = tibble(x = 1.85, y = 7),
-              aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5) +
-    geom_text(data = tibble(x = 2.15, y = 5.3),
-              aes(x = x, y = y),inherit.aes = F, label = "*", size = 10) +
-  scale_fill_manual(values = c("red", "blue"))
+plot_ly(pc_pm, 
+        x = ~PC1, y = ~PC2, z = ~PC3, 
+        color = ~v_j, 
+        colors = c('red','blue')
+)%>%
+  add_markers(size = 15) %>%
+  layout(
+    title = glue('Total Explained Variance = {pc1_pm+pc2_pm+pc3_pm}%'),
+    scene = list(bgcolor = "white")
+  )
 
-pm_ba
-pm_ba %>% 
-  ggplot(aes(v_j, paso, fill = v_j)) +
-  geom_boxplot(width = .5, alpha = .7, show.legend = F) + 
-  geom_point(alpha = .5, show.legend = F) +
-  scale_y_continuous(limits = c(-2,12),
-                     breaks = seq(0,12, 2)) +
-  labs(title = "P.Maze, Nº veces que pasa por el B.abierto",
-       subtitle = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
-       y = "Nº de trámites",
-       x = "Grupo de ratones") +
-  theme_tufte() +
-  theme(axis.line = element_line(),
-        title = element_text(face = "bold", size = 13),
-        axis.title = element_text(size = 17),
-        axis.text.x = element_text(size = 13)) +
-  scale_fill_manual(values = c("red", "blue")) +
-  geom_line(data = tibble(x = c(1,2), y = c(9,9)),
-            aes(x = x, y = y),inherit.aes = F) +
-  geom_text(data = tibble(x = 1.5, y = 9.5),
-            aes(x = x, y = y),inherit.aes = F, label = "n.s.", size = 5)
-  
+plot_grid(pc_1, pc_2, pc_3)

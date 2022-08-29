@@ -2,21 +2,28 @@ library(readxl)
 library(tidyverse)
 library(glue)
 library(xlsx)
+library(rstatix)
 
 # Mi fórmula maestra 
 source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
 # write_csv(practica2, "practica2.csv")
-url_practica2 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/practica2.csv"
-practica2 <- read_csv(url_practica2) %>% 
-  select(alumno, ul_10, ul_20 = ul_20,blanco, tiempo, grupos)
+practica2 <- read_excel("practicas_abbm.xlsx", 
+                             sheet = "Siberio1", col_types = c("numeric", 
+                                                               "numeric", "numeric", "numeric", 
+                                                               "text", "text", "skip", "skip", "skip", 
+                                                               "skip"), na = "NA") %>% 
+  select(alumno, ul_10, ul_20 = yl_20,blanco, tiempo, grupos) %>% view()
 
 
-### Práctica de Siberio 1.
+### Práctica 1 Técnicas básiscas en el laboratorio.
+### Práctica 2 Determinación de la expresión del gen ENA1 de levaduras.
 
-practica2_prep <- practica2 %>% select(-alumno, -grupos)
+
+
+practica2_prep <- practica2 %>% select(-alumno)
 
 experimento <- practica2_prep %>% 
-  pivot_longer(-tiempo, names_to = "tipo_exp", values_to = "absorbancia")
+  pivot_longer(-c(tiempo,grupos), names_to = "tipo_exp", values_to = "absorbancia")
 
 experimento %>% 
   group_by(tiempo, tipo_exp) %>% 
@@ -34,7 +41,7 @@ experimento %>%
                     labels = c("Blanco", "10 μl", "20 μl"),
                     values = c("white", "black", "orange")) +
   labs(
-    title = "Absorbancia según el tiempo de reacción\nenzimática (precipitación de sustrato)",
+    title = "Absorbanica para determinar la concentración de proteína",
     x = "Tiempo",
     y = "Absrobancia"
   ) +
@@ -61,10 +68,10 @@ tres_hora <- experimento %>% filter(tiempo == "3 Horas" & tipo_exp != "blanco")
 cinco_hora <- experimento %>% filter(tiempo == "5 Horas" & tipo_exp != "blanco")
 
 tapply(una_hora$absorbancia, una_hora$tipo_exp, shapiro.test)  # El blanco da problemas, por ser todo 0, 
-# obviamente existen diferencias así que 
-# compararemos únicamente los otros
+                                                               # obviamente existen diferencias así que 
+                                                               # compararemos únicamente los otros
 
-# En 1 hora T-test: p < 0.05* entre 10 ul y 20 ul
+# En 1 hora T-test: p > 0.05 entre 10 ul y 20 ul
 tw.groups(una_hora, absorbancia, "absorbancia", tipo_exp, "ul_10", "ul_20")           
 
 # En 3 hora T-test: p < 0.05* entre 10 ul y 20 ul
@@ -77,354 +84,152 @@ tw.groups(cinco_hora, absorbancia, "absorbancia", tipo_exp, "ul_10", "ul_20")
 
 diez_ul <- experimento %>% filter(tipo_exp == c("ul_10"))
 veinte_ul <- experimento %>% filter(tipo_exp == c("ul_20"))
-
-
+                                    
+                                    
 # Con 10 ul, ANOVA de una vía: p > 0.05 No existen diferncias en los experimentos entre horas en 10 ul de disolución
 th.groups(diez_ul, absorbancia, "absorbancia", tiempo, "1 Horas", "3 Horas", "5 Horas")           
 
 # Con 20 ul, ANOVA de una vía: p > 0.05 No existen diferncias en los experimentos entre horas en 20 ul de disolución
-th.groups(veinte_ul, absorbancia, "absorbancia", tiempo, "1 Horas", "3 Horas", "5 Horas")      
+th.groups(veinte_ul, absorbancia, "absorbancia", tiempo, "1 Horas", "3 Horas", "5 Horas") 
+
+########################################################
+# Curava patrón para los valores medios de absorvancia #
+########################################################
+
+# Tengo apuntado la sigiente curva patrón. Suponiendo un: 
+# Falta un valor de la curva original (absorbancia de 12 ug), lo predeciremos un 
+# una regresión lineal simple, porque las absorbancias medias se
+# salen de la curva. En última instancia usaremos la ecuación de la recta
+
+conc_albumina <- 0.1 # ug/ul
+
+curva_patron <- tibble(
+  ug_prot=c(0,2,4,6,8),
+  absorbancia=c(0,.150,.282,.362,0.465)
+)
+lm_albumina <- lm(absorbancia~ug_prot, data = curva_patron)
+coef_albumina <- lm_albumina$coefficients
+# fórmula de la recta: absorbancia = ug_prot·0.0571 + 0.0234
+# Gramos de prot, predecir hasta: 12,16,20,24 ug de albúmina 
+ug_predecir <- seq(12,24, 4)
+valores_curva_predichos <- tibble(
+  ug_prot=ug_predecir,
+  absorbancia = ug_predecir*lm_albumina$coefficients[2]+lm_albumina$coefficients[1]
+  )
+# Juntar ambos tibbles
+curva_prediccion <- rbind(curva_patron,valores_curva_predichos)
+
+abs_problema_media10ul <- experimento %>% 
+  group_by(tiempo, tipo_exp) %>% 
+  summarise(media=mean(absorbancia, na.rm=T), 
+            sd=sd(absorbancia, na.rm=T)) %>% 
+  filter(!(tipo_exp %in% c("blanco", "ul_20")))
+
+abs_problema_media20ul <- experimento %>% 
+  group_by(tiempo, tipo_exp) %>% 
+  summarise(media=mean(absorbancia, na.rm=T), 
+            sd=sd(absorbancia, na.rm=T)) %>% 
+  filter(!(tipo_exp %in% c("blanco", "ul_10")))
+
+
+
+absorbancia_media <- tibble(
+  media_10ul = c(abs_problema_media10ul$media, abs_problema_media20ul$media),
+  colores=c("10 ul: 1 Hora", "10 ul: 3 Horas", "10 ul: 5 Horas",
+            "20 ul: 1 Hora", "20 ul: 3 Horas", "20 ul: 5 Horas"),
+  ul = c(rep("10ul",3),rep("20ul",3))
+)
+
+ug_prot_problema <- tibble(ug_prot_interpolado = c(12.5,9.15,10.3,
+                                                   21.12,20.3,22),
+                           colores=c("10 ul: 1 Hora", "10 ul: 3 Horas", "10 ul: 5 Horas",
+                                     "20 ul: 1 Hora", "20 ul: 3 Horas", "20 ul: 5 Horas"),
+                           ul = c(rep("10ul",3),rep("20ul",3))
+                           
+)
+
+curva_prediccion %>% 
+  ggplot(aes(ug_prot, absorbancia)) +
+  geom_line(size=1) +
+  geom_point(pch=21, fill="white", size=2) +
+  geom_hline(data = absorbancia_media, aes(yintercept = media_10ul,
+                                 color=colores),
+             linetype="dashed", size=.75) +
+  geom_vline(data = ug_prot_problema, aes(xintercept = ug_prot_interpolado,
+                                          color=colores),
+             linetype="dashed", size=.75) +
+  facet_wrap(~colores) +
+  scale_color_manual(name="vol.extracto\ny Hora", values = c("red", "blue", "forestgreen",
+                                       "magenta", "cyan", "green")) +
+  labs(
+    title = "Recta patrón para identificar la cantidad de proteína problema",
+    x = "ug de albúmina",
+    y = "Absorbancia",
+    caption = glue("Resultados en orden de la legenda (ug):\n{ug_prot_problema[,1]}")
+  ) +
+  theme_classic() +
+  theme(
+    axis.line = element_line(size=1),
+    axis.ticks = element_line(size=1),
+    plot.title = element_text(hjust = .5, face = "bold", size=14, 
+                              margin = margin(b=10)),
+    plot.caption=element_text(hjust = 0, size = 10),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(hjust = .5, face = "bold", size=12),
+    legend.title = element_text(face = "bold", hjust = .5),
+    #legend.position = "bottom",
+    legend.background = element_rect(color = "black"),
+    strip.background = element_rect(size = 2, color="black",
+                                    fill = "tomato"),
+    strip.text = element_text(color = "white", face = "bold")
+  )
+  
 
 #-------------------------------------------------------------------------------#
 #                                 Práctica 6                                    #
 #-------------------------------------------------------------------------------#
 
-#### Curva patrón.
-
-# Va a ser duro poner apunto la base de datos, especiealmente uno de los grupos les faltó apuntar el tiempo
-# de reacción, vamos a ver si podemos improvisar algo...
-
-# write_csv(bradford, "bradford.csv")
-url_bradford <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/bradford.csv"
-bradford <- read_csv(url_bradford)
-
-####################
-###### 1 Horas #####
-####################
-
-brad_1h <- bradford %>% 
-  filter(hora == "1 Hora") %>% 
-  select(hora, blanco, starts_with("tubo")) %>% 
-  pivot_longer(-hora, names_to = "tubos", values_to = "absorbancia")
+practica_6 <- read_excel("practicas_abbm.xlsx", 
+                       sheet = "Bradford") %>% drop_na()
 
 
-onpg_1h <- bradford %>% 
-  filter(hora == "1 Hora") %>% 
-  select(hora, starts_with("onpg")) %>% 
-  pivot_longer(-hora, names_to = "sustrato", values_to = "concentracion") 
 
-una_bradford <- cbind(brad_1h, onpg_1h)
+practica_6_absorbancias <- practica_6 %>% 
+  select(alumno, grupo, tubo_blanco=blanco, starts_with("tubo")) %>% 
+  pivot_longer(-c(alumno, grupo), names_to = "tubo", values_to = "absorbancia")
 
-# Alumnos de 5 horas
-bradford %>% filter(hora=="1 Hora") %>% select(alumno, hora)
+recta <- practica_6_absorbancias %>% filter(!(tubo %in% c("tubo6","tubo7")))
+muestras <- practica_6_absorbancias %>% filter(tubo %in% c("tubo6","tubo7"))
+  
 
-una_bradford[-1] %>% 
-  mutate(alumno = c(rep("alumno10", 8),rep("alumno22", 8),rep("alumno24", 8))) %>% 
-  ggplot(aes(concentracion, absorbancia, color= tubos,group=alumno)) +
-  geom_point(size=3) +
-  geom_line(size=1) +
-  geom_text(data=tibble(x=60, y=.8),
-            aes(x=x,y=y, label="En pricipio esto no debería\nser así, pero bueno..."),
-            inherit.aes = F, color="white") +
-  geom_line(data=tibble(x=c(50,70), y=c(.7,.7)),
-            aes(x=x,y=y), inherit.aes = F, color="white") +
-  scale_color_manual(breaks = c("blanco", "tubo1","tubo2","tubo3",
-                                "tubo4","tubo5","tubo6","tubo7"),
-                     values = c("white", "red", "blue", "forestgreen",
-                                "gray", "yellow", "orange", "magenta")) +
-  labs(title = "Reacción en 5 horas",
-       x="Concentración de ONPG",
-       y="Absorbancia") +
-  theme(
-    plot.title = element_text(size=15, color = "white", 
-                              face = "bold", margin = margin(b=30)),
-    axis.line = element_line(color = "white"), 
-    axis.text = element_text(color = "white"),
-    axis.title = element_text(color="white", face = "bold"),
-    panel.background = element_rect(fill="black", color = "black"),
-    plot.background = element_rect(fill="black", color = "black"),
-    legend.background = element_rect(fill="black", color = "black"),
-    legend.text = element_text(color = "white"),
-    legend.key = element_rect(fill = "azure", color="azure"),
-    panel.grid = element_blank())
-
-####################
-###### 3 Horas #####
-####################
-
-brad_3h <- bradford %>% 
-  filter(hora == "3 Horas") %>% 
-  select(hora, blanco, starts_with("tubo")) %>% 
-  pivot_longer(-hora, names_to = "tubos", values_to = "absorbancia")
+practica_6_alb <- practica_6 %>% 
+  select(alumno, grupo, starts_with("onpg")) %>% 
+  pivot_longer(-c(alumno, grupo), names_to = "onpg", values_to = "conc_onpg") %>% 
+  select(-alumno, -grupo)
 
 
-onpg_3h <- bradford %>% 
-  filter(hora == "3 Horas") %>% 
-  select(hora, starts_with("onpg")) %>% 
-  pivot_longer(-hora, names_to = "sustrato", values_to = "concentracion") 
+tidy_recta <- cbind(recta,practica_6_alb) %>% view()
 
-tres_bradford <- cbind(brad_3h, onpg_3h)
-
-# Alumnos de 5 horas
-bradford %>% filter(hora=="3 Horas") %>% select(alumno, hora)
-
-tres_bradford[-1] %>% 
-  mutate(alumno = c(rep("alumno14", 8),rep("alumno21", 8),rep("alumno23", 8),
-                    rep("alumno28", 8))) %>% 
-  ggplot(aes(concentracion, absorbancia, color= tubos,group=alumno)) +
-  geom_line(size=1) +
-  geom_point(size=3) +
-  geom_text(data=tibble(x=60, y=.8),
-            aes(x=x,y=y, label="En pricipio esto no debería\nser así, pero bueno..."),
-            inherit.aes = F, color="white") +
-  geom_line(data=tibble(x=c(50,70), y=c(.7,.7)),
-            aes(x=x,y=y), inherit.aes = F, color="white") +
-  scale_color_manual(breaks = c("blanco", "tubo1","tubo2","tubo3",
-                                "tubo4","tubo5","tubo6","tubo7"),
-                     values = c("white", "red", "blue", "forestgreen",
-                                "gray", "yellow", "orange", "magenta")) +
-  labs(title = "Reacción en 5 horas",
-       x="Concentración de ONPG",
-       y="Absorbancia") +
-  theme(
-    plot.title = element_text(size=15, color = "white", 
-                              face = "bold", margin = margin(b=30)),
-    axis.line = element_line(color = "white"), 
-    axis.text = element_text(color = "white"),
-    axis.title = element_text(color="white", face = "bold"),
-    panel.background = element_rect(fill="black", color = "black"),
-    plot.background = element_rect(fill="black", color = "black"),
-    legend.background = element_rect(fill="black", color = "black"),
-    legend.text = element_text(color = "white"),
-    legend.key = element_rect(fill = "azure", color="azure"),
-    panel.grid = element_blank())
-
-
-####################
-###### 5 Horas #####
-####################
-
-brad_5h <- bradford %>% 
-  filter(hora == "5 Horas") %>% 
-  select(hora, blanco, starts_with("tubo")) %>% 
-  pivot_longer(-hora, names_to = "tubos", values_to = "absorbancia") 
-
-
-onpg_5h <- bradford %>% 
-  filter(hora == "5 Horas") %>% 
-  select(hora, starts_with("onpg")) %>% 
-  pivot_longer(-hora, names_to = "sustrato", values_to = "concentracion") 
-
-cinco_bradford <- cbind(brad_5h, onpg_5h)
-
-# Alumnos de 5 horas
-bradford %>% filter(hora=="5 Horas") %>% select(alumno, hora)
-
-cinco_bradford[-1] %>% 
-  mutate(alumno = c(rep("alumno13", 8),rep("alumno15", 8),rep("alumno16", 8),
-                    rep("alumno17", 8),rep("alumno18", 8),rep("alumno19", 8),
-                    rep("alumno25", 8),rep("alumno26", 8), rep("alumno27", 8))) %>% 
-  ggplot(aes(concentracion, absorbancia, color= tubos,group=alumno)) +
-  geom_line(size=1) +
-  geom_point(size=3) +
-  geom_text(data=tibble(x=60, y=.8),
-            aes(x=x,y=y, label="En pricipio esto no debería\nser así, pero bueno..."),
-            inherit.aes = F, color="white") +
-  geom_line(data=tibble(x=c(50,70), y=c(.7,.7)),
-            aes(x=x,y=y), inherit.aes = F, color="white") +
-  scale_color_manual(breaks = c("blanco", "tubo1","tubo2","tubo3",
-                                "tubo4","tubo5","tubo6","tubo7"),
-                     values = c("white", "red", "blue", "forestgreen",
-                                "gray", "yellow", "orange", "magenta")) +
-  labs(title = "Reacción en 5 horas",
-       x="Concentración de ONPG (μg)",
-       y="Absorbancia") +
-  theme(
-    plot.title = element_text(size=15, color = "white", 
-                              face = "bold", margin = margin(b=30)),
-    axis.line = element_line(color = "white"), 
-    axis.text = element_text(color = "white"),
-    axis.title = element_text(color="white", face = "bold"),
-    panel.background = element_rect(fill="black", color = "black"),
-    plot.background = element_rect(fill="black", color = "black"),
-    legend.background = element_rect(fill="black", color = "black"),
-    legend.text = element_text(color = "white"),
-    legend.key = element_rect(fill = "azure", color="azure"),
-    panel.grid = element_blank())
-
-#######################################################
-# Vamos a intentar extarpolar loresultados anteriores #
-# para aproximar las horas del grupo que no se anotó  #
-# la hora, que creo que fue el mío xd                 #
-#######################################################
-
-# Utilizaremos los datos hasta el tubo 4 ya que los otros 
-# dan una cosa un poco rara
-
-brad_1h %>% 
-  filter(!(tubos %in% c("tubo5","tubo6","tubo7"))) %>% 
-  group_by(tubos) %>% summarise(media=mean(absorbancia), desv_tipica=sd(absorbancia)) %>% 
-  mutate(mas=media+desv_tipica,
-         menos=media-desv_tipica)
-
-brad_3h %>%
-  filter(!(tubos %in% c("tubo5","tubo6","tubo7"))) %>% 
-  group_by(tubos) %>% summarise(media=mean(absorbancia), desv_tipica=sd(absorbancia))%>% 
-  mutate(mas=media+desv_tipica,
-         menos=media-desv_tipica)
-
-brad_5h %>% 
-  filter(!(tubos %in% c("tubo5","tubo6","tubo7"))) %>% 
-  group_by(tubos) %>% summarise(media=mean(absorbancia), desv_tipica=sd(absorbancia))%>% 
-  mutate(mas=media+desv_tipica,
-         menos=media-desv_tipica)
-
-# Vamos a intentar una cosita
-
-sin_hora <- bradford[c(1:12),c(1,4:11)] %>% 
-  pivot_longer(-alumno, names_to = "tubos", values_to = "absorbancia") %>% view()
-
-# He hecho lo único que se me ha ocurrido xd, no identifico el grupo de tres horas :(
-# Era esto o nada.
-hora_perdida <- sin_hora %>% 
-  filter(tubos == "tubo1") %>% 
-  # Valores máximos de las horas de la media más la desviación típica
-  mutate(hora=case_when(absorbancia < .145 ~ "1 Hora",
-                        absorbancia > .145 & absorbancia < .155 ~ "3 Horas",
-                        absorbancia > .155  ~ "5 Horas")) %>%
-  arrange(alumno) %>% 
-  select(hora)
-
-con_hora <- sin_hora %>% 
-  arrange(tubos) %>% 
-  mutate(hora=rep(hora_perdida$hora, 8))
-
-###### Vamos a echarle un vistazo esta vez a este grupo.
-
-sin_hora_onpg <- bradford[c(1:12),c(1,12:19)] %>% 
-  pivot_longer(-alumno, names_to = "sustrato", values_to = "concentracion") %>%
-  mutate(sustrato=case_when(
-    sustrato == "onpg_blanco" ~ "1", sustrato == "onpg_1" ~ "2",
-    sustrato == "onpg_2" ~ "3", sustrato == "onpg_3" ~ "4",
-    sustrato == "onpg_4" ~ "5", sustrato == "onpg_5" ~ "6",
-    sustrato == "onpg_6" ~ "7", sustrato == "onpg_7" ~ "8",
-  )) %>% arrange(sustrato) %>% select(-alumno) 
-
-grupo1 <- cbind(con_hora, sin_hora_onpg)
-
-grupo1_1h <- grupo1 %>% 
-  filter(hora == "1 Hora") %>% 
-  arrange(concentracion, tubos)
-
-grupo1_1h %>% 
-  ggplot(aes(concentracion, absorbancia, color= tubos,group=alumno)) +
-  geom_point(size=3) +
-  geom_line(size=1) +
-  geom_text(data=tibble(x=60, y=.29),
-            aes(x=x,y=y, label="Este no está mal"),
-            inherit.aes = F, color="white") +
-  scale_color_manual(breaks = c("blanco", "tubo1","tubo2","tubo3",
-                                "tubo4","tubo5","tubo6","tubo7"),
-                     values = c("white", "red", "blue", "forestgreen",
-                                "gray", "yellow", "orange", "magenta")) +
-  labs(title = "Reacción en 1 hora",
-       x="Concentración de ONPG (μg)",
-       y="Absorbancia") +
-  theme(
-    plot.title = element_text(size=15, color = "white", 
-                              face = "bold", margin = margin(b=30)),
-    axis.line = element_line(color = "white"), 
-    axis.text = element_text(color = "white"),
-    axis.title = element_text(color="white", face = "bold"),
-    panel.background = element_rect(fill="black", color = "black"),
-    plot.background = element_rect(fill="black", color = "black"),
-    legend.background = element_rect(fill="black", color = "black"),
-    legend.text = element_text(color = "white"),
-    legend.key = element_rect(fill = "azure", color="azure"),
-    panel.grid = element_blank())
-
-
-####################
-###### 5 Horas #####
-####################
-
-grupo1_5h <- grupo1 %>% 
-  filter(hora == "5 Horas") %>% 
-  arrange(concentracion, tubos)
-
-grupo1_5h %>% 
-  ggplot(aes(concentracion, absorbancia, color= tubos,group=alumno)) +
-  geom_point(size=3) +
-  geom_line(size=1) +
-  scale_color_manual(breaks = c("blanco", "tubo1","tubo2","tubo3",
-                                "tubo4","tubo5","tubo6","tubo7"),
-                     values = c("white", "red", "blue", "forestgreen",
-                                "gray", "yellow", "orange", "magenta")) +
-  labs(title = "Reacción en 5 horas",
-       x="Concentración de ONPG (μg)",
-       y="Absorbancia") +
-  theme(
-    plot.title = element_text(size=15, color = "white", 
-                              face = "bold", margin = margin(b=30)),
-    axis.line = element_line(color = "white"), 
-    axis.text = element_text(color = "white"),
-    axis.title = element_text(color="white", face = "bold"),
-    panel.background = element_rect(fill="black", color = "black"),
-    plot.background = element_rect(fill="black", color = "black"),
-    legend.background = element_rect(fill="black", color = "black"),
-    legend.text = element_text(color = "white"),
-    legend.key = element_rect(fill = "azure", color="azure"),
-    panel.grid = element_blank())
-
-
-##########################
-# Ahora todos juntos!!!! #
-##########################
-
-c <- cinco_bradford[-1] %>% 
-  mutate(alumno = c(rep("13", 8),rep("15", 8),rep("16", 8),
-                    rep("17", 8),rep("18", 8),rep("19", 8),
-                    rep("25", 8),rep("26", 8), rep("27", 8)))
-
-u <- una_bradford[-1] %>% 
-  mutate(alumno = c(rep("10", 8),rep("22", 8),rep("24", 8)))
-
-t <- tres_bradford[-1] %>% 
-  mutate(alumno = c(rep("14", 8),rep("21", 8),rep("23", 8),
-                    rep("28", 8)))
-
-grupo_2_3 <- rbind(u,t,c) %>% 
-  mutate(sustrato=case_when(
-    sustrato == "onpg_blanco" ~ "1", sustrato == "onpg_1" ~ "2",
-    sustrato == "onpg_2" ~ "3", sustrato == "onpg_3" ~ "4",
-    sustrato == "onpg_4" ~ "5", sustrato == "onpg_5" ~ "6",
-    sustrato == "onpg_6" ~ "7", sustrato == "onpg_7" ~ "8",
-  )) %>% 
-  select("alumno", "tubos", "absorbancia", 
-         "hora", "sustrato", "concentracion")
-
-todos_grupos <- rbind(grupo1, grupo_2_3)
-
-# Ya estamos :), a ello
-
-todos_grupos %>% 
-  #filter(hora=="1 Hora") %>% 
-  arrange(desc(hora)) %>% 
-  ggplot(aes(concentracion, absorbancia, color= hora,group=alumno)) +
-  geom_point(size=3) +
-  geom_line(size=1) +
-  geom_smooth(aes(concentracion, absorbancia, color = hora, group=1),
-              color="orange", se=F, size=1.5) +
+tidy_recta %>% 
+  filter(!(tubo %in% c("tubo6","tubo7"))) %>% 
+  ggplot(aes(conc_onpg, absorbancia, color= grupo, fill=grupo)) +
+  geom_point(size=3, pch=21, color="black", size=1) +
+  #geom_line(size=1) +
+  geom_smooth(se=F, size=1.5) +
+  facet_wrap(~grupo) +
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,1.2)) +
   scale_x_continuous(expand = expansion(0),
-                     limits = c(0,80)) +
+                     limits = c(0,15)) +
   scale_color_manual(name="Hora",
-                     breaks = c("1 Hora","3 Horas","5 Horas"),
-                     values = c("blue", "red", "gray")) +
+                     breaks = c("Grupo 1","Grupo 2","Grupo 3", "Grupo 4"),
+                     values = c("gray", "red", "blue", "forestgreen")) +
+  scale_fill_manual(name="Hora",
+                     breaks = c("Grupo 1","Grupo 2","Grupo 3", "Grupo 4"),
+                     values = c("gray", "red", "blue", "forestgreen")) +
   labs(
-    title = "Recta patrón para todos los grupos",
-    x = "Concentración de ONPG (μg)",
+    title = "Práctica 6 para cada grupo",
+    x = "Concentración de Albúmina (μg)",
     y = "Absorbancia"
   ) +
   theme_classic() +
@@ -440,77 +245,51 @@ todos_grupos %>%
     legend.text = element_text(color = "black"),
     legend.key = element_rect(fill = "white", color="black"),
     legend.position = "bottom",
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+    strip.background = element_rect(size = 2, color="black",
+                                    fill = "tomato"),
+    strip.text = element_text(color = "white", face = "bold")
   )
 
-# Vamos a ver quien tiene el coeficiente de correlación lineal más alto
-# redoble de tambores.... El alumno nº 4 es el que tiene fue el alumno 
-# con la supuesta mejor curva. estimación de Pearson = 0.97, p-value < 0.01***
-# las variables están correlacionadas.
 
-todos_grupos %>% 
-  group_by(alumno) %>% 
-  cor_test(concentracion, absorbancia) %>%
-  arrange(desc(cor))
-summarise(maximo_correlacion=max(cor),
-          minimo_pvalor=min(p)
-) 
-
-# Y yo? soy el 1: 0.92, not bad tampoco, no entro en el top 5 por un puesto shit xd.
-
-todos_grupos %>% 
-  group_by(alumno) %>% 
-  filter(alumno == "1") %>% 
-  cor_test(concentracion, absorbancia) %>% 
-  summarise(maximo_correlacion=max(cor),
-            minimo_pvalor=min(p) 
-  ) 
-
-
-# Interpolaresmos con el resultado anterior
+# Interpolaresmos con mi resultado (alumno 1)
 # Absorbancia de la proteína, que tengo apuntada:
 
-abs_ul10 <- .310
-abs_ul20 <- .4
+muestra_media <- muestras %>% 
+  filter(tubo %in% c("tubo6","tubo7")) %>% 
+  group_by(tubo) %>% summarise(media=mean(absorbancia)) %>% 
+  mutate(ug_prot=c(5.35,7.35))
 
-mejor_alumno <- "4"
-yo <- "1"
-mejor10_ul <- 26.55
-mio10_ul <- 6
-
-
-resultado_10_mejor <- (mejor10_ul/10)*10
-resul_mio10 <- (mio10_ul/10)*10
-
-
-
-todos_grupos %>% 
-  mutate(
-    best_alumno = alumno == mejor_alumno,
-    alumno = fct_reorder(factor(alumno), best_alumno)
-  ) %>% 
-  ggplot(aes(concentracion, absorbancia, color= best_alumno,group=alumno)) +
-  geom_line(size=1) +
-  geom_hline(yintercept = abs_ul10,size=.75, 
-             color="black", linetype="dashed") +
-  geom_vline(xintercept = mejor10_ul, size=.75,
-             color="red", linetype="dashed") +
-  geom_vline(xintercept = mio10_ul,size=.75,
-             color="forestgreen", linetype="dashed") +
+alumno_elegido <- "31"
+tidy_recta %>% 
+  filter(!(alumno %in% c("36","37"))) %>%  # outliers
+  # mutate(
+  #   alumno_elegido = alumno == alumno_elegido,
+  #   alumno = fct_reorder(factor(alumno), alumno_elegido)
+  # ) %>%
+  ggplot(aes(conc_onpg, absorbancia, 
+             #color=alumno_elegido, 
+             group=alumno)) +
+  geom_line(size=1, color="gray") +
+  geom_smooth(aes(conc_onpg, absorbancia, group=1),
+              se=FALSE, color="black") +
+  geom_hline(data = muestra_media, 
+             aes(yintercept=media,color=tubo),
+             linetype="dashed",size=.85) +
+  geom_vline(data = muestra_media,aes(xintercept=ug_prot,
+                                      color=tubo),
+             linetype="dashed",size=.85) +
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,1.2)) +
   scale_x_continuous(expand = expansion(0),
-                     limits = c(0,80),
-                     breaks=seq(0,80,10)) +
-  scale_color_manual(name=NULL,
-                     breaks = c(T,F),
-                     labels=c("Mejor resultado (alumno 4,\nno se quien es xd)", "Resto de alumnos"),
-                     values = c("blue", "gray")) +
+                     limits = c(0,13),
+                     breaks=seq(0,13,2)) +
+  scale_color_manual(values = c("red", "blue")) +
   labs(
-    title = "Interpolación con el mejor resultado\nobtenido en rojo (el mío en verde)",
-    x = "Concentración de ONPG (μg)",
+    title = "Resultado de la práctica 6",
+    x = "Microgramos de albúmina",
     y = "Absorbancia",
-    caption=glue("A. Concentración de la proteína del mejor resultado: ({mejor10_ul}/10)*10 = {resultado_10_mejor} μg/μl\nB. Concentración de la proteína de mí muestra: ({mio10_ul}/10)*10  = {resul_mio10} μg/μl")
+   # caption=glue("Interpolación de la proteína, alumno: ({mejor10_ul}/10)*10 = {resultado_10_mejor} μg/μl\nB. Concentración de la proteína de mí muestra: ({mio10_ul}/10)*10  = {resul_mio10} μg/μl")
   ) +
   theme_classic() +
   theme(
@@ -550,15 +329,16 @@ act_esp <- function(Abs, vT, E, conc_prot, ve, t){
 }
 
 # Vamos a decir:
-
-absorbancia <- 0.310
+resutado6 <- muestra_media$ug_prot*c(10,10)/c(10,20)
+aborbancia6 <- muestra_media$media
+# absorbancia_ae
+# ug_prot_ae
 volumen_total_ul <- 850 # ul
 volumen_total_ml <- volumen_total_ul*(1/10^6) # l
 E <- 4.5 # Mm^-1*cm^-1
-conc_prot <- mejor10_ul *1000/1000 # mg/ml
+conc_prot <- resutado6 *1000/1000 # mg/ml
 v_extracto_ml <- 0.01 # ml
 tiempo <- 25 # min
 
-act_esp(Abs = absorbancia, vT = volumen_total_ml, 
-        E = E, conc_prot = conc_prot, ve = v_extracto_ml, t = tiempo)
-
+act_esp(Abs = aborbancia6, vT = volumen_total_ml,
+        E = E, conc_prot = resutado6, ve = v_extracto_ml, t = tiempo)*1000

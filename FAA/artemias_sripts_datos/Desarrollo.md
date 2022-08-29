@@ -3,17 +3,17 @@
 ---
 ## Intención: 
 
-*  *Buenas, mi intención con este Markdow es mostrar como replicaría la práctica de la asignatura de ***Fisiología Animal Aplicada Grado de Biología de la Universidad de La Laguna*** con el lenguaje de programación R, ya que me pareció la práctica más importantes de la carrera, debido a la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho, el el sript está todo resuelto y con algún comentario también. Está hecho de tal forma que puedas copiar el script, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!***)* </p>
+*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de la asignatura de ***Fisiología Animal Aplicada Grado de Biología de la Universidad de La Laguna*** con el lenguaje de programación R, ya que me pareció de las prácticas más importantes de cuarto. Debido a la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. Están hechos de tal forma que puedas copiar dichos script, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```ìnstall.packages("libreria")```)* 
 
-* *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio 2 aprendiéndo lo que puede ofrecer para nosotros los biólogos, habiéndole piellado cierto tranquillo*.
+* *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiéndo lo que puede ofrecer para nosotros los biólogos. Habiéndole piellado cierto tranquillo en el proceso*.
 
-* *Para dejar las cosas claras, mi intención no es enseñar R de principio a fin... solamente comentar como he replicado la práctica de la forma en la que he aprendido yo a hacerlo con código "propio". ***Hay miles de video tutoriales en youtuve*** o en la red (***y gratis, no te vuelvas loc@***) que realizan ese cometido de manera brillante (tanto de R como otros como venrían a ser de Python). Algunas librerías que vendría bien haber visto antes serían, en especial: ***dplyr***, ***ggplot2***, o el conjunto de ***tidyverse***. También tener claro los modelos de inferencia y cuándo elegir uno u otro vendría bien, y utilizaremos una librería muy guapa que te permite hacer estos modelos en combinacnión con dplyr, ***rstatix***. Y obviamente, debes tener R descargado (es ideal que además tengas Rstudio) además de como descargar paquetes, asignar valores a objetos (que significa "<-")...*
+* *Para dejar las cosas claras, mi intención no es enseñar R de principio a fin... solamente comentar como he replicado la práctica de la forma en la que he aprendido ***yo*** a hacerlo con código propio. ***Hay miles de video tutoriales en youtuve*** o en la red (***y gratis, no te vuelvas loc@***) que realizan ese cometido de manera brillante (tanto de R como otros como venrían a ser de Python). Algunas librerías que vendría bien haber visto antes serían, en especial: ***dplyr***, ***ggplot2***, o el conjunto de ***tidyverse***. También tener claro los modelos de inferencia y cuándo elegir uno u otro vendría bien. Utilizaremos una librería muy guapa que te permite hacer estos modelos en combinacnión con dplyr, ```rstatix```. Y obviamente, debes tener R descargado (es ideal que además tengas Rstudio). Saber cosas básicas como descargar paquetes, asignar valores a objetos (que significa "<-")...*
 
-### **Nota: en caso de alguna duda puedes usar ***?*** al principio de la función que te presente dudas, te llevará a una página ejemplo:**
+### **Nota: en caso de alguna duda puedes usar ```?``` al principio de la función que te presente dudas, te llevará a una página ejemplo:**
 
 ```
-# Al final del todo de la página de ayuda hay ejemplos de su uso (por cierto, # al principio 
-# impide que R corra la línea código en cuestión. Con lo que puedes comentar lo que quieras). 
+# Al final del todo de la página de ayuda hay ejemplos de su uso (por cierto, #  impide que R corra la línea 
+# código en cuestión desde donde estña colocada. Con lo que puedes comentar lo que quieras). 
 
 install.packages("dplyr")
 ?library()
@@ -22,7 +22,7 @@ library(dplyr)
 
 ```
 
-### **Pero bueno independientemente de ello, si hay alguien viendo esto... jajaja xd espero que te sirva de ayuda, y si eres de 4º... Ánimo, que ya se acaba, fuerte hasta el final.**
+### **Pero bueno independientemente de ello, si hay alguien viendo esto... espero que te sirva de ayuda, y si eres de 4º... Ánimo, que ya se acaba, fuerte hasta el final.**
 
 ---
 

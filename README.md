@@ -12,3 +12,5 @@ Algunas de las asignaturas no incentivaban a utilizar R, o no fui capaz de busca
 ### **Obviamente quiero dejar constancia que los datos que uso en este repositorio, no las he obtenido por cuenta ajena, sino en mi estancia en la [Universidad de de La Laguna](https://www.ull.es/), en cada una de estas asignaturas.**
 
 También me gustaría decir que por el momento este proyecto está en obras.
+
+**Puedes Hacer con el código de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).**

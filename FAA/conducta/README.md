@@ -43,21 +43,6 @@ Ninguna de las comparaciones en esta prueba reflefaron diferencias significativa
 
 ### **Hole Maze:**
 
----
-
-<p align="center">
- 
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/hm.png" />
-
-</p>
-
-**Figura 2**. Muestra los resultados de Hole Maze. 
-
-En este caso, todas las muestras fueron normales y presentaban homocedasticidad. La variable de tiempo fue separada del resto aún así por presentar un eje y muy largo. Sólo se observó diferencias significativas en las veces que los ratones meten la cabeza en los agujeros, presentando los ratones viejos un promdio de veces mayor que los jóvenes.
-
-Estos resultados sorprenden, ya que se esperaría que fueran los ratones viejos los que tuvieran mayor sentido aventurero por su juventud.
-
----
 
 ---
 

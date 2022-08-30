@@ -22,11 +22,11 @@ Contexto:
 ---
 
 <p align="center">
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot02.png"
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot02.png">
 </p>
 
 <p align="center">
-  img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot03.png"
+  img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot03.png">
 </p>
 
 ---
@@ -43,15 +43,15 @@ Contexto:
 ---
 
 <p align="center">
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot.png"
-       </p>
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot.png">
+</p>
 
 
 *** Hay una errata, hubo más de dos cultivos viables***
   
 
 <p align="center">
-  img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot01.png"
+  img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot01.png">
 </p>
 
 ---
@@ -61,7 +61,7 @@ Contexto:
 ---
 
 <p align="center">
-  img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot04.png"
+  img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot04.png">
 </p>
 
 ---

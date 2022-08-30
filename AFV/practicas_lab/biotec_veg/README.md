@@ -78,7 +78,7 @@ Contexto:
 ---
 
 <p align="center">
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot04.png">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/prunus1.png">
 </p>
 
 ---
@@ -88,8 +88,7 @@ Contexto:
 ---
 
 <p align="center">
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/prunus2.png
-">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/prunus2.png">
 </p>
 
 ---

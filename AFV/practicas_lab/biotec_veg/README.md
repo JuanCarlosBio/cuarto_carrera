@@ -44,7 +44,7 @@ Contexto:
 
 <p align="center">
   <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot.png"
-</p>
+  </p>
 
 *** Hay una errata, hubo más de dos cultivos viables***
 

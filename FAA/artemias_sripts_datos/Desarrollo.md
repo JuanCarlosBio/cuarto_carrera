@@ -454,9 +454,9 @@ Primero graficaremos los gráficos normales y posteriormente los no normales. ¿
 1) Sería demasiada impormación en un gráfico.
 2) Podríamos graficarlos por seaprados ya que lo que nos interesa es ver si hay diferencias significativas dependiendo del tratamiento según para cada uno de los ácidos grasos, pero para ello habría que hacer 16 gráficas, inviable.
 3) Podríamos buscar alguna forma de juntar los ácidos grasos por algún motivo fisiológico, que sean insaturados, saturados, w-3...
-***4)*** **ojo!!** Sin embargo nos vemos en una tesitura estadística. Los test paramétricos (los dos ANOVAS) al ser los datos normales, lo que compara para ver si los grupos son significativos es la ***media*** con respecto a la distribución de los datos, mientras que los test no paramétricos (Kruskal-Wallis) lo que se comparan las ***medianas*** con respecto la distribución de los datos. 
+4) **ojo!!** Sin embargo nos vemos en una tesitura estadística. Los test paramétricos (los dos ANOVAS) al ser los datos normales, lo que compara para ver si los grupos son significativos es la ***media*** con respecto a la distribución de los datos, mientras que los test no paramétricos (Kruskal-Wallis) lo que se comparan las ***medianas*** con respecto la distribución de los datos. 
 
-Debido al punto 4 voy a separar los ácidos grasos según su distribución y homogeneidad de varianzas. No se si de esta forma sería aceptable, pero bueno, de forma educativa servirá.
+Yo creo, debido a que únicamente dos grupos que no son normales, y después de hacerlo no son realmente tantos grupo, me plantearía usar únicamente un gráfico de barras, con todos los grupos. Aún así debido al punto 4 voy a separar los ácidos grasos según su distribución y homogeneidad de varianzas. Un poco por temas formativos.
 
 **Gráfico básico de barras** donde se muestra la *media* y la *desviación típica* (para graficar y explicar resultados de ANOVA)
 

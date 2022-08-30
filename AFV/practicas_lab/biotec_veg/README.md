@@ -8,7 +8,7 @@ Por un lado, te vas a encontrar:
 
 No son de toda la clase tampoco, sino de los que me tocó a mí y en ocasiones a otro compañero de un tipo de planta en concreto.
 
-## ***Resultados de Biotecnología Vegetal.*** nota: (9.5)
+## ***Resultados de Biotecnología Vegetal.*** nota de la memoria: (9.5)
 
 ### **1) Práctica de callos de zanahoria**
 Contexto:
@@ -55,6 +55,8 @@ Contexto:
 
 ---
 
+### * Resultados de 
+
 ### ***Gráfico del conjunto de los experimentos***
 
 ---
@@ -64,3 +66,54 @@ Contexto:
 </p>
 
 ---
+
+## ***Resultados de las prácticas de laboratorio de Ecofisiología*** No hay memoria en esta parte, sino de prácticas de campo.
+
+*Al final de las prácticas tines que compartir tus resultados con los de tus compañeros en la pizarra*
+
+1) Práctica 1: **Planta de estudio** ***Prunus lusitánica (creo que regado).***
+
+* Curva de ETR en el eje x, frente a la luz en fotones. A más luz mayor ETR, hasta llegar un umbral.
+
+---
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot04.png">
+</p>
+
+---
+
+* Emisión de fluorescencia para ver cómo la planta reacciona al aumento de la temperatura. entiendo que la eficiencia del fotosistema II se ve reducida conforme son mayores las temperaturas.
+
+---
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/prunus2.png
+">
+</p>
+
+---
+
+2) Práctica 2: **Planta de estudio** ***Viñátigo regado***
+
+* Eficiencia fotosintética frente a la radiación PAR. Vemos que a mayor radiación luminosa aumenta la eficiencia fotosintética (**A**).
+
+---
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/vinatigo1.png">
+</p>
+
+---
+
+* Potencial hídrico del viñátigo regado a partir de someter una de sus hojas a gran presión (pondré si puedo el aparato utilizado si puedo).
+
+
+---
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/vinatigo3.png">
+</p>
+
+---
+

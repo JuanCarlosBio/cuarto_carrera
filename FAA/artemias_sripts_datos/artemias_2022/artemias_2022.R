@@ -4,8 +4,7 @@ library(tidytext)
 library(rstatix)
 library(glue)
 
-artemias_2022_csv <- read_excel("C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\FA.A\\PracticasFA.A\\bases_datos\\artemias_2022.xlsx",
-                                col_types = c("text",rep("numeric", 16))) %>% view() 
+artemias_2022_csv <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/artemias_2022/artemias_2022.csv")
 
 # write_csv(artemias_2022_csv, "artemias_2022.csv")
 

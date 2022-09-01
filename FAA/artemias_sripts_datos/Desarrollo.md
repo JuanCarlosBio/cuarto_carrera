@@ -433,7 +433,7 @@ Hay una página que me sirvió mucho en su momento, se llama The R Graph Galery:
 
 [link Graph Galery](https://r-graph-gallery.com/)
 
-También recomiendo los tutoriales de Rafa Gozáles Gouviera, también te digo:
+También recomiendo los tutoriales de Rafa Gozáles Gouviera:
 
 [link tutorales R](https://www.youtube.com/watch?v=zAzpuLJA29U&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=15&ab_channel=RafaGonzalezGouveia)
 

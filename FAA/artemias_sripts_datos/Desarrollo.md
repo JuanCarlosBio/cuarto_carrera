@@ -3,7 +3,7 @@
 ---
 ## Intención: 
 
-*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. Están hechos de tal forma que puedas copiar dichos script, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```ìnstall.packages("libreria")```)* 
+*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. Están hechos de tal forma para que puedas copiar dichos script, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```ìnstall.packages("libreria")```)* 
 
 * *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiéndo lo que puede ofrecer para nosotros los biólogos. Habiéndole piellado cierto tranquillo en el proceso*.
 

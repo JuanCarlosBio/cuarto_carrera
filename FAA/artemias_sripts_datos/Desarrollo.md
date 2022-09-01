@@ -412,14 +412,7 @@ Si es cierto que su sintaxis puede ser un poco más compleja que su contraposici
 
 Este es un tema candente para muchos en la Ciencia de Datos. Crear un buen gráfico no es fácil y lleva tiempo. No todos son automáticos, tienes que dedicarles tiempo. 
 
----
-Lloros míos, te puedes saltar esta parte. Pero no la voy a quitar para dejar constancia a estos 0 leyentes.
-
-A mí aprender a diseñar estos gráficos me ha permitido afianzar los conocimientos que tengo de estadística de la carrera. Una vez vas creando por tí mismo el gráfico de un PCA te obliga a entender lo mínicmo que está pasando. A ver, no eres estadístico, y no vas a poder explicar la teoría de los eginvalues o distancia euclidianas, pero más o menos vas entendiéndolo de manera muy básica para generar una interpretación. Una cosa de los profesores que nunca me gustó fue que te dijeran que no te evaluaban por saber utilizar una herramienta informática bien y la carrera se lavó las manos muy fuerte en ese sentido, suerte cuando tengas que medirte con un biotecnólogo para un puesto de trabajo, yo estudié en Salamanca, y ojo, esa gente va muy potente. En la carrera en ese sentido sólo te pedían que interpretases los resultados, ¿Cómo vas a saber algo de forma teórica que no puedes llevarlo a la práctica y entender lo que estás haciendo?, que en 4º de carrera hayan biólogos llorando porque no saben usar un Excel me parece muy fuerte y de que hay algo profundamente mal planteado en algo tan básico para el mercado labora. El biólogo al salir de la carrera lo primordial sería estar cualificado para trabajar, y si le apasiona especializarse en un máster para investigar, no viceversa. 
-
-Pero bueno basta de lloros. Se aprende y ya. Hay que confiar siempre en uno mismo
-
-Por eso esta práctica me pareció muy necesaria. Bien por parte de los de  Fisiología Animal.
+En mi caso, aprender a diseñar estos gráficos me ha permitido afianzar los conocimientos que tengo de estadística de la carrera. Una vez vas creando por tí mismo el gráfico de un PCA te obliga a entender lo mínicmo que está pasando. A ver, no eres estadístico, y no vas a poder explicar la teoría de los eginvalues o distancia euclidianas, pero más o menos vas entendiéndolo de manera muy básica para generar una interpretación.  
 
 ---
 

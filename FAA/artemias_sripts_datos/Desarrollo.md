@@ -505,7 +505,7 @@ Figura 3
 
 ---
 
-A estos gráficos se le pueden añadir letras de significación (la ***a***, ***b***...) según la existencia de diferencias. Aunque a mí, mi tutor de TFG (que era del área de estadística) me reconmendó que no me la juagara, por es difícil usar bien ese tipo de etiquetas y algunos profesores no les gustaba.
+A estos gráficos se le pueden añadir letras de significación (la ***a***, ***b***...) según la existencia de diferencias. Aunque a mí, mi tutor de TFG (que era del área de estadística) me reconmendó que no me la juagara, por eue es difícil usar bien ese tipo de etiquetas y algunos profesores no les gustaba. Lo mejor es siempre explicar las diferencias en la memoria.
 
 ## Gráfico de PCA
 

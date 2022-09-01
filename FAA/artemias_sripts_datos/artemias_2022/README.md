@@ -50,7 +50,7 @@ A tibble: 6 x 2
 6 22:6n-3     5.39e- 7
 ```
 
-Tukey (Hay muchas comparaciones obviamente, si estas interesad@, puedes usar ```filter()``` en el script):
+Tukey, hay muchas comparaciones obviamente, si estas interesad@, puedes usar ```filter()``` en el script. En caso de querer ver todos los resultados puedes usar ``` ...%>% view()```, o ```... %>% print(n=Inf)```:
 
 ```
 # A tibble: 33 x 4

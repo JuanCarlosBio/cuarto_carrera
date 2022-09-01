@@ -21,14 +21,6 @@ Si eso en algún momento consultaré la bibliografía para encontrar informació
 <p align="center">
   <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/artemias_2022/artemias_2022.png">
 </p>
-
-Es curioso cuanto menos que los resultados de las prácticas de informática sean muy parecidos, si no idénticos, a los resultados obtenidos para enero de 2022.
-
-Esto puede deberse a que, a dos motivos.
-
-* *Hay evidencia de que los este experimento es reproducible o parcialmente al menos, obetiéndos los mismos resultados a partir de los mismos pasos.*
-* *Pero sin embargo, me suena que como la práctica era muy próxima a las evaluaciones de enero, con lo que no había tiempo físico para los profesores en usar nuestras muestras. Con lo cual estos resultados serían de alumnos del curso pasado, que se podrían haber sido usados tanto para las prácticas de informática como para esta.*
-* *Aún así, el segundo paso sigue defendiendo que el experimento es reproducible, en caso de que se hicieran dos veces para ambas prácticas. Pero eso yo ya no lo sé. Simplemente es una observación.*
   
 ---
 
@@ -141,11 +133,22 @@ Test de Dunnet (corrección de Bonferroni):
 
 ## **Análisis de componentes principales**
 
-Resultados
+### **Resultados**
+
+---
+
 <p align="center">
 <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/artemias_2022/artemias_pca2022.png">
   </p>
-  
+
+Es curioso cuanto menos que los resultados de las prácticas de informática sean muy parecidos, si no idénticos, a los resultados obtenidos para enero de 2022.
+
+Esto puede deberse a que, a dos motivos.
+
+* *Hay evidencia de que los este experimento es reproducible o parcialmente al menos, obetiéndos los mismos resultados a partir de los mismos pasos.*
+* *Pero sin embargo, me suena que como la práctica era muy próxima a las evaluaciones de enero, con lo que no había tiempo físico para los profesores en usar nuestras muestras. Con lo cual estos resultados serían de alumnos del curso pasado, que se podrían haber sido usados tanto para las prácticas de informática como para esta.*
+* *Aún así, el segundo paso sigue defendiendo que el experimento es reproducible, en caso de que se hicieran dos veces para ambas prácticas. Pero eso yo ya no lo sé. Simplemente es una observación.*
+---  
 ### En cuanto a los resultados de inferencia para las componentes:
 
 PC1: Se usó Kruskal-Wallis y debido a diferencias significativas, se usó como siempre el test de Dunnet (corrección de Bonferroni).

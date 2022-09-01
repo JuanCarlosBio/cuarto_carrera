@@ -406,7 +406,7 @@ output:
 
 ## **Parte 3) visualisación de los datos. visalizacion.R**
 
-Ahora entramos en la parte más divertida, la de diseñar los gráficos a partir de una serie de librerías. ```ggplot2``` es una de las mejores librerías que te vas a encontrar em este aspecto. Para mí es la mejor, es una de las razones por las que he aprendido R en vez de Python sin ninguna duda. 
+Ahora entramos en la parte más divertida, la de diseñar los gráficos a partir de una serie de librerías. ```ggplot2``` es una de las mejores librerías que te vas a encontrar en este aspecto. Para mí es la mejor, es una de las razones por las que he aprendido R en vez de Python sin ninguna duda. 
 
 Si es cierto que su sintaxis puede ser un poco más compleja que su contraposición de ```matplotlib``` en Python, pero su combinación con ```dplyr```, le da una plasticidad espectacular a la historia que le puedes dar a tus datos.
 

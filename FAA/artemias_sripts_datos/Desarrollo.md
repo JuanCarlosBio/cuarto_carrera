@@ -3,17 +3,17 @@
 ---
 ## Intención: 
 
-*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. Están hechos de tal forma para que puedas copiar dichos script, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```ìnstall.packages("libreria")```)* 
+*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. Están hechos de tal forma para que puedas copiar dichos scripts, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```ìnstall.packages("libreria")```)* 
 
-* *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiéndo lo que puede ofrecer para nosotros los biólogos. Habiéndole piellado cierto tranquillo en el proceso*.
+* *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiendo lo que puede ofrecer para nosotros los biólogos. Habiéndole piellado cierto tranquillo en el proceso*.
 
-* *Para dejar las cosas claras, mi intención no es enseñar R de principio a fin... solamente comentar como he replicado la práctica de la forma en la que he aprendido ***yo*** a hacerlo con código propio. ***Hay miles de video tutoriales en youtuve*** o en la red (***y gratis, no te vuelvas loc@***) que realizan ese cometido de manera brillante (tanto de R como otros como venrían a ser de Python). Algunas librerías que vendría bien haber visto antes serían, en especial: ***dplyr***, ```ggplot2``` o el conjunto de ```tidyverse```. También tener claro los modelos de inferencia y cuándo elegir uno u otro vendría bien. Utilizaremos una librería muy guapa que te permite hacer estos modelos en combinacnión con dplyr, ```rstatix```. Y obviamente, debes tener R descargado (es ideal que además tengas Rstudio). Saber cosas básicas como descargar paquetes, asignar valores a objetos (que significa "<-")...*
+* *Para dejar las cosas claras, mi intención no es enseñar R de principio a fin... solamente comentar como he replicado la práctica de la forma en la que he aprendido ***yo*** a hacerlo con código propio. ***Hay miles de videotutoriales en youtuve*** o en la red (***y gratis, no te vuelvas loc@***) que realizan ese cometido de manera brillante (tanto de R como otros como vendría a ser de Python). Algunas librerías que vendría bien haber visto antes serían, en especial: ***dplyr***, ```ggplot2``` o el conjunto de ```tidyverse```. También tener claro los modelos de inferencia y cuándo elegir uno u otro vendría bien. Utilizaremos una librería muy guapa que te permite hacer estos modelos en combinación con dplyr, ```rstatix```. Y obviamente, debes tener R descargado (es ideal que además tengas Rstudio). Saber cosas básicas como descargar paquetes, asignar valores a objetos (que significa "<-")...*
 
 ### **Nota: en caso de alguna duda puedes usar ```?``` al principio de la función que te presente dudas, te llevará a una página ejemplo:**
 
 ```
 # Al final del todo de la página de ayuda hay ejemplos de su uso (por cierto, #  impide que R corra la línea 
-# código en cuestión desde donde estña colocada. Con lo que puedes comentar lo que quieras). 
+# código en cuestión desde donde está colocada. Con lo que puedes comentar lo que quieras). 
 
 install.packages("dplyr")
 ?library()
@@ -22,7 +22,7 @@ library(dplyr)
 
 ```
 
-### **Pero bueno independientemente de ello, si hay alguien viendo esto... espero que te sirva de ayuda, y si eres de 4º... Ánimo, que ya se acaba, fuerte hasta el final.**
+### **Pero bueno, independientemente de ello, si hay alguien viendo esto... espero que te sirva de ayuda, y si eres de 4º... Ánimo, que ya se acaba, fuerte hasta el final.**
 
 ---
 
@@ -37,7 +37,7 @@ library(rstatix)   # Modelos ANOVA, WELCH...
 library(glue)      # permite pegar variables asignadas en texto mediante {}
 ```
 
-Lo siguiente es poner a punto la base de datos. Vamos a correr los datos (```%>%``` es el pipe (tubería), conecta las funciones entre sí compatiples con ```dplyr```) ...  Está pensado para que únicamente con copiar y pegar el script en tu R personal, puedas correr los datos y que obtengas mis resultados (**Reproducibilidad a tope**)
+Lo siguiente es poner a punto la base de datos. Vamos a correr los datos (```%>%``` es el pipe (tubería), conecta las funciones entre sí compatibles con ```dplyr```) ...  Está pensado para que únicamente con copiar y pegar el script en tu R personal, puedas correr los datos y que obtengas mis resultados (**Reproducibilidad a tope**)
 
 ```
 
@@ -79,10 +79,10 @@ Esta conformación de los datos no es del todo ideal para R. Así que comenzarem
 
 * Usaremos ```select()```, selecciona variables que le pidamos, o en este caso si la variable tiene un "-" significa que nos deshacemos de esa variable (la variable original de tratamiento)
 
-* Finalmente, una de las funciones que más me han cambiado la vida. A R y otra clase de Lenguajes, les gusta más las bases de datos más estrechas (***"tidy"***), antes que anchas como esta. Es decir, se prefiere que presenten menos número de variables (*columnas*), pero más largas en cuanto *filas* (le permite hacer a la máquina los trabajos de manera más automática). Para ello usaremos ```pivot_longer()```. La idea es pasar de 12 variables a únicamente 3, ¿Como hace eso esta función?... suena como romper las leyes de la termodinámica..... es Magic.... Nah es broma. Ahora enserio, vamos a hacer que las columnas de tratamiento y los valores numéricos de las variables se coloquen encima una de las otras de forma ordenada (no te preocupes, R no se inventa nada), mientras que vamos a hacer que los nombres de cada variable numérica (los AG) se conviertan en la tercera columna. Llamaremos a la variable donde están los valores numéricos ***"valores"*** y la que presenta los AG ***"acido_graso"*** (***como consejo***, cuando llames a una variable, hazlo en minúscula sin tildes, y la separación con "_" y evita la ñ espa**ñ**olete). Como **tratamiento** no nos interesa que se modifique,sino que se haga más *larga* únicamente con ella misma, le añadimos un "-".
+* Finalmente, una de las funciones que más me han cambiado la vida. A R (y otra clase de Lenguajes de scripting similaes), le gusta más las bases de datos más estrechas (***"tidy"***), antes que anchas como esta. Es decir, se prefiere que presenten menos número de variables (*columnas*), pero más largas en cuanto *filas* (le permite hacer a la máquina los trabajos de manera más automática). Para ello usaremos ```pivot_longer()```. La idea es pasar de 12 variables a únicamente 3, ¿Cómo hace eso esta función?... suena como romper las leyes de la termodinámica..... es Magic.... Nah es broma. Ahora en serio, vamos a hacer que las columnas de tratamiento y los valores numéricos de las variables se coloquen encima una de las otras de forma ordenada (no te preocupes, R no se inventa nada), mientras que vamos a hacer que los nombres de cada variable numérica (los AG) se conviertan en la tercera columna. Llamaremos a la variable donde están los valores numéricos ***"valores"*** y la que presenta los AG ***"acido_graso"*** (***como consejo***, cuando llames a una variable, hazlo en minúscula sin tildes, y la separación con "_" y evita la ñ espa**ñ**olete). Como **tratamiento** no nos interesa que se modifique, sino que se haga más *larga* únicamente con ella misma, le añadimos un "-".
 
 
-Se que es una movida, pero **no asustarse** ahora veremos que pasa.
+Sé que es una movida, pero **no asustarse** ahora veremos que pasa.
 
 ```
 tidy_artemias <- matrix_artemias %>% 
@@ -97,7 +97,7 @@ tidy_artemias <- matrix_artemias %>%
 tidy_artemias
 ```
 
-Veamos el output (Recuerden como estaba los datos al comenzar) ...
+Veamos el output (Recuerden como estaban los datos al comenzar y comparenlos con como están ahora) ...
 
 ```
 tratamiento     acido_graso  valores
@@ -116,9 +116,9 @@ tratamiento     acido_graso  valores
 ```
 ---
 
-### **Hemos pasado de 12 variabes con 16 filas por cada una de esta ... a 3 variables con 176 filas.**
+### **Hemos pasado de 12 variabes con 16 filas cada una de esta ... a 3 variables con 176 filas.**
 
-### **Y pues ya estaríamos listos para empezar a hacer los anáisis =)**
+### **Y pues ya estaríamos listos para empezar a hacer los análisis =)**
 
 Modificar la dataset inicial, para ajustarla a tus necesidades a la hora de realizar los análisis, es la parte más complicada en la mayoría de los casos. Con lo cual es una habilidad a tener en cuenta. Algunas datasets son más fáciles de preprocesar que otras.
 
@@ -126,7 +126,7 @@ Modificar la dataset inicial, para ajustarla a tus necesidades a la hora de real
 
 ## **Comparación de más de dos grupos independientes, ***ANOVA de una vía***, ***ANOVA de Welch*** y ***Kruskal-Wallis***.**  
 
-Para elegir el modelo idóneo hay que estudiar primero si los datos son ***normales*** (en este caso la n = 4 para cada grupo, con lo que el test utilizado será **Shpairo-Wilks**. En caso de que n > 50 habría que usar Kolmogorov-Smirnov) y ***homocedásticos*** (Usaremos para ello la prueba de **Levene**). En ese sentido:
+Para elegir el modelo idóneo hay que estudiar primero si los datos son ***normales*** (en este caso la n = 4 para cada grupo, con lo que el test utilizado será **Shapiro-Wilks**. En caso de que n > 50 habría que usar Kolmogorov-Smirnov) y ***homocedásticos*** (Usaremos para ello la prueba de **Levene**). En ese sentido:
 
 ---
 
@@ -146,18 +146,18 @@ Esto anterior, en caso de que lo que comparáramos **dos** grupos independientes
 
 --- 
 
-El procdimiento básico para realizar los análisis para cada uno de los test es el mismo, salvo una ligera diferencia entre la prueba de normalidad y la de levene, anova, welch...
+El procedimiento básico para realizar los análisis para cada uno de los test es el mismo, salvo una ligera diferencia entre la prueba de normalidad y la de levene, anova, welch...
 * **Integrantes de las funciones**
   - df: nuestra base de datos = *tidy_artemias*
   - grupo1: variable con los tratamientos = *tratamiento*
   - grupo2: ácidos grasos = *acido_graso*
   - variable_numerica: valores numéricos originales de las variables de ácidos grásos: *valores*. 
-  - Vector para filtrar, ya que no cumple las espectativas para realizar alguno de los modelos: *vector_x*. En este caso filtraremos siempre ácidos grasos. Por ejemplo.
+  - Vector para filtrar, ya que no cumple las expectativas para realizar alguno de los modelos: *vector_x*. En este caso filtraremos siempre ácidos grasos. Por ejemplo.
 
 ```
 # Prueba de la normalidad
 normalidad <- df %>%                   # Asignamos a la función como "normalidad"
-  group_by(grupo1, grupo2) %>%         # Agrupamos la variable numerica por el tratamiento y el acido_graso
+  group_by(grupo1, grupo2) %>%         # Agrupamos la variable numérica por el tratamiento y el acido_graso
   shapiro_test(variable_numerica)      # Realizamos el test de shapiro wilks con la variable de los valores de cada AG
 
 # Prueba de la homocedasticidad
@@ -225,7 +225,7 @@ output
 
 ### **Con estos valores anteriores no haríamos ANOVA de una Vía (Bueno... si quieres redondear Enriquecedor comercial allá cada uno), con lo que de nuevo con ```filter()``` filtraríamos los ácidos grasos que nos interesen para cada modelo.**
 
-Y esto sería la primera parte realmente, pero me gustaría añadir la transformación de los datos. Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales o homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hacer esta función ahora la verás más clara. Crearemos nuevas variables, que a lo mejor hagan normales o homocedásticas a los datos de interés (variable *valores).
+Y esto sería la primera parte realmente, pero me gustaría añadir la transformación de los datos. Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hacer esta función ahora la verás más clara. Crearemos nuevas variables, que a lo mejor hagan normales o homocedásticas a los datos de interés (variable *valores).
 
 ```
 tidy_artemias %>% 
@@ -240,7 +240,7 @@ tidy_artemias %>%
          )
 ```
 
-output: no se ven todas las columnas, pero espero que pille la idea. Además obviamente sería conveniente usar ```filter()``` antes para los ácidos grasos que no sea ni normales ni homocedásticos.
+output: no se ven todas las columnas, pero espero que pilles la idea. Además, obviamente sería conveniente usar ```filter()``` antes para los ácidos grasos que no sea ni normales ni homocedásticos.
 
 ```
 A tibble: 112 x 9
@@ -262,13 +262,13 @@ A tibble: 112 x 9
 
 ## **Parte 2) Análisis de Componentes Principales (PCA): pca_faa.R**.
 
-Para el caso del PCA, al ser un análisis multivariante, esta vez nos interesa más que la base de datos sea ancha antes que larga, con lo que esta vez nos ahorraremos convertirla en *tidy_artemias*. Si te interesa entender un poco la teoría del PCA, en este trabajo no te la voy a contar xd, hay un vídeo de youtuve muy bueno que te explica las ideas principales en 5 minutos, también lo hay en versión más amplia y detallada, y otro para hacerlo en R (yo lo hago parecido, pero a mi manera), es de statquest, y el que lo explica es un genético (sip, si te gusta la genética vete pensando en hacerte con R o Python):
+Para el caso del PCA, al ser un análisis multivariante, esta vez nos interesa más que la base de datos sea ancha antes que larga, con lo que esta vez nos ahorraremos convertirla en *tidy_artemias*. Si te interesa entender un poco la teoría del PCA, en este trabajo no te la voy a contar xd, hay un vídeo de youtube muy bueno que te explica las ideas principales en 5 minutos, también lo hay en versión más amplia y detallada, y otro para hacerlo en R (yo lo hago parecido, pero a mi manera), es de Stat quest, y el que lo explica es un genético (sip, si te gusta la genética vete pensando en hacerte con R o Python):
 
 * [StatQuest, PCA in 5 minutes](https://www.youtube.com/watch?v=HMOI_lkzW08&t=192s&ab_channel=StatQuestwithJoshStarmer)
 
 * [StatQuest, PCA in R](https://www.youtube.com/watch?v=0Jp4gsfOLMs&t=91s&ab_channel=StatQuestwithJoshStarmer)
 
-Lo primero que hay que hacer, es deshacernos por el momento de la variable de los grupos. **Una nota sobre R base** (programación en R con su código original): para un data frame (es como se le llaman a las tablas similares a excel propias de este lenguaje), al que le asignamos el nombre de df ( df <- data_frame ), que digamos que presenta un vector llamado "x", otro "y" y un último llamado "z" podemos seleccionar cada uno de ellos de dos maneras: con el símbolo "$" o con corchetes y una como a la izquierda del nombre o número del vector [,]. Ejemplo con código, juega con el:
+Lo primero que hay que hacer, es deshacernos por el momento de la variable de los grupos (```tratamiento```). **Una nota sobre R base** (programación en R con su código original): para un data frame (es como se le llaman a las tablas que buscan simular a las celdas de excel, propias de este lenguaje), al que le asignamos el nombre de df ( df <- data_frame), que digamos que presenta un vector llamado "x", otro "y" y un último llamado "z" podemos seleccionar cada uno de ellos de dos maneras: con el símbolo "$" o con corchetes y una como a la izquierda del nombre o número del vector [,]. Ejemplo con código, juega con el:
 
 ```
 df <- data.frame(x = c(1:10), y = c(1:10), z = c(1:10))
@@ -278,12 +278,12 @@ df$x
 df[,"x"]
 # o el número de la columna
 df[,1]
-# en caso de añadirle un -, no selecionamos, sino que eliminamos una variable (como select())
+# en caso de añadirle un -, no selecionamos, sino que eliminamos una variable (como ```select()``` en dplyr)
 df <- df[,-1]
 df
-# Además para que lo sepas, si añades un número delante de la "," selecionas una fila.
-df[1,]
-df[1:4, 2]
+# Además para que lo sepas, si añades un número delante de la "," selecionas filas.
+df[1,]      # Selecionamos la fíla 1
+df[1:4, 2]  # Selecionamos las filas de la 1 a la 4 de la columna 2   
 ```
 En ese caso haremos lo anterior con tratamiento:
 

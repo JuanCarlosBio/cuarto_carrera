@@ -72,7 +72,7 @@ Estos resultados sorprenden, ya que se esperaría que fueran los ratones viejos 
 
 **Figura 3**. Resultados del P.maze.
 
-En este caso, debido se tuvo que filtrar a una serie de outliers. Fue la primera prueba y seguramete algunos de los ratones se pusieran nerviosos, o no estaban preparados para ser sometidos a este estrés. En ese setido los primeros ratones pasaron un tiempo exagerado en ciertas zonas. Con lo que se procedió a prescindir de estos outliers.
+En este caso, se tuvieron que filtrar a una serie de outliers. Fue la primera prueba y seguramete algunos de los ratones se pusieran nerviosos, o no estaban preparados para ser sometidos a este estrés. En ese setido los primeros ratones pasaron un tiempo exagerado en ciertas zonas. Con lo que se procedió a prescindir de estos outliers.
 
 En concreto fueron:
 

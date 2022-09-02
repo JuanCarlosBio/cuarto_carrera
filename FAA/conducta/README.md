@@ -106,7 +106,7 @@ Procedí por mi cunta a realizar un PCA para cada una de las pruebas, con la int
 
 **Figura 4**. PCA para cada prueba. 
 
-Se puede ver que a pesar de no haber diferencias significativas entre los grupo de ratones jóvenes y viejos (No he ralizado la inferencia en cuanto a las componentes, al menos por el momento), hay un patrón en todos gráficos.
+Se puede ver que a pesar de no haber las diferencias significativas esperadas entre los grupo de ratones jóvenes y viejos (No he ralizado la inferencia en cuanto a las componentes, al menos por el momento), hay un patrón en todos gráficos.
 
 Parece ser que los ratones de mayor edad subfren menor dispersión en los trabajos que realizaban en las tres pruebas, tanto en las PC1 como en las PC2 de manera general. Con lo que a pesar de que no encontramos diferencias significativas, los viejos son más "conservadores" en el trabajo que realizan, seguramente debido a la experiencia adquirida con el tiempo, comportandose todos de manera parecida. Mientras que los ratones jovenes al ser inexpertos, pues cada uno podría estar probando una cosa distinta y explorando más el mundo a su alrededor.
 

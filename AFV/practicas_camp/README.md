@@ -6,6 +6,8 @@
 
 * Si quieres hacer la práctica con R puedes basarte en mis gráficos, pero obviamente en su momento me costó hacer este trabajo, con lo cuál me gustaría que me mencionaras si lo usas =). 
 
+* Teóricamente, debe de estar hecho para que copies y pegues los sripts en tu Rstudio local (o cualquier ambiente en el que lo uses), y obtengas mis resultados. (**Recuerda instalar todos los paquetes!!!**).
+
 * La práctica consiste en ir al Teide y tomar una serie de medidas de distintos parámetros biológicos de distintas especies, en nuestro caso estudiamos únicamente al Pino y al Rosalillo. Se dividirán en grupos, e irán rotando para hacer cada una de las actividades. Por último, cada grupo se encargará de realizar una *"exposición"* de los resultados de una de las actividades en concreto por grupo. Es decir, a cada grupo le tocará explicar los resultados de una de las actividades en concreto.
 
 * Las actividades son las que se realizaron en el laboratorio antes de esta, estudiar los parámetros: 

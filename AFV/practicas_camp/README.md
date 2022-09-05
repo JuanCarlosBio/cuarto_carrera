@@ -4,11 +4,28 @@
 
 ### Si eres alumo de 4º de Biología de la ULL
 
-* Te he de advertir que las prácticas que puedes basar tus gráficos si queires aprender R de estos. 
-* La práctica consiste en ir al Teide y tomar una serie de medidas de distintos parámetros biológicos de distintas especies, en nuestro caso estudiamos únicamente al Pino y al Rosalillo. Se dividirán en grupos, e irán rotando para hacer cada una de las actividades. Por último, cada grupo se encargará de realizar una "exposición" de los resultados de una de las actividades en concreto, es decir, a cada grupo le tocará explicar los resultados de una de las prácticas.
-* Las actividades son las que se realizaron en el laboratorio antes de esta, estudiar los parámetros de PAR, ETR, conductancia estomática, eficiencia fotosintéctica... Además de otras más de campo como el estudio biométrico de Pino. el hecho de que cada grupo recoja los datos y los tengas que hacer tu luego tiene un problema y es que, en mi experiencia, cada persona coge los datos de forma diferente, sin ningún patrón, así que las bases de datos serán personalizadas jajaja, yo te recomiendo poner los datos como yo lo he hecho en los csv, se podría decir que están en versión "matriz". Si lo haces pues igual puedes copiar y pegar los scripts y hacer las gráficas de forma automática con este código. Si que tendrías que tener cuidado con algunas funciones de ggplot2 como los scale_y/x_contiunos().
-* Y la cosa no acaba ahí, luego tienes que hacer una memoria de TODAS! las actividades. Es una currada guapa, de las prácticas más duras de 4º.
-* Creo que me falta un script por subir que lo haré con la calma.
+* Si quieres hacer la práctica con R puedes basarte en mis gráficos, pero obviamente en su momento me costó hacer este trabajo, con lo cuál me gustaría que me mencionaras si lo usas =). 
+
+* La práctica consiste en ir al Teide y tomar una serie de medidas de distintos parámetros biológicos de distintas especies, en nuestro caso estudiamos únicamente al Pino y al Rosalillo. Se dividirán en grupos, e irán rotando para hacer cada una de las actividades. Por último, cada grupo se encargará de realizar una *"exposición"* de los resultados de una de las actividades en concreto por grupo. Es decir, a cada grupo le tocará explicar los resultados de una de las actividades en concreto.
+
+* Las actividades son las que se realizaron en el laboratorio antes de esta, estudiar los parámetros: 
+  - ***PAR***
+  - ***ETR***
+  - ***conductancia estomática***
+  - ***eficiencia fotosintéctica***
+  - ... 
+  
+Además de otras más de campo como el 
+  - estudio biométrico de Pino. 
+
+* El hecho de que cada grupo recoja los datos y los tengas que hacer tu luego tiene un problema y es que, en mi experiencia, cada persona coge los datos de una forma diferente, sin ningún patrón, así que las bases de datos serán *personalizadas*. En ese sentido las bases de datos que tengo aquí subidas han sido procesadas y limpiadas por mí. Pero lo hice en Excel, con lo que he perdido el procedimeinto para hacerlas de esta manera. Muy poco reproducible por mi parte. En ese sentido si quieres hacer que poder usar tus datos con mi código vas a tener que busacar como darles una conformación parecida a la que yo lo he hecho.
+
+* También en su momento no sabía tanto cómo ahora, iguál las haría de forma diferente. Pero bueno, a navío hecho todos somos ingenieros.
+  
+### * Y la cosa no acaba ahí, luego tienes que hacer una memoria de TODAS! las actividades. Es una currada guapa, de las prácticas más duras de 4º.
+
+* Creo que me falta un script por subir que, con la última de las actividades. Lo haré con la calma, si eso, no me pagan.
+
 * Me puso la máxima nota en este trabajo.
 
 ## Información sobre los análisis

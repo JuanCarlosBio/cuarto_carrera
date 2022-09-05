@@ -147,7 +147,7 @@ Esto puede deberse a que, a dos motivos.
 
 * *Hay evidencia de que este experimento es reproducible o parcialmente al menos. Obetiéndose los mismos resultados a partir de los mismos pasos.*
 * *Pero sin embargo, me suena que como la práctica era muy próxima a las evaluaciones de enero, con lo que no había tiempo físico para los profesores en usar nuestras muestras. Con lo cual estos resultados serían de alumnos del curso pasado, que se podrían haber sido usados tanto para las prácticas de informática como para esta.*
-* *Aún así, el segundo paso sigue defendiendo que el experimento es reproducible, en caso de que se hicieran dos veces para ambas prácticas. Pero eso yo ya no lo sé. Simplemente es una observación.*
+* *Aún así, el segundo caso sigue defendiendo que el experimento es reproducible, en caso de que se hicieran dos veces para cada práctica. Pero eso yo ya no lo sé. Simplemente es una observación.*
 ---  
 ### En cuanto a los resultados de inferencia para las componentes:
 

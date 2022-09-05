@@ -1,10 +1,6 @@
-################################################################################
-#########################   Eficiencia fotosintética         ###################
-################################################################################
 library(tidyverse)
-library(ggthemes)
 library(readxl)
-
+library(ggthemes)
 #------------------------------------------------------------------------------#
 #                                Intercambio Gaseoso                           #
 #------------------------------------------------------------------------------#
@@ -45,7 +41,7 @@ inter_gas2 %>%
         legend.text = element_text(size = 11)) +
   scale_fill_manual(values = c("gray", "black")) +
   scale_color_manual(values = c("gray", "black"))
-  
+
 # Temperatura
 inter_gas %>% 
   group_by(hora, exposicion) %>%
@@ -182,7 +178,7 @@ preprocesado <- inter_gas %>% select(exposicion,tleaf, a, gs, e, q) %>%
            !(gs %in% NA) &
            !(e %in% NA) &
            !(q %in% NA)
-         );preprocesado # Tendriamos 24 muestras, ok ok 
+  );preprocesado # Tendriamos 24 muestras, ok ok 
 
 matrix_inter_gas <- as.matrix(preprocesado[,-1]) # nos quedamos solo con las variables cuantitativas
 
@@ -221,12 +217,12 @@ componentes_principales %>%
   ) +
   theme_classic() +
   theme(
-        title = element_text(size = 13, face = "bold"),
-        axis.title = element_text(size = 12, face = "bold"),
-        axis.text.x  = element_text(size = 11, face = "bold"),
-        legend.position = c(.2,.8),
-        legend.background = element_rect(color = "black", fill = NULL),
-        legend.text = element_text(size = 11)) 
+    title = element_text(size = 13, face = "bold"),
+    axis.title = element_text(size = 12, face = "bold"),
+    axis.text.x  = element_text(size = 11, face = "bold"),
+    legend.position = c(.2,.8),
+    legend.background = element_rect(color = "black", fill = NULL),
+    legend.text = element_text(size = 11)) 
 
 #-------------------------------------------------------------------------------------------------#
 #                                     RESULTADO DEL PCA TEÓRICAMENTE                              #
@@ -238,7 +234,7 @@ componentes_principales %>%
 tapply(componentes_principales$PC1, componentes_principales$exposicion, shapiro.test) # p<0.05 en sol, no se cumple la asunción de normalidad
 # Test de Wilcoxon Mann-Whithney (mediana)
 wilcox.test(PC1~exposicion, data = componentes_principales) # p<0.05 las diferencias son estadísticamente
-                                                            # significativas para la PC1 
+# significativas para la PC1 
 
 ### inferencia de la PC2
 # 1) Normalidad

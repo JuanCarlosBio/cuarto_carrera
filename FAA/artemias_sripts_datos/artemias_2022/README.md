@@ -10,11 +10,11 @@ Si eso en algún momento consultaré la bibliografía para encontrar informació
 * *Ác. oleico:* **C 18:1n-9**
 * *Ác. linoleico:* **C 18:2n-6**
 * *Ác. gamma linoléico:* **18:3n-6**
-* *Ác. linolénico:* **C18:3n-3**
-* *Ác. esterearidónico:* **18:4n-3**
-* *Ác. araquidónico:* **20:4n-6 (ARA)**
-* *Ác. timmodónico:* **20:5n-3 (EPA)**
-* *Ác. docosahexanoico:* **22:6n-3 (DAG)**
+* *Ác. linolénico:* **C 18:3n-3**
+* *Ác. esterearidónico:* **C 18:4n-3**
+* *Ác. araquidónico:* **C 20:4n-6 (ARA)**
+* *Ác. timmodónico:* **C 20:5n-3 (EPA)**
+* *Ác. docosahexanoico:* **C 22:6n-3 (DAG)**
 ## * Gráfico con los resultados obtenidos de todos los ácidos grasos.
 ---
 

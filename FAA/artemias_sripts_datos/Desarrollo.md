@@ -321,7 +321,7 @@ output:
 Tenemos ya únicamente las variables numéricas, si no no se puede hacer el PCA.
 
 * Lo siguiente es realizar el pca. 
-  - para ello usaremos la función realizamos con los siguientes parámetros: ```prcomp(df, scale=TRUE, center=TRUE)```.
+  - para ello usaremos la función ```prcomp()``` con los siguientes parámetros: ```prcomp(df, scale=TRUE, center=TRUE)```.
   - Lo siguiente será utilizar la función ```summary()```, que nos dará los resutltdos de cada una de las componentes en una serie de parámetros, a nosotros nos interesa la varianza explicada por las primeras componentes (escogeremos las 3 primeras: PC1, PC2 y PC3) y la varianza acumulada.
   - Además interesa usar *Pearson* para estudiar la correlación lineal entre las variables y las componentes con la función ```cor()```. Nos dará una idea de cómo se van a ordenar los datos una vez los grafiquemos.
 

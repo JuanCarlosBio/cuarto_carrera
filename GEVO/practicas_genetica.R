@@ -7,7 +7,7 @@ library(ggthemes)
 library(readxl)
 library(rstatix)
 
-practicas_gevo <- read_excel("C:/Users/jcge9/Desktop/cuarto_carrera/GEVO/practicas_gevo.xlsx")
+practicas_gevo <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/GEVO/practicas_gevo.csv")
 # write_csv(practicas_gevo, "practicas_gevo.csv")
 # Los nombres de las variables se han vuelto locas ya que están duplicadas, para ser más leíbles al ojo humano, los profesores
 # en vez de hacel la tabla larga la han repetido, unos marcadores están a la derecha y otros a la izquierda. Habrá que procesar.

@@ -11,8 +11,8 @@
 3) Rellenar una tabla en la que había que sacar:
   - Frecencia alélica.
   - Heterocigosidad esperada y observada.
-  - Realizar Xi^2 para verificar equilibrio de Hardy-Weinberg.
   - Realizar Xi^2 de contingencia.
+  - Realizar Xi^2 para verificar equilibrio de Hardy-Weinberg.
 4) Desequilibrio gamético. Como ya he dicho, no está hecho.
 
 ### Me gustaría subir algunos de los ejercicios que subieron para realizarlos expresamente con Excel (o al menos idealmente), pero hecho en R. Sin embargo acabo de empezar el máster con lo que está complicado.

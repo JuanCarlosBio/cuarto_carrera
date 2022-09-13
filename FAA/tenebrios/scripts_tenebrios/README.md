@@ -88,7 +88,39 @@ sample estimates:
 -0.04439224 
 ```
 
+* **Con lo cuál sólo hicimos el modelo para la primera opción.** 
+	* Sacamos los coeficientes de la pendiente e intecepto.
+	* El modelo presentó un p < 0.01, con lo que se rechazá la hipótesis nula que el modelo no es fiable.
 
+```
+Call:
+lm(formula = media_mc ~ semana, data = df_o4_completo)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.004655 -0.004347 -0.001590  0.004509  0.006998 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.0044540  0.0032423   1.374    0.203    
+semana      0.0115933  0.0004781  24.251 1.65e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.005014 on 9 degrees of freedom
+Multiple R-squared:  0.9849,	Adjusted R-squared:  0.9833 
+F-statistic: 588.1 on 1 and 9 DF,  p-value: 1.649e-09
+```
+
+Gráfica en ese entonces, tanto con la media de los valores de la masa corporal (como en el primer gráfico), pero añadiendo las barras de error con la desviación típica y la función de la recta del modelo.
+
+---
+
+<p align= "center">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot07.png">
+</p>
+
+---
 
 
 

@@ -45,6 +45,48 @@ En concreto a mi grupo y a mí nos tocó el experimento de hacer crecer a los te
 
 ---
 
+Por otro lado además, realizamos un test de correlación lineal de pearson, que nos permitieran ver si las variables de la ***masa corporal*** y la ***tasa de crecimiento*** estaban correlacionadas linealmente con las semanas, y de esa manera ser capaces de hacer un modelo de regresión lineal simple, con la intención de sacar futuros valores en otros experimentos.
+
+* **Las variables de la masa corporal y la semana muy están correlacionadas etre ellas**
+
+```
+	Pearson's product-moment correlation
+
+data:  df_o4_completo$semana and df_o4_completo$media_mc
+t = 24.251, df = 9, p-value = 1.649e-09
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.9700914 0.9981027
+sample estimates:
+      cor 
+0.9924351 
+```
+
+* **Por otro lado, las variables tasa crecimiento - semanas; masa corporal - tasa de crecimiento, respectivamente estaban prácticamente correlacionadas de forma nula**
+
+```
+	Pearson's product-moment correlation
+
+data:  df_o4_completo$tasa.crec.s and df_o4_completo$semana
+t = 0.061966, df = 8, p-value = 0.9521
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.6162214  0.6426665
+sample estimates:
+      cor 
+0.0219031 
+
+	Pearson's product-moment correlation
+
+data:  df_o4_completo$media_mc and df_o4_completo$tasa.crec.s
+t = -0.12568, df = 8, p-value = 0.9031
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.6556916  0.6020620
+sample estimates:
+        cor 
+-0.04439224 
+```
 
 
 

@@ -121,6 +121,10 @@ F-statistic: 40.04 on 1 and 6 DF,  p-value: 0.0007283
 
 ---
 
+<p align="center">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/Rplot09.png">
+</p>
+
 **Figura 3.** Resultados del modelo con la ecuación de la recta.
 
 ---

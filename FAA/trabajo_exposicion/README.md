@@ -129,7 +129,7 @@ En la discusión de los resultados y conclusión habría que comentar los result
 
 * **De esta manera, tenemos una ecuación la cuál podríamos usar para predecir, a partir del tiempo que ha tardado un ratón de otro laboratorio al nuestro, cuanta endogamia tiene en número de generaciones. Esto podría intentar extrapolarse a otros tipos de animales.**
 
-### * OJO!!!, les gusta que le digas alguna posible aplicación o futuro proyecto que se puede sacar con estos resultados. Nosotros dijimos que se podría añadir un tercer grupo de estudio, cruce entre primos para ver la respuesta a distintos niveles de cosanguineidad. Nuestra hipótessis sería en ese entonces, que estos ratones también llegarían a el humbral máximo de homocigósis, pero tardarían más número de generaciones en cuanto a cruces para ello.
+### OJO!!!, les gusta que le digas alguna posible aplicación o futuro proyecto que se puede sacar con estos resultados. Nosotros dijimos que se podría añadir un tercer grupo de estudio, cruce entre primos para ver la respuesta a distintos niveles de cosanguineidad. Nuestra hipótessis sería en ese entonces, que estos ratones también llegarían a el humbral máximo de homocigósis, pero tardarían más número de generaciones en cuanto a cruces para ello.
 
 Nada mal para haber salido de mi cabeza perturbada XD.
 

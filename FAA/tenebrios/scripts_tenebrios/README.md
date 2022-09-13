@@ -40,7 +40,7 @@ En concreto a mi grupo y a mí nos tocó el experimento de hacer crecer a los te
 ---
 
 <p align= "center">
-  <img = "https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot05.png">
+  <img src= "https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot05.png">
 </p>
 
 ---

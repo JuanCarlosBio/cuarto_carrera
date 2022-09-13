@@ -77,7 +77,8 @@ artemias_anova %>%
 
 
 artemias_welch <- tidy_artemias %>% 
-  filter(acido_graso %in% vect_welch) %>% 
+  filter(acido_graso %in% c("C 16:1n-7","C 18:0","C 18:1n-9",
+                            "C 18:3n-6","C 20:5n-3","C 22:6n-3")) %>% 
   mutate(tratamiento=factor(tratamiento, 
                             levels = c("Levadura", "Lectina marina", 
                                        "Echium/Bacalao", "Enriquecedor comercial"),
@@ -134,12 +135,10 @@ artemias_kw <- tidy_artemias %>%
 artemias_kw %>% 
   ggplot(aes(acido_graso, valores, fill=tratamiento)) +
   # geom_boxplot() +
-  stat_summary(fun = median, position = position_dodge(.85),
-               geom = "crossbar") +
+  geom_boxplot() +
   geom_jitter(position = position_jitterdodge(seed = 20101997), pch=21) +
   scale_fill_manual(values = c("skyblue", "orange", "tomato", "gray")) +
-  scale_y_continuous(expand = expansion(0),
-                     limits = c(8,26)) +
+  facet_wrap(~acido_graso, scales = "free") +
   labs(
     title = "Cantidad de AG en cada tratamiento",
     subtitle = "Datos no normales",
@@ -161,4 +160,6 @@ artemias_kw %>%
     legend.background = element_rect(color = "white"),
     axis.text.x = element_text(face = "bold", 
                                color = "black", size = 11),
+    strip.background = element_blank(),
+    strip.text = element_blank()
   )

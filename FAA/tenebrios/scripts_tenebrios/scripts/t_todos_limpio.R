@@ -11,7 +11,7 @@ library(tidytext)
 library(ggtext)
 library(glue)
 
-url <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/tenebrios/scripts_tenebrios/tene_todos_crudos.csv"
+url <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/tenebrios/scripts_tenebrios/datos/tene_todos_crudos.csv"
 tene_todos_crudos <- read.csv(url,sep = ";") # madre de dios la limpieza lloro ); sea todo por la ciencia
 ten_tod2 <- tene_todos_crudos[1:42,]
 
@@ -237,3 +237,4 @@ df_temporal %>%
     axis.title.y = element_markdown(size = 12, face = "bold"),
     axis.text.x = element_markdown(size = 12, face = "bold", color="black")
   )
+

@@ -32,4 +32,4 @@ Además de otras más de campo como el
 
 ## Información sobre los análisis
 
-Realmente lo que te van a pedir son unas gráficas modestas, no es necesario que hagas más inferencia estadística, ni análisis multivariante. Yo es que utilizo estos datos para probar cosas, y me gusta desgazarlos. Supongo que si pones alguna comparación de grupos a la profesora le gustará.
+Realmente lo que te van a pedir son unas gráficas modestas, no es necesario que hagas más inferencia estadística, ni análisis multivariante. Yo es que utilizo estos datos para probar cosas, y me gusta desguazarlos. Supongo que si pones alguna comparación de grupos a la profesora le gustará.

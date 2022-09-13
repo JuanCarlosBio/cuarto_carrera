@@ -6,7 +6,6 @@ Básicamente consistió en... hipotéticamente hablando... aparear ratones (ojo 
 
 La idea es que, a medida que los ratones tienen más generaciones de endoganmia, más tardan en cruzar el laberinto.
 
-He de decir que lo he mejorado con el tiempo, ojala pudiera haberlo hecho de esta manera.
 
 ## Simulación para sacar los datos.
 
@@ -59,6 +58,10 @@ Después de una exploración de los datos, vimos que para todas las semanas, los
 
 ---
 
+<p align="center">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/histogramas.png">
+</p>
+
 **Figura 1**: Histogramas para ver las distribuciones de los resultados, tanto para ratones control como para ratones endogámicos. Podemos ver que los ratones endogámicos cada generación que pasan, los tiempos se alejan más de los controles
 
 ---
@@ -67,7 +70,9 @@ Entonces los resulatdos del trabajo de una forma más clara estarían represntad
 
 ---
 
-
+<p align="center">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/endogamia.png">
+</p>
 
 **Figura 2.** Evolución de los ratones endogámicos y los ratones control. Vemos que estos últimos, el tiempo que tardan en el laberinto no se modifica, mientras que los ratones que presentan cosanguinidad aumentan hasta un umbral de los 600 segundos en superar el laberinto.
 

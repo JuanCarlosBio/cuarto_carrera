@@ -13,4 +13,4 @@ Algunas de las asignaturas no incentivaban a utilizar R, o no fui capaz de busca
 
 También me gustaría decir que por el momento este proyecto está en obras.
 
-**Puedes hacer con el código de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).** 
+**Puedes hacer con el código o ficheros de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).** 

@@ -122,7 +122,16 @@ Gráfica en ese entonces, tanto con la media de los valores de la masa corporal 
 
 ---
 
+## **Resultados de todos los grupos.**
 
+### Masa corporal de todos los grupos
+Lo que pudimos ver es que, al hacer la media de cada uno de los grupos de cada uno de los tratamiento para cada semana fue:
+
+* Parece ser que todos los grupos crecen más o menos de forma exponencial, hasta formar una curva final en la que las larvas para de crecer en masa.
+* Parece ser que en cuanto a crecimiento: 
+	* El grupo control (luz y temperatura normal) son los que menos crecen.
+	* Los de oscuridad crecen de forama intermidia hasta adelantar en las últimas semanas a temperatura alta, que hasta la semana 9 son os que más masa tienen. Esto puede deberse a que en este último tratamiento las larvas podrán pasar más rápido a estado de pupa, perdiendose datos de este. 
+  
 
 
 

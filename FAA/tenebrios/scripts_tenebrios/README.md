@@ -131,7 +131,21 @@ Lo que pudimos ver es que, al hacer la media de cada uno de los grupos de cada u
 * Parece ser que en cuanto a crecimiento: 
 	* El grupo control (luz y temperatura normal) son los que menos crecen.
 	* Los de oscuridad crecen de forama intermidia hasta adelantar en las últimas semanas a temperatura alta, que hasta la semana 9 son os que más masa tienen. Esto puede deberse a que en este último tratamiento las larvas podrán pasar más rápido a estado de pupa, perdiendose datos de este. 
-  
+* Pero ... ¿Son las diferencias realmente significativas al comparar los tratamientos en cada semana? Relizaremos inferencia estadistica para ello.
+	* **Lo que vimos es que ninguno de los grupo presentó diferencias significativas!!**
+	* De esta manera, si te interesa de que las larvas tengan más masa, da igual el tratamiento a usar.
+
+---
+
+<p align= "center">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/masa_corporal_todos.png">
+</p>
+
+---
+
+### Tasa de creciemiento
+
+
 
 
 

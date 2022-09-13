@@ -33,7 +33,7 @@ controles_6 <- sample(245:290, 12, replace = TRUE)
 controles_7 <- sample(245:300, 12, replace = TRUE)
 ```
 
-Un problema que pasa es que el código anterior cada vez que lo corras te va a salir un resultado algo distinto, ya que es arleatoria la función. Por, el resultado que me guste (todos son muy parecidos igualmente, el intervalo en el que están hacen que no cambien excesivamente), los voy a escribir en un archivo ```.csv``` que utilicé en su momento para la exposición. Lo haremos con el siguiente código:
+Un problema que pasa es que el código anterior cada vez que lo corras te va a salir un resultado algo distinto, ya que es arleatoria la función (aunque lo bueno es que de esta forma te da una simulación interesante). Lo repetí hasta un resultado que me gustó (todos son muy parecidos igualmente, el intervalo en el que están hacen que no cambien excesivamente), los voy a escribir en un archivo ```.csv``` que utilicé en su momento para la exposición, mediante la función ```write_csv```(). Lo haremos con el siguiente código:
 
 ```
 # Creación de la base de datos

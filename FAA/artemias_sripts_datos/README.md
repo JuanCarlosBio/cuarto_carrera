@@ -20,6 +20,6 @@ Hay varias razones, estas cuatro, son las que más me han gustado.
 
 ---
 
-He subido otro markdown llamado Dessarrollo.md donde he replicado los resultados de la práctica de informática, pero como lo haría yo en R.
+###♦He subido otro markdown llamado **Dessarrollo.md** donde he replicado los resultados de la práctica de informática, pero como lo haría yo en R.
 
 ### **También en la carpeta de Artemias 2022 están los resultados que puede sacar.**

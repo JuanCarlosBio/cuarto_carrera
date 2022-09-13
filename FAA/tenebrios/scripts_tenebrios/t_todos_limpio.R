@@ -1,4 +1,4 @@
-################################################################################
+###############################################################################
 ############################ Tenebrios Todos los grupos ########################
 ################################################################################
 
@@ -40,7 +40,7 @@ colnames(sei) <- nombres_grupos
 
 
 
-df_tenebrios <- bind_rows(uno,dos, tre, cua, cin, sei) %>% 
+df_tenebrios <- as_tibble(bind_rows(uno,dos, tre, cua, cin, sei)) %>% 
   mutate(masa_corp=str_replace(masa_corp, pattern = ",", replacement = "."),
          masa_corp=as.numeric(masa_corp),
          d=str_replace(d, pattern = ",", replacement = "."),
@@ -53,7 +53,9 @@ df_tenebrios <- bind_rows(uno,dos, tre, cua, cin, sei) %>%
                                grepl("O",grupo)~"Oscuridad",
                                grepl("T",grupo)~"Temperatura")) 
 
-df_tenebrios[seq(0,216,12) , c(4,5)] <- NA # Por alguna extraña razón algunas personas decidieron poner el promedio de d y dx al final
+# seq(12,216,12)
+# df_tenebrios[c(12,24,36,48,60,72,84,96,108,120,132,144,156,168,180,192,204,216),c("d","dx")] <- NA 
+df_tenebrios[seq(12,216,12),c("d","dx")] <- NA # Por alguna extraña razón algunas personas decidieron poner el promedio de d y dx al final
 
 
 df_tenebrios %>% 

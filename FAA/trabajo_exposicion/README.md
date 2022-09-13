@@ -1,4 +1,4 @@
-# Trabajo de exposición: Efecto de la cosanguineidad en la resolución de problemas para *Mus musculus*
+# Trabajo de exposición: Efecto de la cosanguinidad en la resolución de problemas para *Mus musculus*
 
 Este trabajo consistió en realizar una exposición de un trabajo técnico. En nuestro caso, simulé un experimento con R.
 
@@ -69,7 +69,7 @@ Entonces los resulatdos del trabajo de una forma más clara estarían represntad
 
 
 
-**Figura 2.** Evolución de los ratones endogámicos y los ratones control. Vemos que estos últimos, el tiempo que tardan en el laberinto no se modifica, mientras que los ratones que presentan cosanguineidad aumentan hasta un umbral de los 600 segundos en superar el laberinto.
+**Figura 2.** Evolución de los ratones endogámicos y los ratones control. Vemos que estos últimos, el tiempo que tardan en el laberinto no se modifica, mientras que los ratones que presentan cosanguinidad aumentan hasta un umbral de los 600 segundos en superar el laberinto.
 
 ---
 ### Comparación de los grupos
@@ -129,7 +129,7 @@ En la discusión de los resultados y conclusión habría que comentar los result
 
 * **De esta manera, tenemos una ecuación la cuál podríamos usar para predecir, a partir del tiempo que ha tardado un ratón de otro laboratorio al nuestro, cuanta endogamia tiene en número de generaciones. Esto podría intentar extrapolarse a otros tipos de animales.**
 
-### OJO!!!, les gusta que le digas alguna posible aplicación o futuro proyecto que se puede sacar con estos resultados. Nosotros dijimos que se podría añadir un tercer grupo de estudio, cruce entre primos para ver la respuesta a distintos niveles de cosanguineidad. Nuestra hipótessis sería en ese entonces, que estos ratones también llegarían a el humbral máximo de homocigósis, pero tardarían más número de generaciones en cuanto a cruces para ello.
+### OJO!!!, les gusta que le digas alguna posible aplicación o futuro proyecto que se puede sacar con estos resultados. Nosotros dijimos que se podría añadir un tercer grupo de estudio, cruce entre primos para ver la respuesta a distintos niveles de cosanguinidad. Nuestra hipótessis sería en ese entonces, que estos ratones también llegarían a el humbral máximo de homocigósis, pero tardarían más número de generaciones en cuanto a cruces para ello.
 
 Nada mal para haber salido de mi cabeza perturbada XD.
 

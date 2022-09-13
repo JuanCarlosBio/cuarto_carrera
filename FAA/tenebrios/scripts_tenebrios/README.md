@@ -1,4 +1,4 @@
-# Prácticas de los tenebrios.
+# Prácticas de los tenebrios. (Sacamos un 9.5) 
 
 ## Información sobre las práctias.
 

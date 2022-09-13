@@ -97,31 +97,31 @@ df_tenebrios %>%
 # automática de hacer esto, pero bueno, esto servirá
 
 semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
-tr.groups(semana_1,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad") 
+th.groups(semana_1,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad") 
 
 semana_2 <- subset(df_tenebrios, as.character(semana) == "2")
-tr.groups(semana_2,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_2,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_3 <- subset(df_tenebrios, as.character(semana) == "3")
-tr.groups(semana_3,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_3,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_4 <- subset(df_tenebrios, as.character(semana) == "4")
-tr.groups(semana_4,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_4,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_5 <- subset(df_tenebrios, as.character(semana) == "5")
-tr.groups(semana_5,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_5,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_6 <- subset(df_tenebrios, as.character(semana) == "6")
-tr.groups(semana_6,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_6,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_7 <- subset(df_tenebrios, as.character(semana) == "7")
-tr.groups(semana_7,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_7,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_8<- subset(df_tenebrios, as.character(semana) == "8")
-tr.groups(semana_8,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_8,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_9 <- subset(df_tenebrios, as.character(semana) == "9")
-tr.groups(semana_9,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_9,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
 
 
 #### Estduio de la tasa de crecimiento semanal
@@ -158,28 +158,28 @@ df_tenebrios %>%
 
 # ¿existen diferencias significativas con el paso de las semanas? 
 semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
-tr.groups(semana_1,d, "d", experimento, "Control", "Temperatura", "Oscuridad") 
+th.groups(semana_1,d, "d", experimento, "Control", "Temperatura", "Oscuridad") 
 
 semana_2 <- subset(df_tenebrios, as.character(semana) == "2")
-tr.groups(semana_2,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_2,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_3 <- subset(df_tenebrios, as.character(semana) == "3")
-tr.groups(semana_3,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_3,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_4 <- subset(df_tenebrios, as.character(semana) == "4")
-tr.groups(semana_4,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_4,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_5 <- subset(df_tenebrios, as.character(semana) == "5")
-tr.groups(semana_5,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_5,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_6 <- subset(df_tenebrios, as.character(semana) == "6")
-tr.groups(semana_6,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_6,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_7 <- subset(df_tenebrios, as.character(semana) == "7")
-tr.groups(semana_7,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_7,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 semana_8<- subset(df_tenebrios, as.character(semana) == "8")
-tr.groups(semana_8,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+th.groups(semana_8,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
 
 # Obviamente las Últimas semanas no se pueden ver si ha diferencias significativas
 # ya que muchos de los tnebrios han entrado en estado de pupa, lo que impide hacer
@@ -210,7 +210,7 @@ df_temporal <- tibble(
 )
 
 # No existen diferencias significativas entre los grupos, p > 0.05
-test_temporal <- tr.groups(df_temporal, semanas, "semanas", experimento, "Control", "Temperatura","Oscuridad")
+test_temporal <- th.groups(df_temporal, semanas, "semanas", experimento, "Control", "Temperatura","Oscuridad")
 estadistico_temporal <- test_temporal$statistic
 p.valor <- round(test_temporal$p.value,2)
 
@@ -237,6 +237,3 @@ df_temporal %>%
     axis.title.y = element_markdown(size = 12, face = "bold"),
     axis.text.x = element_markdown(size = 12, face = "bold", color="black")
   )
-
-
-

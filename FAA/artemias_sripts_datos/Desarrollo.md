@@ -43,7 +43,7 @@ Lo siguiente es poner a punto la base de datos. Vamos a correr los datos (```%>%
 
 matrix_artemias <- read_csv("C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\FA.A\\PracticasFA.A\\artemias_sripts_datos\\matrix_artemias.csv")
 
-matrix %>% print(5)
+matrix_artemias %>% print(5)
 
 ```
 

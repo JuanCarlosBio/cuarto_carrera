@@ -50,8 +50,6 @@ matrix %>% print(5)
 Veamos el output de las 5 primeras filas...
 
 ```
-matrix_artemias
-
 > matrix_artemias
 # A tibble: 16 x 12
    Tratamiento `C 16:0` `C 16:1n-7` `C 18:0` `C 18:1n-9` `C 18:2n-6` `C 18:3n-6`
@@ -64,7 +62,7 @@ matrix_artemias
 
 ```
 
-Tenemos 16 filas de valores de un total de 12 variables. 
+Tenemos 16 filas de valores de un total de 12 variables (nos fijamos en la segunda línea ```A tibble: 16 x 12```). Sólo se ven 5 filas por que con la función ```print(n = 5)``` hago que sólo me muestre ese número, mientras que se ven sólo 7 columnas porque el formato ***tibble*** (una forma de hacer las tablas en R) los resume de esa manera por que no se veían todas en la pantalla. 
 
 ---
 

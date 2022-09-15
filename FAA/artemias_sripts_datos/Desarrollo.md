@@ -168,7 +168,7 @@ levene <- df %>%                                        # Asignamos la función 
                                                         # la media como valor de centralización (nada que preocuparse xd). 
 
 # Modelo estadístico. El de abajo es ANOVA de una vía, Pero funciona igual con todos. 
-modelo_ejemplo_anova <- df %>%            # Asinamos el valor como modelo_anova, modelo_welch...
+modelo_ejemplo_anova <- df %>%            # Asignamos el valor como modelo_anova, modelo_welch...
   filter(!(grupo2 %in% vector_x))) %>%    # Filtramos los valores, en este caso, que no presenten ni normalidad, ni homocedasticidad !() función que sgnifica NO, %in% asignación de un rango
   group_by(grupo2) %>%                    # Agrupamos por ácido graso
   anova_test(variable_numerica ~ grupo1)  # Realizamos ANOVA, funciona igual que Levene, pero sin center=mean

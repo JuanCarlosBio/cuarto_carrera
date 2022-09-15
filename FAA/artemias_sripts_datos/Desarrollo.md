@@ -181,7 +181,7 @@ acidos_anova %>%
 
 Enhorabuena, con esto ya deberías ser capaz de hacer todos los análisis. Esto es comentar un poco como es cada cosa, pero en el script está todo hecho, y con algunos comentarios de cada cosa también. Puede que hayan pequeñas diferencias entre cada test, como aplicar Bonferroni en ```Kurskal_test()```. Pero la idea básica es esta.
 
-Una cosa interesante además, es una vez tenemos los resultados se nos crea en cada caso una tabla con cada uno de los reultados, así como en SPSS. Pero una cosa muy buena que tiene este ```rstatix```, es que podemos filtrar los datos que nos interesa con ```**filter()**``` así como seleccionar las variables resultantes que quermos ver, (los ácidos grasos, tratamiento y el p-valor)  con ```**select()**```. Veremos como sería esto en la prueba de normalidad y levene
+Una cosa interesante además, es una vez tenemos los resultados se nos crea en cada caso una tabla con cada uno de los reultados, así como en SPSS. Pero una cosa muy buena que tiene este ```rstatix```, es que podemos filtrar los datos que nos interesa con ```filter()``` así como seleccionar las variables resultantes que quermos ver, (los ácidos grasos, tratamiento y el p-valor)  con ```select()```. Veremos como sería esto en la prueba de normalidad y levene
 
 ```
 normalidad <- tidy_artemias %>% 

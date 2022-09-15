@@ -3,9 +3,10 @@
 ---
 ## Intención: 
 
-*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. Están hechos de tal forma para que puedas copiar dichos scripts, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```ìnstall.packages("libreria")```)* 
+*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. En teoría deben estar hechos de tal forma para que puedas copiar dichos scripts, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```install.packages("cualquier_libreria")```)* 
 
 * *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiendo lo que puede ofrecer para nosotros los biólogos. Habiéndole piellado cierto tranquillo en el proceso*.
+
 
 * *Para dejar las cosas claras, mi intención no es enseñar R de principio a fin... solamente comentar como he replicado la práctica de la forma en la que he aprendido ***yo*** a hacerlo con código propio. ***Hay miles de videotutoriales en youtuve*** o en la red (***y gratis, no te vuelvas loc@***) que realizan ese cometido de manera brillante (tanto de R como otros como vendría a ser de Python). Algunas librerías que vendría bien haber visto antes serían, en especial: ***dplyr***, ```ggplot2``` o el conjunto de ```tidyverse```. También tener claro los modelos de inferencia y cuándo elegir uno u otro vendría bien. Utilizaremos una librería muy guapa que te permite hacer estos modelos en combinación con dplyr, ```rstatix```. Y obviamente, debes tener R descargado (es ideal que además tengas Rstudio). Saber cosas básicas como descargar paquetes, asignar valores a objetos (que significa "<-")...*
 
@@ -37,7 +38,7 @@ library(rstatix)   # Modelos ANOVA, WELCH...
 library(glue)      # permite pegar variables asignadas en texto mediante {}
 ```
 
-Lo siguiente es poner a punto la base de datos. Vamos a correr los datos (```%>%``` es el pipe (tubería), conecta las funciones entre sí compatibles con ```dplyr```) ...  Está pensado para que únicamente con copiar y pegar el script en tu R personal, puedas correr los datos y que obtengas mis resultados (**Reproducibilidad a tope**)
+Lo siguiente es poner a punto la base de datos. Vamos a correr los datos (```%>%``` es el pipe (tubería), conecta las funciones entre sí compatibles con ```dplyr```)
 
 ```
 

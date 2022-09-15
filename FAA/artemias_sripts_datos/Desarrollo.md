@@ -239,7 +239,7 @@ tidy_artemias %>%
          )
 ```
 
-output: no se ven todas las columnas, pero espero que pilles la idea. Además, obviamente sería conveniente usar ```filter()``` antes para los ácidos grasos que no sea ni normales ni homocedásticos.
+output: no se ven todas las columnas, pero espero que pilles la idea.
 
 ```
 A tibble: 112 x 9

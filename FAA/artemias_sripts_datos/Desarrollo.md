@@ -224,7 +224,7 @@ output
 
 ### **Con estos valores anteriores no haríamos ANOVA de una Vía (Bueno... si quieres redondear Enriquecedor comercial allá cada uno), con lo que de nuevo con ```filter()``` filtraríamos los ácidos grasos que nos interesen para cada modelo.**
 
-Y esto sería la primera parte realmente, pero me gustaría añadir la transformación de los datos. Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la verás más clara. Crearemos nuevas variables, que a lo mejor hagan normales o homocedásticas a los datos de interés (variable *valores).
+Y esto sería la primera parte realmente, pero me gustaría añadir la transformación de los datos. Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás medjor. Crearemos nuevas variables, que a lo posiblemente hagan normales o homocedásticas a los datos de interés.
 
 ```
 tidy_artemias %>% 

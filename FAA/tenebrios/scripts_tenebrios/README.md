@@ -31,7 +31,7 @@ La verdad es que una práctica muy interactiva, a mí me gustó mucho
 
 En concreto a mi grupo y a mí nos tocó el experimento de hacer crecer a los tenebrios en oscuridad (eramos el 4º grupo de este en concreto).
 
-**Antes de continuar, en este caso he contabilizado la primera semana como semana 0 en este caso. Creo que para el estudio de todos los grupos la primera la contabilicé como semana 1. Un fallo de cálculo pero se va aquedar como está xd.**
+**Antes de continuar, en este caso he contabilizado la primera semana como semana 0 en este caso. Creo que para el estudio de todos los grupos la primera la contabilicé como semana 1. Un fallo de cálculo pero se va a quedar como está xd.**
 
 * Comenzando con la variación de la masa corporal, como era esperable, la masa de los tenebrios crecía de manera casi exponencial, hasta que en las últimas semanas se atisba la formación de una curva que muestra el tope.
 

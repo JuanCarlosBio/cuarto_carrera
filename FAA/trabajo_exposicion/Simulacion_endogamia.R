@@ -47,7 +47,7 @@ library(ggtext)
 
 #### Resultados que me guarde con write_csv
 
-simulacion <- read_csv("simulacion_endogamia.csv")
+simulacion <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/trabajo_exposicion/simulacion_endogamia.csv")
 
 # Estudio de la normalidad de los datos:
 # generación 0 y 1 no son normales 

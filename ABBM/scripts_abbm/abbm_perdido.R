@@ -3,6 +3,7 @@
 ################################################################################
 
 library(tidyverse)
+library(readxl)
 
 
 #------------------------------------------------------------------------------#
@@ -10,10 +11,13 @@ library(tidyverse)
 #------------------------------------------------------------------------------#
 
 # Comparación de la actividad enzimática e x tiempo
+parte_1_jueves <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/practica2.csv") 
 
-library(readxl)
-parte_1_jueves <- read_excel("parte_1_jueves.xlsx", 
-                             col_types = c("numeric", "text", "text"));View(parte_1_jueves)
+parte_1_jueves <- parte_1_jueves %>%  
+  filter(grupos == "Grupo 1") %>%
+  select(-alumno, -grupos) %>%
+  pivot_longer(-tiempo, names_to = "muestra", values_to = "valor_conc")
+
 
 parte_1_jueves %>% 
   group_by(tiempo, muestra) %>% 
@@ -159,7 +163,7 @@ COR7 <- cor.test(alumno_7$ug_prot, alumno_7$abs, method = "pearson");COR7
 
 
 library(readxl)
-practica_6 <- read_excel("practica_6.xls", 
+practica_6 <- read_excel("practica_6.xlsx", 
                          col_types = c("numeric", "numeric", "text"));View(practica_6)
 
 

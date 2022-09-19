@@ -10,13 +10,11 @@ rf <- function(dist_frente, dist_prot){
   return(cuerpo)
 }
 
-resultados_clase <- read_excel("practicas_abbm2.xlsx", 
-                              sheet = "Nelida1") %>% 
+resultados_clase <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/resultados_clase.csv") %>% 
   mutate(rf=rf(dist_frente = dist_frente, dist_prot = dist_prot)) %>% 
   select(-dist_prot, -dist_frente)
 
-parametros <- read_excel("practicas_abbm2.xlsx", 
-                              sheet = "Nelida2") %>% 
+parametros <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/ABBM/data/parametros.csv") %>% 
   mutate(rf_gel1=rf(dist_frente1,dist_gel1),
          rf_gel2=rf(dist_frente1,dist_gel2),
          rf_gel3=rf(dist_frente1,dist_gel3),
@@ -99,6 +97,9 @@ parametros_long %>%
     legend.position = c(.8,.7),
     panel.grid = element_blank()
   )
+
+ggsave("rf.png", path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\ABBM\\graficas",
+       width=7, height=5)
 
 # Como va la correlación para cada uno?, en las diapos de la tutoría parece ser que es mejor la 
 # función de la recta para 

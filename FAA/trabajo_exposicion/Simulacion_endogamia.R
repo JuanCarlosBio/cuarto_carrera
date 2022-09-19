@@ -160,7 +160,7 @@ simulacion %>%
   )
 
 ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-        width = 6.5, height = 5)
+        width = 7.5, height = 5)
 
 simulación_regression <- simulacion %>% 
   group_by(generacion, tratamiento) %>% 
@@ -223,5 +223,5 @@ simulación_regression %>%
   )
 
 ggsave("Rplot09.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-       width = 5.5, height = 5)
+       width = 7, height = 5)
 

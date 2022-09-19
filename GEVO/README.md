@@ -15,4 +15,7 @@
   - Realizar Xi^2 para verificar equilibrio de Hardy-Weinberg.
 4) Desequilibrio gamético. Como ya he dicho, no está hecho.
 
+### Tengo algo mal por ahí, me musioron un **9.5**, y no te dicen en que fallas, yo creo que fue en  el último ejercicio la verdad, pero ni indea.
+
 ### Me gustaría subir algunos de los ejercicios que subieron para realizarlos expresamente con Excel (o al menos idealmente), pero hecho en R. Sin embargo acabo de empezar el máster con lo que está complicado.
+

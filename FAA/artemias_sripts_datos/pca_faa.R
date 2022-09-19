@@ -48,7 +48,7 @@ pca <- prcomp(matrix.artem.num, scale = T, center = T)
 
 summary(pca) 
 
-# Lo interesante de la función de abajo es la proproción de la varianza
+# Lo interesante de la función de arriba es la proproción de la varianza
 # Explicada por las primeras componentes.
 # La PC1 explica un total del 61.28% de la varianza
 # La PC2 explica un total del 22.54% de la varianza

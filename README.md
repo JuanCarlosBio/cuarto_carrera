@@ -9,7 +9,7 @@
 
 Algunas de las asignaturas no incentivaban a utilizar R, o no fui capaz de buscar alguna aplicación en ese momento.
 
-### **Obviamente quiero dejar constancia que los datos que uso en este repositorio, no las he obtenido por cuenta ajena, sino en mi estancia en la [Universidad de de La Laguna](https://www.ull.es/), en cada una de estas asignaturas.**
+### **Obviamente quiero dejar constancia que los datos que uso en este repositorio, no los he obtenido por cuenta ajena, sino en mi estancia en la [Universidad de de La Laguna](https://www.ull.es/), en cada una de estas asignaturas.**
 
 También me gustaría decir que por el momento este proyecto está en obras. No sé si ni siquiera si acabará xd.
 

@@ -42,12 +42,15 @@ etr %>%
   theme_classic() +
   labs(title = "Estudio del ETR frente a la luz",
        subtitle = "Practicas de Ecofisiología",
-       x = "micromoles por otras movidas",
-       y = "Luz en Fotones") +
+       x = "μmol/m^2*s de electrones",
+       y = "μmol/m^2*s de fotones") +
   theme(
     plot.title = element_text(size=16, hjust = .5, face = "bold"),
     plot.subtitle = element_text(size=14, hjust = .5, face = "bold")
   )
+
+# ggsave("prunus1.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+#       width = 7, height = 4.5)
 
 ########## 2) parte de la practica: sometimiento de las plantas a distintas 
 ##########    temperaturas para el estudio de su FV/FM parametro de fluorescencia
@@ -88,6 +91,10 @@ df_fvfm %>%
        subtitle = "Práctica de ecofisiología",
        x = "Tª (ºC)",
        y = "FV/FM")
+
+ggsave("prunus2.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+       width = 7, height = 4)
+
 
 #------------------------------------------------------------------------------#
 #                              Practica de 2                                   #
@@ -130,6 +137,9 @@ asim_co2 %>%
   theme(panel.background = element_blank(),
         axis.line = element_line())
 
+ggsave("vinatigo1.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+       width = 7, height = 4)
+
 
 
 ############# Parte 2
@@ -160,5 +170,8 @@ data_3_2 %>%
     axis.title.y = element_text(margin = margin(r = 10)),
     axis.text.x = element_text("top")
     )
+
+ggsave("vinatigo3.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+       width = 7, height = 4)
 
 

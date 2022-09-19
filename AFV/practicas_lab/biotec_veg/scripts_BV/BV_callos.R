@@ -54,6 +54,9 @@ data_zanahoria %>%
     axis.text = element_text(size = 10)
     ) 
 
+# ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+#         width = 8, height = 4)
+
 data_zanahoria %>% 
   ggplot(aes(fecha, callos)) +
   geom_bar(stat = "identity", fill = "orange", color = "black") +
@@ -82,6 +85,8 @@ data_zanahoria %>%
     axis.text = element_text(size = 10)
   )
 
+# ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+#        width = 8, height = 4)
 
 
 

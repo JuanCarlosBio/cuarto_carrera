@@ -70,3 +70,6 @@ data_conjunto %>%
     legend.key = element_rect(fill = "white"),
     legend.position = "top"
   ) 
+
+# ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+#       width = 8, height = 5)

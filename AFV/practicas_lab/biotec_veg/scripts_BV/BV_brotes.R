@@ -29,7 +29,7 @@ data_brotes %>% ggplot(aes(fecha, cont)) +
   geom_line(size = 1) +
   geom_point(pch = 21, size = 3, fill = "white") +
   geom_text(data = data.frame(x=date("2021-11-25")+5, y = 30),
-            aes(x=x,y=y, label="Cultivos iniciales: 24 cultivos\nCultivos viables: 2"),
+            aes(x=x,y=y, label="Cultivos iniciales: 24 cultivos\nCultivos viables: 20"),
             inherit.aes = F, size=6) +
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,40),
@@ -51,6 +51,9 @@ data_brotes %>% ggplot(aes(fecha, cont)) +
     axis.text = element_text(size = 10)
   ) 
 
+
+# ggsave("Rplot.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+#       width = 8, height = 4)
 
 brotes_enr <- data_brotes %>%
   select(fecha, brotes, enraizadas) %>% 
@@ -104,6 +107,9 @@ brotes_enr %>%
     axis.title.x = element_text(margin = margin(t = 10), face = "bold", size = 12),
     
   )
+
+# ggsave("Rplot01.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+#       width = 8, height = 4)
 
 #--------------------------------------------------------------------------#  
 # ¿Están correlacionadas las variables de brotes con las de enraizamiento? #

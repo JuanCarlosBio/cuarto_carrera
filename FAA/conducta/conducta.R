@@ -259,7 +259,7 @@ holes_maze %>%
   )
 
 # ggsave("hm.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
-#       width = 4.5, height = 5.5)
+#       width = 7, height = 5.5)
 #------------------------------------------------------------------------------#
 #                                 P.Maze                                       #
 #------------------------------------------------------------------------------#

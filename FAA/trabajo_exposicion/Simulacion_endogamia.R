@@ -103,8 +103,9 @@ simulacion %>%
     legend.background = element_rect(color="black"),
     legend.position = c(.85, .10)
   )
-  
 
+# ggsave("histogramas.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+#       width = 6, height = 5)
 
 etiquetas <- tibble(
   x = c(1:8),
@@ -145,6 +146,8 @@ simulacion %>%
   ) +
   theme_classic() +
   theme(
+    axis.line = element_line(size = 1), 
+    axis.ticks = element_line(size = 1),
     plot.title = element_text(hjust = .5, size = 14, face = "bold"), 
     plot.subtitle = element_text(hjust = .5, size = 12, face = "italic", 
                                  margin = margin(b=15)), 
@@ -155,6 +158,9 @@ simulacion %>%
     legend.background = element_rect(color="black"),
     legend.position = c(.2, .15)
   )
+
+# ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+#        width = 5, height = 5)
 
 simulación_regression <- simulacion %>% 
   group_by(generacion, tratamiento) %>% 
@@ -183,7 +189,7 @@ simulación_regression %>%
   geom_line(color="black", size=1) +
   geom_errorbar(aes(ymin=media_tiempo-sd_tiempo,
                     ymax=media_tiempo+sd_tiempo), width = .3) +
-  geom_point(pch=21, size=2, color="white") +
+  geom_point(pch=21, size=2, fill="white") +
   geom_abline(intercept = intercepto, slope = pendiente,
               color="red") +
   geom_text(data = tibble(x = 5, y = 200),
@@ -203,6 +209,8 @@ simulación_regression %>%
   ) +
   theme_classic() +
   theme(
+    axis.line = element_line(size = 1), 
+    axis.ticks = element_line(size = 1),
     plot.title = element_text(hjust = .5, size = 14, face = "bold"), 
     plot.subtitle = element_text(hjust = .5, size = 12, face = "italic", 
                                  margin = margin(b=15)), 
@@ -213,3 +221,7 @@ simulación_regression %>%
     legend.background = element_rect(color="black"),
     legend.position = c(.2, .15)
   )
+
+ggsave("Rplot09.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+       width = 5.5, height = 5)
+

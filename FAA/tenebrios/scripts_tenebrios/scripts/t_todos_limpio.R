@@ -92,6 +92,9 @@ df_tenebrios %>%
     legend.text = element_text(size = 12)
   )
 
+# ggsave("masa_corporal_todos.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+#       width=6, height=4)
+
 # Existen diferencias significativas en el aumento de la masa corporal según las semanas en cada grupo?
 # Utilizamos la función que he hecho en el link de la línea "6", seguramente haya alguna manera más 
 # automática de hacer esto, pero bueno, esto servirá
@@ -155,6 +158,8 @@ df_tenebrios %>%
     legend.text = element_text(size = 12)
   )
 
+# ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+#        width=6, height=4)
 
 # ¿existen diferencias significativas con el paso de las semanas? 
 semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
@@ -237,4 +242,5 @@ df_temporal %>%
     axis.title.y = element_markdown(size = 12, face = "bold"),
     axis.text.x = element_markdown(size = 12, face = "bold", color="black")
   )
-
+# ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+#       width=5, height=4.5)

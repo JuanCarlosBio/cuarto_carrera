@@ -13,4 +13,30 @@ Algunas de las asignaturas no incentivaban a utilizar R, o no fui capaz de busca
 
 También me gustaría decir que por el momento este proyecto está en obras. No sé si ni siquiera si acabará xd.
 
-**Puedes hacer con el código o ficheros de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).** 
+## **Puedes hacer con el código o ficheros de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).** 
+
+No te voy a mentir, si no has visto nada de R, y te pones a ver mi código a palo seco, igual tu primera experiencia no será muy buena **:/**. La intención de este repositorio no es hacer tutoriales básicos, sino documentar lo que he hecho, pero me interesa que si alguien se pasa por aquí y quiera aprender, pues que saque algo de probecho. 
+
+Con lo cuál, antes que nada te recomiendo aprender ***dos paquetes fundamentales***: ```dplyr``` (manipulación de bases de datos, con una sintaxis muy amigable, y con el operador ```%>%``` permite concatenar funciones) y ```ggplot2``` (paquete gráfico, que a pesar de no ser muy automáticos, son muy plásticos y puedes hacer que se vean super profeionales). Para empezar [Rafa Gonzalez Gouveia](https://www.youtube.com/c/RafaGonzalezGouveia/videos) tiene muy buenos tutoriales para iniciarse (fueron los primeros tutoriales que ví). En concreto videos interesantes serían:
+
+* [Instalar R y Rstudio](https://www.youtube.com/watch?v=Nmu4WPdJBRo&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=2&ab_channel=RafaGonzalezGouveia), obvio xd. Te recomiendo empezar programando en Rstudio, es una interfaz gráfica muy ajustada a las necesidades de este lenguaje.
+
+* **Visualización de datos:**
+
+    * [Cómo graficar en R con RStudio 💻📊 [ base graphics | ggplot2 | otros ]](https://www.youtube.com/watch?v=bYxjgO2dkXI&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=13&ab_channel=RafaGonzalezGouveia)
+
+    * [CÓMO hacer HISTOGRAMAS en R 💻📊 [R Base graphics | ggplot2]](https://www.youtube.com/watch?v=UhFL6rSjR_c&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=14&ab_channel=RafaGonzalezGouveia)
+
+    * [Cómo hacer GRAFICAS DE BARRAS en R 💻📊 [base graphics | ggplot2 ]](https://www.youtube.com/watch?v=zAzpuLJA29U&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=15&ab_channel=RafaGonzalezGouveia)
+
+* **Importar datos:**
+
+    * [Cómo IMPORTAR datos de EXCEL a R 💻📊 ( CODIGO o INTERFAZ RStudio)](https://www.youtube.com/watch?v=Bi0PoYq_gjE&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=12&ab_channel=RafaGonzalezGouveia)
+
+    * [Cómo IMPORTAR archivos CSV a R 💻📊 [ CURSO R STUDIO ]](https://www.youtube.com/watch?v=agkPSaYEDgQ&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=16&ab_channel=RafaGonzalezGouveia)
+
+* **Manipulación de datos:**
+
+    * [Cómo manipular datos en R con dplyr y RStudio [ Tidyverse ]
+](https://www.youtube.com/watch?v=tpAzZOdA4rw&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=21&ab_channel=RafaGonzalezGouveia)
+

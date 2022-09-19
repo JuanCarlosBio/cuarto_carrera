@@ -7,9 +7,9 @@
 # y suerte!, espero que este código (aunque no soy un experto en la materia) te 
 # ayude en ese sentido. He añadido más cosas de lo que hice en la memoria en su 
 # momento, por probar cosas nuevas, así que no hace falta que hagas todo lo que
-# he hecho aquí, sino lo más básico basta. El experimento es completamente se hizo 
-# de verdad (una práctica chula) así que estás manipulando datos biológicos reales
-# Saqué un 9.5 en la nota, creo que ningún grupo llegó al 10
+# he hecho aquí, sino lo más básico basta. El experimento se hizo de verdad 
+# (una práctica chula) así que estás manipulando datos biológicos reales Saqué un
+#  9.5 en la nota, creo que ningún grupo llegó al 10
 
 library(tidyverse)
 library(readxl)
@@ -65,7 +65,8 @@ masa_tasa_o4 %>%
   scale_color_manual(values = c("black","orange")) +
   theme(
     panel.background = element_blank(),
-    axis.line = element_line(),
+    axis.line = element_line(size=1),
+    axis.ticks = element_line(size = 1),
     plot.title = element_text(size = 14, face = "bold", hjust = .5),
     plot.subtitle = element_text(size = 12, face = "bold", hjust = .5),
     axis.title = element_text(size = 15, face = "bold"),
@@ -76,6 +77,10 @@ masa_tasa_o4 %>%
     strip.background = element_blank(),
     strip.text = element_text(face="bold", size = 11)
   )
+
+ggsave("Rplot05.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+       width = 6, height = 5)
+
 
 # Los reultados anteriores de son los valores promedio de cada semana, el cuál es 
 # el que hay que subir al aula virtual. En el siguiente data frame tengo los valores 
@@ -172,7 +177,8 @@ df_o4_completo %>%
   scale_color_manual(values = c("black","orange")) +
   theme(
     panel.background = element_blank(),
-    axis.line = element_line(),
+    axis.line = element_line(size = 1),
+    axis.ticks = element_line(size = 1),
     plot.title = element_text(size = 14, face = "bold", hjust = .5),
     plot.subtitle = element_text(size = 12, face = "bold", hjust = .5),
     axis.title = element_text(size = 15, face = "bold"),
@@ -184,6 +190,8 @@ df_o4_completo %>%
     legend.text = element_text(size = 12)
   )
 
+ggsave("Rplot07.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+       width = 5, height = 4)
 
 
 #### ¿Y existe correlación entre las variables masa y tasa? 

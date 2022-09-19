@@ -164,6 +164,8 @@ of3 <- open_field %>%
 plot_grid(of1,of2,of3,
                    labels = c("A","B","C"))
 
+# ggsave("om.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+#       width = 8.5, height = 6)
 
 #------------------------------------------------------------------------------#
 #                                  Holes maze                                  #
@@ -240,7 +242,7 @@ holes_maze %>%
        caption = "Práctica de conducta FAA, G.2 105b-106, 4º Biología ULL",
        y = "Observación",
        x = NULL,
-       fill = "Observación") +
+       fill = NULL) +
   theme_classic() +
   theme(axis.line = element_line(size = 1),
         legend.position = "bottom",
@@ -256,7 +258,8 @@ holes_maze %>%
         strip.text = element_blank()
   )
 
-
+# ggsave("hm.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+#       width = 4.5, height = 5.5)
 #------------------------------------------------------------------------------#
 #                                 P.Maze                                       #
 #------------------------------------------------------------------------------#
@@ -469,6 +472,9 @@ pmix2 <- plot_grid(p3,p4,nrow = 1,
           labels = c("C","D"))
 
 plot_grid(pmix1,pmix2, nrow = 2)
+
+# ggsave("Rplot05.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+#       width = 8.75, height = 6)
 
 
 ###### Observaciones específicos del p.maiz
@@ -694,3 +700,6 @@ plot_ly(pc_pm,
   )
 
 plot_grid(pc_1, pc_2, pc_3)
+
+ggsave("Rplot07.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+       width = 8, height = 7)

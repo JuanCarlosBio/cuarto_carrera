@@ -15,7 +15,8 @@
   - Realizar Xi^2 para verificar equilibrio de Hardy-Weinberg.
 4) Desequilibrio gamético. Como ya he dicho, no está hecho.
 
-### Tengo algo mal por ahí, me pusieron un **9.5**, y no te dicen en que fallas.
+### Un par de cositas: 
+* Tengo algo mal por ahí, me pusieron un **9.5**, y no te dicen en que fallas.
 * Yo creo que fue en  el último ejercicio de desiquilibrio gamético, pero ni idea la verdad.
 * También que retoqué las cosas de la primera parte este verano, para dejar igual hay alguna diferencia de la plantilla por la que vienes, pero no debería diferir en nada importante tampoco, igual en decimales.
 

@@ -159,8 +159,8 @@ simulacion %>%
     legend.position = c(.2, .15)
   )
 
-# ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-#        width = 5, height = 5)
+ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+        width = 6.5, height = 5)
 
 simulación_regression <- simulacion %>% 
   group_by(generacion, tratamiento) %>% 

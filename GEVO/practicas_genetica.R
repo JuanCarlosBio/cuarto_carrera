@@ -2,12 +2,24 @@
 #                         informe de prácticas de GEVO                        #
 ###############################################################################
 
+#### Si no tienes los paquetes recuerda instalarlos!!!!
+# Ejemplo, puedes:
+# install.packages("tidyverse")
+# ...
+
 library(tidyverse)
 library(ggthemes)
 library(readxl)
 library(rstatix)
 
+# (pchsss...Lo primero que te recomiendo es que veas si la plantilla que te dan este año es la misma que la que nos dieron a nosotros el año pasado
+# en tal caso, si cambias los valores del año pasado por los tuyos, tal como están en el csv de abajo, en teoría deberías poder correr  el script 
+# perfectamente, con tus datos :), menos la última parte de Hardy Weinberg :(, también tienes que comprobar las tablas para usar o no la corrección 
+# de Yates, eso va a ser un problema, llegado el momento te diré que tienes que cambiar con algún comentario con "OJO!!!". Así que tampoco te fíes. 
+# En el momento que la tabla tenga una columna de más o fila, sorry, tendrás que modificar un par de cosas. Aún así espero que te ayude :).
+
 practicas_gevo <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/GEVO/practicas_gevo.csv")
+
 # write_csv(practicas_gevo, "practicas_gevo.csv")
 # Los nombres de las variables se han vuelto locas ya que están duplicadas, para ser más leíbles al ojo humano, los profesores
 # en vez de hacel la tabla larga la han repetido, unos marcadores están a la derecha y otros a la izquierda. Habrá que procesar.
@@ -22,6 +34,8 @@ df2 <- practicas_gevo[-c(4,8,12),c(8:14)]%>% select(locus=Locus...8, fenotipo=Fe
 # Individuos canarios analizados de la población:
 canarios <- 364
 
+# Esta sería la tabla completada del principio, sólo que en vez de estar dividida
+# en dos, estan todos los locus en una fila, más fácil para el programa.
 df_gevo <- rbind(df1,df2) %>% 
   mutate(locus=c(rep("APO",3), rep("HS3.23",3), rep("HS4.65",3), 
                                               rep("D1",3), rep("A25",3), rep("FXIIIB",3))) %>% 
@@ -72,6 +86,8 @@ ale_tot_canarias <- alelos_canarias %>%
 # Vamos a juntar estas dos tablas
 
 ale_tot_juntos <- rbind(ale_tot_clase, ale_tot_canarias) %>% ungroup()
+# Esto sería las tablitas pequeñas de la plantilla, habría que ir mirando
+# y rellenándolas. 
 ale_tot_juntos
 
 
@@ -86,7 +102,7 @@ frec_relativa <- ale_tot_clase %>%
   group_by(locus) %>% 
   mutate(frec_relativa = numero/sum(numero)) %>% 
   ungroup() 
-frec_relativa %>% select(locus, frec_relativa)
+frec_relativa %>% select(locus, frec_relativa, alelo)
 
 # Heterocigosidad observada
 frec_relativa %>% 
@@ -97,6 +113,10 @@ frec_relativa %>%
   select(locus, het.observada=alelo_1)
 
 # Heterocigosidad esperada
+
+# Creamos un función para sacar la heterocigosidad esperada (psss... si 
+# tienes que usar de vez en cuando esta función puedes copiar y pegarla
+# en otros lados)
 
 he <- function(frec1, frec2) {
   operacion = 1-(frec1^2+frec2^2)
@@ -116,7 +136,7 @@ frec_rel_can <- ale_tot_canarias %>%
   group_by(locus) %>% 
   mutate(frec_relativa = numero/sum(numero)) %>% 
   ungroup() 
-frec_rel_can %>% select(locus, frec_relativa)
+frec_rel_can %>% select(locus, frec_relativa, alelo)
 
 # Heterocigosidad observada
 frec_rel_can %>% 
@@ -181,16 +201,17 @@ ale_tot_juntos %>%
 # La verdad es que acabo de encotrar esta paquete y no está mal, lo que es muy
 # poco automática de serie, pensaría en crear una función pero me puede,a fuerza 
 # bruta. Igual en un futuro vuelvo y mejoro el código. 
+
 library(HardyWeinberg) 
 
 # H-W test para A25
 ale_tot_juntos %>% 
   filter(locus == "A25") %>% 
-  select(`1/1`,`1/2`,`2/2`)
-a25_clase <- c(MM=2,MN=12,NN=47)
+  select(`1/1`,`1/2`,`2/2`) # Fíjate en la tabla para Yates
+a25_clase <- c(MM=2,MN=12,NN=47)       # OJO!!!, esto es lo que tienes que cambiar!!!, No te preocupes por las letras, esas sirven, tienes que cambiar el número de genotipos
 a25_canarias <- c(MM=9,MN=95,NN=260)
 
-HWChisq(a25_clase,cc=.5, verbose=T)       # ns
+HWChisq(a25_clase,cc=.5, verbose=TRUE)    # ns   OJO!!!, cc=... es la corrección de Yates, si tienes que hacerla ponle un .5, si no, 0. Se aplica cuando el 20% de las casillas de los esperados presentan valores menores a 5... creo xd
 HWChisq(a25_canarias,cc=0, verbose=TRUE)  # ns
 
 # H-W test para D1
@@ -243,32 +264,10 @@ hs4_canarias <- c(MM=0,MN=15,NN=349)
 HWChisq(hs4_clase,cc=.5, verbose=TRUE)      # ns
 HWChisq(hs4_canarias,cc=0.5, verbose=TRUE)  # ns
 
-###### Chi cuadrado de contingencia ######
 
-ale_tot_juntos %>% print(n=Inf)
-
-# Resultados de A25: ns
-chisq.test(ale_tot_juntos[c(1,7),c("alelo_1", "alelo_2")], correct = F)
-
-# Resultados de APO: ns
-chisq.test(ale_tot_juntos[c(2,8),c("alelo_1", "alelo_2")], correct = F)
-
-# Resultados de D1: ns
-chisq.test(ale_tot_juntos[c(3,9),c("alelo_1", "alelo_2")], correct = F)
-
-# Resultados de FXIIIB: ns
-chisq.test(ale_tot_juntos[c(4,10),c("alelo_1", "alelo_2")], correct = F)
-
-# Resultados de HS3.23: ns
-chisq.test(ale_tot_juntos[c(5,11),c("alelo_1", "alelo_2")], correct = F)
-
-# Resultados de HS4.65: ns
-chisq.test(ale_tot_juntos[c(6,12),c("alelo_1", "alelo_2")], correct = F)
-
-
-
-
-# Desequilibrio gamético entre los marcadores genéticos. Datos ficticios
+#------------------------------------------------------------------------#
+# Desequilibrio gamético entre los marcadores genéticos. Datos ficticios #
+#------------------------------------------------------------------------#
 
 
 deseq.gam <- tibble(

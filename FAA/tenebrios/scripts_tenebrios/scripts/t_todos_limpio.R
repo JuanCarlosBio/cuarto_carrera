@@ -243,4 +243,4 @@ df_temporal %>%
     axis.text.x = element_markdown(size = 12, face = "bold", color="black")
   )
 # ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
-#       width=5, height=4.5)
+#       width=8.5, height=4)

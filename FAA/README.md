@@ -7,4 +7,4 @@
    * Oscuridad
    * Temperatura alta
 * Trabajo de exposición: Diseños de Investigación -->
-  * Efecto de la cosanguinidad en la resolución de problemas para *Mus musculus*
+  * Efecto de la consanguinidad en la resolución de problemas para *Mus musculus*

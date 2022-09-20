@@ -3,9 +3,9 @@
 ---
 ## Intención: 
 
-*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los sripts, donde está todo resuelto y con algún comentario también. En teoría deben estar hechos de tal forma para que puedas copiar dichos scripts, pegarlo en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```install.packages("cualquier_libreria")```)* 
+*  *Buenas, mi intención con este Markdown es mostrar como replicaría la práctica de informática de artemias de la asignatura de ***Fisiología Animal Aplicada, Grado de Biología, de la Universidad de La Laguna*** con el lenguaje de programación R. Debido a que me pareció de las prácticas más importantes de cuarto por la falta de alguna asignatura de análisis de datos computacionales. Se trata más que nada comentar parte de lo que he hecho en los scripts, donde está todo resuelto y con algún comentario también. En teoría deben estar hechos de tal forma para que puedas copiar dichos scripts, pegarlos en tu ordenador y correrlo directamente (***recuerda descargar las librarías!!!*** --> ```install.packages("cualquier_libreria")```)* 
 
-* *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiendo lo que puede ofrecer para nosotros los biólogos. Habiéndole piellado cierto tranquillo en el proceso*.
+* *He de decir que no me considero una eminencia ni nada por el estilo con esta herramienta. Pero llevo entre 1 año y medio o 2 aprendiendo lo que puede ofrecer para nosotros los biólogos. Habiéndole pillado cierto tranquillo en el proceso*.
 
 
 * *Para dejar las cosas claras, mi intención no es enseñar R de principio a fin... solamente comentar como he replicado la práctica de la forma en la que he aprendido ***yo*** a hacerlo con código propio. ***Hay miles de videotutoriales en youtuve*** o en la red (***y gratis, no te vuelvas loc@***) que realizan ese cometido de manera brillante (tanto de R como otros como vendría a ser de Python). Algunas librerías que vendría bien haber visto antes serían, en especial: ***dplyr***, ```ggplot2``` o el conjunto de ```tidyverse```. También tener claro los modelos de inferencia y cuándo elegir uno u otro vendría bien. Utilizaremos una librería muy guapa que te permite hacer estos modelos en combinación con dplyr, ```rstatix```. Y obviamente, debes tener R descargado (es ideal que además tengas Rstudio). Saber cosas básicas como descargar paquetes, asignar valores a objetos (que significa "<-")...*
@@ -63,22 +63,22 @@ Veamos el output de las 5 primeras filas...
 
 ```
 
-Tenemos 16 filas de valores de un total de 12 variables (nos fijamos en la segunda línea ```A tibble: 16 x 12```). Sólo se ven 5 filas por que con la función ```print(n = 5)``` hago que sólo me muestre ese número, mientras que se ven sólo 7 columnas porque el formato ***tibble*** (una forma de hacer las tablas en R) los resume de esa manera por que no se veían todas en la pantalla. 
+Tenemos 16 filas de valores de un total de 12 variables (nos fijamos en la segunda línea ```A tibble: 16 x 12```). Solo se ven 5 filas porque con la función ```print(n = 5)``` hago que me muestre ese número, mientras que se ven sólo 7 columnas porque el formato ***tibble*** (una forma de hacer las tablas en R) los resume de esa manera porque no se veían todas en la pantalla. 
 
 ---
 
-* La primera variable es la categórica, **Tratamiento**. El grupo 1 = Levadura, grupo 2 = Lectina marina, grupo 3 = Aceite de Echium/Bacalao y grupo 4 = Enriquecedor comercial.
-* Las otras variables son las numericas de cada uno de los ácidos grasos de interés. Representan realmenta el % de área de dicho AG que es básicamente la cantidad de AG en la muestra. Nada de lo que preocuparse por ahora.
+* La primera variable es la categórica, **Tratamiento**. El grupo 1 = Levadura, grupo 2 = Lectina marina, grupo 3 = Aceite de *Echium*/Bacalao y grupo 4 = Enriquecedor comercial.
+* Las otras variables son las numéricas de cada uno de los ácidos grasos de interés. Representan realmenta el % de área de dicho AG que es básicamente la cantidad de AG en la muestra. Nada de lo que preocuparse por ahora.
 
 ---
 
 Esta conformación de los datos no es del todo ideal para R. Así que comenzaremos con lo básico de Ciencia de Datos, y es poner la base de datos a punto. 
 
-* Lo primero es cambiar los números de tratamiento por cada uno de sus valores categóricos. Para ello usamos la función ```mutate()``` (crea una nueva variable), y dentro de este crearemos una nueva variable usando ```case_when()```, que mediante un concición, usando el operador ```==```, pregunta: ¿es x igual a y?, y si es ciento con ```~``` le decimos que nos lo convierta en un valor que le asignimos.
+* Lo primero es cambiar los números de ```Tratamiento``` por cada uno de sus valores categóricos. Para ello usamos la función ```mutate()``` (crea una nueva variable), y dentro de este crearemos una nueva variable usando ```case_when()```, que mediante un concición, usando el operador ```==```, pregunta: ¿es x_cosa igual a y_cosa?, y si es cierto con ```~``` le decimos que nos lo convierta en un valor que le asignemos.
 
-* Usaremos ```select()```, selecciona variables que le pidamos, o en este caso si la variable tiene un "-" significa que nos deshacemos de esa variable (la variable original de tratamiento)
+* Usaremos ```select()```, selecciona variables que le pidamos, o en este caso si la variable tiene un "-" significa que nos deshacemos de esa variable (la variable original de ```Tratamiento``` con los números en vez de los nombres. Date cuenta de que la nueva creada la hemos llamado ```tratamiento``` en minúscula para que sea más sencillo trabajar con ella).
 
-* Finalmente, una de las funciones que más me han cambiado la vida. A R (y otra clase de Lenguajes de scripting similaes), le gusta más las bases de datos más estrechas (***"tidy"***), antes que anchas como esta. Es decir, se prefiere que presenten menos número de variables (*columnas*), pero más largas en cuanto *filas* (le permite hacer a la máquina los trabajos de manera más automática). Para ello usaremos ```pivot_longer()```. La idea es pasar de 12 variables a únicamente 3, ¿Cómo hace eso esta función?... suena como romper las leyes de la termodinámica..... es Magic.... Nah es broma. Ahora en serio, vamos a hacer que las columnas de tratamiento y los valores numéricos de las variables se coloquen encima una de las otras de forma ordenada (no te preocupes, R no se inventa nada), mientras que vamos a hacer que los nombres de cada variable numérica (los AG) se conviertan en la tercera columna. Llamaremos a la variable donde están los valores numéricos ***"valores"*** y la que presenta los AG ***"acido_graso"*** (***como consejo***, cuando llames a una variable, hazlo en minúscula sin tildes, y la separación con "_" y evita la ñ espa**ñ**olete). Como **tratamiento** no nos interesa que se modifique, sino que se haga más *larga* únicamente con ella misma, le añadimos un "-".
+* Finalmente, una de las funciones que más me han cambiado la vida. A R (y otra clase de Lenguajes de scripting similares), le gustan más las bases de datos más estrechas (***formato "tidy"***), antes que anchas como esta. Es decir, se prefiere que presenten menos número de variables (*columnas*), pero más largas en cuanto *filas* (le permite hacer a la máquina los trabajos de manera más automática). Para ello usaremos ```pivot_longer()```. La idea es pasar de 12 variables a únicamente 3, ¿Cómo hace eso esta función?... suena como romper las leyes de la termodinámica..... es Magic.... Nah es broma. Ahora en serio, vamos a hacer que las columnas de tratamiento y los valores numéricos de las variables se coloquen encima una de las otras de forma ordenada (no te preocupes, R no se inventa nada), por otro lado, vamos a hacer que los nombres de cada variable numérica (los AG) se conviertan en la tercera columna. Llamaremos a la nueva variable donde están los valores numéricos ***"valores"*** y la que presenta los AG ***"acido_graso"*** (***como consejo***, cuando llames a una variable, hazlo en minúscula sin tildes, y la separación con "_" y evita la ñ espa**ñ**olete). Como **tratamiento** no nos interesa que se modifique, sino que se haga más *larga* únicamente, le añadimos un "-".
 
 
 Sé que es una movida, pero **no asustarse** ahora veremos que pasa.
@@ -115,11 +115,11 @@ tratamiento     acido_graso  valores
 ```
 ---
 
-### **Hemos pasado de 12 variabes con 16 filas cada una de esta ... a 3 variables con 176 filas.**
+### **Hemos pasado de 12 variables con 16 filas cada una de esta ... a 3 variables con 176 filas.**
 
 ### **Y pues ya estaríamos listos para empezar a hacer los análisis =)**
 
-Modificar la dataset inicial, para ajustarla a tus necesidades a la hora de realizar los análisis, es la parte más complicada en la mayoría de los casos. Con lo cual es una habilidad a tener en cuenta. Algunas datasets son más fáciles de preprocesar que otras.
+Modificar la base de datos original, para ajustarla a tus necesidades a la hora de realizar los análisis, es la parte más complicada en la mayoría de los casos. Con lo cual es una habilidad a tener en cuenta. Algunas bases de datos son más fáciles de preprocesar que otras.
 
 ---
 
@@ -150,7 +150,7 @@ El procedimiento básico para realizar los análisis para cada uno de los test e
   - df: nuestra base de datos = *tidy_artemias*
   - grupo1: variable con los tratamientos = *tratamiento*
   - grupo2: ácidos grasos = *acido_graso*
-  - variable_numerica: valores numéricos originales de las variables de ácidos grásos: *valores*. 
+  - variable_numerica: valores numéricos originales de las variables de ácidos grasos: *valores*. 
   - Vector para filtrar, ya que no cumple las expectativas para realizar alguno de los modelos: *vector_x*. En este caso filtraremos siempre ácidos grasos. Por ejemplo.
 
 ```
@@ -179,9 +179,9 @@ acidos_anova %>%
   tukey_hsd(valores ~ tratamiento)   
 ```
 
-Enhorabuena, con esto ya deberías ser capaz de hacer todos los análisis. Esto es comentar un poco como es cada cosa, pero en el script está todo hecho, y con algunos comentarios de cada cosa también. Puede que hayan pequeñas diferencias entre cada test, como aplicar Bonferroni en ```Kurskal_test()```. Pero la idea básica es esta.
+Enhorabuena, con esto ya deberías ser capaz de hacer todos los análisis. Esto es comentar un poco como es cada cosa, pero en el script está todo hecho, y con algunos comentarios de cada cosa también. Puede que haya pequeñas diferencias entre cada test, como aplicar Bonferroni en ```Kurskal_test()```. Pero la idea básica es esta.
 
-Una cosa interesante además, es una vez tenemos los resultados se nos crea en cada caso una tabla con cada uno de los reultados, así como en SPSS. Pero una cosa muy buena que tiene este ```rstatix```, es que podemos filtrar los datos que nos interesa con ```filter()``` así como seleccionar las variables resultantes que quermos ver, (los ácidos grasos, tratamiento y el p-valor)  con ```select()```. Veremos como sería esto en la prueba de normalidad y levene
+Una cosa interesante, es una vez tenemos los resultados se nos crea en cada caso una tabla con cada uno de estos, así como en SPSS. Pero una cosa muy buena que tiene este ```rstatix```, es que podemos filtrar los datos que nos interesa con ```filter()``` así como seleccionar las variables resultantes que queremos ver, (los ácidos grasos, tratamiento y el p-valor)  con ```select()```. Veremos como sería esto en la prueba de normalidad y levene
 
 ```
 normalidad <- tidy_artemias %>% 
@@ -224,7 +224,9 @@ output
 
 ### **Con estos valores anteriores no haríamos ANOVA de una Vía (Bueno... si quieres redondear Enriquecedor comercial allá cada uno), con lo que de nuevo con ```filter()``` filtraríamos los ácidos grasos que nos interesen para cada modelo.**
 
-Y esto sería la primera parte realmente, pero me gustaría añadir la transformación de los datos. Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás medjor. Crearemos nuevas variables, que a lo posiblemente hagan normales o homocedásticas a los datos de interés.
+## **Transformación de los datos para convertirlos si podemos en normales:**
+
+Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás mejor. Crearemos nuevas variables, que a lo posiblemente hagan normales o homocedásticas a los datos de interés.
 
 ```
 tidy_artemias %>% 
@@ -239,7 +241,7 @@ tidy_artemias %>%
          )
 ```
 
-output: no se ven todas las columnas, pero espero que pilles la idea.
+Output: no se ven todas las columnas, pero espero que pilles la idea.
 
 ```
 A tibble: 112 x 9
@@ -261,13 +263,13 @@ A tibble: 112 x 9
 
 ## **Parte 2) Análisis de Componentes Principales (PCA): pca_faa.R**.
 
-Para el caso del PCA, al ser un análisis multivariante, esta vez nos interesa más que la base de datos sea ancha antes que larga, con lo que esta vez nos ahorraremos convertirla en *tidy_artemias*. Si te interesa entender un poco la teoría del PCA, en este trabajo no te la voy a contar xd, hay un vídeo de youtube muy bueno que te explica las ideas principales en 5 minutos, también lo hay en versión más amplia y detallada, y otro para hacerlo en R (yo lo hago parecido, pero a mi manera), es de Stat quest, y el que lo explica es un genético (sip, si te gusta la genética vete pensando en hacerte con R o Python, en Estados Unidos ya prácticamente es un trámite, y lo que ocurre allí llegará tarde o temprano aquí, viendo lo desfasada que se ha quedado la carrera tiene pinta que tarde un poco, al menos para los alumnos):
+Para el caso del PCA, al ser un análisis multivariante, esta vez nos interesa más que la base de datos sea ancha antes que larga, con lo que esta vez nos ahorraremos convertirla en *tidy_artemias*. Si te interesa entender un poco la teoría del PCA, en este trabajo no te la voy a contar xd, hay un vídeo de youtube muy bueno que te explica las ideas principales en 5 minutos, también lo hay en versión más amplia y detallada, y otro para hacerlo en R (yo lo hago parecido, pero a mi manera), es de [Stat Quest](https://www.youtube.com/c/joshstarmer/videos), y el que lo explica es un genético (sip, si te gusta la genética vete pensando en hacerte con R o Python, en Estados Unidos ya prácticamente es un trámite, y lo que ocurre allí llegará tarde o temprano aquí, viendo lo desfasada que se ha quedado la carrera tiene pinta que tarde un poco):
 
 * [StatQuest, PCA in 5 minutes](https://www.youtube.com/watch?v=HMOI_lkzW08&t=192s&ab_channel=StatQuestwithJoshStarmer)
 
 * [StatQuest, PCA in R](https://www.youtube.com/watch?v=0Jp4gsfOLMs&t=91s&ab_channel=StatQuestwithJoshStarmer)
 
-Lo primero que hay que hacer, es deshacernos por el momento de la variable de los grupos (```tratamiento```). **Una nota sobre R base** (programación en R con su código original): para un data frame (es como se le llaman a las tablas que buscan simular a las celdas de excel, propias de este lenguaje), al que le asignamos el nombre de df ( df <- data_frame), que digamos que presenta un vector llamado "x", otro "y" y un último llamado "z" podemos seleccionar cada uno de ellos de dos maneras: con el símbolo "$" o con corchetes y una como a la izquierda del nombre o número del vector [,]. Ejemplo con código, juega con el:
+Lo primero que hay que hacer, es deshacernos por el momento de la variable de los grupos (```tratamiento```). **Una nota sobre R base** (programación en R con su código original): para un **Data Frame** (es como se le llaman a las tablas que buscan simular a las celdas de excel, propias de este lenguaje), al que le asignamos el nombre de df ( df <- data_frame), que digamos que presenta un vector llamado "x", otro "y" y un último llamado "z" podemos seleccionar cada uno de ellos de dos maneras: con el símbolo "$" o con corchetes y una como a la izquierda del nombre o número del vector [,]. Ejemplo con código, juega con el:
 
 ```
 df <- data.frame(x = c(1:10), y = c(1:10), z = c(1:10))
@@ -284,7 +286,7 @@ df
 df[1,]      # Selecionamos la fíla 1
 df[1:4, 2]  # Selecionamos las filas de la 1 a la 4 de la columna 2   
 ```
-En ese caso haremos lo anterior con tratamiento:
+En ese caso haremos lo anterior con ```tratamiento```:
 
 ```
 ncol(matrix_artemias)
@@ -321,8 +323,8 @@ Tenemos ya únicamente las variables numéricas, si no no se puede hacer el PCA.
 
 * Lo siguiente es realizar el pca. 
   - para ello usaremos la función ```prcomp()``` con los siguientes parámetros: ```prcomp(df, scale=TRUE, center=TRUE)```.
-  - Lo siguiente será utilizar la función ```summary()```, que nos dará los resutltdos de cada una de las componentes en una serie de parámetros, a nosotros nos interesa la varianza explicada por las primeras componentes (escogeremos las 3 primeras: PC1, PC2 y PC3) y la varianza acumulada.
-  - Además interesa usar *Pearson* para estudiar la correlación lineal entre las variables y las componentes con la función ```cor()```. Nos dará una idea de cómo se van a ordenar los datos una vez los grafiquemos.
+  - Lo siguiente será utilizar la función ```summary()```, que nos dará los resultatdos de cada una de las componentes en una serie de parámetros, a nosotros nos interesa la varianza explicada por las primeras componentes (escogeremos las 3 primeras: PC1, PC2 y PC3) y la varianza acumulada.
+  - Además, interesa usar *Pearson* para estudiar la correlación lineal entre las variables y las componentes con la función ```cor()```. Nos dará una idea de cómo se van a ordenar los datos una vez los grafiquemos.
 
 ```
 pca <- prcomp(matrix.artem.num, scale = T, center = T)
@@ -332,8 +334,8 @@ pca <- prcomp(matrix.artem.num, scale = T, center = T)
 resumen <- summary(pca)
 resumen$importance[,c("PC1", "PC2", "PC3")]
 
-# Lo interesante de la función de abajo es la proproción de la varianza
-# Explicada por las primeras componentes.
+# Lo interesante de la función de arriba es la proproción de la varianza
+# explicada por las primeras componentes.
 # La PC1 explica un total del 61.28% de la varianza
 # La PC2 explica un total del 22.54% de la varianza
 # La PC3 explica un total del 14.14% de la varianza
@@ -369,7 +371,7 @@ PC2 -0.4112061 0.05535555 -0.2300094  0.3723965 -0.5443734
 
 Lo siguiente que habría que hacer, es extraer los valores de las 3 primeras componentes y juntarlas con la variable que nos deshicimos al principio, ```tratamiento```, para ello se me podemos usar el siguiente código. 
 
-##### **Nota,** ***tibble*** es lo mismo que data frame, pero a la hora de dar el output, te lo dá más bonito básicamente y ordenado, y me he acostrumbrado a usarlo últimente, con lo que la función ```as_tibble()``` convierte a un conjunto de valores en este tipo de tabla. los valores de las componentes es "x" en el pca. 
+##### **Nota,** ***tibble*** es lo mismo que **data frame**, pero a la hora de dar el output, te lo dá más bonito, básicamente y ordenado, y me he acostumbrado a usarlo últimamente, con lo que la función ```as_tibble()``` convierte a un conjunto de valores en este tipo de tabla. Los valores de las componentes es "x" en el pca. 
 
 ```
 princ_comp <- as_tibble(pca$x[,c(1,2,3)]) %>% 
@@ -401,9 +403,9 @@ output:
 16  1.49   0.435 -1.83    Enriquecedor comercial
 ```
 
-### ***Y ya habríamos terminado la parte técnica del pca, para interpretar estos reultados, hay que graficarlos, para ello. Para ello voy a dedicar otra parte únicamente a la visualización de los datos mediante los paquetes de ```ggplot2``` y ```plot_tly```.***
+### ***Y ya habríamos terminado la parte técnica del pca, para interpretar estos resultados, hay que graficarlos, para ello. Para ello voy a dedicar otra parte únicamente a la visualización de los datos mediante los paquetes de ```ggplot2``` y ```plot_tly```.***
 
-## **Parte 3) visualisación de los datos. visalizacion.R**
+## **Parte 3) visualización de los datos. visalizacion.R**
 
 Ahora entramos en la parte más divertida, la de diseñar los gráficos a partir de una serie de librerías. ```ggplot2``` es una de las mejores librerías que te vas a encontrar en este aspecto. Para mí es la mejor, es una de las razones por las que he aprendido R en vez de Python sin ninguna duda. 
 
@@ -411,20 +413,20 @@ Si es cierto que su sintaxis puede ser un poco más compleja que su contraposici
 
 Este es un tema candente para muchos en la Ciencia de Datos. Crear un buen gráfico no es fácil y lleva tiempo. No todos son automáticos, tienes que dedicarles tiempo. 
 
-En mi caso, aprender a diseñar estos gráficos me ha permitido afianzar los conocimientos que tengo de estadística de la carrera. Una vez vas creando por tí mismo el gráfico de un PCA te obliga a entender lo mínicmo que está pasando. A ver, no eres estadístico, y no vas a poder explicar la teoría de los eginvalues o distancia euclidianas, pero más o menos vas entendiéndolo de manera muy básica para generar una interpretación.  
+En mi caso, aprender a diseñar estos gráficos me ha permitido afianzar los conocimientos que tengo de estadística de la carrera. Una vez vas creando por ti mismo el gráfico de un PCA te obliga a entender lo mínimo que está pasando. A ver, no eres estadístico, y no vas a poder explicar la teoría de los eginvalues o distancias euclidianas, pero más o menos vas entendiéndolo de manera muy básica para generar una interpretación.  
 
 ---
 
 **Existen dos tipos de gráficos:**
 --- 
 
-* ***Exploratorio***: te permiten ver tus resultados. Sirven para tí mismo, pueden ser en ese sentido más automáticos, ya que para entender tu mismo tus datos no tiene que ser muy elaborado.
+* ***Exploratorio***: te permiten ver tus resultados. Sirven para ti mismo, pueden ser en ese sentido más automático, ya que para entender tu mismo tus datos no tiene que ser muy elaborado.
 
-* ***Explicativo***: los haces con la intención de resaltar la información importante que puedan aportar. Sobre todo si tu intención es que otras personas lo vean. Lo tienes que hacer visual, limpio sin excecederte tampoco para no desviar la atención a cosas que no sean tan impotantes.
+* ***Explicativo***: los haces con la intención de resaltar la información importante que puedan aportar. Sobre todo si tu intención es que otras personas lo vean. Lo tienes que hacer visual, limpio, sin excederte tampoco para no desviar la atención a cosas que no sean tan importantes.
 
 ---
 
-Comenzaré con las gráficas que hecho sobre inferencia estadística y por último haremos los reultados del PCA. 
+Comenzaré con las gráficas que hecho sobre inferencia estadística y por último haremos los resultados del PCA. 
 
 Realmente aquí no puedo explicar absolutamente todo de ggplot2, lo que haré será darte los input para crear gráficos básicos y mostraré en lo que se pueden convertir. Tienes mi código para complementarlos como te venga en gana.
 
@@ -432,27 +434,31 @@ Hay una página que me sirvió mucho en su momento, se llama The R Graph Galery:
 
 [link Graph Galery](https://r-graph-gallery.com/)
 
-También recomiendo los tutoriales de Rafa Gozáles Gouviera:
+También recomiendo los tutoriales de Rafa Gonzáles Gouviera:
 
 [link tutorales R](https://www.youtube.com/watch?v=zAzpuLJA29U&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=15&ab_channel=RafaGonzalezGouveia)
 
 
-Dejar claro que no es mi intención interpretar los resultados. Yo ya lo hice en su momento. Eso te toca a tí.
+Dejar claro que no es mi intención interpretar los resultados. Yo ya lo hice en su momento. Eso te toca a ti. 
 
 ## **Gráficos de inferencia estadística:**
 
 Primero graficaremos los gráficos normales y posteriormente los no normales. ¿A qué se debe esto, por qué no lo graficamos todos juntos? .
 
-1) Sería demasiada impormación en un gráfico.
-2) Podríamos graficarlos por seaprados ya que lo que nos interesa es ver si hay diferencias significativas dependiendo del tratamiento según para cada uno de los ácidos grasos, pero para ello habría que hacer 16 gráficas, inviable.
+1) Sería demasiada información en un gráfico.
+2) Podríamos graficarlos por seaprado, ya que lo que nos interesa es ver si hay diferencias significativas dependiendo del tratamiento según para cada uno de los ácidos grasos, pero para ello habría que hacer 16 gráficas, inviable.
 3) Podríamos buscar alguna forma de juntar los ácidos grasos por algún motivo fisiológico, que sean insaturados, saturados, w-3...
 4) **ojo!!** Sin embargo nos vemos en una tesitura estadística. Los test paramétricos (los dos ANOVAS) al ser los datos normales, lo que compara para ver si los grupos son significativos es la ***media*** con respecto a la distribución de los datos, mientras que los test no paramétricos (Kruskal-Wallis) lo que se comparan las ***medianas*** con respecto la distribución de los datos. 
 
-Sinceramente, creo que en este caso en concreto, si estuviera haciendo un TFG, al haber tantos grupo, creo que estaría bien tenerlos en un único gráfico, no me volvería muy loco y haría un gráfico de barras con la media y la desviación típica. Pero, por motivos didácticos, separaré los resultados dependiendo de las circunstancias de la inferencia estadística. Por ello, los resultados de ANOVA, los representaremos como barras con la media y su desviación, mientras que para los grupos no normales los representaremos con un boxplot, para visualizar por otro lado, la mediana y la distribución de los datos.
+En este caso en concreto, elegir cómo graficarlos de una manera coherente fisiológicamente hablando no es tan sencillo. O al menos a mí no me lo parece.
+
+Por motivos didácticos, separaré los resultados dependiendo de las circunstancias de la inferencia estadística. Por ello, los resultados normales, los representaremos como barras con la media y su desviación, mientras que para los grupos no normales, los representaremos con un boxplot, para visualizar por otro lado, la mediana y la distribución de los datos.
+
+Si estuviera haciendo un TFG intentaría buscar otra manera de hacerlo.
 
 **Gráfico básico de barras** donde se muestra la *media* y la *desviación típica* (para graficar y explicar resultados de ANOVA)
 
-He de decir que estos gráficos incluso el básico persé no son tan sencillos de hecho. Tienen sus truquillos.
+He de decir que estos gráficos, incluso el básico a secas, no son tan sencillos, de hecho, tienen sus truquillos.
 
 ```
 data_frame %>% 
@@ -504,11 +510,11 @@ Figura 3
 
 ---
 
-A estos gráficos se le pueden añadir letras de significación (la ***a***, ***b***...) según la existencia de diferencias. Aunque a mí, mi tutor de TFG (que era del área de estadística) me reconmendó que no me la juagara, por eue es difícil usar bien ese tipo de etiquetas y algunos profesores no les gustaba. Lo mejor es siempre explicar las diferencias en la memoria.
+A estos gráficos se le pueden añadir letras de significación (la ***a***, ***b***...) según la existencia de diferencias. Aunque a mí, mi tutor de TFG (que era del área de estadística) me recomendó que no me la jugara, por que es difícil usar bien ese tipo de etiquetas y algunos profesores no les gustaba. Lo mejor es siempre explicar las diferencias en la memoria.
 
 ## Gráfico de PCA
 
-Hacer uno básico de PCA es sencillito en verdad. Este sería el input
+Hacer uno básico de PCA es sencillo en verdad. Este sería el input
 
 ```
 data_frame %>% 
@@ -529,18 +535,18 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 
 --- 
 
-### **Nota sobre el PCA:** recuerda que para sacar una interpretación biológica de este gráfico, tienes que estudiar las componentes por separado, es decir, PC1 y PC2 son independientes. Otra cosa que deberías hacer y está en el script del pca, es realizar infenrencia estadística (ANOVA, kruskal...) para cada componente, para ver si los grupos presentan diferencias significativas. 
+### **Nota sobre el PCA:** recuerda que para sacar una interpretación biológica de este gráfico, tienes que estudiar las componentes por separado, es decir, PC1 y PC2 son independientes. Otra cosa que deberías hacer y está en el script del pca, es realizar inferencia estadística (ANOVA, kruskal...) para cada componente, para ver si los grupos presentan diferencias significativas. 
 
 Como he dicho, no es mi intención dar una interpretación del PCA, pero si necesitas un ejemplo, lo he hecho en mis resultados del TFG. Hice un PCA con una interpretación muy sencilla, tenía un patrón biológico claro sobre la biometría de las tortugas rescatadas por la Tahonilla. 
 
-En principio no sé como llevaré ese proyecto; en el momento en el que estoy escribiendo aún no lo he podido poner a punto del todo, habrán algunos fallos (creo que en cuanto a interpretación no debería haberme dejado nada). 
+En principio no sé como llevaré ese proyecto; en el momento en el que estoy escribiendo aún no lo he podido poner a punto del todo, habrá algunos fallos (creo que en cuanto a interpretación no debería haberme dejado nada). 
 
-El problema del PCA y otro tipo de técnicas de ordenación multivariante (PCoA, NMDS), es que tú tienes que sacar la interpretación biológica. En ese sentido básicamente el PCA, dicho de una manera muy burda, es coger toda la información que ofrecen las variables, que forman tantas dimensiones como número de variables que puedes comparar, y hacer un mejunje que explique la mayor varianza posible en las primeras componentes, para con suerte, ser capaz de de reducir de x dimensiones a únicamente 2 y poder graficarlas en un paper. En ese momento te verás en la tesitura de pensar si los patrones que ves son verdad o tu cabeza te ha mentido, cosa que no sabrás hasta que se lo expliques a otra persona y arriesgándote a que te mire como si estuviras loco.
+El problema del PCA y otro tipo de técnicas de ordenación multivariante (PCoA, NMDS), es que tú tienes que sacar la interpretación biológica. En ese sentido, básicamente el PCA, dicho de una manera muy burda, es coger toda la información que ofrecen las variables, que forman tantas dimensiones como número de variables que puedes comparar, y hacer un mejunje que explique la mayor varianza posible en las primeras componentes, para con suerte, ser capaz de reducir de x dimensiones a únicamente 2 y poder graficarlas en un paper. En ese momento te verás en la tesitura de pensar si los patrones que ves son verdad o tu cabeza te ha mentido, cosa que no sabrás hasta que se lo expliques a otra persona y arriesgándote a que te mire como si estuvieras loco.
 
-Por último, probé gráficos 3D de otra librería de ```plotly```. Podemos añadir en ese sentido una tercera componente (**PC3**) y de esa manera podemos rotar las componentes a nuestro antojo (además aumenta la varianza explicada acumulada!!!), lo cuál puede ayudar en la interpretación de los resultados. No voy a explicar cómo hacerlo, porque para cuando estoy haciendo esta memoria lo acabo de descubrir. Tengo suficiente bagaje para aprender a hacerlo en el momento, pero aún así hay varias cosas que asimilar. Igualmente de dejo el Link de la página de Plotly donde aprendí a hacerlo: [Gráfico PCA plotly](https://plotly.com/r/pca-visualization/)
+Por último, probé gráficos 3D de otra librería de ```plotly```. Podemos añadir en ese sentido una tercera componente (**PC3**) y de esa manera podemos rotar las componentes a nuestro antojo (además aumenta la varianza explicada acumulada!!!), lo cual puede ayudar en la interpretación de los resultados. No voy a explicar cómo hacerlo, porque para cuando estoy haciendo esta memoria lo acabo de descubrir. Tengo suficiente bagaje para aprender a hacerlo en el momento, pero aun así hay varias cosas que asimilar. Igualmente de dejo el Link de la página de Plotly donde aprendí a hacerlo: [Gráfico PCA plotly](https://plotly.com/r/pca-visualization/)
 
-Igualmente te advierto que este gráfico es una flipada en verdad porque en la práctica ¿adivina que? Las memorias que hagas son en 2D, con lo cual de nada te sirve una imagen 3D no interactiva en 2D. Es más te preguntarás por que no lo he subido aquí si GitHub permite subir este tipo de gráficos... bueno ... literal el archivo en HTML es tan grande que no se puede ver aquí, todos mis spripts de R en este directorio no suman casi ni 1% en comparación con ese archivo. Lástima, hay otras librerías que hacen este cometido como ```rgl```, y puedes conseguir un gif de la imagen en 3D con un peso infinitamente menor, pero no es de tanta calidad como plotly. 
+Igualmente, te advierto que este gráfico es una flipada en verdad porque en la práctica ¿adivina qué? Las memorias que hagas son en 2D, con lo cual de nada te sirve una imagen 3D no interactiva en 2D. Es más, te preguntarás por qué no lo he subido aquí, si GitHub permite subir este tipo de gráficos... bueno ... Literal el archivo en HTML es tan grande que no se puede ver aquí. Todos mis spripts de R en este directorio no suman casi ni 1% en comparación con ese archivo. Lástima, hay otras librerías que hacen este cometido como ```rgl```, y puedes conseguir un GIF de la imagen en 3D con un peso infinitamente menor, pero no es de tanta calidad como plotly. 
 
 
 ### **It si over**
-Espero que te siva =)
+Espero que te sirva =)

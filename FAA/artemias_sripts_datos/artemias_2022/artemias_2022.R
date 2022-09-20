@@ -292,7 +292,7 @@ tidy_pc %>%
 
 # Games_howell Todos presentan diferencias significativas 
 tidy_pc %>% 
-  filter(componentes == "PC1") %>% 
+  filter(componentes == "PC2") %>% 
   group_by(componentes) %>% 
   games_howell_test(valores ~ tratamiento) %>% 
   select(componentes, comparacion1=group1, 

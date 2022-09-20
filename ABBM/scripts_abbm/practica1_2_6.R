@@ -136,6 +136,8 @@ concentracio_tubo6 <- (muestras_ganador[1,5]/10)*10
 concentracio_tubo7 <- (muestras_ganador[2,5]/10)*20
 
 alumno_elegido <- "14"
+cor_14 <- alumno_ganadores %>%
+  filter(alumno == "14")
 
 tidy_recta %>% 
   filter(!(alumno %in% c("36","37"))) %>%  # outliers
@@ -160,7 +162,7 @@ tidy_recta %>%
                      breaks=seq(0,13,2)) +
   scale_color_manual(values = c("gray", "red", "blue", "forestgreen")) +
   labs(
-    title = "Resultado conjunto, el <span style = 'color: red'>alumno elegido</span><br>es el 14 (cor = 14) y <span style = 'color: darkgray'>el resto</span> de comparativa",
+    title = glue("Resultado conjunto, el <span style = 'color: red'>alumno elegido</span><br>es el 14 (cor = {cor_14$cor}) y <span style = 'color: darkgray'>el resto</span> de comparativa"),
     x = "Microgramos de albúmina",
     y = "Absorbancia",
     caption=glue("Interpolación de la proteína:<br><span style = 'color: blue'>Concentración del tubo 6: ({muestras_ganador[1,5]}/10)*10 = {concentracio_tubo6} μg/μl</span>\n<br><span style = 'color: forestgreen'>Concentración del tubo 7: ({muestras_ganador[2,5]}/10)*20  = {concentracio_tubo7} μg/μl</span>")

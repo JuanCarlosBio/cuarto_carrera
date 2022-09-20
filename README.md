@@ -15,7 +15,7 @@ También me gustaría decir que por el momento este proyecto está en obras. No 
 
 ## **Puedes hacer con el código o ficheros de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).** 
 
-No te voy a mentir, si no has visto nada de R, y te pones a ver mi código a palo seco, igual tu primera experiencia no será muy buena **:/**. La intención de este repositorio no es hacer tutoriales básicos, sino documentar lo que he hecho, pero me interesa que si alguien se pasa por aquí y quiera aprender, pues que saque algo de probecho. 
+No te voy a mentir, si no has visto nada de R, y te pones a ver mi código a palo seco, igual tu primera experiencia no será muy buena **:/**. La intención de este repositorio no es hacer tutoriales básicos, sino documentar lo que he hecho, pero me interesa que si alguien se pasa por aquí y quiera aprender, pues que saque algo de provecho. 
 
 Con lo cuál, antes que nada te recomiendo aprender ***dos paquetes fundamentales***: ```dplyr``` (manipulación de bases de datos, con una sintaxis muy amigable, y con el operador ```%>%``` permite concatenar funciones) y ```ggplot2``` (paquete gráfico, que a pesar de no ser muy automáticos, son muy plásticos y puedes hacer que se vean super profeionales). Para empezar [Rafa Gonzalez Gouveia](https://www.youtube.com/c/RafaGonzalezGouveia/videos) tiene muy buenos tutoriales para iniciarse (fueron los primeros tutoriales que ví). En concreto videos interesantes serían:
 

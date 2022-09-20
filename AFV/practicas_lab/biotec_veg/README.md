@@ -31,6 +31,30 @@ Contexto:
 
 ---
 
+* **Agunas fotografías de los callos:**
+
+---
+
+### **Foto 1: Comienzo de las prácticas de cultivo ***in vitro*** de callos**
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/fotos/callos_orig2.png">
+</p>
+
+### **Foto 2 Callo Contaminado.** Todas las bacterias fueron similares ~ iguales.
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/fotos/callo_contaminado.png">
+</p>
+
+### **Foto 3: Callo Formado**
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/fotos/IMG_20211104_121140.jpg">
+</p>
+
+---
+
 ### 2) Prácticas de segmentos nodales:
 
 * Hormona: Benciladenina (**BA**) y Ácido naftalenacético (**ANA**).
@@ -51,6 +75,24 @@ Contexto:
 
 <p align="center">
   <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/graficas/Rplot01.png">
+</p>
+
+---
+
+* **Agunas fotografías de los segmentos nodales y apicales:**
+
+---
+
+### **Foto 4: comienzo de las prácticas de cultivo ***in vitro*** de segmentos nodales y apicales**
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/fotos/fotos.png">
+</p>
+
+### **Foto 5 Formados 1 o 2 semanas después.**
+
+<p align="center">
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/AFV/practicas_lab/fotos/tallos_formados.png">
 </p>
 
 ---

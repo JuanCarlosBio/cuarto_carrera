@@ -2,14 +2,14 @@
 
 Este trabajo consistió en realizar una exposición de un diseño experimental. En nuestro caso, me encargué de la parte técnica, simulé un experimento con R.
 
-Básicamente consistió en... hipotéticamente hablando... aparear ratones (ojo ***hermanos***, importante para la discuisión) en un nº de generaciones concreto (7 generaciones). Los cuáles medíamos el tiempo que tardaban una serie de ratones cosanguíneos con otros controles que no estaban emparentados y supuestamente sin endogamia.
+Básicamente, consistió en... hipotéticamente hablando... aparear ratones (ojo ***hermanos***, importante para la discusión) en un nº de generaciones concreto (7 generaciones). Los cuales medíamos el tiempo que tardaban una serie de ratones consanguíneos con otros controles que no estaban emparentados y supuestamente sin endogamia.
 
-La idea es que, a medida que los ratones tienen más generaciones de endoganmia, más tardan en cruzar el laberinto.
+La idea es que, a medida que los ratones tienen más generaciones de endogamia, más tardan en cruzar el laberinto.
 
 
 ## Simulación para sacar los datos.
 
-El truco fue usar una función de R llamada ```sample()``` que puede coger valores arleatorios de una serie de intervalos que le asignes. Seguramente se puede hacer de una manera menos tediosa, pero vamos en su momento funcionó perfectamente. Este fue el código:
+El truco fue usar una función de R llamada ```sample()``` que puede coger valores aleatorios de una serie de intervalos que le asignes. Seguramente se puede hacer de una manera menos tediosa, pero vamos en su momento funcionó perfectamente. Este fue el código:
 
 ```
 # # Simulación de los tiempos ratones endogámicos
@@ -33,7 +33,7 @@ controles_6 <- sample(245:290, 12, replace = TRUE)
 controles_7 <- sample(245:300, 12, replace = TRUE)
 ```
 
-Un problema que pasa es que el código anterior cada vez que lo corras te va a salir un resultado algo distinto, ya que es arleatoria la función (aunque lo bueno es que de esta forma te da una simulación interesante). Lo repetí hasta un resultado que me gustó (todos son muy parecidos igualmente, el intervalo en el que están hacen que no cambien excesivamente), los voy a escribir en un archivo ```.csv``` que utilicé en su momento para la exposición, mediante la función ```write_csv()```. Lo haremos con el siguiente código:
+Un problema que pasa es que el código anterior cada vez que lo corras te va a salir un resultado algo distinto, ya que es aleatoria la función (aunque lo bueno es que de esta forma te da una simulación interesante). Lo repetí hasta un resultado que me gustó (todos son muy parecidos igualmente, el intervalo en el que están hacen que no cambien excesivamente), los voy a escribir en un archivo ```.csv``` que utilicé en su momento para la exposición, mediante la función ```write_csv()```. Lo haremos con el siguiente código:
 
 ```
 # Creación de la base de datos
@@ -54,7 +54,7 @@ write_csv(simulacion, "simulacion_endogamia.csv")
 
 ## Resultados elegidos para la exposición.
 
-Después de una exploración de los datos, vimos que para todas las semanas, los resultados elegidos era normales (alguno de ellos muy cerca de no serlo, pero normales). Para visualizarlos realizamos los siguientes histogramas:
+Después de una exploración de los datos, vimos que para todas las semanas, los resultados elegidos eran normales (alguno de ellos muy cerca de no serlo, pero normales). Para visualizarlos realizamos los siguientes histogramas:
 
 ---
 
@@ -66,7 +66,7 @@ Después de una exploración de los datos, vimos que para todas las semanas, los
 
 ---
 
-Entonces los resulatdos del trabajo de una forma más clara estarían represntados de la siguiente manera:
+Entonces los resutados del trabajo de una forma más clara estarían representados de la siguiente manera:
 
 ---
 
@@ -74,18 +74,18 @@ Entonces los resulatdos del trabajo de una forma más clara estarían represntad
 <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/endogamia.png">
 </p>
 
-**Figura 2.** Evolución de los ratones endogámicos y los ratones control. Vemos que estos últimos, el tiempo que tardan en el laberinto no se modifica, mientras que los ratones que presentan cosanguinidad aumentan hasta un umbral de los 600 segundos en superar el laberinto.
+**Figura 2.** Evolución de los ratones endogámicos y los ratones control. Vemos que estos últimos, el tiempo que tardan en el laberinto no se modifica, mientras que los ratones que presentan consanguinidad aumentan hasta un umbral de los 600 segundos en superar el laberinto.
 
 ---
 ### Comparación de los grupos
-Realizamos en ese entonces inferencia estadística, está hecho para que independientemente del resultado, los ratones de la generación 0 no presenten diferencias significativas, por otro lado a partir de la primera, ya que condsideramos que la endogamia entrehermanos aumenta rápidamente, ya los tiempos pasan a tener diferencias significativas. Estas se representaron en el gráfico con un **"*"**.
+Realizamos en ese entonces inferencia estadística, está hecho para que independientemente del resultado, los ratones de la generación 0 no presenten diferencias significativas, por otro lado a partir de la primera, ya que consideramos que la endogamia entre hermanos aumenta rápidamente, ya los tiempos pasan a tener diferencias significativas. Estas se representaron en el gráfico con un **"*"**.
 
 El umbral de los 600 segundos se debe a que los ratones llegan a la homocigosis.
 
-Los modelos utilizados para comparar los grupos fueron la T-student para la mayoría de generaciones excepto para las 2 y 7 que se realizó una T-Welch debido a la falta de homogeneidad de varianzas (la prueba de Levene fue significativa).
+Los modelos utilizados para comparar los grupos fueron la T-student para la mayoría de generaciones, excepto para las 2 y 7 que se realizó una T-Welch debido a la falta de homogeneidad de varianzas (la prueba de Levene fue significativa).
 
 ### Modelo predictivo: modelo de regresión lineal simple
-Por último, realizamos un coeficiente de correlación de Pearson para ver si las valiables de las generaciones pasadas y el tiempo que tardan los ratones endogámicos en cruzar el laberinto estaban relacionados linealmente.
+Por último, realizamos un coeficiente de correlación de Pearson para ver si las variables de las generaciones pasadas y el tiempo que tardan los ratones endogámicos en cruzar el laberinto estaban relacionados linealmente.
 
 * **Resultados de Pearson: estimación = 0.93, es próxima a 1, *p* < 0.05, la correlación es alta y se rechaza la hipótesis nula de que no existe correlación lineal entre las variables**
 
@@ -102,7 +102,7 @@ sample estimates:
 0.9325681 
 ```
 
-* **Realizamos entonces el modelo de regresión lineal simple: p < 0.05, se rechaza la hipótesis nula de que el modelo no es predictivo, y sacamos sacamos los coficientes de la recta**
+* **Realizamos entonces el modelo de regresión lineal simple: p < 0.05, se rechaza la hipótesis nula de que el modelo no es predictivo, y sacamos los coeficientes de la recta**
 
 ```
 Call:
@@ -136,9 +136,9 @@ F-statistic: 40.04 on 1 and 6 DF,  p-value: 0.0007283
 
 En la discusión de los resultados y conclusión habría que comentar los resultados como:
 
-* **De esta manera, tenemos una ecuación la cuál podríamos usar para predecir, a partir del tiempo que ha tardado un ratón de otro laboratorio trasladado al nuestro, cuanta endogamia tiene en número de generaciones. Esto podría intentar extrapolarse a otros tipos de animales.**
+* **De esta manera, tenemos una ecuación la cual podríamos usar para predecir, a partir del tiempo que ha tardado un ratón de otro laboratorio trasladado al nuestro, cuanta endogamia tiene en número de generaciones. Esto podría intentar extrapolarse a otros tipos de animales.**
 
-### OJO!!!, les gusta que le digas alguna posible aplicación o futuro proyecto que se puede sacar con estos resultados. Nosotros dijimos que se podría añadir un tercer grupo de estudio, cruce entre primos para ver la respuesta a distintos niveles de cosanguinidad. Nuestra hipótessis sería en ese entonces, que estos ratones también llegarían a el humbral máximo de homocigósis, pero tardarían más número de generaciones en cuanto a cruces para ello.
+### OJO!!!, les gusta que le digas alguna posible aplicación o futuro proyecto que se puede sacar con estos resultados. Nosotros dijimos que se podría añadir un tercer grupo de estudio, cruce entre primos, para ver la respuesta a distintos niveles de consanguinidad. Nuestra hipótesis sería en ese entonces, que estos ratones también llegarían al umbral máximo de homocigosis, pero tardarían más número de generaciones en cuanto a cruces para ello.
 
 Nada mal para haber salido de mi cabeza perturbada XD.
 

@@ -9,7 +9,7 @@
 1) Completar una tabla con los genotipos (frecuencias y absolutos).
 2) Sacar los alelos absolutos.
 3) Rellenar una tabla en la que había que sacar:
-  - Frecencia alélica.
+  - Frecuencia alélica.
   - Heterocigosidad esperada y observada.
   - Realizar Xi^2 de contingencia.
   - Realizar Xi^2 para verificar equilibrio de Hardy-Weinberg.
@@ -17,10 +17,10 @@
 
 ### Un par de cositas: 
 * Tengo algo mal por ahí, me pusieron un **9.5**, y no te dicen en que fallas.
-* Yo creo que fue en  el último ejercicio de desiquilibrio gamético, pero ni idea la verdad.
+* Yo creo que fue en  el último ejercicio de desequilibrio gamético, pero ni idea la verdad.
 * También que retoqué las cosas de la primera parte este verano, para dejarlas más guay. Igual hay alguna diferencia de la plantilla por la que vienes, pero no debería diferir en nada importante tampoco, igual en decimales si eso.
 
 
-### Me gustaría subir algunos de los ejercicios que subieron para realizarlos expresamente con Excel (o al menos idealmente), pero hecho en R. Sin embargo acabo de empezar el máster con lo que está complicado.
+### Me gustaría subir algunos de los ejercicios que subieron para realizarlos expresamente con Excel (o al menos idealmente), pero hecho en R. Sin embargo, acabo de empezar el máster con lo que está complicado.
 
 

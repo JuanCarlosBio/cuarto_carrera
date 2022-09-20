@@ -46,19 +46,23 @@ artemias_2022 %>%
                                        "Echium/Bacalao","Enriquecedor comercial"),
                             labels = c("Levadura", "Lectina\nmarina",
                                        "Aceite\nEchium\nBacalao", "Enriquecedor\ncomercial"))) %>% 
-  group_by(tratamiento, acido_graso) %>% 
-  summarise(media=mean(porcentaje, na.rm=TRUE), 
-            sd=sd(porcentaje, TRUE)) %>% 
-  ungroup() %>% 
-  ggplot(aes(acido_graso, media, fill=tratamiento)) +
-  geom_bar(stat = "identity", position = "dodge",
-           color="black") + 
-  geom_errorbar(aes(ymin=media-sd, ymax=media+sd),
-                position = "dodge") +
-  scale_y_continuous(expand = expansion(0),
-                     limits = c(0,27),
-                     breaks = seq(0,27,5)) +
-  scale_fill_manual(values = c("skyblue", "orange", "tomato", "gray")) +
+  #group_by(tratamiento, acido_graso) %>% 
+  #summarise(media=mean(porcentaje, na.rm=TRUE), 
+  #          sd=sd(porcentaje, TRUE)) %>% 
+  #ungroup() %>% 
+  ggplot(aes(acido_graso, porcentaje, fill=tratamiento)) +
+  geom_boxplot() +
+  stat_summary(fun = "mean", color = "red", size = .25, width =.7,
+               position = position_dodge(.7), geom="crossbar", show.legend = FALSE) +
+  facet_wrap(~acido_graso, scales = "free") +
+  #geom_bar(stat = "identity", position = "dodge",
+  #         color="black") + 
+  #geom_errorbar(aes(ymin=media-sd, ymax=media+sd),
+  #              position = "dodge") +
+  #scale_y_continuous(expand = expansion(0),
+  #                   limits = c(0,27),
+  #                   breaks = seq(0,27,5)) +
+  scale_fill_manual(values = c("skyblue", "orange", "forestgreen", "gray")) +
   labs(
     title = "Perfil medio de AG (%) de la artemia de los cuatro\ntratamientos para el enriquecimiento de artemia (2022)",
     x = "Ácidos grasos",
@@ -70,14 +74,21 @@ artemias_2022 %>%
     axis.line = element_line(size = 1),
     axis.ticks.y = element_line(size = 1),
     axis.ticks.x = element_blank(), 
-    plot.title = element_text(face = "bold", hjust = .5, size=13, 
+    plot.title = element_text(face = "bold", hjust = .5, size=16, 
                               margin = margin(b=10)),
-    axis.title = element_text(face = "bold", size = 12),
-    axis.text = element_text(size = 11),
-    axis.text.x = element_text(margin = margin(b=10)),
+    axis.title = element_text(face = "bold", size = 14),
+    axis.text = element_text(size = 13, face="bold"),
+    axis.text.x = element_blank(),
     axis.text.y = element_text(margin = margin(r=10)),
-    legend.position = "top"
+    legend.position = c(.9,.175),
+    legend.text = element_text(margin = margin(b=5)),
+    legend.background = element_rect(color = "black"),
+    strip.text = element_text(color="black", face = "bold", size = 11),
+    strip.background = element_rect(size=1)
   )
+
+#ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+#       width = 9.5, height = 6)
 
 ##### Análisis estadístico #####
 

@@ -21,10 +21,16 @@ Si eso en algún momento consultaré la bibliografía para encontrar informació
 <p align="center">
   <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/artemias_2022/artemias_2022.png">
 </p>
-  
+
+**Figura:** se me ocurrió, como no todos los valores eran normales, y en ese caso estudiaremos la mediana en ese caso cuando sea necesario, he hecho boxplots con una modificación. Se mostrarían la distribución de los datos (mínimos, máximos, cuartiles) y la mediana como línea negra. Pero además he añadido el estadístico de la media a partir de una nueva línea de color rojo, para poder fijarnos. Con lo cuál nos podemos fijar en un estadístico o en otro. Como no se verían bien los resultados, (ya que hay algunos AG, con porcenjates muy superiores) además he subdividido en casillas cada ácido graso. Esto anterior tiene un problema, y es que el eje de las y se ajusta automáticamente para cada una, por defecto, cada casilla ocupa la mínima distancia entre ácidos grasos, con lo cuál puede engañar un poco a la vista si quieres buscar diferencias.
+
+Yo creo, que lo mejor para solucionar los problemas de esta figura lo ideal sería buscar una forma de separar los gráficos según un sentido lógico fisiológico. En plan ácido grasos eseciales, polares, cadena saturada/insaturada. Pero me voy a quedar con la figura que he hecho, no creo que esté mal del todo, y además no es que sea un experto en la materia de AGs.
+
 ---
 
-**Nota importante antes de continuar:** No encontré en tres de los tratamiento rastros del  ác. gamma linoleico, con lo cual, alginos de los test no corren cuando son sólo valores 0. Pero es obvio que existen por un lado diferencias significativas, al menos en uno de los grupos. En este caso, sólo el tratamiento de aceite de echium bacalao presenta este ácido graso.  
+* **Nota importante antes de continuar:** 
+  * No encontré en tres de los tratamiento rastros del  ác. gamma linoleico, con lo cual, alginos de los test no corren cuando son sólo valores 0. Pero es obvio que existen por un lado diferencias significativas, al menos en uno de los grupos. En este caso, sólo el tratamiento de aceite de echium bacalao presenta este ácido graso. 
+  * Alomejor me he dejado de identificar algún AG que pedía la profesora, yo he identificado los que hicimos en la práctica de informática y listo. 
 
 ### **En cuanto a la inferencia estadística, estos fueron los resultados:**
 

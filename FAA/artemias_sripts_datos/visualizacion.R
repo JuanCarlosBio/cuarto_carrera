@@ -76,6 +76,9 @@ artemias_anova %>%
   )
 
 
+# ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+#       width = 7, height = 4)
+
 artemias_welch <- tidy_artemias %>% 
   filter(acido_graso %in% c("C 16:1n-7","C 18:0","C 18:1n-9",
                             "C 18:3n-6","C 20:5n-3","C 22:6n-3")) %>% 
@@ -121,7 +124,8 @@ artemias_welch %>%
                                color = "black", size = 11)
   )
 
-
+# ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+#       width = 7, height = 4)
 
 artemias_kw <- tidy_artemias %>% 
   filter(acido_graso %in% vect_kw) %>% 
@@ -163,3 +167,6 @@ artemias_kw %>%
     strip.background = element_blank(),
     strip.text = element_blank()
   )
+
+# ggsave("Rplot06.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+#        width = 8, height = 4)

@@ -3,6 +3,7 @@ library(readxl)
 library(tidytext)
 library(rstatix)
 library(glue)
+library(ggtext)
 
 artemias_2022_csv <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/artemias_2022/artemias_2022.csv")
 
@@ -87,8 +88,8 @@ artemias_2022 %>%
     strip.background = element_rect(size=1)
   )
 
-#ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#       width = 9.5, height = 6)
+ggsave("artemias_2022.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
+       width = 9.5, height = 6)
 
 ##### Análisis estadístico #####
 
@@ -231,7 +232,7 @@ prin_comp %>%
   scale_color_manual(name="Tratamiento:",
                      values = c("skyblue", "orange", "tomato", "gray")) +
   labs(
-    title = glue("PCA para estudiar el perfil de AG (%), para 4 tratamientos aplicados al\nenriquecimiento de artemia: varianza explicada acumulada {var_pc1+var_pc2}%"),
+    title = glue("PCA para estudiar el perfil de AG (%), para 4 tratamientos aplicados al<br>enriquecimiento de artemia: <span style = 'color: red'>varianza explicada acumulada {var_pc1+var_pc2}%</span>"),
     x=glue("PC1 ({var_pc1}% varianza explicada)"),
     y=glue("PC2 ({var_pc2}% varianza explicada)")
   ) +
@@ -239,12 +240,15 @@ prin_comp %>%
   theme(
     axis.line = element_line(size=1),
     axis.ticks = element_line(size=1),
-    plot.title = element_text(size = 12, face = "bold", hjust = .5,
+    plot.title = element_markdown(size = 12, face = "bold", hjust = .5,
                               margin = margin(b=30)),
     axis.title = element_text(face = "bold"),
     legend.position = "bottom",
     legend.background = element_rect(color = "white")
   )
+
+# ggsave("artemias_pca2022.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
+#       width = 7, height = 5.5)
 
 ###### Existen diferencias significativas entre las componenetes?
 

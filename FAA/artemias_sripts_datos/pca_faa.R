@@ -111,6 +111,9 @@ princ_comp %>%
     legend.background = element_rect(color = "white")
   )
 
+# ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+#       width = 7, height = 5.5)
+
 # ¿Existen diferencias entre cada grupo de ambas componentes principales?
 
 tidy_pc <- princ_comp %>%
@@ -194,3 +197,6 @@ fig <- fig %>%
   )
 
 fig
+
+
+

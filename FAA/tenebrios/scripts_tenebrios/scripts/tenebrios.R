@@ -79,7 +79,7 @@ masa_tasa_o4 %>%
   )
 
 ggsave("Rplot05.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
-       width = 6, height = 5)
+       width = 8, height = 5)
 
 
 # Los reultados anteriores de son los valores promedio de cada semana, el cuál es 

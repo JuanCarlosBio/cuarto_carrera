@@ -4,6 +4,8 @@ library(tidytext)
 library(rstatix)
 library(glue)
 library(ggtext)
+library(psych)
+
 
 artemias_2022_csv <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/artemias_2022/artemias_2022.csv")
 
@@ -200,29 +202,26 @@ artemias_wider[is.na(artemias_wider)] <- 0
 
 matrix_artemias <- artemias_wider[,-1]
 
-artemias_pca <- prcomp(matrix_artemias, scale = TRUE, center = TRUE) 
+rpca <- principal(matrix_artemias, nfactors = 2, 
+                  rotate = "varimax", scores = TRUE)
 
-# Resumen del pca y correlación con las variables de los ácidos grasos y componentes
-resumen_pca <- summary(artemias_pca)
+# Estudiamos esta vez la correlación de las variables con las componentes rotadas
+cor(rpca$scores[,c(1,2)], matrix_artemias) 
 
-cor(matrix_artemias, artemias_pca$x[,c(1,2)])
+var_rotado1_label <- round(rpca$Vaccounted[2,1]*100,2)
+var_rotado2_label <- round(rpca$Vaccounted[2,2]*100,2)
+var_rtotal_exp <- var_rotado1_label + var_rotado2_label
 
-var_pc1 <- round(resumen_pca$importance[2,1]*100, 2)
-var_pc2 <- round(resumen_pca$importance[2,2]*100, 2)
-var_pc3 <- round(resumen_pca$importance[2,3]*100, 2)
+cp_2022 <- as_tibble(rpca$scores[,c(1,2)]) %>%
+  mutate(tratamiento=artemias_wider$tratamiento)
 
-# tibble con las componentes y los grupos
-prin_comp <- as_tibble(artemias_pca$x) %>% 
-  select(PC1, PC2, PC3) %>% 
-  mutate(tratamiento=artemias_wider$tratamiento,
-         tratamiento=factor(tratamiento,
-                            levels = c("Levadura", "Lectina marina",
-                                       "Echium/Bacalao","Enriquecedor comercial"),
-                            labels = c("Levadura", "Lectina\nmarina",
-                                       "Aceite\nEchium\nBacalao", "Enriquecedor\ncomercial")))
-
-prin_comp %>% 
-  ggplot(aes(PC1, PC2, color=tratamiento, fill=tratamiento)) +
+cp_2022 %>% 
+  mutate(tratamiento= factor(tratamiento,
+                             levels = c("Levadura", "Lectina marina",
+                                        "Echium/Bacalao", "Enriquecedor comercial"),
+                             labels = c("Levadura", "Lectina\nmarina",
+                                        "Aceite\nEchium/Bacalao", "Enriquecedor\ncomercial"))) %>% 
+  ggplot(aes(RC1, RC2, fill=tratamiento, color = tratamiento)) +
   geom_point(pch=21, color="black") +
   stat_ellipse(geom = "polygon", alpha = .25) +
   geom_vline(xintercept = 0, color="black", linetype="dashed") +
@@ -232,67 +231,66 @@ prin_comp %>%
   scale_color_manual(name="Tratamiento:",
                      values = c("skyblue", "orange", "tomato", "gray")) +
   labs(
-    title = glue("PCA para estudiar el perfil de AG (%), para 4 tratamientos aplicados al<br>enriquecimiento de artemia: <span style = 'color: red'>varianza explicada acumulada {var_pc1+var_pc2}%</span>"),
-    x=glue("PC1 ({var_pc1}% varianza explicada)"),
-    y=glue("PC2 ({var_pc2}% varianza explicada)")
+    title = glue("PCA rotado (Varimax) para cada tratamieto según su contenido<br>en ácidos grasos <span style = 'color: red'>Varianza explicada acumulada = {var_rtotal_exp}%"),
+    x=glue("RC1 ({var_rotado1_label}% varianza explicada)"),
+    y=glue("RC2 ({var_rotado2_label}% varianza explicada)")
   ) +
   theme_classic() +
   theme(
     axis.line = element_line(size=1),
     axis.ticks = element_line(size=1),
-    plot.title = element_markdown(size = 12, face = "bold", hjust = .5,
+    plot.title = element_markdown(size = 14, face = "bold", hjust = .5,
                               margin = margin(b=30)),
     axis.title = element_text(face = "bold"),
     legend.position = "bottom",
     legend.background = element_rect(color = "white")
   )
 
-# ggsave("artemias_pca2022.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
-#       width = 7, height = 5.5)
+#ggsave("artemias_pca2022.png", 
+#        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
+#        width = 7, height = 5.5)
 
-###### Existen diferencias significativas entre las componenetes?
+# ¿Existen diferencias entre cada grupo de ambas componentes principales?
 
-tidy_pc <- prin_comp %>%
-  select(-PC3) %>% 
+tidy_cp <- cp_2022 %>%
   pivot_longer(-tratamiento, names_to = "componentes", values_to = "valores")
 
-# Normalidad de los datos, PC1 no presenta normalidad en todos los grupos.
-tidy_pc %>% 
+# Normalidad de los datos, todas las variables son normales.
+tidy_cp %>% 
   group_by(componentes, tratamiento) %>% 
   shapiro_test(valores) %>% 
-  filter(p < 0.05)
+  filter(p > 0.05)
 
-# Hocedasticidad de los datos. PC2 no presenta homocedasticidad
+# Homocedasticidad de los datos. PC2 no presenta homocedasticidad
 
-tidy_pc %>% 
+tidy_cp %>% 
   mutate(tratamiento=as.factor(tratamiento)) %>% 
   group_by(componentes) %>% 
   levene_test(valores ~ tratamiento)
 
-# kruskal-Wallis. Hay diferencias significativas en la PC1
-tidy_pc %>% 
-  filter(componentes == "PC1") %>% 
+# ANOVA de una vía PC1. Hay diferencias significativas 
+tidy_cp %>% 
+  filter(componentes == "RC1") %>% 
   group_by(componentes) %>% 
-  kruskal_test(valores ~ tratamiento) 
+  anova_test(valores ~ tratamiento) 
 
-# Dunnet test, Bonferroni: existen diferencias significativas unicamente entre los
-# grupos de lectina marina y Echium bacalao
-tidy_pc %>% 
-  filter(componentes == "PC1") %>% 
+# Tukey
+tidy_cp %>% 
+  filter(componentes == "RC1") %>% 
   group_by(componentes) %>% 
-  dunn_test(valores ~ tratamiento, p.adjust.method = "BH") %>% 
+  tukey_hsd(valores ~ tratamiento) %>% 
   select(componentes, comparacion1=group1, 
          comparacion2=group2, significacion=p.adj.signif)
 
 # ANOVA de Welch. Hay diferencias significativas 
-tidy_pc %>% 
-  filter(componentes == "PC2") %>% 
+tidy_cp %>% 
+  filter(componentes == "RC2") %>% 
   group_by(componentes) %>% 
   welch_anova_test(valores ~ tratamiento) 
 
-# Games_howell Todos presentan diferencias significativas 
-tidy_pc %>% 
-  filter(componentes == "PC2") %>% 
+# Games Howell. Todos presentan diferencias significativas 
+tidy_cp %>% 
+  filter(componentes == "RC2") %>% 
   group_by(componentes) %>% 
   games_howell_test(valores ~ tratamiento) %>% 
   select(componentes, comparacion1=group1, 

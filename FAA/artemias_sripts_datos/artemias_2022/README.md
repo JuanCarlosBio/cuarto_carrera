@@ -157,6 +157,7 @@ Esto puede deberse a que, a dos motivos.
 * *Hay evidencia de que este experimento es reproducible o parcialmente al menos. Obetiéndose los mismos resultados a partir de los mismos pasos.*
 * *Pero sin embargo, me suena que como la práctica estaba muy próxima a las evaluaciones de enero, con lo que los profesores no tenían tiempo físico para obtener los resultados de nuestras muestras. Con lo cual estos resultados serían de alumnos del curso pasado, que podrían haber sido usados tanto para las prácticas de informática como para esta.*
 * *Aún así, el segundo caso sigue defendiendo que el experimento es reproducible, en caso de que se hicieran dos veces para cada práctica. Pero eso yo ya no lo sé. Simplemente es una observación.*
+* En el caso de Levadura, a uno de los cormatogramas les faltaba la segunda página con los porcentajes de área, de tal manera que se pierde el resultado de una de las muestras, y ```ggplot``` no puede computar el resultado de este estadístico.
 ---  
 ### En cuanto a los resultados de inferencia para las componentes:
 
@@ -164,26 +165,26 @@ PC1: Se usó Kruskal-Wallis y debido a diferencias significativas, se usó como 
 
 ```
 # A tibble: 6 x 4
-  componentes comparacion1              comparacion2              significacion
-  <chr>       <chr>                     <chr>                     <chr>        
-1 PC1         "Levadura"                "Lectina\nmarina"         ns           
-2 PC1         "Levadura"                "Aceite\nEchium\nBacalao" ns           
-3 PC1         "Levadura"                "Enriquecedor\ncomercial" ns           
-4 PC1         "Lectina\nmarina"         "Aceite\nEchium\nBacalao" **           
-5 PC1         "Lectina\nmarina"         "Enriquecedor\ncomercial" ns           
-6 PC1         "Aceite\nEchium\nBacalao" "Enriquecedor\ncomercial" ns       
+  componentes comparacion1           comparacion2           significacion
+  <chr>       <chr>                  <chr>                  <chr>
+1 RC1         Echium/Bacalao         Enriquecedor comercial ****
+2 RC1         Echium/Bacalao         Lectina marina         ****
+3 RC1         Echium/Bacalao         Levadura               ****
+4 RC1         Enriquecedor comercial Lectina marina         ns
+5 RC1         Enriquecedor comercial Levadura               ns
+6 RC1         Lectina marina         Levadura               ns   
 ```
 
 PC2: Se usó Games-Howels
 
 ```
 # A tibble: 6 x 4
-  componentes comparacion1              comparacion2              significacion
-  <chr>       <chr>                     <chr>                     <chr>
-1 PC2         "Levadura"                "Lectina\nmarina"         ***
-2 PC2         "Levadura"                "Aceite\nEchium\nBacalao" ****
-3 PC2         "Levadura"                "Enriquecedor\ncomercial" **
-4 PC2         "Lectina\nmarina"         "Aceite\nEchium\nBacalao" ns
-5 PC2         "Lectina\nmarina"         "Enriquecedor\ncomercial" *
-6 PC2         "Aceite\nEchium\nBacalao" "Enriquecedor\ncomercial" ***
+  componentes comparacion1           comparacion2           significacion
+  <chr>       <chr>                  <chr>                  <chr>
+1 RC2         Echium/Bacalao         Enriquecedor comercial **
+2 RC2         Echium/Bacalao         Lectina marina         **
+3 RC2         Echium/Bacalao         Levadura               ***
+4 RC2         Enriquecedor comercial Lectina marina         **
+5 RC2         Enriquecedor comercial Levadura               ***
+6 RC2         Lectina marina         Levadura               ***
 ```

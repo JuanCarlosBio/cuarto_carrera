@@ -535,7 +535,38 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 
 --- 
 
-### **Nota sobre el PCA:** recuerda que para sacar una interpretación biológica de este gráfico, tienes que estudiar las componentes por separado, es decir, PC1 y PC2 son independientes. Otra cosa que deberías hacer y está en el script del pca, es realizar inferencia estadística (ANOVA, kruskal...) para cada componente, para ver si los grupos presentan diferencias significativas. 
+## ***Aún así, es aconsejable realizar técnicas de rotación, con las componentes que expliquen una mayor varianza y hayamos decidido trabajar con ellas. En este caso PC1 y PC2.***
+
+La idea de rotar las componentes, teóricamente y estadísticamente hablando,  es adquirir un mayor nivel de interpretación de los datos.
+
+Para ello una técnica muy utilizada es ```varimax```, para ello se usaría el siguiente código ultilizando la función ```principal()``` de la librería ```psysch```:
+
+```
+library(psych)
+rpca <- principal(matrix.artem.num,         # Usamos nuestra base de datos
+                  nfactors = 2,             # Selecionamos las dos primeras componentes
+                  rotate = "varimax",       # La técnica de rotación que usaremos 
+                  scores = TRUE)
+
+```
+
+En ese sentido, al graficar, utilizaríamos los ```scores``` (valores de las componentes 1 y 2 rotadas) que nos proporciona esta función.
+
+Y lo siguiente sería realizar el mismo gráfico de las componentes, pero esta vez con los rotados. Obteniendo como resultado:
+
+---
+
+<p align="center">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/rpca.png">
+</p>
+
+***Figura 5.*** Análisis de componentes principales para distintos tratamientos de diverso contenido de ácidos grasos.
+
+--- 
+
+### **Nota sobre el PCA (rotado o no):** recuerda que para sacar una interpretación biológica de este gráfico, tienes que estudiar las componentes por separado, es decir, PC1 y PC2 son independientes (aunque la que tienen más varianza explicada en principio es la que más peso tiene). Otra cosa que deberías hacer y está en el script del pca rotado, es realizar inferencia estadística (ANOVA, kruskal...) para cada componente, para ver si los grupos presentan diferencias significativas. 
+
+---
 
 Como he dicho, no es mi intención dar una interpretación del PCA, pero si necesitas un ejemplo, lo he hecho en mis resultados del TFG. Hice un PCA con una interpretación muy sencilla, tenía un patrón biológico claro sobre la biometría de las tortugas rescatadas por la Tahonilla. 
 
@@ -548,5 +579,5 @@ Por último, probé gráficos 3D de otra librería de ```plotly```. Podemos aña
 Igualmente, te advierto que este gráfico es una flipada en verdad porque en la práctica ¿adivina qué? Las memorias que hagas son en 2D, con lo cual de nada te sirve una imagen 3D no interactiva en 2D. Es más, te preguntarás por qué no lo he subido aquí, si GitHub permite subir este tipo de gráficos... bueno ... Literal el archivo en HTML es tan grande que no se puede ver aquí. Todos mis spripts de R en este directorio no suman casi ni 1% en comparación con ese archivo. Lástima, hay otras librerías que hacen este cometido como ```rgl```, y puedes conseguir un GIF de la imagen en 3D con un peso infinitamente menor, pero no es de tanta calidad como plotly. 
 
 
-### **It si over**
-Espero que te sirva =)
+## **It si over**
+### Espero que te sirva =)

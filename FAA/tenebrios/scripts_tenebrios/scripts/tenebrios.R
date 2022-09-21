@@ -78,8 +78,8 @@ masa_tasa_o4 %>%
     strip.text = element_text(face="bold", size = 11)
   )
 
-ggsave("Rplot05.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
-       width = 8, height = 5)
+# ggsave("Rplot05.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+#       width = 8, height = 5)
 
 
 # Los reultados anteriores de son los valores promedio de cada semana, el cuál es 
@@ -190,8 +190,8 @@ df_o4_completo %>%
     legend.text = element_text(size = 12)
   )
 
-ggsave("Rplot07.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
-       width = 5, height = 4)
+# ggsave("Rplot07.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+#       width = 7, height = 4)
 
 
 #### ¿Y existe correlación entre las variables masa y tasa? 

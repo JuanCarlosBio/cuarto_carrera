@@ -75,6 +75,35 @@ act_esp <- function(Abs, vT, E, conc_prot, ve, t){
 
 ---
 
+## **Fotografías de los geles (espero que estén bien ordenados)**
+
+* ### **Fotografía Gel 1 (que guapo el paint)**
+
+<p align="center">
+    <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/ABBM/geles/Gel1.jpeg">
+</p>
+
+
+* ### **Fotografía Gel 2**
+
+<p align="center">
+    <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/ABBM/geles/Gel2.jpeg">
+</p>
+
+* ### **Fotografía Gel 3**
+
+<p align="center">
+    <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/ABBM/geles/Gel3.jpeg">
+</p>
+
+* ### **Fotografía Gel 4**
+
+<p align="center">
+    <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/ABBM/geles/Gel4.jpeg">
+</p>
+
+## ***Resultado de los geles:***
+
 <p align="center">
     <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/ABBM/graficas/rf.png">
 </p>

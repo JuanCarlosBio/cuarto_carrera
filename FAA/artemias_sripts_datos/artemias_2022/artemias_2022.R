@@ -297,18 +297,8 @@ tidy_cp %>%
          comparacion2=group2, significacion=p.adj.signif)
 
 
-library(plotly)
 
-plot_ly(prin_comp, 
-        x = ~PC1, y = ~PC2, z = ~PC3, 
-        color = ~tratamiento, 
-        colors = c('skyblue','orange','tomato','darkgray')
-        )%>%
-        add_markers(size = 15) %>%
-        layout(
-               title = glue('Total Explained Variance = {var_pc1+var_pc2+var_pc3}%'),
-               scene = list(bgcolor = "white")
-                )
+ 
 
 
 

@@ -223,32 +223,27 @@ tidy_rc %>%
 
 library(plotly)
 
-X <- subset(matrix_artemias, select = -c(tratamiento))
-
-prin_comp <- prcomp(X, rank. = 3)
-
-components <- prin_comp[["x"]]
-components <- data.frame(components)
-components$PC2 <- -components$PC2
-components$PC3 <- -components$PC3
-components = cbind(components, matrix_artemias$tratamiento)
-
-tot_explained_variance_ratio <- summary(prin_comp)[["importance"]]['Proportion of Variance',]
-tot_explained_variance_ratio <- 100 * sum(tot_explained_variance_ratio)
-
-tit = glue('Total Explained Variance = {var_tot}')
-
-fig <- plot_ly(components, x = ~PC1, y = ~PC2, z = ~PC3, color = ~matrix_artemias$tratamiento, colors = c('skyblue','orange','tomato','darkgray') ) %>%
-  add_markers(size = 12)
-
-
-fig <- fig %>%
+plot_ly(princ_comp, 
+        x = ~PC1, y = ~PC2, z = ~PC3, 
+        color = ~tratamiento, 
+        colors = c('skyblue','orange','#dc4b31','darkgray') ) %>%
+  add_markers(size = 12) %>%
   layout(
-    title = tit,
-    scene = list(bgcolor = "white")
-  )
-
-fig
-
+    title = glue('Total Explained Variance = {var_tot}'),
+    scene = list(xaxis = list(title = glue('PC1 ({var_pc1}% varianza explicada)'),
+                              zerolinewidth = 1,
+                              ticklen = 5,
+                              gridwith = 2),
+                 yaxis = list(title = glue('PC2 ({var_pc2}% varianza explicada)'),
+                              zerolinewidth = 1,
+                              ticklen = 5,
+                              gridwith = 2),
+                 zaxis = list(title = glue('PC3 ({var_pc3}% varianza explicada)'),
+                              zerolinewidth = 1,
+                              ticklen = 5,
+                              gridwith = 2),
+         paper_bgcolor = 'rgb(243, 243, 243)',
+         plot_bgcolor = 'rgb(243, 243, 243)')
+  ) 
 
 

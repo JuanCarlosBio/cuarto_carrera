@@ -156,11 +156,11 @@ simulacion %>%
     legend.title = element_text(face = "bold", hjust = .5, size = 11.5),
     legend.text = element_text(size = 11),
     legend.background = element_rect(color="black"),
-    legend.position = c(.2, .15)
+    legend.position = c(.2, .875)
   )
 
-# ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-#        width = 7, height = 4.5)
+ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+        width = 7, height = 4.5)
 
 simulación_regression <- simulacion %>% 
   group_by(generacion, tratamiento) %>% 

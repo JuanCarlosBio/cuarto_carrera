@@ -104,8 +104,8 @@ simulacion %>%
     legend.position = c(.85, .10)
   )
 
-ggsave("histogramas.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-       width = 7.5, height = 5)
+# ggsave("histogramas.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+#       width = 7.5, height = 5)
 
 etiquetas <- tibble(
   x = c(1:8),
@@ -159,8 +159,8 @@ simulacion %>%
     legend.position = c(.2, .15)
   )
 
-ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-        width = 7.5, height = 4)
+# ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
+#        width = 7.5, height = 4)
 
 simulación_regression <- simulacion %>% 
   group_by(generacion, tratamiento) %>% 
@@ -223,5 +223,5 @@ simulación_regression %>%
   )
 
 ggsave("Rplot09.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-       width = 7.5, height = 4)
+       width = 6, height = 4.5)
 

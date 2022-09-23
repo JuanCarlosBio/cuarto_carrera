@@ -222,9 +222,9 @@ holes_maze %>%
   mutate(mucho=observacion=="Tiempo olisqueo") %>% 
   ggplot(aes(v_j, media, fill=reorder(observacion, media))) +
   geom_bar(stat = "identity", color="black",
-           width = .5, position = position_dodge(.7)) +
+           width = .25, position = position_dodge(.7)) +
   geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
-                width=.3, position = position_dodge(.7)) +
+                width=.1, position = position_dodge(.7)) +
   geom_hline(yintercept = 0, size=1) +
   geom_text(data = etiqueta_sighm,
             aes(x=x, y=y, label=etiqueta),
@@ -258,8 +258,8 @@ holes_maze %>%
         strip.text = element_blank()
   )
 
-# ggsave("hm.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
-#       width = 7, height = 5.5)
+ggsave("hm.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+       width = 7, height = 5.5)
 #------------------------------------------------------------------------------#
 #                                 P.Maze                                       #
 #------------------------------------------------------------------------------#

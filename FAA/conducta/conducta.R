@@ -138,7 +138,7 @@ of2 <- open_field %>%
 of3 <- open_field %>%
   filter(observacion %in% c("Acicalarse")) %>% 
   ggplot(aes(v_j, numero_obs, fill=reorder(observacion, numero_obs))) +
-  geom_boxplot(width=.5, alpha=.5) +
+  geom_boxplot(width=.35, alpha=.5) +
   geom_jitter(pch=21, position = position_jitterdodge(seed = )) +
   scale_y_continuous(limits = c(-1,NA)) +
   scale_fill_manual(values = c("yellow", "skyblue")) +
@@ -337,9 +337,9 @@ p1 <- p.maze %>%
   summarise(media=mean(numero_obs), sd=sd(numero_obs)) %>%
   ggplot(aes(v_j, media, fill=observacion)) +
   geom_bar(stat = "identity", color="black",
-           width = .5, position = position_dodge(.7)) +
+           width = .325, position = position_dodge(.7)) +
   geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
-                width=.3, position = position_dodge(.7)) +
+                width=.15, position = position_dodge(.7)) +
   # geom_boxplot(data=data_abierto,aes(v_j, numero_obs), inherit.aes = FALSE,
   #              fill="orange", alpha=.25, width=.25, position = position_nudge(x=.5,y=0)) +
   scale_y_continuous(expand = expansion(0),
@@ -371,8 +371,8 @@ p2 <- p.maze %>%
                               levels = c("Tiempo abierto"),
                               labels = c("Aabierto"))) %>%
   ggplot(aes(v_j, numero_obs, fill=observacion)) +
-  geom_boxplot(width=.35, alpha=.25) +
-  geom_jitter(pch=21,position = position_jitterdodge(.5), size=1) +
+  geom_boxplot(width=.3, alpha=.25) +
+  geom_jitter(pch=21,position = position_jitterdodge(.5), size=2) +
   scale_y_continuous(limits = c(0,200),
                      breaks = seq(0,200, 40)) +
   scale_fill_manual(values ="orange") +
@@ -410,9 +410,9 @@ p3 <- p.maze %>%
   summarise(media=mean(numero_obs), sd=sd(numero_obs)) %>%
   ggplot(aes(v_j, media, fill=observacion)) +
   geom_bar(stat = "identity", color="black",
-           width = .5, position = position_dodge(.7)) +
+           width = .35, position = position_dodge(.7)) +
   geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
-                width=.3, position = position_dodge(.7)) +
+                width=.2, position = position_dodge(.7)) +
   geom_text(data = tibble(x=c(.825,1.825),y=c(12,6)),
             aes(x=x,y=y, label="*"), inherit.aes = FALSE, size=7) +
   scale_y_continuous(expand = expansion(0),
@@ -444,8 +444,8 @@ p4 <- p.maze %>%
                               levels = c("Nº.abierto"),
                               labels = c("Brazo\nabierto"))) %>%
   ggplot(aes(v_j, numero_obs, fill=observacion)) +
-  geom_boxplot(width=.35, alpha=.25) +
-  geom_jitter(pch=21,position = position_jitterdodge(.5), size=1) +
+  geom_boxplot(width=.3, alpha=.25) +
+  geom_jitter(pch=21,position = position_jitterdodge(.5), size=2) +
   scale_y_continuous(limits = c(0,20),
                      breaks = seq(0,20, 3)) +
   scale_fill_manual(values ="yellowgreen") +
@@ -488,9 +488,9 @@ p.maze %>%
   summarise(media=mean(numero_obs), sd=sd(numero_obs)) %>%
   ggplot(aes(v_j, media, fill=observacion)) +
   geom_bar(stat = "identity", color="black",
-           width = .5, position = position_dodge(.7)) +
+           width = .3, position = position_dodge(.7)) +
   geom_errorbar(aes(ymin=media-0, ymax=media+sd), 
-                width=.3, position = position_dodge(.7)) +
+                width=.15, position = position_dodge(.7)) +
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,30),
                      breaks = seq(0,30, 3)) +
@@ -513,6 +513,9 @@ p.maze %>%
         axis.ticks.x = element_blank() ,
         axis.ticks.y = element_line(size=1)
   )
+
+# ggsave("obs_esp.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+#        width = 6, height = 4)
 
 #---------------------------------------------------------------#
 # Análisis de componentes principales para cada prueba          #
@@ -701,5 +704,21 @@ plot_ly(pc_pm,
 
 plot_grid(pc_1, pc_2, pc_3)
 
-ggsave("Rplot07.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
-       width = 8, height = 7)
+# ggsave("Rplot07.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\conducta\\graficas",
+#        width = 8, height = 7)
+
+
+##### Voy a usar varimax para rotarlas a ver que tal, al menos los de open field. No le veo
+##### gran diferencia
+
+library(psych)
+
+of_varimax <- principal(matrix_numof, nfactors = 2, rotate = "varimax", scores = TRUE)
+
+as_tibble(of_varimax$scores) %>% 
+  mutate(v_j=matrix_of$v_j) %>%
+  ggplot(aes(RC1,RC2,fill=v_j)) +
+  geom_point(pch = 21, size=2) +
+  stat_ellipse(geom="polygon", alpha = .35) +
+  theme_classic()
+

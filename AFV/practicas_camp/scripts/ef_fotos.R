@@ -1,6 +1,7 @@
 library(tidyverse)
 library(readxl)
 library(ggthemes)
+library(glue)
 #------------------------------------------------------------------------------#
 #                                Intercambio Gaseoso                           #
 #------------------------------------------------------------------------------#
@@ -184,7 +185,12 @@ matrix_inter_gas <- as.matrix(preprocesado[,-1]) # nos quedamos solo con las var
 
 pca_inter_gas <- prcomp(matrix_inter_gas, center = T, scale = T)
 
-summary(pca_inter_gas) # PC1 = 0.49, PC2 = 0.33, entre los dos explican un 82.48 % de la varianza total
+resumen_inter_gas <- summary(pca_inter_gas) # PC1 = 0.49, PC2 = 0.33, entre los dos explican un 82.48 % de la varianza total
+
+var_inter_gas1 <- round(resumen_inter_gas$importance[2,1]*100,2)
+var_inter_gas2 <- round(resumen_inter_gas$importance[2,2]*100,2)
+var_inter_gas3 <- round(resumen_inter_gas$importance[2,3]*100,2)
+
 componentes <- as.data.frame(pca_inter_gas$x)
 componentes$PC1
 
@@ -211,8 +217,8 @@ componentes_principales %>%
   labs(
     title = "PCA de las variables de intercambio gaseoso",
     subtitle = "Informe A.F.V,García-Estupiñán, J.C., Biología ULL",
-    x = "PC1 (49% de la varianza explicada)",
-    y = "PC2 (33% de la varianza explicada)",
+    x = glue("PC1 ({var_inter_gas1}% de la varianza explicada)"),
+    y = glue("PC2 ({var_inter_gas2}% de la varianza explicada)"),
     fill= "Tipo de hoja"
   ) +
   theme_classic() +
@@ -223,6 +229,17 @@ componentes_principales %>%
     legend.position = c(.2,.8),
     legend.background = element_rect(color = "black", fill = NULL),
     legend.text = element_text(size = 11)) 
+
+tres_d_inter_gas <- componentes_principales %>% 
+  mutate(colores=case_when(exposicion == "SOL" ~"yellow",
+                           exposicion == "SOMBRA" ~ "black"))
+
+plot3d(x=tres_d_inter_gas$PC1, y=tres_d_inter_gas$PC2, z=tres_d_inter_gas$PC3,
+       col = tres_d_inter_gas$colores, type = "s", size = 1,
+       xlab=glue("PC1 ({var_inter_gas1}% varianza explicada)"), 
+       ylab=glue("PC2 ({var_inter_gas2}% varianza explicada)"), 
+       zlab=glue("PC3 {var_inter_gas3}% varianza explicada"))
+
 
 #-------------------------------------------------------------------------------------------------#
 #                                     RESULTADO DEL PCA TEÓRICAMENTE                              #

@@ -95,8 +95,8 @@ microclima %>%
   geom_errorbar(aes(ymin=media+sd, ymax=media-sd), width = .3, position = position_dodge(.915)) +
   scale_fill_manual(values = c("yellow","red3","skyblue")) +
   geom_hline(yintercept = 0) +
-  geom_text(data = tibble(x=2, y=25),
-            aes(x=x,y=y,label="*"), inherit.aes = F, size=8) +
+  geom_text(data = tibble(x=2, y=21),
+            aes(x=x,y=y,label="*"), inherit.aes = F, size=10) +
   labs(title = "PAR, estudio microclimático del Rosalillo",
        subtitle = "Informe A.F.V, García Estupiñán, J.C., Biología ULL",
        x="Hora",
@@ -110,7 +110,7 @@ microclima %>%
     axis.text = element_text(size = 12),
     axis.title = element_text(size = 14, face="bold"), 
     panel.background = element_blank(),
-    legend.position = c(.8,.85),
+    legend.position = "top",
     legend.background = element_rect(color = "black")
   )
 
@@ -148,15 +148,15 @@ kruskal.test(tleaf~estrato, data = microc_12_30)                              # 
 
 #------------------------------------------------------------------------------3
 
-tr.groups(microc_10_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
-tr.groups(microc_10_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media")
+th.groups(microc_10_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+th.groups(microc_10_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media")
 pairwise.wilcox.test(x=microc_10_30$tleaf,
                      g=microc_10_30$estrato, 
                      p.adjust.method = "bonf")                # p > 0.05 apical-media y basal-media
-tr.groups(microc_11_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
-tr.groups(microc_11_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
-tr.groups(microc_12_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
-tr.groups(microc_12_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+th.groups(microc_11_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+th.groups(microc_11_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+th.groups(microc_12_00, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
+th.groups(microc_12_30, tleaf, "tleaf", estrato, "Apical", "Basal", "Media") # p > 0.05
 
 
 

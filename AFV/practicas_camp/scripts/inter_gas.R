@@ -163,3 +163,6 @@ t.test(fvfm~exposicion, data = rosalillo)                     # p > 0.05
 
 
 
+
+
+

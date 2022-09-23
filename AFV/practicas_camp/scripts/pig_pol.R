@@ -8,6 +8,8 @@ library(readxl)
 library(rgl)
 library(tidytext)
 library(xlsx)
+library(glue)
+library(ggtext)
 
 # Este link provee un script donde tengo una funciones interesantes hechas por mí
 source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
@@ -245,6 +247,7 @@ pig_pol_rosalillo %>%
         legend.background = element_rect(color = "black"),
         legend.text = element_text(size = 11)) +
   scale_fill_manual(values = c("white", "gray"))
+
 #-------- Diferencias entre NBI Haz y envés / sombra y Sol del Rosalillo? -----#
 
 tw.groups(pig_pol_rosalillo, nbi, "nbi", h_e, "Envés", "Haz")# p > 0.05 
@@ -366,13 +369,18 @@ df_total <- data.frame(
 
 matrix_total <- df_total[,-5]
 pca_total <- prcomp(matrix_total, center = T, scale = T)
-summary(pca_total) # PC1 = 71.57%, PC2 = 27.94% --> PC1 + PC2 = 99.52% 
+resumen_pc2 <- summary(pca_total) # PC1 = 71.57%, PC2 = 27.94% --> PC1 + PC2 = 99.52% 
+
+var_pc1_especies <- round(resumen_pc2$importance[2,1]*100,2)
+var_pc2_especies <- round(resumen_pc2$importance[2,2]*100,2)
+var_pc3_especies <- round(resumen_pc2$importance[2,3]*100,2) 
 
 componentes_total <- as.data.frame(pca_total$x)
 
 df_pc_total <- data.frame(
   PC1 = componentes_total$PC1,
   PC2 = componentes_total$PC2,
+  PC3 = componentes_total$PC3,
   especie=df_total$especie
 ) %>% 
   mutate(especie.2 = case_when(especie == "Pino sol" ~ "Pino",
@@ -389,8 +397,8 @@ df_pc_total %>%
   labs(
     title = "PCA, variables pigmentos y fenoles, Pino vs Rosalillo",
     subtitle = "Informe A.F.V.,García-Estupiñán, J.C., Biología ULL",
-    x="PC1 (66.57% de la varianza explicada)",
-    y="PC1 (26.39% de la varianza explicada)",
+    x=glue("PC1 ({var_pc1_especies}% de la varianza explicada)"),
+    y=glue("PC2 ({var_pc2_especies}% de la varianza explicada)"),
     fill="Especie",
     color="Especie"
   ) +
@@ -409,3 +417,12 @@ tapply(df_pc_total$PC2, df_pc_total$especie.2, shapiro.test)   # p > 0.05 en amb
 LeveneTest(PC2~especie.2, data = df_pc_total, center = "mean") # p > 0.05 los datos son homocedásticos 
 t.test(PC1~especie.2, data = df_pc_total)                      # p < 0.05 en la PC2 también, existen diferencias significativas
 
+tres_d2 <- df_pc_total %>% 
+  mutate(colores=case_when(especie.2 == "Pino" ~"red",
+                           especie.2 == "Rosalillo" ~ "blue"))
+
+plot3d(x=tres_d2$PC1, y=tres_d2$PC2, z=tres_d2$PC3,
+       col = tres_d2$colores, type = "s", size = 1,
+       xlab=glue("PC1 ({var_pc1_especies}% varianza explicada)"), 
+       ylab=glue("PC2 ({var_pc2_especies}% varianza explicada)"), 
+       zlab=glue("PC3 {var_pc3_especies}% varianza explicada"))

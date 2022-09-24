@@ -579,5 +579,5 @@ Por último, probé gráficos 3D de otra librería de ```plotly```. Podemos aña
 Igualmente, te advierto que este gráfico es una flipada en verdad porque en la práctica ¿adivina qué? Las memorias que hagas son en 2D, con lo cual de nada te sirve una imagen 3D no interactiva en 2D. Es más, te preguntarás por qué no lo he subido aquí, si GitHub permite subir este tipo de gráficos... bueno ... Literal el archivo en HTML es tan grande que no se puede ver aquí. Todos mis spripts de R en este directorio no suman casi ni 1% en comparación con ese archivo. Lástima, hay otras librerías que hacen este cometido como ```rgl```, y puedes conseguir un GIF de la imagen en 3D con un peso infinitamente menor, pero no es de tanta calidad como plotly. 
 
 
-## **It si over**
+## **Se acabó**
 ### Espero que te sirva =)

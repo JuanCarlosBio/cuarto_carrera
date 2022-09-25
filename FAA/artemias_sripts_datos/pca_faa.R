@@ -113,7 +113,7 @@ princ_comp %>%
   )
 
 # ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#       width = 7, height = 5.5)
+#       width = 7, height = 4.75)
 
 
 # Una forma de entender mejor el PCA es aplicar el "Varimax rotation".
@@ -167,7 +167,7 @@ componentes_rotados %>%
 
 #ggsave("rpca.png", 
 #        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#        width = 7, height = 5.5)
+#        width = 7, height = 4.75)
 
 # ¿Existen diferencias entre cada grupo de ambas componentes principales?
 
@@ -226,7 +226,7 @@ library(plotly)
 plot_ly(princ_comp, 
         x = ~PC1, y = ~PC2, z = ~PC3, 
         color = ~tratamiento, 
-        colors = c('skyblue','orange','#dc4b31','darkgray') ) %>%
+        colors = c('tomato','gray','orange','skyblue') ) %>%
   add_markers(size = 12) %>%
   layout(
     title = glue('Total Explained Variance = {var_tot}'),
@@ -234,11 +234,11 @@ plot_ly(princ_comp,
                               zerolinewidth = 1,
                               ticklen = 5,
                               gridwith = 2),
-                 yaxis = list(title = glue('PC2 ({var_pc2}% varianza explicada)'),
+                 zaxis = list(title = glue('PC2 ({var_pc2}% varianza explicada)'),
                               zerolinewidth = 1,
                               ticklen = 5,
                               gridwith = 2),
-                 zaxis = list(title = glue('PC3 ({var_pc3}% varianza explicada)'),
+                 yaxis = list(title = glue('PC3 ({var_pc3}% varianza explicada)'),
                               zerolinewidth = 1,
                               ticklen = 5,
                               gridwith = 2),

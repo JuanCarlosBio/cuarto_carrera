@@ -4,9 +4,9 @@
 
 ### Si eres alumo de 4º de Biología de la ULL
 
-* Si quieres hacer la práctica con R puedes basarte en mis gráficos, pero obviamente en su momento me costó hacer este trabajo, con lo cuál me gustaría que me mencionaras si lo usas =). 
+* Si quieres hacer la práctica con R puedes basarte en mis gráficos, pero obviamente en su momento me costó hacer este trabajo, con lo cual me gustaría que me mencionaras si lo usas =). 
 
-* Teóricamente, debe de estar hecho para que copies y pegues los sripts en tu Rstudio local (o cualquier ambiente en el que lo uses), y obtengas mis resultados. (**Recuerda instalar todos los paquetes!!!**).
+* Teóricamente, debe de estar hecho para que copies y pegues mis [sripts](https://github.com/Juankkar/cuarto_carrera/tree/main/AFV/practicas_camp/scripts) en tu Rstudio local (o cualquier ambiente en el que lo uses), y obtengas mis resultados. (**Recuerda instalar todos los paquetes!!!**).
 
 * La práctica consiste en ir al Teide y tomar una serie de medidas de distintos parámetros biológicos de distintas especies, en nuestro caso estudiamos únicamente al Pino y al Rosalillo. Se dividirán en grupos, e irán rotando para hacer cada una de las actividades. Por último, cada grupo se encargará de realizar una *"exposición"* de los resultados de una de las actividades en concreto por grupo. Es decir, a cada grupo le tocará explicar los resultados de una de las actividades en concreto.
 
@@ -22,7 +22,7 @@
 Además de otras más de campo como el 
   - estudio biométrico de Pino. 
 
-* El hecho de que cada grupo recoja los datos y los tengas que hacer tu luego tiene un problema y es que, en mi experiencia, cada persona coge los datos de una forma diferente, sin ningún patrón, así que las bases de datos serán *personalizadas*. En ese sentido las bases de datos que tengo aquí subidas han sido procesadas y limpiadas por mí. Pero lo hice en Excel, con lo que he perdido el procedimeinto para hacerlas de esta manera. Muy poco reproducible por mi parte. En ese sentido si quieres poder usar tus datos con mi código vas a tener que busacar como darles una conformación igual a la que yo tengo.
+* El hecho de que cada grupo recoja los datos y los tengas que hacer tu luego tiene un problema y es que, en mi experiencia, cada persona coge los datos de una forma diferente, sin ningún patrón, así que las bases de datos serán *personalizadas*. En ese sentido las bases de datos que tengo aquí subidas han sido procesadas y limpiadas por mí. Pero lo hice en Excel, con lo que he perdido el procedimeinto para hacerlas de esta manera. Muy poco reproducible por mi parte. En ese sentido si quieres poder usar tus datos con mi código vas a tener que busacar como darles una conformación igual a los míos. [Datos de los alumnos de prácticas de campo del 2021-22](https://github.com/Juankkar/cuarto_carrera/tree/main/AFV/practicas_camp/bases_datos). 
 
 * También en su momento no sabía tanto cómo ahora, iguál las haría de forma diferente. Pero bueno, a navío hecho todos somos ingenieros.
   

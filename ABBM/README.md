@@ -53,13 +53,13 @@ En proceso. Me está costando recordar la parte de cinética. Muy desordenado lo
 
     * Está feo que yo lo diga, pero me ha quedado un gráfica espectacular.
 
-    * Posteriormente se creó una fucnicón para obtener la actividad específica.De manera que añadiendo a la función cada cosa daría el resultado que queremos. **No sé si en el script lo que hice está bien xd**. O sea la función sí, el problema como ocurre siempre con química-bioquímica-bio. molecular... son siempre el problema de las unidades (que ansiedad me da siempre xd). En el exámen de prácticas eso es una movida, también te digo que es a papel y boli, así que la finción de abajo no te va a ayudar en ese momento. Añado el código de la función, (si consigues tener cada cosa con sus unidades bien, te debería funcionar wonderfully siempre):
+    * Posteriormente se creó una fucnicón para obtener la actividad específica.De manera que añadiendo a la función cada cosa daría el resultado que queremos. **No sé si en el script lo que hice está bien xd**. O sea la función sí, el problema como ocurre siempre con química-bioquímica-bio. molecular... son siempre el problema de las unidades (que ansiedad me da siempre xd). En el exámen de prácticas eso es una movida, también te digo que es a papel y boli, así que la función de abajo no te va a ayudar en ese momento. Añado el código, (si consigues tener cada cosa con sus unidades bien, te debería *funcionar* wonderfully siempre):
 
 ```
 
 # Abs: Absotbancia
 # vT: Volumane total
-# E: no me acuerdo exactamente por ahora xd
+# E: Coeficiente de extinción molar
 # conc_prot: concentración de la proteína de estudio
 # ve: volumen de extracto de la proteína
 # t: tiempo
@@ -121,19 +121,16 @@ rf <- function(dist_frente, dist_prot){
  
     * Identificación de una proteína heteróloga a partir de su movilidad relativa.
 
-    * Primero se hace una una cormatografía de columna, para obtener de un extracto la proteína problema deseada (creo que enconcreto la hicmos de afinidad o algo así, no me hagas mucho caso, la hice hace mucho tiempo).
+    * Primero se hace una una cormatografía de columna, para obtener de un extracto la proteína problema deseada (creo que enconcreto la hicmos de afinidad o intercambio iónico, no me hagas mucho caso, la hice hace mucho tiempo).
     
     * Después la muestra de interés se esudió en un gel de poliacrilamida. Las muestras de todos los alumnos estaban en uno o dos. Yo logré salvar **cuatro geles** que conpartimos los alumnos de mi curso. 
     
-    * He de decir que los resultados estaban ahí ahí xd. Intenté sacar como pude en ese sentido la movididad relativa de los geles.
+    * He de decir que los resultados de las fotografías estaban ahí ahí xd. Intenté sacar como pude en ese sentido la movididad relativa de los geles. En algunos igual he tenido exceso de fe para ver el frente. 
 
-    * El resultado están en esta gráfica para cada uno. Se interpola el **log(PM)**, ojo, no directamente los **Kd**. Los pesos del marcador te los dá la profesora.
+    * El resultado están en esta gráfica para cada uno. Se interpola el **log(PM)**, ojo, no directamente los **Kd**. Los pesos del marcador molecular con el que haces la recta te los dá la profesora.
 
     * Luego se supone que tienes que buscar la porteína en una base de datos según su peso. 
 
-    * Una cosa que no me gusta del todo, es que en los apuntes pone hacer la gráfica con la ecuación de la recta que es lo que hice, pero, pero creo que es más correcto trazar una línea que se ajuste correctamente a los puntos en sí. 
-
-
-
+    * Una cosa que no me gusta del todo, es que en los apuntes pone hacer la gráfica con la ecuación de la recta que es lo que hice. Pero creo que es más correcto trazar una línea que se ajuste correctamente a los puntos en sí. No me pagan lo suficiente...
 
 ---

@@ -246,9 +246,9 @@ cp_2022 %>%
     legend.background = element_rect(color = "white")
   )
 
-# ggsave("artemias_pca2022.png", 
+#ggsave("artemias_pca2022.png", 
 #        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
-#        width = 7, height = 4.45)
+#        width = 7, height = 4.75)
 
 # ¿Existen diferencias entre cada grupo de ambas componentes principales?
 

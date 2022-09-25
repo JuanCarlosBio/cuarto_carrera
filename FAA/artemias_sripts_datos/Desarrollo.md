@@ -226,7 +226,7 @@ output
 
 ## **Transformación de los datos para convertirlos si podemos en normales:**
 
-Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás mejor. Crearemos nuevas variables, que a lo posiblemente hagan normales o homocedásticas a los datos de interés.
+Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás mejor. Modificamos nuevas variables modificando ```valores```, que a lo mejor sea hagan normales o homocedásticas a los datos de interés.
 
 ```
 tidy_artemias %>% 

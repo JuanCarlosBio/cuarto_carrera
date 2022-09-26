@@ -40,7 +40,7 @@ data_zanahoria %>%
   scale_x_date(date_labels = "%d %b",
                date_breaks = "7 days") +
   labs(title = "Contaminaciones, callos de zanahoria",
-       subtitle = "Informe AFV, Grupo 5, Bloque de Biotecnología, Biología ULL",
+       subtitle = "Informe AFV, Grupo 6, Bloque de Biotecnología, Biología ULL",
        y = "Nº de medios de cultivo",
        x = "Fecha de la contaminación (2021)") +
   theme(
@@ -71,7 +71,7 @@ data_zanahoria %>%
   scale_x_date(date_labels = "%d %b",
                date_breaks = "7 days") +
   labs(title = "Callos formados (zanahoria)",
-       subtitle = "Informe AFV, Grupo 5, Bloque de Biotecnología, Biología ULL",
+       subtitle = "Informe AFV, Grupo 6, Bloque de Biotecnología, Biología ULL",
        y = "Nº de medios de cultivo",
        x = "Fecha de la contaminación (2021)") +
   theme(

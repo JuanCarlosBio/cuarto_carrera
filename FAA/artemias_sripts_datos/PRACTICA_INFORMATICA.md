@@ -539,7 +539,7 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 
 La idea de rotar las componentes, teóricamente y estadísticamente hablando,  es adquirir un mayor nivel de interpretación de los datos.
 
-Para ello una técnica muy utilizada es ```varimax```, para ello se usaría el siguiente código ultilizando la función ```principal()``` de la librería ```psysch```:
+Para ello una técnica muy utilizada es ```varimax```, se usaría el siguiente código ultilizando la función ```principal()``` de la librería ```psysch```:
 
 ```
 library(psych)

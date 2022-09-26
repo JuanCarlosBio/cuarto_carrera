@@ -17,13 +17,12 @@ library(readxl)
 library(rstatix)
 
 # (pchsss...) Lo primero que te recomiendo es que veas si la plantilla que te dan este año es la misma que la que nos dieron a nosotros el año pasado
-# en tal caso, si cambias los valores del año pasado por los tuyos, tal como están en el csv de abajo, en teoría deberías poder correr  el script 
-# perfectamente, con tus datos :). Sólo hay un pero, cuando hagas la parte de Hardy Weinberg, tienes que asegurarte en caso de que tengas que hacer la
-# correción de Yates, te avisaré que tienes que cambiar con un OJO!!! en su momento en ese caso. 
+# en tal caso, si cambias los valores del año pasado por los tuyos en cada base de datos, tal como están en el csv de abajo y en desequilibrio gamético,
+# en teoría deberías poder correr  el script perfectamente, con tus datos :). Sólo hay un pero, cuando hagas la parte de Hardy Weinberg, tienes que 
+# asegurarte en caso de que tengas que hacer la correción de Yates. Te avisaré que tienes que cambiar con un OJO!!! en su momento en ese caso. 
 
 # En el momento que la tabla tenga una columna de más o fila, sorry, tendrás que modificar un par de cosas. Aún así espero que te ayude :).
-
-practicas_gevo <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/GEVO/practicas_gevo.csv")
+practicas_gevo <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/GEVO/practicas_gevo.csv") # OJO!!! descarga tu base de datos
 
 # write_csv(practicas_gevo, "practicas_gevo.csv")
 # Los nombres de las variables se han vuelto locas ya que están duplicadas, para ser más leíbles al ojo humano, los profesores
@@ -47,7 +46,7 @@ df_gevo <- rbind(df1,df2) %>%
   group_by(locus) %>% 
   mutate(gf=round(g/sum(g), 2),
          can=round(sum(canarios)*canf, 0)) %>% 
-  ungroup()
+  ungroup();df_gevo
 
 
 df_gevo %>% 
@@ -282,7 +281,7 @@ HWChisq(hs4_canarias,cc=0.5, verbose=TRUE)  # ns
 deseq.gam <- tibble(
   A25 = c(rep("1/1",3),rep("1/2",3),rep("2/2",3)),
   D1 = rep(c("1/1","1/2","2/2"),3),
-  N = c(98,87,9,45,76,43,6,25,12)
+  N = c(98,87,9,45,76,43,6,25,12) # OJO!!!, si los valores son diferentes cambialos
 ) %>% mutate(total=sum(N),
              nA25_1 = case_when(A25 == "1/1" ~ 2,
                                 A25 == "1/2" ~ 1,
@@ -313,13 +312,13 @@ q_A25 <- sum(deseq.gam$fgenoA25_2)
 p_D1 <- sum(deseq.gam$fgenoD1_1)
 q_D1 <- sum(deseq.gam$fgenoD1_2)
 
-
+# OJO!!! Recuerda cambiar los valores en caso de que no sean iguales 
 tabla_construida <- data.frame(
-  A1A1=c(98,87,9),
-  A1A2=c(45,76,43),
-  A2A2=c(6,25,12)
+  APO_1_1=c(98,87,9),
+  APO_1_2=c(45,76,43),
+  APO_2_2=c(6,25,12)
 )
-rownames(tabla_construida) <- c("B1B1","B1B2","B2B2")
+rownames(tabla_construida) <- c("D1_1_1","D1_1_2","D1_2_2")
 
 tabla_construida
 

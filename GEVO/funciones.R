@@ -29,7 +29,7 @@ vect_hw <- function(df,      # tabla de hardy weinberg que hemos creado
 # N: nº de individuos
 # p1, p2, q1, q2: frecuencias alélicas 
 langley <- function(A,B,C,D,N,p1,p2,q1,q2){
-  print(">>> Resultados de desequilibrio gamético de Langley:")
+  print(">>> Resultados de desequilibrio gametico de Langley:")
   v=((4*A+2*B+2*C+D)/(2*N)) - (2*p1*p2)
   chi_cuadrado=(N*v^2)/(p1*p2*q1*q2)
   R=sqrt(chi_cuadrado/(4*N))

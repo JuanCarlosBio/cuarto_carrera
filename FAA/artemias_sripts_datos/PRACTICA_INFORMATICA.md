@@ -568,7 +568,7 @@ Y lo siguiente sería realizar el mismo gráfico de las componentes, pero esta v
 
 ---
 
-Como he dicho, no es mi intención dar una interpretación del PCA, pero si necesitas un ejemplo, lo he hecho en mis resultados del TFG. Hice un PCA con una interpretación muy sencilla, tenía un patrón biológico claro sobre la biometría de las tortugas rescatadas por la Tahonilla. 
+Como he dicho, no es mi intención dar una interpretación del PCA, pero si necesitas un ejemplo, lo he hecho en mis resultados del [TFG](https://github.com/Juankkar/Tortugas_La_Tahonilla). Hice un PCA con una interpretación muy sencilla, tenía un patrón biológico claro sobre la biometría de las tortugas rescatadas por la Tahonilla. 
 
 En principio no sé como llevaré ese proyecto; en el momento en el que estoy escribiendo aún no lo he podido poner a punto del todo, habrá algunos fallos (creo que en cuanto a interpretación no debería haberme dejado nada). 
 

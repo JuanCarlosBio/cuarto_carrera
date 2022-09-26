@@ -1,4 +1,4 @@
-# Trabajo de exposición: Efecto de la cosanguinidad en la resolución de problemas para *Mus musculus*
+# Trabajo de exposición: Efecto de la consanguinidad en la resolución de problemas para *Mus musculus*
 
 Este trabajo consistió en realizar una exposición de un diseño experimental. En nuestro caso, me encargué de la parte técnica, simulé un experimento con R.
 

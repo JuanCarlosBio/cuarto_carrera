@@ -20,7 +20,7 @@ El punto 4 es aparte.
 
 ---
 
-## ***Plantilla de prácticas resuleta en R, hay dos Scripts:***
+## ***Plantilla de prácticas resuelta en R, hay dos Scripts:***
 
 * Uno que se llama [funciones.R](https://github.com/Juankkar/cuarto_carrera/blob/main/GEVO/funciones.R), que tiene una serie de funciones que he programado para realizar los análisis. No tienes por qué mirarlo, ya que con una función llamada ```source()``` se descargan en el siguiente script de manera automática. Si es verdad que las puedes usar para cualquier ejecicio, cambiando los parámetros que necesites.
 

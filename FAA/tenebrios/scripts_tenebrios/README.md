@@ -33,7 +33,7 @@ La verdad es que una práctica muy interactiva, a mí me gustó mucho
 
 	* Resultados de todos: tene_todos_crudos.R --> la base de datos de todos los alumnos de FAA. He de decir que la forma que toman los datos, queda muy bonito, pero no es muy R, SPSS, Python... friendly, con lo cual tuve que hacer un preprocesamiento guapo. 
 
-# ***Resumen de los resultados*** (Son además más de lo que llegamos a presentar)
+# ***Resumen de los resultados*** 
 
 ## **Resultados de nuestro experimento en concreto:**
 

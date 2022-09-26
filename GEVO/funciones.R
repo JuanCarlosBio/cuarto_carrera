@@ -1,6 +1,13 @@
 ##### En este script están algunas funciones necesarias, que facilitan mucho a la hora de hacer 
 # el script de las practicas_genetica.R, y volverlo más automático.
 
+# Función para calcular la Heterocigocidad esperada:
+
+he <- function(frec1, frec2) {
+  operacion = 1-(frec1^2+frec2^2)
+  return(operacion)
+}
+
 # Función para extraer la información de la tabla como vectores. De esta manera, 
 # debería funcionar de manera automática incluso con tus datos, siempre y cuando
 # el nº total de genotipos sean 3, ejemplo AA Aa aa.

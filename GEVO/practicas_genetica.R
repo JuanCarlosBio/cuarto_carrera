@@ -119,15 +119,6 @@ frec_relativa %>%
 
 # Heterocigosidad esperada
 
-# Creamos un función para sacar la heterocigosidad esperada (psss... si 
-# tienes que usar de vez en cuando esta función puedes copiar y pegarla
-# en otros lados)
-
-he <- function(frec1, frec2) {
-  operacion = 1-(frec1^2+frec2^2)
-  return(operacion)
-}
-
 frec_relativa %>% 
   select(locus,alelo, frec_relativa) %>% 
   pivot_wider(values_from = frec_relativa, names_from = alelo) %>%

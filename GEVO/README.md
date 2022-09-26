@@ -30,7 +30,7 @@ El punto 4 es aparte.
 
 ###### jaja que prim@ no? xd
 
-* Servir te pueden seguir serviendo, pero no te va a hacer la cama.
+* Servir te pueden seguir serviendo, pero no te va a hacer la cama. También si cambian los locus, pues tendrás que modificar l(o incluso los genotipos, si en vez de 1/1,1/2...) os datos  que te piden este año.
 
 * Tengo algo mal por ahí, me pusieron un **9.6** (muy disrespectful eso xd), y no te dicen en que fallas. Creo que es lo último, lo de decir que gametos están en exceso o no.
 

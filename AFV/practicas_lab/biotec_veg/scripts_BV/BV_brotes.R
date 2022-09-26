@@ -37,7 +37,7 @@ data_brotes %>% ggplot(aes(fecha, cont)) +
   scale_x_date(date_labels = "%d %b",
                date_breaks = "7 days") +
   labs(title = "Contaminaciones, segmentos nodales y ápices",
-       subtitle = "Informe AFV, Grupo 5, Bloque de Biotecnología, Biología ULL",
+       subtitle = "Informe AFV, Grupo 6, Bloque de Biotecnología, Biología ULL",
        y = "Nº de medios de cultivo",
        x = "Fecha de la contaminación (2021)") +
   theme(
@@ -76,7 +76,7 @@ brotes_enr %>%
   geom_point(aes(y = raices_trans), color="brown", size=3) +
   labs(
     title="Formación de segmentos nodales y raíces",
-    subtitle = "Informe AFV, Grupo 5, Bloque de Biotecnología, Biología ULL",
+    subtitle = "Informe AFV, Grupo 6, Bloque de Biotecnología, Biología ULL",
     x="Fecha (2021)",
     y="Segmentos nodales\nformados"
   ) +

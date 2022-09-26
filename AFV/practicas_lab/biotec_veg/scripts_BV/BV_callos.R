@@ -54,8 +54,8 @@ data_zanahoria %>%
     axis.text = element_text(size = 10)
     ) 
 
-# ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
-#         width = 8, height = 4)
+ ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+         width = 8, height = 4)
 
 data_zanahoria %>% 
   ggplot(aes(fecha, callos)) +

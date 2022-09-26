@@ -13,7 +13,7 @@ Algunas de las asignaturas no incentivaban a utilizar R, o no fui capaz de busca
 
 También me gustaría decir que por el momento este proyecto está en obras. No sé si ni siquiera si acabará xd.
 
-## **Puedes hacer con el código o ficheros de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me menciones en tus trabajos =).** 
+## **Puedes hacer con el código o ficheros de este repositorio lo que te venga en gana. Pero en caso de ello me gustaría que me mencionaras en tus trabajos =).** 
 
 No te voy a mentir, si no has visto nada de R, y te pones a ver mi código a palo seco, igual tu primera experiencia no será muy buena **:/**. La intención de este repositorio no es hacer tutoriales básicos, sino documentar lo que he hecho, pero me interesa que si alguien se pasa por aquí y quiera aprender, pues que saque algo de provecho. 
 

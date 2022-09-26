@@ -2,6 +2,10 @@
 #                         informe de prácticas de GEVO                        #
 ###############################################################################
 
+# Antes que nada cargaremos las funciones propias que he hecho para estas prácticas...
+
+source("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/GEVO/funciones.R")
+
 #### Si no tienes los paquetes recuerda instalarlos!!!!
 # Ejemplo, puedes:
 # install.packages("tidyverse")
@@ -12,10 +16,11 @@ library(ggthemes)
 library(readxl)
 library(rstatix)
 
-# (pchsss...Lo primero que te recomiendo es que veas si la plantilla que te dan este año es la misma que la que nos dieron a nosotros el año pasado
+# (pchsss...) Lo primero que te recomiendo es que veas si la plantilla que te dan este año es la misma que la que nos dieron a nosotros el año pasado
 # en tal caso, si cambias los valores del año pasado por los tuyos, tal como están en el csv de abajo, en teoría deberías poder correr  el script 
-# perfectamente, con tus datos :), menos la última parte de Hardy Weinberg :(, también tienes que comprobar las tablas para usar o no la corrección 
-# de Yates, eso va a ser un problema, llegado el momento te diré que tienes que cambiar con algún comentario con "OJO!!!". Así que tampoco te fíes. 
+# perfectamente, con tus datos :). Sólo hay un pero, cuando hagas la parte de Hardy Weinberg, tienes que asegurarte en caso de que tengas que hacer la
+# correción de Yates, te avisaré que tienes que cambiar con un OJO!!! en su momento en ese caso. 
+
 # En el momento que la tabla tenga una columna de más o fila, sorry, tendrás que modificar un par de cosas. Aún así espero que te ayude :).
 
 practicas_gevo <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/GEVO/practicas_gevo.csv")
@@ -204,62 +209,73 @@ ale_tot_juntos %>%
 
 library(HardyWeinberg) 
 
-# H-W test para A25
-ale_tot_juntos %>% 
-  filter(locus == "A25") %>% 
-  select(`1/1`,`1/2`,`2/2`) # Fíjate en la tabla para Yates
-a25_clase <- c(MM=2,MN=12,NN=47)       # OJO!!!, esto es lo que tienes que cambiar!!!, No te preocupes por las letras, esas sirven, tienes que cambiar el número de genotipos
-a25_canarias <- c(MM=9,MN=95,NN=260)
+#### H-W test para A25
 
+# Creamos la tabla de Hardy weimberg
+tabla_hw_a25 <- ale_tot_juntos %>% 
+  filter(locus == "A25") %>% 
+  select(`1/1`,`1/2`,`2/2`,procedencia) # Fíjate en la tabla para Yates puedes añadir "%>% view()" para ver la tabla
+
+# Extraemos los vectores de la tabla anterior con la función que creamos
+# con el data frame no va, tiene que ser un vector.
+a25_clase <- vect_hw(tabla_hw_a25, 1, 1, 2, 3)       
+a25_canarias <- vect_hw(tabla_hw_a25, 2, 1, 2, 3)
+
+# Usamos la función que nos hace Hardy Weimberg del paquete HardyWeinberg, NICE
 HWChisq(a25_clase,cc=.5, verbose=TRUE)    # ns   OJO!!!, cc=... es la corrección de Yates, si tienes que hacerla ponle un .5, si no, 0. Se aplica cuando el 20% de las casillas de los esperados presentan valores menores a 5... creo xd
 HWChisq(a25_canarias,cc=0, verbose=TRUE)  # ns
 
 # H-W test para D1
-ale_tot_juntos %>% 
+tabla_hw_d1 <- ale_tot_juntos %>% 
   filter(locus == "D1") %>% 
   select(`1/1`,`1/2`,`2/2`)
-d1_clase <- c(MM=9,MN=23,NN=27)
-d1_canarias <- c(MM=37,MN=179,NN=148)
+
+d1_clase <- vect_hw(tabla_hw_d1, 1, 1, 2, 3)
+d1_canarias <- vect_hw(tabla_hw_d1, 2, 1, 2, 3)
 
 HWChisq(d1_clase,cc=0, verbose=TRUE)     # ns
 HWChisq(d1_canarias,cc=0, verbose=TRUE)  # ns
 
 # H-W test para FXIIIB
-ale_tot_juntos %>% 
+tabla_hw_fxiiib <- ale_tot_juntos %>% 
   filter(locus == "FXIIIB") %>% 
   select(`1/1`,`1/2`,`2/2`)
-fx_clase <- c(MM=16,MN=24,NN=14)
-fx_canarias <- c(MM=55,MN=169,NN=140)
+
+fx_clase <- vect_hw(tabla_hw_fxiiib, 1, 1, 2, 3)
+fx_canarias <- vect_hw(tabla_hw_fxiiib, 2, 1, 2, 3)
 
 HWChisq(fx_clase,cc=0, verbose=TRUE)     # ns
 HWChisq(fx_canarias,cc=0, verbose=TRUE)  # ns
 
 # H-W test para APO
-ale_tot_juntos %>% 
+tabla_hw_apo <- ale_tot_juntos %>% 
   filter(locus == "APO") %>% 
   select(`1/1`,`1/2`,`2/2`)
-apo_clase <- c(MM=48,MN=9,NN=2)
-apo_canarias <- c(MM=328,MN=35,NN=1)
+
+apo_clase <- vect_hw(tabla_hw_apo, 1, 1, 2, 3)
+apo_canarias <- vect_hw(tabla_hw_apo, 2, 1, 2, 3)
 
 HWChisq(apo_clase,cc=.5, verbose=TRUE)      # ns
 HWChisq(apo_canarias,cc=0.5, verbose=TRUE)  # ns
 
 # H-W test para HS3.23
-ale_tot_juntos %>% 
+tabla_hw_hs3 <- ale_tot_juntos %>% 
   filter(locus == "HS3.23") %>% 
   select(`1/1`,`1/2`,`2/2`)
-hs3_clase <- c(MM=46,MN=13,NN=0)
-hs3_canarias <- c(MM=278,MN=79,NN=7)
+
+hs3_clase <- vect_hw(tabla_hw_hs3, 1, 1, 2, 3)
+hs3_canarias <- vect_hw(tabla_hw_hs3, 2, 1, 2, 3)
 
 HWChisq(hs3_clase,cc=.5, verbose=TRUE)      # ns
 HWChisq(hs3_canarias,cc=0, verbose=TRUE)    # ns
 
 # H-W test para HS4.65
-ale_tot_juntos %>% 
+tabla_hw_hs4 <- ale_tot_juntos %>% 
   filter(locus == "HS4.65") %>% 
   select(`1/1`,`1/2`,`2/2`)
-hs4_clase <- c(MM=0,MN=5,NN=56)
-hs4_canarias <- c(MM=0,MN=15,NN=349)
+
+hs4_clase <- vect_hw(tabla_hw_hs4, 1, 1, 2, 3)
+hs4_canarias <- vect_hw(tabla_hw_hs4, 2, 1, 2, 3)
 
 HWChisq(hs4_clase,cc=.5, verbose=TRUE)      # ns
 HWChisq(hs4_canarias,cc=0.5, verbose=TRUE)  # ns
@@ -269,13 +285,43 @@ HWChisq(hs4_canarias,cc=0.5, verbose=TRUE)  # ns
 # Desequilibrio gamético entre los marcadores genéticos. Datos ficticios #
 #------------------------------------------------------------------------#
 
-
+# Como es una movida la tabla que he hecho, voy a intentar exlicarla. tentdrás que modificarla en tu caso.
+# No creo que pongan los mismos resultados (tendrás que cambiar N). A lo mejor han cambiado por completo
+# la plantilla de un año para otro xd.
 deseq.gam <- tibble(
   A25 = c(rep("1/1",3),rep("1/2",3),rep("2/2",3)),
   D1 = rep(c("1/1","1/2","2/2"),3),
   N = c(98,87,9,45,76,43,6,25,12)
-)
-deseq.gam
+) %>% mutate(total=sum(N),
+             nA25_1 = case_when(A25 == "1/1" ~ 2,
+                                A25 == "1/2" ~ 1,
+                                A25 == "2/2" ~ 0),
+             nD1_1 = case_when(D1 == "1/1" ~ 2,
+                               D1 == "1/2" ~ 1,
+                               D1 == "2/2" ~ 0),
+             nA25_2 = case_when(A25 == "1/1" ~ 0,
+                                A25 == "1/2" ~ 1,
+                                A25 == "2/2" ~ 2),
+             nD1_2 = case_when(D1 == "1/1" ~ 0,
+                               D1 == "1/2" ~ 1,
+                               D1 == "2/2" ~ 2),
+              fgenoA25_1=(nA25_1*N)/(2*total),
+              fgenoA25_2=(nA25_2*N)/(2*total),
+              fgenoD1_1=(nD1_1*N)/(2*total),
+              fgenoD1_2=(nD1_2*N)/(2*total),
+              ) %>% view # Chiquita tabla, para si es porquería de resultado, mi niño xd
+
+# Número de individuos (es importante para hacer automático el script)
+N <- sum(deseq.gam$N)
+
+# Frecuencias alélicas de A25
+p_A25 <- sum(deseq.gam$fgenoA25_1)
+q_A25 <- sum(deseq.gam$fgenoA25_2)
+
+# Frecuencias alélicas de D1
+p_D1 <- sum(deseq.gam$fgenoD1_1)
+q_D1 <- sum(deseq.gam$fgenoD1_2)
+
 
 tabla_construida <- data.frame(
   A1A1=c(98,87,9),
@@ -286,6 +332,10 @@ rownames(tabla_construida) <- c("B1B1","B1B2","B2B2")
 
 tabla_construida
 
-# Ni me acuerdo de cómo hacer esta vaina, si es verdad que la parte interesante era
-# la primera, este ejercicio se lo sacaron de la manga muy fuerte. Me da una pereza muy 
-# fuerte repasarmelo.
+# Chosss bro... esta función es muy nasty, en plan guay, me siento hasta orgulloso.
+# La puedes utilizar para cualquier ejercicio, en vez de darle el valor de las tablas individuos...
+# de forma "lógica" como he hecho, puedes darle los valores numéricos.
+langley(A=tabla_construida[1,1], B=tabla_construida[1,2], 
+        C=tabla_construida[2,1], D=tabla_construida[2,2],
+        N=N, 
+        p1=p_A25, p2=p_D1, q1=q_A25, q2 =q_D1) 

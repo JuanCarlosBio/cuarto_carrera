@@ -22,9 +22,9 @@ El punto 4 es aparte.
 
 ## ***Plantilla de prácticas resuleta en R, hay dos Scripts:***
 
-* Uno que se llama [**funciones.R**](https://github.com/Juankkar/cuarto_carrera/blob/main/GEVO/funciones.R), que tiene una serie de funciones que he programado para realizar los análisis. No tienes por qué mirarlo, ya que con una función llamada ```source()``` se descargan en el siguiente script de manera automática. Si es verdad que las puedes usar para cualquier ejecicio, cambiando los parámetros que necesites.
+* Uno que se llama [funciones.R](https://github.com/Juankkar/cuarto_carrera/blob/main/GEVO/funciones.R), que tiene una serie de funciones que he programado para realizar los análisis. No tienes por qué mirarlo, ya que con una función llamada ```source()``` se descargan en el siguiente script de manera automática. Si es verdad que las puedes usar para cualquier ejecicio, cambiando los parámetros que necesites.
 
-* El otro tiene la resolución de la plantilla de prácticas, llamado [**practicas_genetica.R**](https://github.com/Juankkar/cuarto_carrera/blob/main/GEVO/practicas_genetica.R). **Está hecho para que, en caso de que no hayan cambiado el formato de la pantilla, simplemente cambiando los valores de mi curso por los tuyos, debería correr perfectamente. De nada.**
+* El otro tiene la resolución de la plantilla de prácticas, llamado [practicas_genetica.R](https://github.com/Juankkar/cuarto_carrera/blob/main/GEVO/practicas_genetica.R). **Está hecho para que, en caso de que no hayan cambiado el formato de la pantilla, simplemente cambiando los valores de mi curso por los tuyos, debería correr perfectamente. De nada.**
 
 * Ahora bien si han añadido alguna columna/fila o en caso de que no te salgan porque no entiendas nada de R pues sorry... 
 

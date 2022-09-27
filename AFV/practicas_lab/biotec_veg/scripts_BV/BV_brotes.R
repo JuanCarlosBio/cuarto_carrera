@@ -6,6 +6,8 @@ library(tidyverse)
 library(ggthemes)
 library(lubridate)
 library(xlsx)
+library(plotly)
+library(htmlwidgets)
 
         #######################################################
         # Práctica 3 explantes y siembra de segmentos nodales #
@@ -51,9 +53,9 @@ data_brotes %>% ggplot(aes(fecha, cont)) +
     axis.text = element_text(size = 10)
   ) 
 
-
-# ggsave("Rplot.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
+# ggsave("Rplot.html", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\AFV\\practicas_lab\\graficas",
 #       width = 8, height = 4)
+
 
 brotes_enr <- data_brotes %>%
   select(fecha, brotes, enraizadas) %>% 

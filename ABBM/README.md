@@ -51,7 +51,7 @@ En proceso. Me está costando recordar la parte de cinética. Muy desordenado lo
 
     *  Luego, obtenidos los resultados de la absorbancia de los tubos problema 6 y 7, se interpoló para sacar los ug de proteína, y sacamos de esta manera la concentración de cada una (no estoy muy seguro si para el segundo caso, el de los 20 ul se multiplica o se divide, en principio lo que yo he hecho, si este tubo tiene más absorbancia sería lógico)
 
-#### Está feo que yo lo diga, pero me ha quedado un gráfica espectacular.
+    * Está feo que yo lo diga, pero me ha quedado un gráfica espectacular.
 
     * Posteriormente se creó una fucnicón para obtener la actividad específica.De manera que añadiendo a la función cada cosa daría el resultado que queremos. **No sé si en el script lo que hice está bien xd**. O sea la función sí, el problema como ocurre siempre con química-bioquímica-bio. molecular... son siempre el problema de las unidades (que ansiedad me da siempre xd). En el exámen de prácticas eso es una movida, también te digo que es a papel y boli, así que la función de abajo no te va a ayudar en ese momento. Añado el código, (si consigues tener cada cosa con sus unidades bien, te debería *funcionar* wonderfully siempre):
 

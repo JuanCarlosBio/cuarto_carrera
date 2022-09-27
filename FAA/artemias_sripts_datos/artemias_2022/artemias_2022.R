@@ -47,8 +47,8 @@ artemias_2022 %>%
   mutate(tratamiento=factor(tratamiento,
                             levels = c("Levadura", "Lectina marina",
                                        "Echium/Bacalao","Enriquecedor comercial"),
-                            labels = c("Levadura", "Lectina\nmarina",
-                                       "Aceite\nEchium\nBacalao", "Enriquecedor\ncomercial"))) %>% 
+                            labels = c("Levadura", "Lectina<br>marina",
+                                       "Aceite<br>*Echium*<br>Bacalao", "Enriquecedor\ncomercial"))) %>% 
   #group_by(tratamiento, acido_graso) %>% 
   #summarise(media=mean(porcentaje, na.rm=TRUE), 
   #          sd=sd(porcentaje, TRUE)) %>% 
@@ -84,7 +84,7 @@ artemias_2022 %>%
     axis.text.x = element_blank(),
     axis.text.y = element_text(margin = margin(r=10)),
     legend.position = c(.9,.175),
-    legend.text = element_text(margin = margin(b=5)),
+    legend.text = element_markdown(margin = margin(b=5)),
     legend.background = element_rect(color = "black"),
     strip.text = element_text(color="black", face = "bold", size = 11),
     strip.background = element_rect(size=1)
@@ -219,8 +219,8 @@ cp_2022 %>%
   mutate(tratamiento= factor(tratamiento,
                              levels = c("Levadura", "Lectina marina",
                                         "Echium/Bacalao", "Enriquecedor comercial"),
-                             labels = c("Levadura", "Lectina\nmarina",
-                                        "Aceite\nEchium/Bacalao", "Enriquecedor\ncomercial"))) %>% 
+                             labels = c("Levadura", "Lectina<br>marina",
+                                        "Aceite<br>*Echium*/Bacalao", "Enriquecedor\ncomercial"))) %>% 
   ggplot(aes(RC1, RC2, fill=tratamiento, color = tratamiento)) +
   geom_point(pch=21, color="black") +
   stat_ellipse(geom = "polygon", alpha = .25) +
@@ -242,13 +242,14 @@ cp_2022 %>%
     plot.title = element_markdown(size = 14, face = "bold", hjust = .5,
                               margin = margin(b=30)),
     axis.title = element_text(face = "bold"),
+    legend.text = element_markdown(),
     legend.position = "bottom",
     legend.background = element_rect(color = "white")
   )
 
-#ggsave("artemias_pca2022.png", 
-#        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
-#        width = 7, height = 4.75)
+ggsave("artemias_pca2022.png", 
+        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
+        width = 7, height = 4.75)
 
 # ¿Existen diferencias entre cada grupo de ambas componentes principales?
 

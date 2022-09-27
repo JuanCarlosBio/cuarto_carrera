@@ -352,21 +352,20 @@ t(cor(matrix.artem.num, pca$x[,c(1,2)]))
 output:
 
 ```
-> summary(pca)
+> resumen
 Importance of components:
-                          PC1    PC2    PC3    
-Standard deviation     2.4703 1.6216 1.3981 
-Proportion of Variance 0.5547 0.2391 0.1777 
-Cumulative Proportion  0.5547 0.7938 0.9715 
+                          PC1    PC2    PC3     
+Standard deviation     2.5963 1.5746 1.2472 
+Proportion of Variance 0.6128 0.2254 0.1414 
+Cumulative Proportion  0.6128 0.8382 0.9796
 
 > t(cor(matrix.artem.num, pca$x[,c(1,2)]))
-    Tratamiento     C 16:0   C 16:1n-7     C 18:0 C 18:1n-9 C 18:2n-6
-PC1  0.03874417 -0.9724542  0.90511630 -0.4544657 0.4677226 0.5692914
-PC2 -0.72268663 -0.1228565 -0.01096018  0.7197490 0.8765420 0.3815882
-     C 18:3n-6  C 18:3n-3  C 18:4n-3  C 20:4n-6  C 20:5n-3
-PC1  0.8774424 0.97998403  0.9650077 -0.6465118 -0.7120432
-PC2 -0.4112061 0.05535555 -0.2300094  0.3723965 -0.5443734
-
+         C 16:0  C 16:1n-7    C 18:0  C 18:1n-9  C 18:2n-6  C 18:3n-6
+PC1  0.97896130 -0.9182935 0.3557374 -0.5509704 -0.5670637 -0.8423759s
+PC2 -0.02365045 -0.2093470 0.5480327  0.7903879  0.5578415 -0.5216688
+      C 18:3n-3  C 18:4n-3 C 20:4n-6  C 20:5n-3  C 22:6n-3
+PC1 -0.97458606 -0.9378363 0.6382211  0.7441699  0.8291693
+PC2  0.00288405 -0.3069549 0.6049313 -0.5923490 -0.3401095s
 ```
 
 Lo siguiente que habría que hacer, es extraer los valores de las 3 primeras componentes y juntarlas con la variable que nos deshicimos al principio, ```tratamiento```, para ello se me podemos usar el siguiente código. 

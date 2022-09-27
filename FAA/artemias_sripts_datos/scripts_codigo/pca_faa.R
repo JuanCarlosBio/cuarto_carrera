@@ -59,7 +59,7 @@ summary(pca)
 # sacar información interesante, dependindo de los valores, se encontrarán en una 
 # posición u otra del gráfico que haremos
 
-cor(matrix.artem.num, pca$x[,c(1,2)])
+t(cor(matrix.artem.num, pca$x[,c(1,2)]))
 
 #### en ese sentido vamos a obtener los valores de las 3 primeras componentes. Y
 #### Vamos a añadir el vector de los grupos del que prescindimos en el principio

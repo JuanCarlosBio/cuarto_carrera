@@ -141,7 +141,7 @@ Me enteré de que este test es recomendable que ***n > 6*** para cada uno de los
 
 **No voy a modificar ni borrar** el procedimiento para hacer este test en el script de inferencia estadística. Ya que es una de las opciones más potentes, te recomiendo que lo utilices siempre, si tu muestra es mayor a la ya mencionada. 
 
-Lo que voy a hacer es aplicar el modelo de **Tamhane T2**, pero no lo voy a hacer en R, sino en ***Python***, ya que me sirve para practicar este lenguaje. Para ello utilizaré la librería ```scikit_posthocs```. El problema de esta, es que no es tan automática como ```rstatix```, pero bueno... la vida es dura. Para ello puedes ver este archivo de [Jupiter Notebook](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/post_hoc.ipynb)
+Lo que voy a hacer es aplicar el modelo de **Tamhane T2**, pero no lo voy a hacer en R, sino en ***Python***, ya que me sirve para practicar este lenguaje. Para ello utilizaré la librería ```scikit_posthocs```. El problema de esta, es que no es tan automática como ```rstatix```, pero bueno... la vida es dura. Para ello puedes ver este archivo de [Jupyter Notebook](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/post_hoc.ipynb)
 
 ---
 

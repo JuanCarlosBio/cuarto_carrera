@@ -10,7 +10,7 @@ Hay varias razones, estas cuatro, son las que más me han gustado.
 
 ---
 
-1) Primera, **es gratis** xd, el SPSS es muy caro, lo que pasa es que como la universidad tiene contratado el servicio de la empresa IBM, donde nosotros, los residentes universitarios lo pagamos a base de matrícula e impuestos. Si salimos al mundo laboral fuera de la universidad, será difícil tener fácil acceso programas como este (puede que no oye, dependerá de la empresa).
+1) Primera, **es gratis** xd, el SPSS es muy caro, lo que pasa es que como la universidad tiene contratado el servicio de la empresa IBM, donde nosotros, los residentes universitarios, lo pagamos a base de matrícula e impuestos. Si salimos al mundo laboral fuera de la universidad, será difícil tener fácil acceso programas como este (puede que no oye, dependerá de la empresa).
 
 2) R, al igual que otros similares, es un ***software de código abierto (OSS open source software)***, lo que permite modificar el sofware de base y lanzarlo al mundo sin ningún tipo de licencia. Técnicamente un lenguaje de programación te permite la posibilidad de programar todas las funciones que tu imaginación te permita tener, que a lo mejor no tenga en un principio alguno de estos softwares informáticos de interfaz gráfica. Estos últimos pueden ser muy útiles y "sencillos", pero son muy poco flexibles.
 

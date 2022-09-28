@@ -20,6 +20,6 @@ Hay varias razones, estas cuatro, son las que más me han gustado.
 
 ---
 
-## **He subido otro Markdown llamado [PRACTICA_INFORMATICA.md](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/PRACTICA_INFORMATICA.md), donde comento algunas cosas de cómo he replicado los resultados de la práctica de informática en R con [estos tres scripts](https://github.com/Juankkar/cuarto_carrera/tree/main/FAA/artemias_sripts_datos/scripts_codigo).**
+## **He subido otro Markdown llamado [PRACTICA_INFORMATICA.md](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/PRACTICA_INFORMATICA.md), donde comento algunas cosas de cómo he replicado los resultados de la práctica de informática en R con [estos tres scripts](https://github.com/Juankkar/cuarto_carrera/tree/main/FAA/artemias_sripts_datos/scripts_codigo). Además hay un cuarto script, escrito en [Jupitar Lab](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/post_hoc.ipynb) en el lenguaje de Python, para hacer uno de los test en concreto.**
 
 ### **También en la carpeta de Artemias 2022 están los resultados que puede sacar en los cromatogramas de este año**

@@ -131,7 +131,7 @@ Para elegir el modelo idóneo hay que estudiar primero si los datos son ***norma
 
 * ***Cumplimiento de la suposición de la normalidad (p>0.05, **ojo!!!, todos los grupos tienen que ser normales**.*** Igualmente, he visto algunas personas que estudian la normalidad del conjunto de datos, y no por separado por cada grupo. Pero nosotros los realizaremos así) y ***homocedasticidad (p>0.05)***: **ANOVA de una vía**. En presencia de diferencias significativas, realizaremos el **test de Tukey**
 
-* ***Cumplimiento de la suposición de la normalidad (p>0.05), pero no de la homocedasticidad (p<0.05)***: **ANOVA de Welch**, en presencia de diferencias significativas, realizaromos el **test de Games-Howell**
+* ***Cumplimiento de la suposición de la normalidad (p>0.05), pero no de la homocedasticidad (p<0.05)***: **ANOVA de Welch**, en presencia de diferencias significativas, realizaromos el **test de Games-Howell**. Me acabo de enterar de que este test es recomendable que n > 6. Pues mentiría si dijera que no me ha fastidiado el día, porque los otros tests no se pueden hacer con este paquete. Nos la jugaremos por el momento con esta función xd. Hasta que se me ocurra algo.
 
 * ***Incumplimiento de la suposición de la normalidad (p<0.05)***: **Kruskal-Wallis**. En presencia de diferencias significativas: **test de Dunnet, y como corrección usaremos Bonferroni** (hay otras como Benjamin Hoschberg, Holms...).
 

@@ -40,7 +40,6 @@ tabla_perfil_medio_ag <- artemias_2022 %>%
   pivot_wider(names_from = "tratamiento", values_from = "media") %>% 
   select(acido_graso, Levadura, `Lectina marina`, `Echium/Bacalao`, `Enriquecedor comercial`)
 
-
 # Gráfico de barras.
 
 artemias_2022 %>% 
@@ -159,7 +158,7 @@ anova_welch %>%
   welch_anova_test(porcentaje ~ tratamiento) %>% 
   select(acido_graso, p)    
 
-# Post-Hoc Games-Howell
+# Post-Hoc Games-Howell OJO!!! mirar el jupiter lab de python, no es correcto hacer Games-Howell con n < 4
 
 anova_welch %>% 
   games_howell_test(porcentaje ~tratamiento) %>% 
@@ -196,7 +195,9 @@ artemias_wider <- artemias_2022 %>%
   mutate(rn = row_number()) %>%
   pivot_wider(names_from = acido_graso, values_from = porcentaje) %>%
   select(-rn) %>% 
-  filter(!(`16:1n-7` %in% NA))
+  filter(!(`16:1n-7` %in% NA)) 
+
+# write_csv(artemias_wider, "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022\\artemias_wider.csv")
 
 artemias_wider[is.na(artemias_wider)] <- 0  
 
@@ -214,6 +215,8 @@ var_rtotal_exp <- var_rotado1_label + var_rotado2_label
 
 cp_2022 <- as_tibble(rpca$scores[,c(1,2)]) %>%
   mutate(tratamiento=artemias_wider$tratamiento)
+
+# write_csv(cp_2022, "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022\\cp_2022.csv")
 
 cp_2022 %>% 
   mutate(tratamiento= factor(tratamiento,
@@ -247,9 +250,9 @@ cp_2022 %>%
     legend.background = element_rect(color = "white")
   )
 
-ggsave("artemias_pca2022.png", 
-        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
-        width = 7, height = 4.75)
+#ggsave("artemias_pca2022.png", 
+#        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\artemias_2022",
+#        width = 7, height = 4.75)
 
 # ¿Existen diferencias entre cada grupo de ambas componentes principales?
 
@@ -300,6 +303,7 @@ tidy_cp %>%
 
 
  
+
 
 
 

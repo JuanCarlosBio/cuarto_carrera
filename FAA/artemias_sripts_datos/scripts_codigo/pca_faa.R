@@ -203,17 +203,22 @@ tidy_rc %>%
 
 # ANOVA de Welch. Hay diferencias significativas 
 tidy_rc %>% 
-  filter(componentes == "PC2") %>% 
+  filter(componentes == "RC2") %>% 
   group_by(componentes) %>% 
   welch_anova_test(valores ~ tratamiento) 
 
-# Tukey. Todos presentan diferencias significativas 
+# Games-Howell. Todos presentan diferencias significativas 
 tidy_rc %>% 
-  filter(componentes == "PC1") %>% 
+  filter(componentes == "RC2") %>% 
   group_by(componentes) %>% 
   games_howell_test(valores ~ tratamiento) %>% 
   select(componentes, comparacion1=group1, 
          comparacion2=group2, significacion=p.adj.signif)
+
+RC2 <- tidy_rc %>% 
+  filter(componentes == "RC2")
+
+write_csv(RC2, "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\rca.csv")
 
 #------------------------------------------------------------------------------#
 #                       Gráfico 3D para ver las componentes 

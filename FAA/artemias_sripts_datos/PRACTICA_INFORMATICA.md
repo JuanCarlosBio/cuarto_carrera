@@ -131,7 +131,19 @@ Para elegir el modelo idóneo hay que estudiar primero si los datos son ***norma
 
 * ***Cumplimiento de la suposición de la normalidad (p>0.05, **ojo!!!, todos los grupos tienen que ser normales**.*** Igualmente, he visto algunas personas que estudian la normalidad del conjunto de datos, y no por separado por cada grupo. Pero nosotros los realizaremos así) y ***homocedasticidad (p>0.05)***: **ANOVA de una vía**. En presencia de diferencias significativas, realizaremos el **test de Tukey**
 
-* ***Cumplimiento de la suposición de la normalidad (p>0.05), pero no de la homocedasticidad (p<0.05)***: **ANOVA de Welch**, en presencia de diferencias significativas, realizaromos el **test de Games-Howell**. Me acabo de enterar de que este test es recomendable que n > 6. Pues mentiría si dijera que no me ha fastidiado el día, porque los otros tests no se pueden hacer con este paquete. Nos la jugaremos por el momento con esta función xd. Hasta que se me ocurra algo.
+* ***Cumplimiento de la suposición de la normalidad (p>0.05), pero no de la homocedasticidad (p<0.05)***: **ANOVA de Welch**, en presencia de diferencias significativas, realizaromos el **test de Games-Howell**. 
+
+---
+
+### ***OJO!!!, me equivoqué con respecto al post-hoc de Games-Howell***
+
+Me enteré de que este test es recomendable que ***n > 6*** para cada uno de los grupos de estudio, y la nuestra como ya hemos dicho es ***n = 4***. Hay un problema y es que ```rstatix``` no tiene esta función, lo cual es desafortunado.
+
+**No voy a modificar ni borrar** el procedimiento para hacer este test en el script de inferencia estadística. Ya que es una de las opciones más potentes, te recomiendo que lo utilices si tu muestra es mayor a la ya mencionada siempre. 
+
+Lo que voy a hacer es aplicar el modelo de **Tamhane T2**, pero no lo voy en Python, ya que me sirve para practicar este lenguaje. Para ello utilizaré la librería ```scikit_posthocs```. El problema de esta, es que no es tan automática como ```rstatix```, pero bueno... la vida es dura. Para ello puedes ver este archivo de [Jupiter Lab](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/post_hoc.ipynb)
+
+---
 
 * ***Incumplimiento de la suposición de la normalidad (p<0.05)***: **Kruskal-Wallis**. En presencia de diferencias significativas: **test de Dunnet, y como corrección usaremos Bonferroni** (hay otras como Benjamin Hoschberg, Holms...).
 

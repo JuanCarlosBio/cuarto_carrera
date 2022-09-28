@@ -137,7 +137,7 @@ Para elegir el modelo idóneo hay que estudiar primero si los datos son ***norma
 
 ### ***OJO!!!, me equivoqué con respecto al post-hoc de Games-Howell***
 
-Me enteré de que este test es recomendable que ***n > 6*** para cada uno de los grupos de estudio, y la nuestra como ya hemos dicho es ***n = 4***. Hay un problema y es que ```rstatix``` los otros post-hoc para varianzas desiguales... lo cual es desafortunado.
+Me enteré de que este test es recomendable que ***n > 6*** para cada uno de los grupos de estudio, y la nuestra como ya hemos dicho es ***n = 4***. Hay un problema y es que ```rstatix``` no tiene los otros post-hoc para varianzas desiguales... lo cual es desafortunado.
 
 **No voy a modificar ni borrar** el procedimiento para hacer este test en el script de inferencia estadística. Ya que es una de las opciones más potentes, te recomiendo que lo utilices siempre, si tu muestra es mayor a la ya mencionada. 
 

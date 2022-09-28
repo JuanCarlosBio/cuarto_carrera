@@ -10,7 +10,7 @@ library(glue)
 library(ggtext)
 
 # Necesitas información del script de este script. 
-source("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/inferencia_estadistica.R")
+source("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/scripts_codigo/inferencia_estadistica.R")
 
 url_artemias <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/artemias_sripts_datos/matrix_artemias.csv"
 
@@ -76,8 +76,8 @@ artemias_anova %>%
   )
 
 
- ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-       width = 7, height = 4)
+ # ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+ #      width = 7, height = 4)
 
 artemias_welch <- tidy_artemias %>% 
   filter(acido_graso %in% c("C 16:1n-7","C 18:0","C 18:1n-9",
@@ -124,8 +124,8 @@ artemias_welch %>%
                                color = "black", size = 11)
   )
 
- ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-       width = 7, height = 4)
+ #ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+ #      width = 7, height = 4)
 
 artemias_kw <- tidy_artemias %>% 
   filter(acido_graso %in% vect_kw) %>% 
@@ -168,5 +168,5 @@ artemias_kw %>%
     strip.text = element_blank()
   )
 
- ggsave("Rplot06.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-        width = 8, height = 4)
+ # ggsave("Rplot06.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+ #       width = 8, height = 4)

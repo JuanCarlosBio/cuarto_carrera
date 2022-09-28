@@ -125,7 +125,12 @@ Modificar la base de datos original, para ajustarla a tus necesidades a la hora 
 
 ## **Comparación de más de dos grupos independientes, ***ANOVA de una vía***, ***ANOVA de Welch*** y ***Kruskal-Wallis***.**  
 
-Para elegir el modelo idóneo hay que estudiar primero si los datos son ***normales*** (en este caso la n = 4 para cada grupo, con lo que el test utilizado será **Shapiro-Wilks**. En caso de que n > 50 habría que usar Kolmogorov-Smirnov) y ***homocedásticos*** (Usaremos para ello la prueba de **Levene**). En ese sentido:
+* Para elegir el modelo idóneo hay que estudiar primero si los datos son ***normales*** y ***homocedásticos***.
+
+  * Test normalidad: **n = 4** (n < 50) ***Shapiro-Wilks*** (en caso de que n > 50: **Kolmogorov Smirnov**)
+  * Test para la homogeneidad de varianzas: ***Levene***.
+
+En ese sentido:
 
 ---
 

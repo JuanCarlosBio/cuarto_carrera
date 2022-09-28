@@ -207,7 +207,7 @@ tidy_rc %>%
   group_by(componentes) %>% 
   welch_anova_test(valores ~ tratamiento) 
 
-# Games-Howell. Todos presentan diferencias significativas 
+# Games-Howell. Todos presentan diferencias significativas OJO!!!, n < 6, no es post-hoc más preciso
 tidy_rc %>% 
   filter(componentes == "RC2") %>% 
   group_by(componentes) %>% 

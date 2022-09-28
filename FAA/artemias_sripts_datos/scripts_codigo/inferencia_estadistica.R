@@ -154,6 +154,7 @@ anova_welch %>%
 # C 18:3n-6   Lectina marina         Levadura                     ns           
 # C 22:6n-3   Enriquecedor comercial Lectina marina               ns 
 
+# OJO!!! La muestra es < 6, Games Howell no es muy certero, mira como hacer el otro post-hoc en python
 anova_welch %>% 
   games_howell_test(valores ~tratamiento) %>% 
   select(acido_graso, 
@@ -188,10 +189,11 @@ kw_artemias %>%
   dunn_test(valores ~ tratamiento, p.adjust.method = "bonf") %>% 
   select(acido_graso, 
          comparacion1=group1, comparacion2=group2, 
-         significacion=p.adj.signif) %>% 
-  filter(significacion == c("*", "**", "***"))
+         significacion=p.adj.signif) #%>% 
+  #filter(significacion == c("*", "**", "***"))
 
 
 
 
          
+

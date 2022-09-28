@@ -88,7 +88,9 @@ A tibble: 2 x 2
 2 18:0        0.002  
 ```
 
-Games-howells:
+### Games-howells; **Este test no es el más indicado en este caso, ya que la muestra es muy queña, (n = 4)**, en este [Jupyter Notebook](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/post_hoc.ipynb) he utilizado el test de  Tamhane T2, que hasta donde tengo entendido, en este caso en concreto es una mejor opción.
+
+Lo que pasa es que está escrito en Python. Igualmente dejo escrito a bajo los resultados de Games-Howell. ```rstatix``` es una librería muy potente, que te permite estudiar muchos grupos usando ```dply```. Lo dije en el markdown de las práctica de informática, pero lo repito aquí, si tu muestra es **n >= 6**, te recomeindo esta librería.  
 
 ```
 # A tibble: 12 x 4
@@ -175,7 +177,7 @@ PC1: Se usó Kruskal-Wallis y debido a diferencias significativas, se usó como 
 6 RC1         Lectina marina         Levadura               ns   
 ```
 
-PC2: Se usó Games-Howels
+PC2: Se usó Games-Howels (de nuevo: [Jupyter Notebook](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/post_hoc.ipynb))
 
 ```
 # A tibble: 6 x 4

@@ -97,7 +97,7 @@ princ_comp %>%
   scale_color_manual(name="Tratamiento:",
                      values = c("skyblue", "orange", "tomato", "gray")) +
   labs(
-    title = glue("PCA para cada tratamieto según sucontenido en ácidos<br>grasos: <span style = 'color: red'>varianza explicada acumulada = {var_pc1_pc2}%</span>"),
+    title = glue("PCA para cada tratamieto según su contenido en ácidos<br>grasos: <span style = 'color: red'>varianza explicada acumulada = {var_pc1_pc2}%</span>"),
     x=glue("PC1 ({var_pc1}% varianza explicada)"),
     y=glue("PC2 ({var_pc2}% varianza explicada)")
   ) +

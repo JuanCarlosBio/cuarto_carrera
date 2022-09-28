@@ -53,10 +53,10 @@ artemias_anova %>%
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,10)) +
   labs(
-    title = "Cantidad de AG en cada tratamiento",
+    title = "Porcentaje de área de AG en cada tratamiento",
     subtitle = "Datos normales y homocedásticos",
     x=NULL,
-    y="Cantidad AG por Trat.",
+    y="% de área de AG",
     fill="Tratamiento"
   ) +
   theme_classic() +
@@ -76,8 +76,8 @@ artemias_anova %>%
   )
 
 
-# ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#       width = 7, height = 4)
+ ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+       width = 7, height = 4)
 
 artemias_welch <- tidy_artemias %>% 
   filter(acido_graso %in% c("C 16:1n-7","C 18:0","C 18:1n-9",
@@ -102,10 +102,10 @@ artemias_welch %>%
   scale_y_continuous(expand = expansion(0),
                      limits = c(0,25)) +
   labs(
-    title = "Cantidad de AG en cada tratamiento",
+    title = "Porcentaje de área de AG en cada tratamiento",
     subtitle = "Datos normales y no homocedásticos",
     x=NULL,
-    y="Cantidad AG por Trat.",
+    y="% de área de AG",
     fill="Tratamiento"
   ) +
   theme_classic() +
@@ -124,8 +124,8 @@ artemias_welch %>%
                                color = "black", size = 11)
   )
 
-# ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#       width = 7, height = 4)
+ ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+       width = 7, height = 4)
 
 artemias_kw <- tidy_artemias %>% 
   filter(acido_graso %in% vect_kw) %>% 
@@ -144,10 +144,10 @@ artemias_kw %>%
   scale_fill_manual(values = c("skyblue", "orange", "tomato", "gray")) +
   facet_wrap(~acido_graso, scales = "free") +
   labs(
-    title = "Cantidad de AG en cada tratamiento",
+    title = "Porcentaje de área de AG en cada tratamiento",
     subtitle = "Datos no normales",
     x=NULL,
-    y="Cantidad AG por Trat.",
+    y="% de área de AG",
     fill="Tratamiento"
   ) +
   theme_classic() +
@@ -168,5 +168,5 @@ artemias_kw %>%
     strip.text = element_blank()
   )
 
-# ggsave("Rplot06.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#        width = 8, height = 4)
+ ggsave("Rplot06.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+        width = 8, height = 4)

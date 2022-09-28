@@ -500,7 +500,7 @@ data_frame %>%
   geom_boxplot() 
 ```
 
-### Y esta ha sido el que yo he hecho.
+### **Y este ha sido el que yo he hecho.**
 
 ---
 
@@ -512,7 +512,7 @@ Figura 3
 
 ---
 
-A estos gráficos se le pueden añadir letras de significación (la ***a***, ***b***...) según la existencia de diferencias (la función para añadir texto sería ```geom_text()```). Aunque a mí, mi tutor de TFG (que era del área de estadística) me recomendó que no me la jugara, por que es difícil usar bien ese tipo de etiquetas y algunos profesores no les gustaba. Lo mejor es siempre explicar las diferencias en la memoria por escrito.
+A estos gráficos se le pueden añadir letras de significación (la ***a***, ***b***...) según la existencia de diferencias (la función para añadir texto sería ```geom_text()```). Aunque a mí, mi tutor de TFG (que era del área de estadística) me recomendó que no me la jugara, por que es difícil usar bien ese tipo de etiquetas y algunos profesores no les gustaba. Lo mejor es siempre explicar las diferencias en la memoria por escrito. Además... son muchos grupos, no me da la vida.
 
 ## **Gráfico de PCA**
 

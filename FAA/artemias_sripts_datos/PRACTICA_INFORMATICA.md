@@ -226,7 +226,7 @@ output
 
 ## **Transformación de los datos para convertirlos si podemos en normales:**
 
-Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás mejor. Creamos nuevas variables modificando ```valores```, que a lo mejor hagan normales u homocedásticas a los datos de interés (mi humilde opinión, una pérdida de tiempo xd).
+Si quieres sí o sí hacer un ANOVA por x razones, y no te salen los datos normales u homocedásticos, lo que puedes hacer es modificar los datos mediante una serie de técnicas, que puedes hacer con ```mutate()```, si no te había quedado claro que hace esta función ahora la entenderás mejor. Creamos nuevas variables modificando ```valores```, que a lo mejor hagan normales u homocedásticos a los datos de interés (mi humilde opinión, una pérdida de tiempo xd).
 
 ```
 tidy_artemias %>% 
@@ -263,13 +263,16 @@ A tibble: 112 x 9
 
 ## **Parte 2) Análisis de Componentes Principales (PCA): [pca_faa.R](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/pca_faa.R)**.
 
-Para el caso del PCA, al ser un análisis multivariante, esta vez nos interesa más que la base de datos sea ancha antes que larga, con lo que esta vez nos ahorraremos convertirla en *tidy_artemias*. Si te interesa entender un poco la teoría del PCA, en este trabajo no te la voy a contar xd, hay un vídeo de youtube muy bueno que te explica las ideas principales en 5 minutos, también lo hay en versión más amplia y detallada, y otro para hacerlo en R (yo lo hago parecido, pero a mi manera), es de [Stat Quest](https://www.youtube.com/c/joshstarmer/videos), y el que lo explica es un genético (sip, si te gusta la genética vete pensando en hacerte con R o Python, en Estados Unidos ya prácticamente es un trámite, y lo que ocurre allí llegará tarde o temprano aquí, viendo lo desfasada que se ha quedado la carrera tiene pinta que tarde un poco):
+Para el caso del PCA, al ser un análisis multivariante, esta vez nos interesa más que la base de datos sea ancha antes que larga, con lo que esta vez nos ahorraremos convertirla en *tidy_artemias*. Si te interesa entender un poco la teoría del PCA, en este trabajo no te la voy a contar xd. hay un vídeo de youtube muy bueno que te explica las ideas principales en 5 minutos. También lo hay en versión más amplia y detallada, y otro para hacerlo en R (yo lo hago parecido, pero a mi manera). Es de [Stat Quest](https://www.youtube.com/c/joshstarmer/videos), ¡y el que lo explica es un genético! (sip, si te gusta la genética vete pensando en hacerte con R o Python, en Estados Unidos, en este campo, ya prácticamente es un trámite, y lo que ocurre allí llegará tarde o temprano aquí... viendo lo desfasada que se ha quedado la carrera tiene pinta que tarde un poco):
 
 * [StatQuest, PCA in 5 minutes](https://www.youtube.com/watch?v=HMOI_lkzW08&t=192s&ab_channel=StatQuestwithJoshStarmer)
 
 * [StatQuest, PCA in R](https://www.youtube.com/watch?v=0Jp4gsfOLMs&t=91s&ab_channel=StatQuestwithJoshStarmer)
 
-Lo primero que hay que hacer, es deshacernos por el momento de la variable de los grupos (```tratamiento```). **Una nota sobre R base** (programación en R con su código original): para un **Data Frame** (es como se le llaman a las tablas que buscan simular a las celdas de excel, propias de este lenguaje), al que le asignamos el nombre de df ( df <- data_frame), que digamos que presenta un vector llamado "x", otro "y" y un último llamado "z" podemos seleccionar cada uno de ellos de dos maneras: con el símbolo "$" o con corchetes y una como a la izquierda del nombre o número del vector [,]. Ejemplo con código, juega con el:
+Lo primero que hay que hacer, es deshacernos por el momento de la variable de los grupos (```tratamiento```). 
+
+###### **Una nota sobre R base** (programación en R con su código original):
+* Para un **Data Frame** (es como se le llaman a las tablas que buscan simular a las celdas de excel, propias de este lenguaje), al que le asignamos el nombre de df ```df <- data_frame```, que digamos que presenta un **vector** (conjunto de valores, numéricos, categóricos, lógicos... concatenados en serie, en caso de en contrarse en un data frame estarían formando las columnas/variable) llamado "x", otro "y" y un último llamado "z", podemos seleccionar cada una de las columnas de dos maneras: con el símbolo ```$``` o con corchetes y una "," a la izquierda del nombre o número del vector ```[,]```. Ejemplo con código, juega con el:
 
 ```
 df <- data.frame(x = c(1:10), y = c(1:10), z = c(1:10))
@@ -286,7 +289,7 @@ df
 df[1,]      # Selecionamos la fíla 1
 df[1:4, 2]  # Selecionamos las filas de la 1 a la 4 de la columna 2   
 ```
-En ese caso haremos lo anterior con ```tratamiento```:
+En este caso, con la técnica anterior, nos deshacemos de la variable ```tratamiento```:
 
 ```
 ncol(matrix_artemias)
@@ -368,9 +371,9 @@ PC1 -0.97458606 -0.9378363 0.6382211  0.7441699  0.8291693
 PC2  0.00288405 -0.3069549 0.6049313 -0.5923490 -0.3401095s
 ```
 
-Lo siguiente que habría que hacer, es extraer los valores de las 3 primeras componentes y juntarlas con la variable que nos deshicimos al principio, ```tratamiento```, para ello se me podemos usar el siguiente código. 
+Lo siguiente que habría que hacer, es extraer los valores de las 3 primeras componentes y juntarlas con la variable que nos deshicimos al principio, ```tratamiento```, para ello me podemos usar el siguiente código. 
 
-##### **Nota,** ***tibble*** es lo mismo que **data frame**, pero a la hora de dar el output, te lo dá más bonito, básicamente y ordenado, y me he acostumbrado a usarlo últimamente, con lo que la función ```as_tibble()``` convierte a un conjunto de valores en este tipo de tabla. Los valores de las componentes es "x" en el pca. 
+##### **Nota,** ***tibble*** es lo mismo que **data frame**, pero a la hora de dar el output, te lo dá más "estético" y ordenado. Me he acostumbrado a usarlo últimamente, con lo que la función ```as_tibble()``` convierte a un conjunto de valores en este tipo de tabla. Los valores de las componentes es "x" en el pca. 
 
 ```
 princ_comp <- as_tibble(pca$x[,c(1,2,3)]) %>% 
@@ -402,7 +405,7 @@ output:
 16  1.49   0.435 -1.83    Enriquecedor comercial
 ```
 
-### ***Y ya habríamos terminado la parte técnica del pca, para interpretar estos resultados, hay que graficarlos, para ello. Para ello voy a dedicar otra parte únicamente a la visualización de los datos mediante los paquetes de ```ggplot2``` y ```plot_tly```.***
+### ***Y ya habríamos terminado la parte técnica del pca, para interpretar estos resultados, hay que graficarlos. Para ello voy a dedicar otra parte únicamente a la visualización de los datos mediante los paquetes de ```ggplot2``` y ```plot_tly```.***
 
 ## **Parte 3) visualización de los datos. [visalizacion.R](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/visualizacion.R)** (aunque los gráficos de PCA y RCA están en el script de [pca_faa.R](https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/scripts_codigo/pca_faa.R))
 
@@ -419,7 +422,7 @@ En mi caso, aprender a diseñar estos gráficos me ha permitido afianzar los con
 
 --- 
 
-* ***Exploratorio***: te permiten ver tus resultados. Sirven para ti mismo, pueden ser en ese sentido más automático, ya que para entender tu mismo tus datos no tiene que ser muy elaborado.
+* ***Exploratorio***: te permiten ver tus resultados. Sirven para ti mismo y pueden ser en ese sentido más automáticos, ya que para entender tu mismo tus datos no tiene que ser muy elaborado.
 
 * ***Explicativo***: los haces con la intención de resaltar la información importante que puedan aportar. Sobre todo si tu intención es que otras personas lo vean. Lo tienes que hacer visual, limpio, sin excederte tampoco para no desviar la atención a cosas que no sean tan importantes.
 
@@ -455,15 +458,15 @@ Por motivos didácticos, separaré los resultados dependiendo de las circunstanc
 
 Si estuviera haciendo un TFG intentaría buscar otra manera de hacerlo. 
 
-**Gráfico básico de barras** donde se muestra la *media* y la *desviación típica* (para graficar y explicar resultados de ANOVA)
+### **Gráfico básico de barras** donde se muestra la *media* y la *desviación típica* (para graficar y explicar resultados de ANOVA)
 
 He de decir que estos gráficos, incluso los más básicos a secas, no son tan sencillos, de hecho, tienen sus truquillos.
 
 ```
 data_frame %>% 
-  group_by(variable_categorica1, variable_categorica2) %>%                       # En ocasiones solo haría falta de agrupar con 
-  summarise(media = mean(variable_numerica), desvaicion_tipica=sd(valores)) %>%  # summarise() permite calcular estadísticos, al agruparlos, calcula la media y desviación
-  ggplot(aes(x = variable_categoria1,y = media, fill=variable_categorica2)) +    # función de ggplot2, hay que poner las variables x, y, fill (color de relleno)
+  group_by(variable_categorica1, variable_categorica2) %>%                       # En ocasiones solo haría falta de agrupar con una única variable categórica, pero en este caso agruparíamos con acido_graso y tratamiento
+  summarise(media = mean(variable_numerica), desvaicion_tipica=sd(valores)) %>%  # summarise() permite calcular estadísticos resumiendo la información (lo que lo diferencia de mutate()!), al agruparlos, calcula la media y desviación
+  ggplot(aes(x = variable_categoria1,y = media, fill=variable_categorica2)) +    # función de ggplot2, hay que poner las variables x, y, fill (color de relleno, ojo! es de hecho importante, si no, no se separan los grupos, pero esto lo entenderás con la experiencia xd)
   geom_bar(stat = "identity", position = position_dodge()) +                     # geometría de barras
   geom_errorbar(aes(ymin=media-sd, ymax=media+sd),                               # geometría de barras de error (media +- la desviación típica), algunas personas que he visto en la carrera que hacen esta gráfica en excel les queda la disviación más grande por un lado de la grafica que por otro, cuidado con eso, debe ser igual en ambos lados
                 position = position_dodge(.9))

@@ -22,13 +22,13 @@ La verdad es que una práctica muy interactiva, a mí me gustó mucho
 
 ## En ese sentido, en este directorio tengo:
 
-* **Dos scripts:** 
+* ***Dos scripts:*** 
 
 	* ```tenebrios.R``` con los resultados del nuestro grupo, es decir, el Grupo 4 de Oscuridad. 
 
 	* Por otro lado, el script de ```tene_todos_limpio.R``` es el que utilicé para estudiar los resultados de todos los grupos.
 
-* 3 bases de datos:
+* ***Tres bases de datos:***
 
 	* Nuestros resultados: están por un lado: ```tenebrios.csv``` --> tal cuál como te piden hacer la base de datos (la media de la masa corporal cada semana), las tasas de crecimiento semanal y diaria. Mientras, ```df_tenebrios.csv```, los datos de cada uno de los tenebrios pesados cada semana, es decir, nuestros resultados en crudo.
 

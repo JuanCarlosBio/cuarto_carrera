@@ -208,7 +208,7 @@ tabla_hw_a25 <- ale_tot_juntos %>%
 
 # Extraemos los vectores de la tabla anterior con la función que creamos
 # con el data frame no va, tiene que ser un vector.
-a25_clase <- vect_hw(tabla_hw_a25, 1, 1, 2, 3)       
+a25_clase <- vect_hw(tabla_hw_a25, 1, 1, 2, 3)            # En caso de que quieras ver de que va función: línea 14 del script de funciones.R
 a25_canarias <- vect_hw(tabla_hw_a25, 2, 1, 2, 3)
 
 # Usamos la función que nos hace Hardy Weimberg del paquete HardyWeinberg, NICE
@@ -231,7 +231,7 @@ tabla_hw_fxiiib <- ale_tot_juntos %>%
   filter(locus == "FXIIIB") %>% 
   select(`1/1`,`1/2`,`2/2`)
 
-fx_clase <- vect_hw(tabla_hw_fxiiib, 1, 1, 2, 3)
+fx_clase <- vect_hw(tabla_hw_fxiiib, 1, 1, 2, 3)          
 fx_canarias <- vect_hw(tabla_hw_fxiiib, 2, 1, 2, 3)
 
 HWChisq(fx_clase,cc=0, verbose=TRUE)     # ns
@@ -283,18 +283,10 @@ deseq.gam <- tibble(
   D1 = rep(c("1/1","1/2","2/2"),3),
   N = c(98,87,9,45,76,43,6,25,12) # OJO!!!, si los valores son diferentes cambialos
 ) %>% mutate(total=sum(N),
-             nA25_1 = case_when(A25 == "1/1" ~ 2,
-                                A25 == "1/2" ~ 1,
-                                A25 == "2/2" ~ 0),
-             nD1_1 = case_when(D1 == "1/1" ~ 2,
-                               D1 == "1/2" ~ 1,
-                               D1 == "2/2" ~ 0),
-             nA25_2 = case_when(A25 == "1/1" ~ 0,
-                                A25 == "1/2" ~ 1,
-                                A25 == "2/2" ~ 2),
-             nD1_2 = case_when(D1 == "1/1" ~ 0,
-                               D1 == "1/2" ~ 1,
-                               D1 == "2/2" ~ 2),
+             nA25_1 = contar_al(A25,"1"),   # En caso que queiras cambiar los parámetros de la función: línea ~29 del script funciones.R
+             nD1_1 = contar_al(D1,"1"),
+             nA25_2 = contar_al(A25,"2"),
+             nD1_2 = contar_al(D1,"2"),
               fgenoA25_1=(nA25_1*N)/(2*total),
               fgenoA25_2=(nA25_2*N)/(2*total),
               fgenoD1_1=(nD1_1*N)/(2*total),

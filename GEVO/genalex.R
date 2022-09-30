@@ -26,7 +26,7 @@ prac_genalex %>% view
 # Cantidad de muestras de cada población:
 
 #t(
-prac_genalex %>%
+n <- prac_genalex %>%
     group_by(poblacion) %>%
     count()
 #)
@@ -166,3 +166,18 @@ frecuencias_relativas %>%
 
 # ggsave("Heterocigosidad.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\GEVO\\graficas",
 #        width=8, height = 6)
+
+
+####### Estructura poblacional
+
+output_Hr <- frecuencias_relativas %>%
+    group_by(poblacion) %>%
+    summarise(media_he_pob=mean(het_esperada),
+              n=n()) %>% 
+    ungroup() %>%
+    summarise(ni=(sum(media_he_pob*n))/sum(n))
+
+
+Fs(frecuencias_relativas$het_esperada, output_Hr$ni,
+   frecuencias_relativas$f_relat1, frecuencias_relativas$f_relat2)
+

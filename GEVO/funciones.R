@@ -22,6 +22,23 @@ vect_hw <- function(df,      # tabla de hardy weinberg que hemos creado
   return(cuerpo)
 }
 
+# Función para contar los alelos de los genotipos; es para resumir el código básicamente
+# Se trata de un condicional, en caso de que se cumpla la función de que el alelo que estamos
+# estudiando es el "1" (puede que se llame de otra manera), nos da el primer output, si el el "2"
+# nos dará la opción del else if.
+contar_al <- function(locus, alelo){
+  condicion=if(alelo == "1"){
+    case_when(locus == "1/1" ~ 2,
+              locus == "1/2" ~ 1,
+              locus == "2/2" ~ 0)
+  } else if(alelo == "2"){
+     case_when(locus == "1/1" ~ 0,
+               locus == "1/2" ~ 1,
+               locus == "2/2" ~ 2)
+  }
+  return(condicion)
+}
+
 # Función creada por mí, necesarias para desequilibrio gamético en el método de langley.
 # Obtenemos a partir de una única función: v; chi cuadrado; R
 # Los parámetros necesarios serían:
@@ -52,3 +69,22 @@ genotipo <- function(x, y){
                      x == "2" & y == "2" ~ "2/2")
   return(cuerpo)
 }
+
+##### Funciones de estructura poblacional
+# Seguramente hayan librerías, pero whatever
+### F de Wright (índices de fijación)
+# En proceso ...................................................... Emmmm, creo que no funciona muy bien............
+Fs <- function(he,output,pi,qi){
+  print(">>> Este es el resultado de la estructura poblacional")
+  Hs=mean(he)                     # Heterocigosidad media de las subpoblaciones
+  Hr=output_Hr                # media ponderada de la heterocigosidad esperada de los grupo (ki=número de subpoblaciones en región i) esta está complicada de automatizar
+  Ht=1-(mean(pi)^2 + mean(qi)^2)  # frecuencia media del alelo i en la población total
+  Fsr=(Hr-Hs)/Hr       
+  Frt=(Ht-Hr)/Ht
+  Fst=(Ht-Hs)/Ht
+  resultado=c("Fsr_result:"=Fsr,
+            "Frt_result:"=Frt,
+            "Fst_result:"=Fst)
+  return(resultado)
+}
+

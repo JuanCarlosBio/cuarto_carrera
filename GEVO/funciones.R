@@ -38,3 +38,17 @@ langley <- function(A,B,C,D,N,p1,p2,q1,q2){
               "R_result"=R)
   return(round(resultado,2))
 }
+
+
+################################
+########## GENALEX  ############
+################################
+
+# Función para obtener los genotipos
+genotipo <- function(x, y){
+  cuerpo = case_when(x == "1" & y == "1" ~ "1/1",
+                     x == "1" & y == "2" ~ "1/2",
+                     x == "2" & y == "1"  ~ "1/2",
+                     x == "2" & y == "2" ~ "2/2")
+  return(cuerpo)
+}

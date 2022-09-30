@@ -38,11 +38,11 @@ df2 <- practicas_gevo[-c(4,8,12),c(8:14)]%>% select(locus=Locus...8, fenotipo=Fe
 # Individuos canarios analizados de la población:
 canarios <- 364
 
-# Esta sería la tabla completada del principio, sólo que en vez de estar dividida
-# en dos, estan todos los locus en una fila, más fácil para el programa.
+# Esta sería la tabla completada del principio, sólo que en vez de estar dividida en dos, estan todos los locus en una fila,
+# más fácil para el programa. Puede que tengas que cambiar los nombres de los locus.
 df_gevo <- rbind(df1,df2) %>% 
   mutate(locus=c(rep("APO",3), rep("HS3.23",3), rep("HS4.65",3), 
-                                              rep("D1",3), rep("A25",3), rep("FXIIIB",3))) %>% 
+                 rep("D1",3), rep("A25",3), rep("FXIIIB",3))) %>% 
   group_by(locus) %>% 
   mutate(gf=round(g/sum(g), 2),
          can=round(sum(canarios)*canf, 0)) %>% 

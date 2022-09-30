@@ -29,6 +29,17 @@ tidy_artemias <- matrix_artemias %>%
 #                               Visualización de los datos               
 #------------------------------------------------------------------------------#
 
+# Para estudiar los datos y argumentar la normalidad de los datospodemos usar un histograna/gráfico de
+# desnidad. 
+
+tidy_artemias %>%
+  ggplot(aes(valores, fill=tratamiento)) +
+  geom_density() +
+  facet_wrap(~acido_graso, scales="free")
+
+# ggsave("normalidad.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+#       width=8, height = 5)
+
 # Resultados del ANOVA de una vía
 
 artemias_anova <- tidy_artemias %>% 

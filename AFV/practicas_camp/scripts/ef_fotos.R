@@ -2,6 +2,7 @@ library(tidyverse)
 library(readxl)
 library(ggthemes)
 library(glue)
+library(rgl)
 #------------------------------------------------------------------------------#
 #                                Intercambio Gaseoso                           #
 #------------------------------------------------------------------------------#

@@ -49,6 +49,3 @@ num_ndiff <- function(diff_ij,L,C,Cpoblacion){
     vector=c("num_ndiff"=npi,"var"=V)
     return(vector)
 }
-
-
-

@@ -40,12 +40,15 @@ ndiff <- function(i,Ps){
 
 ### Diversidad nucleotídica basada en el número de diferencias
 
-num_ndiff <- function(diff_ij,L,C,Cpoblacion){
+num_ndiff <- function(diff_ij,L,n){
+    print(">>> Resultado de la diversidad nucleotídica:  (u+/-σ)")
+    C=n*(n-1)/2
     npi=diff_ij/(L*C)
-    C= ifelse(Cpoblacion == "intraploblacional", n*(n-1)/2, n1*n2)
-    b1=(n+1)/(3(n-1))
+    b1=(n+1)/(3*(n-1))
     b2=(2*(n^2+n+3))/(9*n*(n-1))
     V=(npi*(b1/L)) + (b2*npi^2)
     vector=c("num_ndiff"=npi,"var"=V)
     return(vector)
-}
+    }
+
+

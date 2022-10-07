@@ -123,23 +123,14 @@ tabla4 %>%
 tabla4 %>%
     filter(f_alelo >= 0.95)
 
+# Ejercicio 5
 
-# 4.- A continuación se muestran las posiciones segregantes encontradas para un fragmento del gen nd1 de
-# 600 pb, del genoma mitocondrial, para un conjunto de 15 individuos de la especie de coral Tubastraea
-# coccinea de la isla de Tenerife.
-# Se pide:
-# a) Construye una tabla de haplotipos indicando sus frecuencias en la población.
-# b) Estime la diversidad haplotípica,
-# c) Estime la proporción de sitios polimórficos
-# d) Estime la diversidad genética basada en el número de posiciones segregantes (θ, Estimador de
-# Watterson) con su desviación
-# e) La diversidad nucleotídica basada en las diferencias entre secuencias (𝜋, Nei) y su desviación.
+
 
 sust <- function(col,base){
     cuerpo=str_replace(col, pattern = "[:punct:]", base)
     return(cuerpo)
 }
-
 
 tabla5 <- read.table("C:\\Users\\jcge9\\Desktop\\paper_ph\\ejercicio5.txt", header = TRUE) %>%
     mutate(
@@ -148,4 +139,41 @@ tabla5 <- read.table("C:\\Users\\jcge9\\Desktop\\paper_ph\\ejercicio5.txt", head
         X11=sust(X11,"T"), X12=sust(X12,"T"), X13=sust(X13,"T"), X14=sust(X14,"G"), X15=sust(X15,"C"),
         X16=sust(X16,"A"), X17=sust(X17,"T"), X18=sust(X18,"T"), X19=sust(X19,"C"), X20=sust(X20,"A"),
         X21=sust(X21,"A"), X22=sust(X22,"T"), X23=sust(X23,"A"), X24=sust(X24,"T"), X25=sust(X25,"G") 
-    ) %>% view()
+)
+
+# Cuerpo necesario
+dist(tabla5)
+
+comparar <- function(col1,col2){
+    attach(tabla5, warn.conflicts = FALSE)
+    x = col1 == col2
+    y = sum(x == FALSE)
+    return(y) 
+}
+
+# Bastante coñazo, no se ni como harías esto a mano, parece mucho pero se puede harcore coding (copiar y pegar), ojala encontrar una librería que te haga el trabajo
+dist_matrix <- data.frame(
+    sec1=c(comparar(X1,X2),comparar(X1,X3),comparar(X1,X4),comparar(X1,X5),comparar(X1,X6),comparar(X1,X7),comparar(X1,X8),comparar(X1,X9), comparar(X1,X10),comparar(X1,X11),comparar(X1,X12),comparar(X1,X13),comparar(X1,X14),comparar(X1,X15)),
+    sec2=c(comparar(X2,X3),comparar(X2,X4),comparar(X2,X5),comparar(X2,X6),comparar(X2,X7),comparar(X2,X8),comparar(X2,X9),comparar(X2,X10),comparar(X2,X11),comparar(X2,X12),comparar(X2,X13),comparar(X2,X14),comparar(X2,X15),NA),
+    sec3=c(comparar(X3,X4),comparar(X3,X5),comparar(X3,X6),comparar(X3,X7),comparar(X3,X8),comparar(X3,X9), comparar(X3,X10),comparar(X3,X11),comparar(X3,X12),comparar(X3,X13),comparar(X3,X14),comparar(X3,X15),rep(NA,2)),
+    sec4=c(comparar(X4,X5),comparar(X4,X6),comparar(X4,X7),comparar(X4,X8),comparar(X4,X9), comparar(X4,X10),comparar(X4,X11),comparar(X4,X12),comparar(X4,X13),comparar(X4,X14),comparar(X4,X15),rep(NA,3)),
+    sec5=c(comparar(X5,X6),comparar(X5,X7),comparar(X5,X8),comparar(X5,X9), comparar(X5,X10),comparar(X5,X11),comparar(X5,X12),comparar(X5,X13),comparar(X5,X14),comparar(X5,X15),rep(NA,4)),
+    sec6=c(comparar(X6,X7),comparar(X6,X8),comparar(X6,X9), comparar(X6,X10),comparar(X6,X11),comparar(X6,X12),comparar(X6,X13),comparar(X6,X14),comparar(X6,X15),rep(NA,5)),
+    sec7=c(comparar(X7,X8),comparar(X7,X9), comparar(X7,X10),comparar(X7,X11),comparar(X7,X12),comparar(X7,X13),comparar(X6,X14),comparar(X7,X15),rep(NA,6)),
+    sec8=c(comparar(X8,X9), comparar(X8,X10),comparar(X8,X11),comparar(X8,X12),comparar(X8,X13),comparar(X8,X14),comparar(X8,X15),rep(NA,7)),
+    sec9=c(comparar(X9,X10),comparar(X9,X11),comparar(X9,X12),comparar(X9,X13),comparar(X9,X14),comparar(X9,X15),rep(NA,8)),
+    sec10=c(comparar(X10,X11),comparar(X10,X12),comparar(X10,X13),comparar(X10,X14),comparar(X10,X15),rep(NA,9)),
+    sec11=c(comparar(X11,X12),comparar(X11,X13),comparar(X11,X14),comparar(X11,X15),rep(NA,10)),
+    sec12=c(comparar(X12,X13),comparar(X12,X14),comparar(X12,X15),rep(NA,11)),
+    sec13=c(comparar(X13,X14),comparar(X13,X15),rep(NA,12)),
+    sec14=c(comparar(X14,X15),rep(NA,13))
+)
+
+rownames(dist_matrix) <- c("sec2","sec3","sec4","sec5","sec6","sec7","sec8","sec9",
+                           "sec10","sec11","sec12","sec13","sec14","sec15")
+
+diffij <- sum(dist_matrix, na.rm=TRUE)
+L <- 600
+n <- 15
+
+round(num_ndiff(diffij,L,n),5) # No entiendo de donde viene ese 0 de menos en la varianza tengo que repasarlo

@@ -50,3 +50,5 @@ num_ndiff <- function(diff_ij,L,C,Cpoblacion){
     return(vector)
 }
 
+
+

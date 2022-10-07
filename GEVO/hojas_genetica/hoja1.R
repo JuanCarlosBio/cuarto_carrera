@@ -124,11 +124,6 @@ tabla4 %>%
     filter(f_alelo >= 0.95)
 
 
-sust <- function(col,base){
-    cuerpo=str_replace(col, pattern = "[:punct:]", base)
-    return(cuerpo)
-}
-
 # 4.- A continuación se muestran las posiciones segregantes encontradas para un fragmento del gen nd1 de
 # 600 pb, del genoma mitocondrial, para un conjunto de 15 individuos de la especie de coral Tubastraea
 # coccinea de la isla de Tenerife.
@@ -139,7 +134,13 @@ sust <- function(col,base){
 # d) Estime la diversidad genética basada en el número de posiciones segregantes (θ, Estimador de
 # Watterson) con su desviación
 # e) La diversidad nucleotídica basada en las diferencias entre secuencias (𝜋, Nei) y su desviación.
-iris
+
+sust <- function(col,base){
+    cuerpo=str_replace(col, pattern = "[:punct:]", base)
+    return(cuerpo)
+}
+
+
 tabla5 <- read.table("C:\\Users\\jcge9\\Desktop\\paper_ph\\ejercicio5.txt", header = TRUE) %>%
     mutate(
         X1=sust(X1,"A"), X2=sust(X2,"T"), X3=sust(X3,"T"), X4=sust(X4,"T"), X5=sust(X5,"C"),

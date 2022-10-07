@@ -181,3 +181,40 @@ output_Hr <- frecuencias_relativas %>%
 Fs(frecuencias_relativas$het_esperada, output_Hr$ni,
    frecuencias_relativas$f_relat1, frecuencias_relativas$f_relat2)
 
+############# Ahora quiero hacer la matrix de distancias, pero aún no sé muy bien como hacerla, 
+#### con lo que voy a copirla de las diapositivas... shameless. Haber si descubro con que se hace 
+#### y la puedo hace bien
+clase <- c(0,.011,0,.009,.005,.020,.025,.021,.018,.024,.019)
+canarias <- c(0,0,.001,.006,.007,.006,.011,.029,.015,.025,.013)
+andalucia <- c(rep(0,4),.002,.007,.015,.031,.014,.022,.013)
+catalunia <- c(rep(0,4),.001,.016,.025,.046,.026,.042,.020) 
+pvasco <- c(rep(0,5),.025,.032,.043,.028,.050,.026)
+marruecos_n <- c(rep(0,7),.011,0,.006,0)
+marruecos_w <- c(rep(0,7),.010,.002,.013,.004)
+marruecos_se <- c(rep(0,8),.006,.009,0)
+tunez <- c(rep(0,9),.004,0)
+argelia <- c(rep(0,10),.007)
+sahara <- c(rep(0,11))
+
+dist_matrix_places <- data.frame(clase,canarias,andalucia,catalunia,
+                          pvasco,marruecos_n,marruecos_w,
+                          marruecos_se,tunez,argelia,sahara) %>% 
+    mutate(localidad=c("Clase","Canarias","Andalucía","Cataluña","País Vasco","Marruecos N",
+                       "Marruecos O", "Marruecos SE", "Túnez", "Argelia","Sahara Occ."),
+            region=c(rep("España",5),rep("Africa N",6)))
+
+dist_matrix <- dist_matrix_places %>% 
+    select(-localidad,-region)
+
+pcoa <- cmdscale(dist_matrix, k=2, eig = TRUE, add=TRUE) 
+colnames(pcoa) <- c("PCoA1","PCoA2")
+
+positions %>%
+    as_tibble() %>%
+    mutate(region=dist_matrix_places$region,
+           localidad=dist_matrix_places$localidad) %>%
+    ggplot(aes(PCoA1, PCoA2, fill=region)) +
+    geom_text(aes(label=localidad, color=region), show.legend = FALSE) +
+    stat_ellipse(geom="polygon", alpha=.25) +
+    scale_color_manual(values = c("red","blue")) +
+    theme_classic()

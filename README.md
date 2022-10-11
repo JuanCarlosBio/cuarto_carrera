@@ -42,4 +42,4 @@ Con lo cual, antes que nada, te recomiendo aprender ***dos paquetes fundamentale
     * [Cómo manipular datos en R con dplyr y RStudio [ Tidyverse ]
 ](https://www.youtube.com/watch?v=tpAzZOdA4rw&list=PLbDLkhJ5sFvCWFbP4tAFALHkNWNFo_FiL&index=21&ab_channel=RafaGonzalezGouveia)
 
-hola
+

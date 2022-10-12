@@ -6,5 +6,5 @@
    * Control (temperatura normal y luz)
    * Oscuridad
    * Temperatura alta
-* Trabajo de exposición: Diseños de Investigación -->
+* **Trabajo de exposición: Diseños de Investigación** -->
   * Efecto de la consanguinidad en la resolución de problemas para *Mus musculus*

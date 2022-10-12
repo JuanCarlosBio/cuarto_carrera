@@ -1,3 +1,7 @@
+
+### NO MIRES ESTE SCRIPTS, ni yo me acuerdo que puse xd, fue el que hice durante las prácticas.
+### Los otros son una versión mejrada
+
 ################################################################################
 ############################      PRÁCTICAS ABBM      ##########################
 ################################################################################

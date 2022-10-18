@@ -71,7 +71,7 @@ Entonces los resutados del trabajo de una forma más clara estarían representad
 ---
 
 <p align="center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/endogamia.png" alt="800" width="800" />
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/endogamia.png" alt="700" width="700" />
 </p>
 
 **Figura 2.** Evolución de los ratones endogámicos y los ratones control. Vemos que estos últimos, el tiempo que tardan en el laberinto no se modifica, mientras que los ratones que presentan consanguinidad aumentan hasta un umbral de los 600 segundos en superar el laberinto.
@@ -127,7 +127,7 @@ F-statistic: 40.04 on 1 and 6 DF,  p-value: 0.0007283
 ---
 
 <p align="center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/Rplot09.png" alt="800" width=800/>
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/trabajo_exposicion/graficas/Rplot09.png" alt="700" width=700/>
 </p>
 
 **Figura 3.** Resultados del modelo con la ecuación de la recta.

@@ -223,8 +223,8 @@ df_temporal %>%
   mutate(experimento=factor(experimento,
                             levels = c("Control","Temperatura","Oscuridad"))) %>% 
   ggplot(aes(experimento, semanas, fill=experimento)) +
-  geom_jitter(pch=21, position = position_jitter(.25), show.legend = F) +
-  geom_boxplot(alpha=.35, width=.5, show.legend = F) +
+  geom_jitter(pch=21, position = position_jitter(.15), show.legend = F) +
+  geom_boxplot(alpha=.35, width=.35, show.legend = F) +
   scale_y_continuous(limits = c(5,15),
                      breaks = seq(4,16,2)) +
   scale_fill_manual(breaks = c("Control", "Temperatura", "Oscuridad"),
@@ -242,5 +242,5 @@ df_temporal %>%
     axis.title.y = element_markdown(size = 12, face = "bold"),
     axis.text.x = element_markdown(size = 12, face = "bold", color="black")
   )
-# ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
-#       width=8.5, height=4)
+ggsave("Rplot03.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
+       width=7, height=6)

@@ -178,7 +178,7 @@ En ese entonces, la pérdida de valores de las últimas semanas debido a la entr
 ---
 
 <p align= "center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot03.png">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot03.png" alt="700" width="700"/>
 </p>
 
 ---

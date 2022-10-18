@@ -523,7 +523,7 @@ data_frame %>%
 ---
 
 <p align="center">
-     <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot06.png" alt="800" width="800" />
+     <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot06.png" alt="850" width="850" />
 </p>
 
 Figura 3
@@ -548,7 +548,7 @@ ggplot(aes(PC1, PC2, color = variable_categorica)) +
 ---
 
 <p align="center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png" alt="850" width="850" />
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/artemias_sripts_datos/graficas/Rplot02.png" alt="700" width="700" />
 </p>
 
 ***Figura 4.*** Análisis de componentes principales para distintos tratamientos de diverso contenido de ácidos grasos.

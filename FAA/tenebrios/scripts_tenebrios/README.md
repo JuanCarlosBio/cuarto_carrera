@@ -47,7 +47,7 @@ La verdad es que una práctica muy interactiva, a mí me gustó mucho
 ---
 
 <p align= "center">
-  <img src= "https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot05.png">
+  <img src= "https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot05.png" alt="800" width="800" />
 </p>
 
 ---
@@ -124,7 +124,7 @@ Gráfica en ese entonces, tanto con la media de los valores de la masa corporal 
 ---
 
 <p align= "center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot07.png">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot07.png" alt="800" width="800" />
 </p>
 
 ---
@@ -145,7 +145,7 @@ Lo que pudimos ver es que, al hacer la media de cada uno de los tratamientos par
 ---
 
 <p align= "center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/masa_corporal_todos.png">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/masa_corporal_todos.png" alt="800" width="800" />
 </p>
 
 ---
@@ -162,7 +162,7 @@ En este caso:
 ---
 
 <p align= "center">
-<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot04.png">
+<img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/tenebrios/scripts_tenebrios/graficas/Rplot04.png" alt="800" width="800" />
 </p>
 
 ---

@@ -31,7 +31,7 @@ Para corroborar la distribución de los datos y la igualdad de varianzas, Se tes
 
 <p align="center">
  
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/om.png" alt="800" width="800" />
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/om.png" alt="900" width="900" />
 
 </p>
 
@@ -66,7 +66,7 @@ Estos resultados sorprenden, ya que se esperaría que fueran los ratones viejos 
 
 <p align="center">
  
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/Rplot05.png" alt="800" width="800" />
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/Rplot05.png" alt="900" width="900" />
 
 </p>
 
@@ -100,7 +100,7 @@ Procedí por mi cuenta a realizar un PCA para cada una de las pruebas, con la in
 
 <p align="center">
  
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/Rplot07.png" alt="800" width="800" />
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/Rplot07.png" alt="900" width="900" />
 
 </p>
 
@@ -114,7 +114,7 @@ Hay un pero en el Gráfico de P.maze. La varianza no llega al 60% con lo que no 
 
 <p align="center">
  
-  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/Rplot06.png" alt="800" width="800" />
+  <img src="https://github.com/Juankkar/cuarto_carrera/blob/main/FAA/conducta/graficas/Rplot06.png" alt="900" width="900" />
 
 </p>
 

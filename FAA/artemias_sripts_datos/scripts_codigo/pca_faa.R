@@ -112,8 +112,8 @@ princ_comp %>%
     legend.background = element_rect(color = "white")
   )
 
- #ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
- #      width = 7, height = 4.75)
+ ggsave("Rplot02.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+       width = 6, height = 6)
 
 
 # Una forma de entender mejor el PCA es aplicar el "Varimax rotation".
@@ -165,9 +165,9 @@ componentes_rotados %>%
     legend.background = element_rect(color = "white")
   )
 
-#ggsave("rpca.png", 
-#        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
-#        width = 7, height = 4.75)
+ggsave("rpca.png", 
+        path="C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\artemias_sripts_datos\\graficas",
+        width = 6, height = 6)
 
 # ¿Existen diferencias entre cada grupo de ambas componentes principales?
 

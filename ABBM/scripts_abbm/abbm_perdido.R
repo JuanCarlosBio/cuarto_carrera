@@ -117,15 +117,9 @@ c = 0.310/(4.5*1);c # 0.069 nM
 
 # nM*vt (litros) = nmol/t(tiempo de incubación = 25 min)
 
-Act_esp = 
-  
-  
-  
   #------------------------------------------------------------------------------#
   #                  Estudio de los resultdos de la pizarra                      #
   #------------------------------------------------------------------------------#
-  
-  
   
   df_curva %>% 
   ggplot(aes(ug_prot, abs, col = alumnos)) +
@@ -201,8 +195,12 @@ alumno_10_ <- filter(practica_6, alumno %in% "10")
 alumno_11_ <- filter(practica_6, alumno %in% "11")
 alumno_12_ <- filter(practica_6, alumno %in% "12")
 
+cor_fun <- function(df, vect1, vect2){
+    cuerpo=cor.test(df$vect1, df$vect2, method="pearson")
+    return(cuerpo)
+}
 
-COR1 <- cor.test(alumno_1_$conc_sust, alumno_1_$abs, method = "pearson");COR1
+COR1 <- cor_fun(conc_sus, alumno_1_, alumno_2_);COR1
 COR2 <- cor.test(alumno_2_$conc_sust, alumno_2_$abs, method = "pearson");COR2
 COR3 <- cor.test(alumno_3_$conc_sust, alumno_3_$abs, method = "pearson");COR3
 COR4 <- cor.test(alumno_4_$conc_sust, alumno_4_$abs, method = "pearson");COR4

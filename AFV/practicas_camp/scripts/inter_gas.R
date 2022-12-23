@@ -5,9 +5,10 @@ library(tidyverse)
 library(readxl)
 library(ggthemes)
 library(DescTools)
+library(glue)
 
 # Este link provee un script donde tengo una funciones interesantes hechas por mí
-source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
+source("https://raw.githubusercontent.com/Juankkar/cosas_mias/main/funciones_propias/funR/contraste_hip.R")
 
 #------------------------------------------------------------------------------#
 #                       Estudio de la Tª con/sin vaselina                      #
@@ -79,37 +80,28 @@ temp_sombra %>%
 # Análisis estadístico más profundo # Se debería buscar alguna forma de hacer este proceso más auto_
 ##################################### mático, tiempo al tiempo supongo.
 
+## Función para el análisis inferencial
+inferencia_bucle <- function(data){
+  for(i in horas){
+    print(glue(">>> Hora de estudio para la comparación: {i}"))
+    vector = data %>% filter(hora %in% i)
+    print(tw.groups(vector, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina"))
+  }
+}
+
+## Horas de estudio
+horas <- c("10:00:00", "10:30:00","11:00:00",
+           "11:30:00", "12:00:00", "12:30:00")
+
+## Temperatura al sol
 temp_sol2 <- temp_sol[,c("hora","temperatura","vaselina")]
-
-sol_10_00 <- temp_sol2 %>% filter(hora %in% "10:00:00")
-tw.groups(sol_10_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p < 0.05*
-sol_10_30 <- temp_sol2 %>% filter(hora %in% "10:30:00")
-tw.groups(sol_10_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina") # p > 0.05
-sol_11_00 <- temp_sol2 %>% filter(hora %in% "11:00:00")           
-tw.groups(sol_11_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina") # p < 0.05*
-sol_11_30 <- temp_sol2 %>% filter(hora %in% "11:30:00")
-tw.groups(sol_11_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-sol_12_00 <- temp_sol2 %>% filter(hora %in% "12:00:00")
-tw.groups(sol_12_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p < 0.05*
-sol_12_30 <- temp_sol2 %>% filter(hora %in% "12:30:00")
-tw.groups(sol_12_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-
-
-
+## Temperatura a la sombra
 temp_sombra2 <- temp_sombra[,c("hora","temperatura","vaselina")]
 
-sombra_10_00 <- temp_sombra2 %>% filter(hora %in% "10:00:00")
-tw.groups(sombra_10_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-sombra_10_30 <- temp_sombra2 %>% filter(hora %in% "10:30:00")
-tw.groups(sombra_10_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-sombra_11_00 <- temp_sombra2 %>% filter(hora %in% "11:00:00")           
-tw.groups(sombra_11_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-sombra_11_30 <- temp_sombra2 %>% filter(hora %in% "11:30:00")
-tw.groups(sombra_11_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-sombra_12_00 <- temp_sombra2 %>% filter(hora %in% "12:00:00")
-tw.groups(sombra_12_00, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p > 0.05 
-sombra_12_30 <- temp_sombra2 %>% filter(hora %in% "12:30:00")
-tw.groups(sombra_12_30, temperatura, "temperatura", vaselina,"Con vaselina","Sin vaselina")# p < 0.05 
+## Resultados Temperatura luz
+inferencia_bucle(temp_sol2)
+## Resultados Temperatura sombra
+inferencia_bucle(temp_sombra2)
 
 #------------------------------------------------------------------------------#
 #                         Eficiencia fotoquímica del                           #
@@ -150,19 +142,11 @@ fvfm2 %>%
 # Son las diferencias estadísticamente significativas? #
 #------------------------------------------------------#
 
-pino <- fvfm2 %>% filter(especie %in% "Pino")
-tapply(pino$fvfm, pino$exposicion, shapiro.test)    # se cumple normalidad
-LeveneTest(fvfm~exposicion, data = pino)            # se cumple homocedasticidad
-t.test(fvfm~exposicion, data = pino)                # p > 0.05
-
-
-rosalillo <- fvfm2 %>% filter(especie %in% "Rosalillo")
-tapply(rosalillo$fvfm, rosalillo$exposicion, shapiro.test)    # se cumple normalidad
-LeveneTest(fvfm~exposicion, data = rosalillo)                 # se cumple homocedasticidad
-t.test(fvfm~exposicion, data = rosalillo)                     # p > 0.05
-
-
-
-
-
+for(i in c("Pino", "Rosalillo")){
+  print(glue(">>> Inferencia de la especie: {i}"))
+  df <- fvfm2 %>% filter(especie %in% i)
+  tapply(df$fvfm, df$exposicion, shapiro.test)
+  LeveneTest(fvfm~as.factor(exposicion), data = df)          
+  print(t.test(fvfm~exposicion, data = df)) 
+}
 

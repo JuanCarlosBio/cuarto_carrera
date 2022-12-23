@@ -12,7 +12,7 @@ library(glue)
 library(ggtext)
 
 # Este link provee un script donde tengo una funciones interesantes hechas por mí
-source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
+source("https://raw.githubusercontent.com/Juankkar/cosas_mias/main/funciones_propias/funR/contraste_hip.R")
 
 url1 <- "https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/AFV/practicas_camp/bases_datos/pig_polifenoles_pino.csv"
 pig_pol_pino <- read_csv(url1)
@@ -45,6 +45,7 @@ pig_pol_pino %>%
   scale_fill_manual(values = c("white", "gray"))
 
 #-------------------------- Diferenicias NBI? ---------------------------#
+
 h_adulta <- pig_pol_pino %>% filter(hoja %in% "Adulta")
 tw.groups(h_adulta, nbi, "nbi", exposicion, "Sol", "Sombra")     # p > 0.05 
 h_joven <- pig_pol_pino %>% filter(hoja %in% "Joven")

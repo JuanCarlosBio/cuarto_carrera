@@ -3,7 +3,7 @@
 ################################################################################
 
 # Esta función me abre corre un script que tengo en GitHub con funciones de inferencia estadística
-source("https://raw.githubusercontent.com/Juankkar/mis_cosas/main/funciones_propias/inferencia.R")
+source("https://raw.githubusercontent.com/Juankkar/cosas_mias/main/funciones_propias/funR/contraste_hip.R")
 
 library(readxl)      
 library(readr)
@@ -99,33 +99,11 @@ df_tenebrios %>%
 # Utilizamos la función que he hecho en el link de la línea "6", seguramente haya alguna manera más 
 # automática de hacer esto, pero bueno, esto servirá
 
-semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
-th.groups(semana_1,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad") 
-
-semana_2 <- subset(df_tenebrios, as.character(semana) == "2")
-th.groups(semana_2,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_3 <- subset(df_tenebrios, as.character(semana) == "3")
-th.groups(semana_3,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_4 <- subset(df_tenebrios, as.character(semana) == "4")
-th.groups(semana_4,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_5 <- subset(df_tenebrios, as.character(semana) == "5")
-th.groups(semana_5,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_6 <- subset(df_tenebrios, as.character(semana) == "6")
-th.groups(semana_6,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_7 <- subset(df_tenebrios, as.character(semana) == "7")
-th.groups(semana_7,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_8<- subset(df_tenebrios, as.character(semana) == "8")
-th.groups(semana_8,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_9 <- subset(df_tenebrios, as.character(semana) == "9")
-th.groups(semana_9,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad")
-
+for(i in c(1:12)){
+  print(glue(">>> Inferencia en la semana: {i}"))
+  semana_n <- subset(df_tenebrios, as.character(semana) == i)
+  print(th.groups(semana_n,masa_corp, "masa_corp", experimento, "Control", "Temperatura", "Oscuridad"))
+}
 
 #### Estduio de la tasa de crecimiento semanal
 df_tenebrios %>% 
@@ -161,30 +139,12 @@ df_tenebrios %>%
 # ggsave("Rplot04.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\tenebrios\\scripts_tenebrios\\graficas",
 #        width=6, height=4)
 
-# ¿existen diferencias significativas con el paso de las semanas? 
-semana_1 <- subset(df_tenebrios, as.character(semana) == "1")
-th.groups(semana_1,d, "d", experimento, "Control", "Temperatura", "Oscuridad") 
-
-semana_2 <- subset(df_tenebrios, as.character(semana) == "2")
-th.groups(semana_2,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_3 <- subset(df_tenebrios, as.character(semana) == "3")
-th.groups(semana_3,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_4 <- subset(df_tenebrios, as.character(semana) == "4")
-th.groups(semana_4,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_5 <- subset(df_tenebrios, as.character(semana) == "5")
-th.groups(semana_5,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_6 <- subset(df_tenebrios, as.character(semana) == "6")
-th.groups(semana_6,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_7 <- subset(df_tenebrios, as.character(semana) == "7")
-th.groups(semana_7,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
-
-semana_8<- subset(df_tenebrios, as.character(semana) == "8")
-th.groups(semana_8,d, "d", experimento, "Control", "Temperatura", "Oscuridad")
+## Inferencia estadística de las 12 semanas de la tasa de crecimiento.
+for(i in c(1:12)){
+  print(glue(">>> Inferencia en la semana: {i}"))
+  semana_n <- subset(df_tenebrios, as.character(semana) == i)
+  print(th.groups(semana_n,d, "d", experimento, "Control", "Temperatura", "Oscuridad"))
+}
 
 # Obviamente las Últimas semanas no se pueden ver si ha diferencias significativas
 # ya que muchos de los tnebrios han entrado en estado de pupa, lo que impide hacer

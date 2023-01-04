@@ -64,10 +64,9 @@ brotes_enr <- data_brotes %>%
 
     raices_trans =  (enraizadas - min(enraizadas))/(max(enraizadas)-min(enraizadas)),
   )
-
 # Vemos los valores máximos y mínimos para ajustar los scales:
-brotes_enr %>% summarise(max_brotes =max(bortes), min_brotes =min(brotes),
-                         max_reaices =max(enraizadas), min_brotes =min(enraizadas))
+brotes_enr %>% summarise(max_brotes =max(brotes), min_brotes =min(brotes),
+                         max_reaices =max(enraizadas), min_raices =min(enraizadas))
 
 brotes_enr %>% 
   ggplot(aes(fecha, brotes_trans)) +
@@ -83,8 +82,8 @@ brotes_enr %>%
   ) +
   scale_color_manual(breaks = c("brotes","enraizadas"),
                      values = c("forestgreen", "brown")) +
-  scale_y_continuous(labels = seq(0,23, 4),
-                     breaks = (seq(0,23,4) - 0)/(23-0),
+  scale_y_continuous(labels = seq(0,24, 3),
+                     breaks = (seq(0,24,3) - 0)/(23-0),
                      sec.axis = sec_axis(trans = ~.,
                                          labels = seq(0,8, 2),
                                          breaks = (seq(0,8,2) - 0)/(8-0),

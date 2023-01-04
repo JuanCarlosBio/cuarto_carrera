@@ -61,14 +61,13 @@ brotes_enr <- data_brotes %>%
   select(fecha, brotes, enraizadas) %>% 
   mutate(
     brotes_trans =  (brotes - min(brotes))/(max(brotes)-min(brotes)),
-    brotes_min=min(brotes),
-    brotes_max=max(brotes),
-    
+
     raices_trans =  (enraizadas - min(enraizadas))/(max(enraizadas)-min(enraizadas)),
-    raices_min=min(enraizadas),
-    raices_max=max(enraizadas)
   )
 
+# Vemos los valores máximos y mínimos para ajustar los scales:
+brotes_enr %>% summarise(max_brotes =max(bortes), min_brotes =min(brotes),
+                         max_reaices =max(enraizadas), min_brotes =min(enraizadas))
 
 brotes_enr %>% 
   ggplot(aes(fecha, brotes_trans)) +

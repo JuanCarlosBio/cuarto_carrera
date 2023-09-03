@@ -1,0 +1,25 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                      count
+---------------------  -------
+pigmentos_polifenoles        1
+total                        1
+
+Select jobs to execute...
+
+[Sun Sep  3 15:33:07 2023]
+rule pigmentos_polifenoles:
+    input: code/05pig_pol.R
+    output: results/plots/pigmentos_polifenoles/14NBI.png, results/plots/pigmentos_polifenoles/15clorofila.png, results/plots/pigmentos_polifenoles/16flavonoides.png, results/plots/pigmentos_polifenoles/17antocianinas.png, results/plots/pigmentos_polifenoles/18pca_pigmentos_polifenoles.png, results/plots/pigmentos_polifenoles/19NBI_hoja_rosalillo.png, results/plots/pigmentos_polifenoles/20nivel_colorfilas.png, results/plots/pigmentos_polifenoles/21flavos_hoja_rosalillo.png, results/plots/pigmentos_polifenoles/22antos_hoja_rosalillo.png, results/plots/pigmentos_polifenoles/23pca_pigmentos_fenoles.png
+    jobid: 0
+    reason: Missing output files: results/plots/pigmentos_polifenoles/15clorofila.png, results/plots/pigmentos_polifenoles/22antos_hoja_rosalillo.png, results/plots/pigmentos_polifenoles/20nivel_colorfilas.png, results/plots/pigmentos_polifenoles/19NBI_hoja_rosalillo.png, results/plots/pigmentos_polifenoles/23pca_pigmentos_fenoles.png, results/plots/pigmentos_polifenoles/16flavonoides.png, results/plots/pigmentos_polifenoles/14NBI.png, results/plots/pigmentos_polifenoles/18pca_pigmentos_polifenoles.png, results/plots/pigmentos_polifenoles/21flavos_hoja_rosalillo.png, results/plots/pigmentos_polifenoles/17antocianinas.png
+    resources: tmpdir=/tmp
+
+[Sun Sep  3 15:33:10 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-09-03T153306.919800.snakemake.log

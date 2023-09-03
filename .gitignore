@@ -1,6 +1,18 @@
+
+##----------------------------------------------##
+##      Aplicaiones de Fisiología vegetal       ##
+##----------------------------------------------##
+# Prácticas de campo
+#
 AFV/practicas_camp/.snakemake
 AFV/practicas_camp/Rplots*
 AFV/practicas_camp/.Snakefile.swp
+
+# Prácticas de laboratorio
+
+AFV/practicas_lab/.snakemake
+AFV/practicas_lab/Rplots*
+AFV/practicas_lab/.Snakefile.swp
 
 # History files
 .Rhistory

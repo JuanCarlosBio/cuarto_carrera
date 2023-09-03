@@ -1,5 +1,4 @@
-name: afv_campo 
-
+name: afv
 channels:
   - conda-forge
   - bioconda

@@ -1,0 +1,34 @@
+
+rule biotecnologia_vegetal:
+    input:
+        callos = "code/01BV_callos.R",
+        brotes = "code/02BV_brotes.R"
+    output:
+        "results/plots/callos/01contaminacion.png",
+        "results/plots/callos/02callos.png",
+        "results/plots/brotes/03contaminaciones.png",
+        "results/plots/brotes/04brotes.png"
+    conda:
+        "AFV_env.yml"
+    shell:
+        """
+        for script in {input.callos} {input.brotes}
+        do
+            Rscript $script
+        done
+        """
+
+rule ecofisiologia_vegetal:
+    input:
+       "code/03ecofisio_lab.R" 
+    output:
+        "results/plots/ecofisiologia/prunus1.png",
+        "results/plots/ecofisiologia/prunus2.png",
+        "results/plots/ecofisiologia/vinatigo1.png",
+        "results/plots/ecofisiologia/inatigo3.png"
+    conda:
+        "AFV_env.yml"
+    shell:
+        """
+        Rscript {input}
+        """

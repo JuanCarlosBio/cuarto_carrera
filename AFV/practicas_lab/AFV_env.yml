@@ -1,0 +1,16 @@
+name: afv 
+
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - default
+
+dependencies:
+  - r-tidyverse=2.0.0
+  - r-glue=1.6.2
+  - r-rgl=1.2.1
+  - r-rstatix=0.7.2
+  - r-lubridate=1.9.2
+  - snakemake=7.32.3
+  - r-ggtext=0.1.2

@@ -1,0 +1,25 @@
+name: faa
+
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - default
+
+dependencies:
+  - python=3.11.5
+  - r-base=4.3.1
+  - r-tidyverse=2.0.0
+  - r-rstatix=0.7.2
+  - r-ggtext=0.1.2
+  - r-glue=1.6.2
+  - pandas=2.1.0
+  - numpy=1.25.2
+  - r-desctools=0.99.49
+  - r-cowplot=1.1.1
+  - snakemake=7.32.3
+  - bash=5.2.15
+  - r-rmarkdown=2.24
+  - r-tinytex=0.46
+  - scikit-posthocs=0.7.0
+  - r-plotly=4.10.2

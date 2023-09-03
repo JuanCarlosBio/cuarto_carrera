@@ -14,6 +14,14 @@ AFV/practicas_lab/.snakemake
 AFV/practicas_lab/Rplots*
 AFV/practicas_lab/.Snakefile.swp
 
+##----------------------------------------------##
+##         Fisiología Animal Aplicada           ##
+##----------------------------------------------##
+
+FAA/.snakemake
+FAA/Rplots*
+FAA/.Snakefile.swp
+
 # History files
 .Rhistory
 .Rapp.history

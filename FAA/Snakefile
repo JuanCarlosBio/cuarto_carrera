@@ -1,0 +1,36 @@
+
+#--------------#
+#   ARTEMIAS   #
+#--------------#
+
+rule artemias:
+    input:
+        inferencia = "artemias/code/01inferencia_estadistica.R",
+        visualizacion = "artemias/code/02visualizacion.R",
+        pca = "artemias/code/03pca_faa.R",
+        artemias_22 = "artemias/code/04artemias_2022.R",
+        inferencia_tamhane = "artemias/code/05inferencia_estadistica.py"
+    output:
+        "artemias/results/plots/area_ag.png",
+        "artemias/results/plots/normalidad_homocedasticidad.png",
+        "artemias/results/plots/no_normles.png",
+        "artemias/data/pca_artemias.png",
+        "artemias/results/plots/rpca.png"
+    conda:
+        "FAA_env.yml"
+    shell:
+        """
+        scripts=(
+            {input.inferencia}
+            {input.visualizacion}
+            {input.pca}
+            {input.artemias_22}
+        )
+
+        for script in ${{scripts[*]}}
+        do
+            Rscript $script
+        done
+
+        python {input.inferencia_tamhane}
+        """

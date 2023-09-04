@@ -77,7 +77,7 @@ rule tenebrios:
         png4 = "tenebrios/results/plots/masa_corporal_todos.png",
         png5 = "tenebrios/results/plots/tasa_crecimiento_todos.png",
         png6 = "tenebrios/results/plots/comparacion_semanas_crecimeinto.png"
-    conda:               
+    conda:
         "FAA_env.yml"
     shell:
         """
@@ -87,12 +87,21 @@ rule tenebrios:
 
         Rscript {input.clase} 
         """
+#---------------#
+#   EXPOSICIÓN  #
+#---------------#
 
-
-
-
-
-
-
-
-
+rule trabajo_exposicion:
+    input:
+        "trabajo_exposicion/code/Simulacion_endogamia.R"
+    output:
+        "trabajo_exposicion/results/tables/simulacion.csv",
+        "trabajo_exposicion/results/plots/histogramas.png",
+        "trabajo_exposicion/results/plots/endogamia.png",
+        "trabajo_exposicion/results/plots/regresion.png"
+    conda:
+        "FAA_env.yml"
+    shell:
+        """
+        Rscript {input}
+        """

@@ -2,52 +2,51 @@
 ########### PRÁCTICAS DE INFORMÁTICA DE FISIOLOGÍA ANIMAL APLICADA  ############
 ################################################################################
 
+
+
 library(tidyverse)
-library(ggthemes)
-library(readxl)
 library(rstatix)
 library(glue)
 library(ggtext)
 
-# # Simulación de los tiempos ratones endogámicos
-# generacion0 <- sample(245:300, 12, replace = TRUE)
-# generacion1 <- sample(300:400, 12, replace = TRUE)
-# generacion2 <- sample(330:450, 12, replace = TRUE)
-# generacion3 <- sample(400:550, 12, replace = TRUE)
-# generacion4 <- sample(470:590, 12, replace = TRUE)
-# generacion5 <- sample(490:600, 12, replace = TRUE)
-# generacion6 <- sample(500:600, 12, replace = TRUE)
-# generacion7 <- sample(500:600, 12, replace = TRUE)
-# 
-# # Simulación de los ratones control
-# controles_0 <- sample(245:300, 12, replace = TRUE)
-# controles_1 <- sample(240:295, 12, replace = TRUE)
-# controles_2 <- sample(243:303, 12, replace = TRUE)
-# controles_3 <- sample(241:310, 12, replace = TRUE)
-# controles_4 <- sample(230:300, 12, replace = TRUE)
-# controles_5 <- sample(235:310, 12, replace = TRUE)
-# controles_6 <- sample(245:290, 12, replace = TRUE)
-# controles_7 <- sample(245:300, 12, replace = TRUE)
+set.seed(97)
 
-# # Creación de la base de datos
-# simulacion <- tibble(
-#   engdogamicos = c(generacion0,generacion1,generacion2,generacion3,
-#                    generacion4,generacion5,generacion6,generacion7),
-#   control = c(controles_0,controles_1,controles_2,controles_3,
-#               controles_4,controles_5,controles_6,controles_7)
-#   ) %>%
-#   mutate(generacion=c(rep("Generación 0", 12),rep("Generación 1", 12),rep("Generación 2", 12),
-#                       rep("Generación 3", 12),rep("Generación 4", 12),rep("Generación 5", 12),
-#                       rep("Generación 6", 12),rep("Generación 7", 12))) %>%
-#   pivot_longer(-generacion, names_to = "tratamiento", values_to = "resultados")
-# 
-# # Escribir los resulatdos en un csv
-# write_csv(simulacion, "simulacion_endogamia.csv") 
+# Simulación de los tiempos ratones endogámicos
+generacion0 <- sample(245:300, 12, replace = TRUE)
+generacion1 <- sample(300:400, 12, replace = TRUE)
+generacion2 <- sample(330:450, 12, replace = TRUE)
+generacion3 <- sample(400:550, 12, replace = TRUE)
+generacion4 <- sample(470:590, 12, replace = TRUE)
+generacion5 <- sample(490:600, 12, replace = TRUE)
+generacion6 <- sample(500:600, 12, replace = TRUE)
+generacion7 <- sample(500:600, 12, replace = TRUE)
 
+# Simulación de los ratones control
+controles_0 <- sample(245:300, 12, replace = TRUE)
+controles_1 <- sample(240:295, 12, replace = TRUE)
+controles_2 <- sample(243:303, 12, replace = TRUE)
+controles_3 <- sample(241:310, 12, replace = TRUE)
+controles_4 <- sample(230:300, 12, replace = TRUE)
+controles_5 <- sample(235:310, 12, replace = TRUE)
+controles_6 <- sample(245:290, 12, replace = TRUE)
+controles_7 <- sample(245:300, 12, replace = TRUE)
+
+# Creación de la base de datos
+simulacion <- tibble(
+  engdogamicos = c(generacion0,generacion1,generacion2,generacion3,
+                   generacion4,generacion5,generacion6,generacion7),
+  control = c(controles_0,controles_1,controles_2,controles_3,
+              controles_4,controles_5,controles_6,controles_7)
+  ) %>%
+  mutate(generacion=c(rep("Generación 0", 12),rep("Generación 1", 12),rep("Generación 2", 12),
+                      rep("Generación 3", 12),rep("Generación 4", 12),rep("Generación 5", 12),
+                      rep("Generación 6", 12),rep("Generación 7", 12))) %>%
+  pivot_longer(-generacion, names_to = "tratamiento", values_to = "resultados")
 
 #### Resultados que me guarde con write_csv
 
-simulacion <- read_csv("https://raw.githubusercontent.com/Juankkar/cuarto_carrera/main/FAA/trabajo_exposicion/simulacion_endogamia.csv")
+write_csv(x = simulacion, 
+          "trabajo_exposicion/results/tables/simulacion.csv")
 
 # Estudio de la normalidad de los datos:
 # generación 0 y 1 no son normales 
@@ -104,8 +103,9 @@ simulacion %>%
     legend.position = c(.85, .10)
   )
 
-# ggsave("histogramas.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-#       width = 7.5, height = 5)
+ggsave("trabajo_exposicion/results/plots/histogramas.png",
+       width = 7.5, 
+       height = 5)
 
 etiquetas <- tibble(
   x = c(1:8),
@@ -159,8 +159,9 @@ simulacion %>%
     legend.position = c(.2, .875)
   )
 
-ggsave("endogamia.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-        width = 6.5, height = 6)
+ggsave("trabajo_exposicion/results/plots/endogamia.png",
+        width = 6.5, 
+        height = 6)
 
 simulación_regression <- simulacion %>% 
   group_by(generacion, tratamiento) %>% 
@@ -222,6 +223,7 @@ simulación_regression %>%
     legend.position = c(.2, .15)
   )
 
-ggsave("Rplot09.png", path = "C:\\Users\\jcge9\\Desktop\\cuarto_carrera\\cuarto_carrera\\FAA\\trabajo_exposicion\\graficas",
-       width = 6.5, height = 6)
+ggsave("trabajo_exposicion/results/plots/regresion.png",
+       width = 6.5, 
+       height = 6)
 

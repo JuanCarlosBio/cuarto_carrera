@@ -1,3 +1,8 @@
+###################################
+###       SNAKEFILE FAA         ###
+###################################
+
+
 
 #--------------#
 #   ARTEMIAS   #
@@ -34,3 +39,60 @@ rule artemias:
 
         python {input.inferencia_tamhane}
         """
+
+#--------------#
+#   CONDUCTA   #
+#--------------#
+
+rule conducta:
+    input:
+        "conducta/code/conducta.R"
+    output:
+        "conducta/results/plots/om.png",
+        "conducta/results/plots/hm.png",
+        "conducta/results/plots/pm.png",
+        "conducta/results/plots/obs_esp.png",
+        "conducta/results/plots/pc_ratones.png",
+        "conducta/results/plots/rca.png"
+    conda:
+        "FAA_env.yml"
+    shell:
+        """
+        Rscript {input}
+        """
+
+#---------------#
+#   TENEBRIOS   #
+#---------------#
+
+rule tenebrios:
+    input:
+        grupo = "tenebrios/code/01tenebrios.R",
+        procesar_todos = "tenebrios/code/02procesar_data.sh",
+        clase = "tenebrios/code/03t_todos_limpio.R" 
+    output:
+        png1 = "tenebrios/results/plots/masa_corporal_grupo.png",
+        png2 = "tenebrios/results/plots/masa_corporal_tasa_crec_grupo.png",
+        csv_process = "tenebrios/data/procesada/tenebrios_todos_process.csv",
+        png4 = "tenebrios/results/plots/masa_corporal_todos.png",
+        png5 = "tenebrios/results/plots/tasa_crecimiento_todos.png",
+        png6 = "tenebrios/results/plots/comparacion_semanas_crecimeinto.png"
+    conda:               
+        "FAA_env.yml"
+    shell:
+        """
+        Rscript {input.grupo}
+
+        bash {input.procesar_todos} > {output.csv_process}
+
+        Rscript {input.clase} 
+        """
+
+
+
+
+
+
+
+
+

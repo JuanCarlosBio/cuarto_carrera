@@ -11,8 +11,8 @@ A partir de la tabla anterior había que hacer los puntos 2 y 3.
 3) **Rellenar una tabla en la que había que sacar:**
     - Frecuencia relativa alélica.
     - Heterocigosidad esperada y observada.
-    - Realizar Xi^2 de contingencia.
-    - Realizar Xi^2 para verificar equilibrio de Hardy-Weinberg.
+    - Realizar Xi<sup>2</sup> de contingencia.
+    - Realizar Xi<sup>2</sup> para verificar equilibrio de Hardy-Weinberg.
 
 El punto 4 es aparte. 
 

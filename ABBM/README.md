@@ -53,7 +53,7 @@ En proceso. Me está costando recordar la parte de cinética. Muy desordenado lo
 
     * Está feo que yo lo diga, pero me ha quedado un gráfica espectacular.
 
-    * Posteriormente se creó una fucnicón para obtener la actividad específica.De manera que añadiendo a la función cada cosa daría el resultado que queremos. **No sé si en el script lo que hice está bien xd**. O sea la función sí, el problema como ocurre siempre con química-bioquímica-bio. molecular... son siempre el problema de las unidades (que ansiedad me da siempre xd). En el exámen de prácticas eso es una movida, también te digo que es a papel y boli, así que la función de abajo no te va a ayudar en ese momento. Añado el código, (si consigues tener cada cosa con sus unidades bien, te debería *funcionar* wonderfully siempre):
+    * Posteriormente se creó una fucnicón para obtener la actividad específica. De manera que añadiendo a la función cada cosa daría el resultado que queremos. En el exámen de prácticas eso es una movida, también te digo que es a papel y boli, así que la función de abajo no te va a ayudar en ese momento. Añado el código:
 
 ```
 
@@ -126,8 +126,6 @@ rf <- function(dist_frente, dist_prot){
     * Después la muestra de interés se esudió en un gel de poliacrilamida. Las muestras de todos los alumnos estaban en uno o dos. Yo logré salvar **cuatro geles** que conpartimos los alumnos de mi curso. 
     
     * He de decir que los resultados de las fotografías estaban ahí ahí xd. Intenté sacar como pude en ese sentido la movididad relativa de los geles. En algunos igual he tenido exceso de fe para ver el frente. 
-
-    * El resultado están en esta gráfica para cada uno. Se interpola el **log(PM)**, ojo, no directamente los **Kd**. Los pesos del marcador molecular con el que haces la recta te los dá la profesora.
 
     * Luego se supone que tienes que buscar la porteína en una base de datos según su peso. 
 

@@ -15,7 +15,7 @@ En proceso. Me está costando recordar la parte de cinética. Muy desordenado lo
 </p>
 
 * **Figura 1:**
-    * No voy a mentir, no sé muy bien que es esto xd, así que no me hagas mucho caso, en principio es una proteína formada por *Pichia pastoris*. 
+    * No voy a mentir, no me acuerdo bien que era exactamente esto, en principio es una proteína formada por *Pichia pastoris*. 
 
     * En ese entonces mediríamos la cantidad de proteínas que forma esta levadura a distintos tiempos, alimentándola de un sustrato en concreto (ni me acuerdo, ONPG fue el que usamos para la última práctica, la 6).
 
